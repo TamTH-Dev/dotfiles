@@ -48,7 +48,7 @@ network_print() {
 
         printf "\n"
     else
-        echo "睊 No Internet"
+        echo "睊  No Internet"
     fi
 }
 

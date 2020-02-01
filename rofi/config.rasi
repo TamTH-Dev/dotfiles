@@ -7,12 +7,12 @@ configuration {
 	yoffset: 50;
 	fixed-num-lines: true;
 	disable-history: true;
-	case-sensitive: true;
+	case-sensitive: false;
 	cycle: false;
 	line-padding: 10;
 	separator-style: "solid";
 	hide-scrollbar: true;
 	click-to-exit: true;
 	show-match: false;
-        borderwidth: 3;
+        borderwidth: 2;
 }

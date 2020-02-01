@@ -1,0 +1,233 @@
+;-------------------------------------------------------------------------------;
+;                                                               V A R I A B L E S                                                               ;
+;-------------------------------------------------------------------------------;
+[colors]
+background = #131637
+blue = #00aaff
+yellow = #f69e23
+purple = #7f5dca
+black = #000
+white = #fff
+green = #50fa6b
+;-------------------------------------------------------------------------------;
+;                                                               B A R S                                                                         ;
+;-------------------------------------------------------------------------------;
+[bar/main]
+width = 100%
+height = 24
+fixed-center = false 
+
+background = ${colors.background}
+foreground = ${colors.black}
+font-0 = Inconsolata Nerd Font:style=bold:size=12;3
+;font-1 = NotoSans Symbols2:pixelsize=13;3
+
+modules-left = i3 arrowi3
+modules-right = arrowbacklight backlight arrowpulseaudio pulseaudio arrowcpu cpu arrowmemory memory arrownetwork network-networkmanager arrowbattery battery arrowdate date
+
+tray-position = right
+tray-background = ${colors.background}
+tray-padding = 1
+;-------------------------------------------------------------------------------;
+;                               D E C O R A T I O N S                                                           ;
+;-------------------------------------------------------------------------------;
+[module/arrowbattery]
+type= custom/text
+content = " "
+content-font = 2
+content-foreground = ${colors.green} 
+content-background = ${colors.purple}
+
+[module/arrowi3]
+type = custom/text
+content = ""
+content-font = 2
+content-foreground = ${colors.purple}
+content-background = ${colors.background}
+
+[module/arrownetwork]
+type = custom/text
+content = " "
+content-font = 2
+content-foreground = ${colors.purple}
+content-background = ${colors.blue}
+
+[module/arrowbacklight]
+; grey to bg
+type = custom/text
+content = " "
+content-font = 2
+content-foreground = ${colors.purple}
+content-background = ${colors.background}
+
+[module/arrowpulseaudio]
+type = custom/text
+content = " "
+content-font = 2
+content-foreground = ${colors.blue} 
+content-background = ${colors.purple}
+
+[module/arrowcpu]
+type = custom/text
+content = " "
+content-font = 2
+content-foreground = ${colors.purple}
+content-background = ${colors.blue}
+
+[module/arrowmemory]
+type = custom/text
+content = " "
+content-font = 2
+content-foreground = ${colors.blue}
+content-background = ${colors.purple}
+
+[module/arrowdate]
+; grey to bg
+type = custom/text
+content = " "
+content-font = 2
+content-foreground = ${colors.yellow}
+content-background = ${colors.green}
+
+;-------------------------------------------------------------------------------;
+;                               M O D U L E S                                   ;
+;-------------------------------------------------------------------------------;
+[module/battery]
+type = internal/battery
+; This is useful in case the battery never reports 100% charge
+full-at = 94
+; Use the following command to list batteries and adapters:
+; $ ls -1 /sys/class/power_supply/
+battery = BAT0
+adapter = AC
+poll-interval = 5
+format-charging = <animation-charging><label-charging>
+format-discharging = <ramp-capacity><label-discharging>
+label-charging = "%percentage%%"
+label-charging-foreground = ${colors.black}
+label-charging-background = ${colors.green}
+label-full = " ﮣ   %percentage%%"
+label-full-foreground = ${colors.black}
+label-full-background = ${colors.green}
+ramp-capacity-0 = " ﮤ   "
+ramp-capacity-1 = " ﮤ   "
+ramp-capacity-2 = " ﮤ   " 
+ramp-capacity-3 = " ﮤ   "
+ramp-capacity-4 = " ﮤ   "
+ramp-capacity-foreground = ${colors.black}
+ramp-capacity-background = ${colors.green}
+animation-charging-0 = " ﮣ   "   
+animation-charging-1 = " ﮣ   "
+animation-charging-2 = " ﮣ   "
+animation-charging-3 = " ﮣ   "
+animation-charging-4 = " ﮣ   "
+animation-charging-framerate = 750
+animation-charging-background = ${colors.green}
+animation-charging-foreground = ${colors.black}
+
+[module/backlight]
+type = internal/backlight
+output = HDMI-1
+enable-scroll = false
+card=intel_backlight
+format = <label>
+label = "  %percentage%%"
+label-foreground = ${colors.black}
+label-background = ${colors.purple}
+
+[module/i3]
+type = internal/i3
+format = <label-state><label-mode>
+index-sort = false
+enable-click = true 
+enable-scroll = false
+ws-icon-0 = 10;0[]
+ws-icon-1 = 1;1  
+ws-icon-2 = 2;2   
+ws-icon-3 = 3;3  
+ws-icon-4 = 4;4  
+ws-icon-5 = 5;5  
+ws-icon-6 = 6;6  
+ws-icon-7 = 7;7  
+ws-icon-8 = 8;8  
+pin-workspaces = true ;
+label-mode = " %mode% "
+label-mode-background = ${colors.blue}
+label-focused = %{F#7F5DCA B#00AAFF}%{F-} %icon% %{B#7F5DCA F#00AAFF}%{F-}
+label-visible = " %icon% "
+label-visible-foreground = ${colors.purple}
+label-visible-background = ${colors.purple}
+label-unfocused = " %icon% "
+label-unfocused-foreground = ${colors.black}
+label-unfocused-background = ${colors.purple}
+label-urgent = " %icon% "
+label-urgent-foreground = ${colors.purple}
+label-urgent-background = ${colors.purple}
+label-separator-padding = 0
+label-separator-foreground = ${colors.purple}
+label-separator-background = ${colors.purple}
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = "  "
+format-prefix-foreground = ${colors.black}
+format-prefix-background = ${colors.purple}
+label = %percentage%%
+label-foreground = ${colors.black}
+label-background = ${colors.purple}
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = "   "
+format-prefix-foreground = ${colors.black}
+format-prefix-background = ${colors.blue}
+label = %gb_used%
+label-foreground = ${colors.black}
+label-background = ${colors.blue}
+
+[module/date]
+type = internal/date
+interval = 1
+
+date = "   %a, %b %d, %Y"
+time= "at %I:%M %p "
+
+label = %date% %time%
+label-foreground = ${colors.black}
+label-background = ${colors.yellow}
+
+[module/pulseaudio]
+type = internal/pulseaudio
+sink = alsa_output.pci-0000_12_00.3.analog-stereo
+use-ui-max = false
+interval = 1
+format-volume = <ramp-volume><label-volume>
+label-volume = "  %percentage%%"
+label-volume-foreground = ${colors.black}
+label-volume-background = ${colors.blue}
+format-muted = <label-muted>
+label-muted = 🔇 Muted
+label-muted-foreground = ${colors.black} 
+label-muted-background = ${colors.blue}
+ramp-volume-0 = 🔈
+ramp-volume-1 = 🔉
+ramp-volume-2 = 🔊
+
+[module/network-networkmanager]
+type = custom/script
+exec = /home/madlife/.config/polybar/scripts/network-networkmanager.sh
+label = " %output%"
+tail = true
+format-foreground = ${colors.black}
+format-background = ${colors.purple}
+
+[settings]
+screenchange-reload = true
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+

@@ -42,7 +42,7 @@ content-background = ${colors.purple}
 type= custom/text
 content = " "
 content-font = 2
-content-foreground = ${colors.green} 
+content-foreground = ${colors.yellow} 
 content-background = ${colors.blue}
 
 [module/arrowi3]
@@ -93,8 +93,8 @@ content-background = ${colors.blue}
 type = custom/text
 content = " "
 content-font = 2
-content-foreground = ${colors.yellow}
-content-background = ${colors.green}
+content-foreground = ${colors.green}
+content-background = ${colors.yellow}
 
 ;-------------------------------------------------------------------------------;
 ;                               M O D U L E S                                   ;
@@ -111,7 +111,7 @@ format-background = ${colors.blue}
 [module/battery]
 type = internal/battery
 ; This is useful in case the battery never reports 100% charge
-full-at = 94
+full-at = 98
 ; Use the following command to list batteries and adapters:
 ; $ ls -1 /sys/class/power_supply/
 battery = BAT0
@@ -121,26 +121,26 @@ format-charging = <animation-charging><label-charging>
 format-discharging = <ramp-capacity><label-discharging>
 label-charging = "%percentage%%"
 label-charging-foreground = ${colors.black}
-label-charging-background = ${colors.green}
+label-charging-background = ${colors.yellow}
 label-discharging-foreground = ${colors.black}
-label-discharging-background = ${colors.green}
+label-discharging-background = ${colors.yellow}
 label-full = " ﮣ   %percentage%%"
 label-full-foreground = ${colors.black}
-label-full-background = ${colors.green}
+label-full-background = ${colors.yellow}
 ramp-capacity-0 = " ﮤ   "
 ramp-capacity-1 = " ﮤ   "
 ramp-capacity-2 = " ﮤ   " 
 ramp-capacity-3 = " ﮤ   "
 ramp-capacity-4 = " ﮤ   "
 ramp-capacity-foreground = ${colors.black}
-ramp-capacity-background = ${colors.green}
+ramp-capacity-background = ${colors.yellow}
 animation-charging-0 = " ﮣ   "   
 animation-charging-1 = " ﮣ   "
 animation-charging-2 = " ﮣ   "
 animation-charging-3 = " ﮣ   "
 animation-charging-4 = " ﮣ   "
 animation-charging-framerate = 750
-animation-charging-background = ${colors.green}
+animation-charging-background = ${colors.yellow}
 animation-charging-foreground = ${colors.black}
 
 [module/backlight]
@@ -214,7 +214,7 @@ time= "at %I:%M %p "
 
 label = %date% %time%
 label-foreground = ${colors.black}
-label-background = ${colors.yellow}
+label-background = ${colors.green}
 
 [module/pulseaudio]
 type = internal/pulseaudio

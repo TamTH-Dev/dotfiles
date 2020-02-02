@@ -8,13 +8,13 @@ yellow = #f69e23
 purple = #7f5dca
 black = #000
 white = #fff
-green = #50fa6b
+green = #50e46b
 ;-------------------------------------------------------------------------------;
 ;                                                               B A R S                                                                         ;
 ;-------------------------------------------------------------------------------;
 [bar/main]
 width = 100%
-height = 24
+height = 20
 fixed-center = false 
 
 background = ${colors.background}
@@ -23,7 +23,7 @@ font-0 = Inconsolata Nerd Font:style=bold:size=12;3
 ;font-1 = NotoSans Symbols2:pixelsize=13;3
 
 modules-left = i3 arrowi3
-modules-right = arrownetwork network-networkmanager arrowpulseaudio pulseaudio arrowcpu cpu arrowmemory memory arrowbacklight backlight arrowbattery battery arrowdate date
+modules-right = arrownetworkmanager network-networkmanager arrowpulseaudio pulseaudio arrowmemory memory arrow-system-cpu-temppercore system-cpu-temppercore arrowcpu cpu arrowbacklight backlight arrowbattery battery arrowdate date
 
 tray-position = right
 tray-background = ${colors.background}
@@ -31,12 +31,19 @@ tray-padding = 1
 ;-------------------------------------------------------------------------------;
 ;                               D E C O R A T I O N S                                                           ;
 ;-------------------------------------------------------------------------------;
+[module/arrow-system-cpu-temppercore]
+type = custom/text
+content = " "
+content-font = 2
+content-foreground = ${colors.blue}
+content-background = ${colors.purple}
+
 [module/arrowbattery]
 type= custom/text
 content = " "
 content-font = 2
 content-foreground = ${colors.green} 
-content-background = ${colors.purple}
+content-background = ${colors.blue}
 
 [module/arrowi3]
 type = custom/text
@@ -45,7 +52,7 @@ content-font = 2
 content-foreground = ${colors.purple}
 content-background = ${colors.background}
 
-[module/arrownetwork]
+[module/arrownetworkmanager]
 type = custom/text
 content = " "
 content-font = 2
@@ -57,8 +64,8 @@ content-background = ${colors.background}
 type = custom/text
 content = " "
 content-font = 2
-content-foreground = ${colors.purple}
-content-background = ${colors.blue}
+content-foreground = ${colors.blue}
+content-background = ${colors.purple}
 
 [module/arrowpulseaudio]
 type = custom/text
@@ -78,8 +85,8 @@ content-background = ${colors.blue}
 type = custom/text
 content = " "
 content-font = 2
-content-foreground = ${colors.blue}
-content-background = ${colors.purple}
+content-foreground = ${colors.purple}
+content-background = ${colors.blue}
 
 [module/arrowdate]
 ; grey to bg
@@ -92,6 +99,15 @@ content-background = ${colors.green}
 ;-------------------------------------------------------------------------------;
 ;                               M O D U L E S                                   ;
 ;-------------------------------------------------------------------------------;
+[module/system-cpu-temppercore]
+type = custom/script
+exec = /home/madlife/.config/polybar/scripts/system-cpu-temppercore.sh
+interval = 30
+label = "   %output%"
+tail = true
+format-foreground = ${colors.black}
+format-background = ${colors.blue}
+
 [module/battery]
 type = internal/battery
 ; This is useful in case the battery never reports 100% charge
@@ -135,7 +151,7 @@ card=intel_backlight
 format = <label>
 label = "  %percentage%%"
 label-foreground = ${colors.black}
-label-background = ${colors.purple}
+label-background = ${colors.blue}
 
 [module/i3]
 type = internal/i3
@@ -157,16 +173,16 @@ label-mode = " %mode% "
 label-mode-background = ${colors.blue}
 label-focused = %{F#7F5DCA B#00AAFF}%{F-} %icon% %{B#7F5DCA F#00AAFF}%{F-}
 label-visible = " %icon% "
-label-visible-foreground = ${colors.purple}
+label-visible-foreground = ${colors.black}
 label-visible-background = ${colors.purple}
 label-unfocused = " %icon% "
 label-unfocused-foreground = ${colors.black}
 label-unfocused-background = ${colors.purple}
 label-urgent = " %icon% "
-label-urgent-foreground = ${colors.purple}
+label-urgent-foreground = ${colors.black}
 label-urgent-background = ${colors.purple}
 label-separator-padding = 0
-label-separator-foreground = ${colors.purple}
+label-separator-foreground = ${colors.black}
 label-separator-background = ${colors.purple}
 
 [module/cpu]
@@ -184,10 +200,10 @@ type = internal/memory
 interval = 2
 format-prefix = "   "
 format-prefix-foreground = ${colors.black}
-format-prefix-background = ${colors.blue}
+format-prefix-background = ${colors.purple}
 label = %gb_used%
 label-foreground = ${colors.black}
-label-background = ${colors.blue}
+label-background = ${colors.purple}
 
 [module/date]
 type = internal/date

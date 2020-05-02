@@ -1,0 +1,22 @@
+" Plugins management
+call plug#begin('~/.vim/plugged')
+
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'alvan/vim-closetag'
+Plug 'tpope/vim-surround'
+Plug 'scrooloose/nerdcommenter'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'sheerun/vim-polyglot'
+Plug 'vim-airline/vim-airline'
+Plug 'dense-analysis/ale'
+Plug 'scrooloose/nerdtree'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'npm install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+Plug 'ervandew/supertab'
+Plug 'valloric/youcompleteme'
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
+
+call plug#end()
+

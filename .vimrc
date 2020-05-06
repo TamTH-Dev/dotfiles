@@ -57,6 +57,7 @@ autocmd Filetype html setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype css setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype json setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
 " Leader key
 let mapleader = ","
@@ -72,10 +73,10 @@ nnoremap <Leader>/ :vsplit<CR>
 nnoremap <Leader>\ :split<CR>
 
 " Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+" map <C-j> <C-W>j
+" map <C-k> <C-W>k
+" map <C-h> <C-W>h
+" map <C-l> <C-W>l
 
 " Use tab with text block
 vmap <Tab> >gv
@@ -139,6 +140,7 @@ let g:jsx_ext_required = 0
 " NerdCommenter Configuration
 let g:NERDSpaceDelims = 1
 let g:NERDTrimTrailingWhitespace = 1
+let g:NERDDefaultAlign = 'left'
 
-" Vim-Snippets Configuration  
+" Vim-Snippets Configuration
 let g:UltiSnipsExpandTrigger="<C-d>"

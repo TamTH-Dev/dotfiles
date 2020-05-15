@@ -69,8 +69,8 @@ nmap <leader>w :w!<cr>
 nmap <leader>q :q<cr>
 
 " Split windows
-nnoremap <Leader>/ :vsplit<CR>
-nnoremap <Leader>\ :split<CR>
+" nnoremap <Leader>/ :vsplit<CR>
+" nnoremap <Leader>\ :split<CR>
 
 " Smart way to move between windows
 " map <C-j> <C-W>j
@@ -87,6 +87,9 @@ map <silent> <leader><space> :nohl<cr>
 
 " Esc vim modes
 imap jj <Esc>
+
+" Toggle line numbers
+nmap <leader>/ :set invnumber<CR>
 
 " Move vertically by visual line
 nnoremap j gj

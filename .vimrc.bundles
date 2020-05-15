@@ -2,6 +2,7 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'drewtempelmeyer/palenight.vim'
+Plug 'dracula/vim', { 'name': 'dracula' }
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'

@@ -53,6 +53,9 @@ set magic
 " Set tab space for specific languages
 autocmd Filetype python setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype php setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype c setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype cpp setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype java setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype html setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2 softtabstop=2
@@ -147,3 +150,4 @@ let g:NERDDefaultAlign = 'left'
 
 " Vim-Snippets Configuration
 let g:UltiSnipsExpandTrigger="<C-d>"
+

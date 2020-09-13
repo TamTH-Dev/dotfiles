@@ -1,4 +1,4 @@
-call plug#begin('~/AppData/Local/nvim/plugged')
+call plug#begin('~/plugged')
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-surround'
@@ -7,14 +7,19 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
 Plug 'mattn/emmet-vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 " Plug 'dense-analysis/ale'
 " Plug 'valloric/youcompleteme'
 " Plug 'sirver/ultisnips'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'scrooloose/nerdtree'
-Plug 'prettier/vim-prettier', {
-   \ 'do': 'npm install',
-   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+Plug 'ryanoasis/vim-devicons'
+" Plug 'prettier/vim-prettier', {
+"   \ 'do': 'npm install',
+"   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'ervandew/supertab'
 Plug 'honza/vim-snippets'
 call plug#end()
@@ -75,14 +80,14 @@ nmap <leader>w :w!<cr>
 nmap <leader>q :q<cr>
 
 " Split windows
-nnoremap <Leader>/ :vsplit<CR>
-nnoremap <Leader>\ :split<CR>
+" nnoremap <Leader>/ :vsplit<CR>
+" nnoremap <Leader>\ :split<CR>
 
 " Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+map <A-j> <C-W>j
+map <A-k> <C-W>k
+map <A-h> <C-W>h
+map <A-l> <C-W>l
 
 " Use tab with text block
 vmap <Tab> >gv
@@ -101,14 +106,6 @@ imap jj <Esc>
 nnoremap j gj
 nnoremap k gk
 
-" Line moving
-nnoremap <A-j> :m +1<CR>==
-nnoremap <A-k> :m -2<CR>==
-inoremap <A-j> <Esc>:m +1<CR>==gi
-inoremap <A-k> <Esc>:m -2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
-
 " Multi select
 let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_prev_key='<C-p>'
@@ -120,6 +117,7 @@ let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeShowHidden=1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 map <C-b> :NERDTreeToggle<CR>
 
 " Vim-airline Configuration
@@ -127,9 +125,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 " Youcompleteme Configuraion
-set completeopt-=preview
-let g:ycm_semantic_triggers =  { 'c,cpp,php,python,javascript,typescript': [ 're!\w{2}' ] }
-let g:ycm_show_diagnostics_ui = 0
+" set completeopt-=preview
+" let g:ycm_semantic_triggers =  { 'c,cpp,php,python,javascript,typescript': [ 're!\w{2}' ] }
+" let g:ycm_show_diagnostics_ui = 0
 
 " ALE Configuration
 " let g:ale_fixers = {
@@ -175,3 +173,12 @@ let g:user_emmet_leader_key='<C-Y>'
 " Supertab Configuration
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
+
+" Fzf Configuration
+nnoremap <C-p> :FZF<CR>
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit'
+  \}
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'

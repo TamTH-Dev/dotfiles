@@ -22,6 +22,9 @@ Plug 'ryanoasis/vim-devicons'
 "   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'ervandew/supertab'
 Plug 'honza/vim-snippets'
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'natebosch/vim-lsc'
+Plug 'natebosch/vim-lsc-dart'
 call plug#end()
 
 " Basic Configuration
@@ -100,7 +103,7 @@ map <silent> <leader><space> :nohl<cr>
 imap jj <Esc>
 
 " Toggle line numbers
-" nmap <leader>/ :set invnumber<CR>
+nmap <leader>/ :set invnumber<CR>
 
 " Move vertically by visual line
 nnoremap j gj
@@ -124,7 +127,7 @@ map <C-b> :NERDTreeToggle<CR>
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
-" Youcompleteme Configuraion
+" Youcompleteme Configuration
 " set completeopt-=preview
 " let g:ycm_semantic_triggers =  { 'c,cpp,php,python,javascript,typescript': [ 're!\w{2}' ] }
 " let g:ycm_show_diagnostics_ui = 0
@@ -182,3 +185,7 @@ let g:fzf_action = {
   \ 'ctrl-v': 'vsplit'
   \}
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+
+" Dart-lsc Configuration
+" let g:lsc_auto_map = v:true
+

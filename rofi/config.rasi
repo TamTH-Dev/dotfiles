@@ -3,7 +3,7 @@ configuration {
 	font: "DejaVu Sans Mono Bold Nerd Font 12";
 	location: 2;
 	padding: 5;
-        bw: 0;
+  bw: 0;
 	yoffset: 50;
 	fixed-num-lines: true;
 	disable-history: true;
@@ -14,5 +14,5 @@ configuration {
 	hide-scrollbar: true;
 	click-to-exit: true;
 	show-match: false;
-        borderwidth: 2;
+  borderwidth: 2;
 }

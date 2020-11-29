@@ -1,30 +1,28 @@
 call plug#begin('~/plugged')
+Plug 'joshdick/onedark.vim'
 Plug 'drewtempelmeyer/palenight.vim'
-Plug 'alvan/vim-closetag'
-Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
-Plug 'mattn/emmet-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'ryanoasis/vim-devicons'
+Plug 'honza/vim-snippets'
+Plug 'ervandew/supertab'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'alvan/vim-closetag'
+" Plug 'tpope/vim-surround'
+" Plug 'mattn/emmet-vim'
 " Plug 'dense-analysis/ale'
 " Plug 'valloric/youcompleteme'
 " Plug 'sirver/ultisnips'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'scrooloose/nerdtree'
-Plug 'ryanoasis/vim-devicons'
+" Plug 'leafgarland/typescript-vim'
+" Plug 'peitalin/vim-jsx-typescript'
 " Plug 'prettier/vim-prettier', {
 "   \ 'do': 'npm install',
 "   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-Plug 'ervandew/supertab'
-Plug 'honza/vim-snippets'
-Plug 'dart-lang/dart-vim-plugin'
-Plug 'natebosch/vim-lsc'
-Plug 'natebosch/vim-lsc-dart'
 call plug#end()
 
 " Basic Configuration
@@ -66,12 +64,16 @@ set magic
 
 " Set tab space for specific languages
 autocmd Filetype python setlocal tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Filetype php setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype cpp setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype h setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype sh setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype java setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype html setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype css setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype css setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype json setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype php setlocal tabstop=4 shiftwidth=4 softtabstop=4
 
 " Leader key
 let mapleader = ","
@@ -157,21 +159,15 @@ let g:UltiSnipsExpandTrigger="<C-d>"
 
 " Coc Configuration
 let g:coc_global_extensions = [
-         \'coc-css',
-         \'coc-flutter',
-         \'coc-go',
-         \'coc-html',
-         \'coc-java',
          \'coc-json',
          \'coc-prettier',
          \'coc-sh',
-         \'coc-tsserver',
-         \'coc-vetur'
+         \'coc-python',
          \]
 nnoremap <silent><nowait> <C-e> :<C-u>CocList diagnostics<cr>
 
 " Emmet-Vim Configuration
-let g:user_emmet_leader_key='<C-Y>'
+" let g:user_emmet_leader_key='<C-Y>'
 
 " Supertab Configuration
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -185,7 +181,3 @@ let g:fzf_action = {
   \ 'ctrl-v': 'vsplit'
   \}
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
-
-" Dart-lsc Configuration
-" let g:lsc_auto_map = v:true
-

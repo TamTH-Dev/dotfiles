@@ -111,6 +111,9 @@ nmap <leader>/ :set invnumber<CR>
 nnoremap j gj
 nnoremap k gk
 
+" Save neovim yank to clipboard
+set clipboard+=unnamedplus
+
 " Multi select
 let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_prev_key='<C-p>'

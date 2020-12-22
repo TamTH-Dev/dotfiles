@@ -64,5 +64,8 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
+" Working with Python virtualenv
+Plug 'plytophogy/vim-virtualenv'
+
 call plug#end()
 

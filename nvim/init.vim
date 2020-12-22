@@ -52,8 +52,9 @@ autocmd Filetype sh setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype java setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype html setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype css setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype js setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype jsx setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype ts setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype json setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype php setlocal tabstop=4 shiftwidth=4 softtabstop=4
 
@@ -248,6 +249,14 @@ let g:fzf_action = {
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit'
   \}
+
+
+" ============================================================================ "
+" ===                     VIM-JAVASCRIPT CONFIGURATION                     === "
+" ============================================================================ "
+
+" Enables syntax highlighting for JSDocs
+let g:javascript_plugin_jsdoc = 1
 
 
 " ============================================================================ "

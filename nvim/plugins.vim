@@ -14,7 +14,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-" Fuzzy search 
+" Fuzzy search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -34,14 +34,14 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'honza/vim-snippets'
 Plug 'sirver/ultisnips'
 
-" Allows to use <Tab> for all insert completion needs 
+" Allows to use <Tab> for all insert completion needs
 Plug 'ervandew/supertab'
 
 " Conquer of Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" ReactJS JSX syntax highlighting
-Plug 'mxw/vim-jsx'
+" Javascript syntax highlighting and indentation improving.
+Plug 'pangloss/vim-javascript'
 
 " Typescript syntax highlighting
 Plug 'herringtondarkholme/yats.vim'

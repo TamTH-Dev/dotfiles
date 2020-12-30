@@ -13,7 +13,7 @@ syntax enable
 set termguicolors
 set t_Co=256
 set background=dark
-colorscheme gotham
+colorscheme custom
 set number
 set numberwidth=5
 set cursorline
@@ -47,7 +47,7 @@ set magic
 " Set tab space for specific languages
 autocmd Filetype python setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype cpp setlocal tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Filetype h setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype c setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype sh setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype java setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype html setlocal tabstop=4 shiftwidth=4 softtabstop=4
@@ -153,8 +153,14 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 " Enable caching of the various syntax highlighting groups
 let g:airline_highlighting_cache = 1
 
-" let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
+
+" Enable powerline fonts
+let g:airline_powerline_fonts = 1
+
+" Airline theme
+let g:airline_theme='gotham'
 
 
 " ============================================================================ "

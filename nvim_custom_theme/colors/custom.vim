@@ -68,10 +68,10 @@ endfunction
 let s:colors = {}
 
 " Base colors.
-let s:colors.base0 = { 'gui': '#222222', 'cterm': 0 }
-let s:colors.base1 = { 'gui': '#282828', 'cterm': 8 }
-let s:colors.base2 = { 'gui': '#121212', 'cterm': 10 }
-let s:colors.base3 = { 'gui': '#333333', 'cterm': 12 }
+let s:colors.base0 = { 'gui': '#1e1e1e', 'cterm': 0 }
+let s:colors.base1 = { 'gui': '#242424', 'cterm': 8 }
+let s:colors.base2 = { 'gui': '#1a1a1a', 'cterm': 10 }
+let s:colors.base3 = { 'gui': '#2a2a2a', 'cterm': 12 }
 let s:colors.base4 = { 'gui': '#1e6479', 'cterm': 11 }
 let s:colors.base5 = { 'gui': '#00aaff', 'cterm': 14 }
 let s:colors.base6 = { 'gui': '#eeeeee', 'cterm': 7 }
@@ -83,9 +83,10 @@ let s:colors.orange  = { 'gui': '#ff922b', 'cterm': 9  }
 let s:colors.yellow  = { 'gui': '#ffbb00', 'cterm': 3  }
 let s:colors.magenta = { 'gui': '#aaaaaa', 'cterm': 13 }
 let s:colors.violet  = { 'gui': '#4e5166', 'cterm': 5  }
-let s:colors.blue    = { 'gui': '#555555', 'cterm': 4  }
+let s:colors.blue    = { 'gui': '#333333', 'cterm': 4  }
 let s:colors.cyan    = { 'gui': '#0022ff', 'cterm': 6  }
 let s:colors.green   = { 'gui': '#00c7b6', 'cterm': 2  }
+let s:colors.gray    = { 'gui': '#555555', 'cterm': 0  }
 
 " Neovim :terminal colors.
 let g:terminal_color_0  = get(s:colors.base0, 'gui')
@@ -129,7 +130,7 @@ call s:Col('ColorColumn', '', s:linenr_background)
 call s:Col('Visual', '', 'base3')
 
 " Easy-to-guess code elements.
-call s:Col('Comment', 'blue')
+call s:Col('Comment', 'gray')
 call s:Col('String', 'green')
 call s:Col('Number', 'orange')
 call s:Col('Statement', 'base5')
@@ -240,7 +241,7 @@ call s:Col('htmlBoldItalic', 'cyan', '')
 call s:Attr('htmlBoldItalic', 'bold,italic')
 
 " Python
-call s:Col('pythonStatement', 'blue')
+call s:Col('pythonStatement', 'orange')
 
 
 " Plugin =======================================================================

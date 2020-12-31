@@ -5,7 +5,7 @@ let s:c = {}
 
 " Base colors.
 let s:c.base0 = { 'gui': '#1c1c1c', 'cterm': 0 }
-let s:c.base1 = { 'gui': '#1c1c1c', 'cterm': 8 }
+let s:c.base1 = { 'gui': '#161616', 'cterm': 8 }
 let s:c.base2 = { 'gui': '#eeeeee', 'cterm': 10 }
 let s:c.base3 = { 'gui': '#eeeeee', 'cterm': 12 }
 let s:c.base4 = { 'gui': '#1c1c1c', 'cterm': 11 }

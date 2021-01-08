@@ -1,10 +1,9 @@
 call plug#begin('~/.config/nvim/plugged')
 
 " Colorscheme
-Plug 'whatyouhide/vim-gotham'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'morhetz/gruvbox'
-Plug 'joshdick/onedark.vim'
+Plug 'arcticicestudio/nord-vim'
 
 " Add multi cursors
 Plug 'terryma/vim-multiple-cursors'

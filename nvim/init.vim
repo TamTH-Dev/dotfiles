@@ -13,7 +13,7 @@ syntax enable
 set termguicolors
 set t_Co=256
 set background=dark
-colorscheme custom
+colorscheme nord
 set number
 set numberwidth=5
 set cursorline
@@ -160,7 +160,7 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_powerline_fonts = 1
 
 " Airline theme
-let g:airline_theme='gotham'
+" let g:airline_theme='gotham'
 
 
 " ============================================================================ "

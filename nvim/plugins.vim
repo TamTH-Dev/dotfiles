@@ -26,7 +26,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 
 " Support auto close
-Plug 'rstacruz/vim-closer'
+Plug 'cohama/lexima.vim'
 
 " Add icons
 Plug 'ryanoasis/vim-devicons'

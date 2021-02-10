@@ -19,6 +19,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+" Change the working directory to the project root
+Plug 'airblade/vim-rooter'
+
 " File explorer
 Plug 'scrooloose/nerdtree'
 

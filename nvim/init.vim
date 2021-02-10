@@ -50,7 +50,7 @@ autocmd Filetype cpp setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype c setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype sh setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype java setlocal tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Filetype html setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype html setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype css setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype js setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype jsx setlocal tabstop=2 shiftwidth=2 softtabstop=2
@@ -118,12 +118,12 @@ set clipboard+=unnamedplus
 " ============================================================================ "
 
 " Default mappings
-let g:multi_cursor_start_word_key      = '<C-n>'
-let g:multi_cursor_next_key            = '<C-n>'
-let g:multi_cursor_select_all_word_key = '<A-n>'
-let g:multi_cursor_prev_key            = '<C-p>'
+let g:multi_cursor_start_word_key      = '<C-d>'
+let g:multi_cursor_next_key            = '<C-d>'
+let g:multi_cursor_select_all_word_key = '<A-d>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
+" let g:multi_cursor_prev_key            = '<C-p>'
 
 
 " ============================================================================ "
@@ -139,7 +139,7 @@ let NERDTreeMinimalUI = 1
 " Exit nvim if NERDTree is the only window left
 autocmd bufenter * if winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree() | q | endif
 " Toggle NERDTree
-map <C-b> :NERDTreeToggle<CR>
+map <C-n> :NERDTreeToggle<CR>
 
 
 " ============================================================================ "
@@ -206,15 +206,18 @@ let g:UltiSnipsExpandTrigger="<C-d>"
 
 " Specify plugins to install
 let g:coc_global_extensions = [
-         \'coc-css',
-         \'coc-eslint',
-         \'coc-html',
-         \'coc-json',
-         \'coc-prettier',
-         \'coc-python',
-         \'coc-sh',
-         \'coc-tsserver',
-         \]
+       \'coc-clangd',
+       \'coc-css',
+       \'coc-eslint',
+       \'coc-html',
+       \'coc-java',
+       \'coc-json',
+       \'coc-prettier',
+       \'coc-python',
+       \'coc-sh',
+       \'coc-tsserver',
+       \'coc-vetur',
+       \]
 
 " Show all diagnostics
 nnoremap <silent><nowait> <C-e> :<C-u>CocList diagnostics<cr>
@@ -243,21 +246,6 @@ let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
 
 " ============================================================================ "
-" ===                         FZF CONFIGURATION                            === "
-" ============================================================================ "
-
-" === Fzf shortcuts === "
-" Open search popup
-nnoremap <C-p> :FZF<CR>
-" Actions for fzf
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-s': 'split',
-  \ 'ctrl-v': 'vsplit'
-  \}
-
-
-" ============================================================================ "
 " ===                     VIM-JAVASCRIPT CONFIGURATION                     === "
 " ============================================================================ "
 
@@ -271,13 +259,13 @@ let g:javascript_plugin_jsdoc = 1
 
 " === Denite shortcuts === "
 " Browser currently open buffers
-nmap ; :Denite buffer<CR>
+nmap <C-b> :Denite buffer<CR>
 " Browse list of files in current directory
-nmap <C-t> :DeniteProjectDir file/rec<CR>
+" nmap <C-t> :DeniteProjectDir file/rec<CR>
 " Search current directory for occurences of given term and close window if no results
-nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
+" nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
 " Search current directory for occurences of word under cursor
-nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
+" nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
 
 " Define mappings while in 'filter' mode
 autocmd FileType denite-filter call s:denite_filter_my_settings()
@@ -294,14 +282,14 @@ function! s:denite_filter_my_settings() abort
   inoremap <silent><buffer><expr> <CR>
   \ denite#do_map('do_action')
   " Open currently selected file in a new tab
-  inoremap <silent><buffer><expr> <C-t>
-  \ denite#do_map('do_action', 'tabopen')
+  " inoremap <silent><buffer><expr> <C-t>
+  " \ denite#do_map('do_action', 'tabopen')
   " Open currently selected file a vertical split
-  inoremap <silent><buffer><expr> <C-v>
-  \ denite#do_map('do_action', 'vsplit')
+  " inoremap <silent><buffer><expr> <C-v>
+  " \ denite#do_map('do_action', 'vsplit')
   " Open currently selected file in a horizontal split
-  inoremap <silent><buffer><expr> <C-h>
-  \ denite#do_map('do_action', 'split')
+  " inoremap <silent><buffer><expr> <C-h>
+  " \ denite#do_map('do_action', 'split')
 endfunction
 
 " Define mappings while in denite window
@@ -324,15 +312,70 @@ function! s:denite_my_settings() abort
   " Switch to insert mode inside of filter prompt
   nnoremap <silent><buffer><expr> i
   \ denite#do_map('open_filter_buffer')
-  nnoremap <silent><buffer><expr> <C-o>
-  \ denite#do_map('open_filter_buffer')
+  " nnoremap <silent><buffer><expr> <C-o>
+  " \ denite#do_map('open_filter_buffer')
   " Open currently selected file in a new tab
-  nnoremap <silent><buffer><expr> <C-t>
-  \ denite#do_map('do_action', 'tabopen')
+  " nnoremap <silent><buffer><expr> <C-t>
+  " \ denite#do_map('do_action', 'tabopen')
   " Open currently selected file a vertical split
-  nnoremap <silent><buffer><expr> <C-v>
-  \ denite#do_map('do_action', 'vsplit')
+  " nnoremap <silent><buffer><expr> <C-v>
+  " \ denite#do_map('do_action', 'vsplit')
   " Open currently selected file in a horizontal split
-  nnoremap <silent><buffer><expr> <C-h>
-  \ denite#do_map('do_action', 'split')
+  " nnoremap <silent><buffer><expr> <C-h>
+  " \ denite#do_map('do_action', 'split')
+endfunction
+
+
+" ============================================================================ "
+" ===                         FZF CONFIGURATION                            === "
+" ============================================================================ "
+
+" Fzf default command and options
+let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info --preview "bat --theme="Coldark-Dark" --color=always --style=numbers --line-range :500 {}"'
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/**" --glob "!build/**" --glob "!dist/**" --glob "!.dart_tool/**" --glob "!.idea" --glob "!node_modules"'
+
+" Open search popup
+nnoremap <C-p> :Files<CR>
+nnoremap <C-f> :Rg<CR>
+
+" Files searching with preview window
+command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, <bang>0)
+
+" Advanced file's content searching
+command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
+
+" Actions for fzf
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit'
+  \}
+
+" Fzf layout
+let g:fzf_layout = {'up': '~90%', 'window': {'width': 0.8, 'height': 0.8, 'yoffset':0.5, 'xoffset': 0.5, 'highlight': 'Todo', 'border': 'rounded'}}
+
+" Customize fzf colors to match color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" Advanced ripgrep integration
+let $BAT_THEME = 'Coldark-Dark'
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case  --glob "!.git/**" --glob "!node_modules/**" --glob "!package-lock.json" --glob "!yarn.lock" --glob "!build/**" --glob "!dist/**" --glob "!.idea/**" -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction

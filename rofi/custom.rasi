@@ -1,0 +1,104 @@
+/**
+ * ROFI Color theme
+ * NAME: custom.rasi
+ * DESCRIPTION: Custom theme for rofi
+ * AUTHOR: TamTH-Dev
+ */
+
+* {
+    background-color:            #212124;
+    border-color:                #6165ea;
+    text-color:                  #ffffff;
+    font:                        "Fira Mono for Powerline 11";
+    prompt-font:                 "Fira Mono for Powerline 11";
+    prompt-background:           #6165ea;
+    prompt-foreground:           #ffffff;
+    prompt-padding:              4 8;
+    alternate-normal-background: #161618;
+    alternate-normal-foreground: @text-color;
+    selected-normal-background:  #6165ea;
+    selected-normal-foreground:  #ffffff;
+    spacing:                     3;
+}
+
+#window {
+    location: north;
+    anchor:   north;
+    y-offset: 80;
+    border:  2;
+    padding: 4;
+    border-radius: 2;
+}
+
+#mainbox {
+    border:  0;
+    padding: 2;
+}
+
+#message {
+    border:  1 dash 0 0;
+    padding: 1;
+}
+
+#listview {
+    fixed-height: 0;
+    border:       1 dash 0 0;
+    spacing:      2;
+    scrolbar:     true;
+    padding:      4 0 0 0;
+    lines: 12;
+}
+
+#element {
+    border:  0;
+    padding: 4 8;
+}
+
+#element.selected.normal {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+}
+
+#element.alternate.normal {
+    background-color: @alternate-normal-background;
+    text-color:       @alternate-normal-foreground;
+}
+
+#scrollbar {
+    width:        0;
+    border:       0;
+    handle-width: 0;
+    padding:      0;
+}
+
+#sidebar {
+    border: 2 dash 0 0;
+}
+
+#button.selected {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+}
+
+#inputbar {
+    spacing: 4;
+    padding: 2 0;
+}
+
+#case-indicator {
+    spacing: 0;
+}
+
+#entry {
+    padding: 4;
+    expand: false;
+    width: 10em;
+}
+
+#prompt {
+    padding:          @prompt-padding;
+    background-color: @prompt-background;
+    text-color:       @prompt-foreground;
+    font:             @prompt-font;
+    border-radius:    2;
+}

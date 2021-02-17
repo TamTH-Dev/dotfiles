@@ -13,9 +13,9 @@ syntax enable
 set termguicolors
 set t_Co=256
 set background=dark
-colorscheme nord
+colorscheme onedark
 set number
-set numberwidth=5
+set numberwidth=4
 set cursorline
 set showcmd
 set wildmenu
@@ -52,7 +52,8 @@ autocmd Filetype sh setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype java setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype css setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype js setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype vue setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype jsx setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype ts setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype json setlocal tabstop=2 shiftwidth=2 softtabstop=2
@@ -137,7 +138,7 @@ let NERDTreeShowHidden=1
 " Start NERDTree in minimal UI mode (No help lines)
 let NERDTreeMinimalUI = 1
 " Exit nvim if NERDTree is the only window left
-autocmd bufenter * if winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree() | q | endif
+" autocmd bufenter * if winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree() | q | endif
 " Toggle NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
@@ -225,6 +226,9 @@ nnoremap <silent><nowait> <C-e> :<C-u>CocList diagnostics<cr>
 " Disable neovim warning on startup
 let g:coc_disable_startup_warning = 1
 
+" Format file command
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
 
 " ============================================================================ "
 " ===                         EMMET CONFIGURATION                          === "
@@ -251,6 +255,14 @@ let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
 " Enables syntax highlighting for JSDocs
 let g:javascript_plugin_jsdoc = 1
+
+
+" ============================================================================ "
+" ===                        VIM-VUE CONFIGURATION                         === "
+" ============================================================================ "
+
+"Disable pre-processor languages altogether (only highlight HTML, JavaScript, and CSS)
+let g:vue_pre_processors = []
 
 
 " ============================================================================ "
@@ -331,7 +343,7 @@ endfunction
 " ============================================================================ "
 
 " Fzf default command and options
-let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info --preview "bat --theme="Coldark-Dark" --color=always --style=numbers --line-range :500 {}"'
+let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info --preview "bat --theme="OneHalfDark" --color=always --style=numbers --line-range :500 {}"'
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/**" --glob "!build/**" --glob "!dist/**" --glob "!.dart_tool/**" --glob "!.idea" --glob "!node_modules"'
 
 " Open search popup
@@ -371,7 +383,7 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 
 " Advanced ripgrep integration
-let $BAT_THEME = 'Coldark-Dark'
+let $BAT_THEME = 'OneHalfDark'
 function! RipgrepFzf(query, fullscreen)
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case  --glob "!.git/**" --glob "!node_modules/**" --glob "!package-lock.json" --glob "!yarn.lock" --glob "!build/**" --glob "!dist/**" --glob "!.idea/**" -- %s || true'
   let initial_command = printf(command_fmt, shellescape(a:query))

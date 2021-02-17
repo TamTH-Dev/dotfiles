@@ -1,25 +1,28 @@
 {
-  "suggest.echodocSupport": true,
-  "suggest.maxCompleteItemCount": 20,
+  "clangd.path": "/home/madlife/.config/coc/extensions/coc-clangd-data/install/11.0.0/clangd_11.0.0/bin/clangd",
   "coc.preferences.formatOnSaveFiletypes": [
-    "html",
     "css",
-    "python",
+    "html",
+    "java",
     "javascript",
-    "typescript",
-    "typescriptreact",
+    "javascriptreact",
     "json",
-    "javascriptreact",
-    "typescript.tsx"
-  ],
-  "eslint.filetypes": [
-    "javascript",
+    "python",
     "typescript",
     "typescriptreact",
-    "javascriptreact",
-    "typescript.tsx"
+    "vue"
   ],
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
-  "diagnostic.infoSign": "•"
+  "diagnostic.infoSign": "•",
+  "eslint.filetypes": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue"
+  ],
+  "eslint.nodePath": "/home/madlife/.config/yarn/global/node_modules/eslint",
+  "suggest.echodocSupport": true,
+  "suggest.maxCompleteItemCount": 20
 }

@@ -68,12 +68,14 @@ let g:closetag_emptyTags_caseSensitive = 1
 
 
 " ============================================================================ "
-" ===                              ULTISNIPS                               === "
+" ===                             COMMENTARY                               === "
 " ============================================================================ "
 
-" === Ultisnips shortcuts === "
-" Trigger configuration
-" let g:UltiSnipsExpandTrigger="<C-d>"
+" Keys mappings
+xmap <leader>/  <Plug>Commentary
+nmap <leader>/  <Plug>Commentary
+omap <leader>/  <Plug>Commentary
+nmap <leader>/  <Plug>CommentaryLine
 
 
 " ============================================================================ "
@@ -126,18 +128,6 @@ let g:coc_disable_startup_warning = 1
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')

@@ -38,8 +38,8 @@ Plug 'tpope/vim-surround'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Snippets
-Plug 'honza/vim-snippets'
-Plug 'sirver/ultisnips'
+" Plug 'honza/vim-snippets'
+" Plug 'sirver/ultisnips'
 
 " Allows to use <Tab> for all insert completion needs
 Plug 'ervandew/supertab'

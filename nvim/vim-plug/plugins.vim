@@ -4,38 +4,9 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'arcticicestudio/nord-vim'
 
-" Add multi cursors
-Plug 'terryma/vim-multiple-cursors'
-
 " Customized vim status line
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-
-" Fuzzy search
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
-" File explorer
-Plug 'scrooloose/nerdtree'
-
-" Commenter
-Plug 'tpope/vim-commentary'
-
-" Support auto close
-Plug 'cohama/lexima.vim'
-
-" Add icons
-Plug 'ryanoasis/vim-devicons'
-
-" Snippets
-Plug 'honza/vim-snippets'
-Plug 'sirver/ultisnips'
-
-" Allows to use <Tab> for all insert completion needs
-Plug 'ervandew/supertab'
-
-" Conquer of Completion
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Syntax highlighting
 Plug 'pangloss/vim-javascript'  " Javascript
@@ -45,11 +16,46 @@ Plug 'herringtondarkholme/yats.vim'  " Typescript
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}  " Python
 Plug 'octol/vim-cpp-enhanced-highlight'  " C++
 
+" Add icons
+Plug 'ryanoasis/vim-devicons'
+
+" Add multi cursors
+Plug 'terryma/vim-multiple-cursors'
+
+" Commenter
+Plug 'tpope/vim-commentary'
+
+" Support auto close
+Plug 'cohama/lexima.vim'
+
 " Auto close (X)HTML tags
 Plug 'alvan/vim-closetag'
 
+" Surround parentheses, brackets, quotes, XML tags, and more
+Plug 'tpope/vim-surround'
+
+" Conquer of Completion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Snippets
+Plug 'honza/vim-snippets'
+Plug 'sirver/ultisnips'
+
+" Allows to use <Tab> for all insert completion needs
+Plug 'ervandew/supertab'
+
 " Emmet for nvim
 Plug 'mattn/emmet-vim'
+
+" File explorer
+Plug 'scrooloose/nerdtree'
+
+" Display tags in a window, ordered by scope
+Plug 'majutsushi/tagbar'
+
+" Fuzzy search
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Fuzzy finding, buffer management
 if has('nvim')

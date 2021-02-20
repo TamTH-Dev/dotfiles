@@ -3,14 +3,16 @@
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "html",
-    "java",
     "javascript",
     "javascriptreact",
-    "json",
-    "python",
     "typescript",
     "typescriptreact",
-    "vue"
+    "jxs",
+    "tsx",
+    "vue",
+    "python",
+    "java",
+    "json"
   ],
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
@@ -20,6 +22,8 @@
     "javascriptreact",
     "typescript",
     "typescriptreact",
+    "jxs",
+    "tsx",
     "vue"
   ],
   "eslint.nodePath": "/home/madlife/.config/yarn/global/node_modules/eslint",

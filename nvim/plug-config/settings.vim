@@ -9,7 +9,7 @@
 " ===                              MULTI CURSORS                           === "
 " ============================================================================ "
 
-" Default mappings
+" Keys mappings
 let g:multi_cursor_start_word_key      = '<C-d>'
 let g:multi_cursor_next_key            = '<C-d>'
 let g:multi_cursor_select_all_word_key = '<A-d>'
@@ -68,12 +68,38 @@ let g:closetag_emptyTags_caseSensitive = 1
 
 
 " ============================================================================ "
-" ===                               ULTISNIPS                              === "
+" ===                              ULTISNIPS                               === "
 " ============================================================================ "
 
 " === Ultisnips shortcuts === "
 " Trigger configuration
-let g:UltiSnipsExpandTrigger="<C-d>"
+" let g:UltiSnipsExpandTrigger="<C-d>"
+
+
+" ============================================================================ "
+" ===                               TAGBAR                                 === "
+" ============================================================================ "
+
+" Toggle tagbar
+nmap <F8> :TagbarToggle<CR>
+
+" Open tagbar for specific filetypes
+autocmd FileType html,javascript,javascriptreact,jsx,typescript,typescriptreact,tsx,vue,python,c,cpp,java nested :TagbarOpen
+
+" Set tagbar's width
+" The tagbar window will be set to 20 percent of the window width with a limit
+" of no less than 25 characters.
+let g:tagbar_width = max([25, winwidth(0) / 5])
+
+" Omit the short help at the top of the window and the blank lines in between
+" top-level scopes
+let g:tagbar_compact = 1
+
+" Show absolute tags' line number
+let g:tagbar_show_tag_linenumbers = 1
+
+" Set icons for tagbar
+let g:tagbar_iconchars = ['▸', '▾']
 
 
 " ============================================================================ "
@@ -148,7 +174,6 @@ nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 " ===                                EMMET                                 === "
 " ============================================================================ "
 
-" === Emmet shortcuts === "
 " Remap the default emmet's leader key
 let g:user_emmet_leader_key='<C-y>'
 
@@ -183,8 +208,7 @@ let g:vue_pre_processors = []
 " ===                                DENITE                                === "
 " ============================================================================ "
 
-" === Denite shortcuts === "
-" Browser currently open buffers
+" Browse currently open buffers
 nmap <C-b> :Denite buffer<CR>
 " Browse list of files in current directory
 " nmap <C-t> :DeniteProjectDir file/rec<CR>
@@ -278,7 +302,7 @@ let g:fzf_action = {
   \}
 
 " Fzf layout
-let g:fzf_layout = {'up': '~90%', 'window': {'width': 0.8, 'height': 0.8, 'yoffset':0.5, 'xoffset': 0.5, 'highlight': 'Todo', 'border': 'rounded'}}
+let g:fzf_layout = {'up': '~90%', 'window': {'width': 0.8, 'height': 0.7, 'yoffset':0.5, 'xoffset': 0.5, 'highlight': 'Todo', 'border': 'rounded'}}
 
 " Customize fzf colors to match color scheme
 let g:fzf_colors =

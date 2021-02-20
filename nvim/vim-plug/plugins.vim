@@ -1,10 +1,8 @@
 call plug#begin('~/.config/nvim/plugged')
 
 " Colorscheme
-Plug 'drewtempelmeyer/palenight.vim'
 Plug 'morhetz/gruvbox'
 Plug 'arcticicestudio/nord-vim'
-Plug 'joshdick/onedark.vim'
 
 " Add multi cursors
 Plug 'terryma/vim-multiple-cursors'
@@ -21,7 +19,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 
 " Commenter
-Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-commentary'
 
 " Support auto close
 Plug 'cohama/lexima.vim'
@@ -63,4 +61,3 @@ else
 endif
 
 call plug#end()
-

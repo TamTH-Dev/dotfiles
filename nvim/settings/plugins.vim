@@ -1,12 +1,13 @@
 " ============================================================================ "
 " ============================================================================ "
-" ====                        VIM-PLUG CONFIGURATION                      ==== "
+" ====                         PLUGINS CONFIGURATION                      ==== "
 " ============================================================================ "
 " ============================================================================ "
 
 
+
 " ============================================================================ "
-" ===                              MULTI CURSORS                           === "
+" ===                             MULTI CURSORS                            === "
 " ============================================================================ "
 
 " Keys mappings
@@ -15,23 +16,41 @@ let g:multi_cursor_next_key            = '<C-d>'
 let g:multi_cursor_select_all_word_key = '<A-d>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
-" let g:multi_cursor_prev_key            = '<C-p>'
 
 
 " ============================================================================ "
-" ===                                 NERDTREE                             === "
+" ===                                NERDTREE                              === "
 " ============================================================================ "
+
+" Toggle NERDTree
+map <C-n> :NERDTreeToggle<CR>
+
+" Change default mappings
+" let NERDTreeMapOpenInTab='<C-t>'
+let NERDTreeMapOpenSplit='<C-x>'
+let NERDTreeMapOpenVSplit='<C-v>'
 
 " Automatically delete the buffer after deleting or renaming a file
 let NERDTreeAutoDeleteBuffer = 1
+
 " Show hidden files
 let NERDTreeShowHidden=1
+
 " Start NERDTree in minimal UI mode (No help lines)
 let NERDTreeMinimalUI = 1
+
 " Exit nvim if NERDTree is the only window left
 autocmd bufenter * if winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree() | q | endif
-" Toggle NERDTree
-map <C-n> :NERDTreeToggle<CR>
+
+" Open the existing NERDTree on each new tab.
+autocmd BufWinEnter * silent NERDTreeMirror
+
+" Change default arrows
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
+" Ignore specified files
+let g:NERDTreeIgnore = ['^build$', '^dist$', '^node_modules$', '^.git$']
 
 
 " ============================================================================ "
@@ -40,19 +59,17 @@ map <C-n> :NERDTreeToggle<CR>
 
 " Automatically displays all buffers when there's only one tab open
 let g:airline#extensions#tabline#enabled = 1
+
 " Path formatter
 let g:airline#extensions#tabline#formatter = 'unique_tail'
+
 " Enable caching of the various syntax highlighting groups
 let g:airline_highlighting_cache = 1
-
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " Enable powerline fonts
 let g:airline_powerline_fonts = 1
-
-" Airline theme
-" let g:airline_theme='gotham'
 
 
 " ============================================================================ "
@@ -61,8 +78,10 @@ let g:airline_powerline_fonts = 1
 
 " File extensions where this plugin is enabled
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js'
+
 " List of non-closing tags self-closing in the specified files
 let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+
 " Make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
 let g:closetag_emptyTags_caseSensitive = 1
 
@@ -85,16 +104,14 @@ nmap <leader>/  <Plug>CommentaryLine
 " Toggle tagbar
 nmap <F8> :TagbarToggle<CR>
 
-" Open tagbar for specific filetypes
-autocmd FileType html,javascript,javascriptreact,jsx,typescript,typescriptreact,tsx,vue,python,c,cpp,java nested :TagbarOpen
+" Open tagbar for specified filetypes
+autocmd FileType html,css,javascript,javascriptreact,jsx,typescript,typescriptreact,tsx,vue,python,c,cpp,java nested :TagbarOpen
 
 " Set tagbar's width
-" The tagbar window will be set to 20 percent of the window width with a limit
-" of no less than 25 characters.
+" The tagbar window will be set to 20 percent of the window width with a limit of no less than 25 characters.
 let g:tagbar_width = max([25, winwidth(0) / 5])
 
-" Omit the short help at the top of the window and the blank lines in between
-" top-level scopes
+" Omit the short help at the top of the window and the blank lines in between top-level scopes
 let g:tagbar_compact = 1
 
 " Show absolute tags' line number
@@ -102,6 +119,20 @@ let g:tagbar_show_tag_linenumbers = 1
 
 " Set icons for tagbar
 let g:tagbar_iconchars = ['▸', '▾']
+
+
+" ============================================================================ "
+" ===                                SNIPPETS                              === "
+" ============================================================================ "
+
+" Trigger snippet expand
+imap <CR> <Plug>(coc-snippets-expand)
+
+" Select text for visual placeholder of snippet
+vmap <CR> <Plug>(coc-snippets-select)
+
+" Jump to next placeholder
+let g:coc_snippet_next = '<CR>'
 
 
 " ============================================================================ "
@@ -116,6 +147,7 @@ let g:coc_global_extensions = [
        \'coc-html',
        \'coc-java',
        \'coc-json',
+       \'coc-snippets',
        \'coc-prettier',
        \'coc-python',
        \'coc-sh',
@@ -125,6 +157,18 @@ let g:coc_global_extensions = [
 
 " Disable neovim warning on startup
 let g:coc_disable_startup_warning = 1
+
+" Use tab for trigger completion with characters ahead and navigate
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -169,16 +213,6 @@ let g:user_emmet_leader_key='<C-y>'
 
 
 " ============================================================================ "
-" ===                               SUPERTAB                               === "
-" ============================================================================ "
-
-" === Supertab shortcuts === "
-" Change scrolling direction of completion popup
-let g:SuperTabDefaultCompletionType = "<c-n>"
-let g:SuperTabContextDefaultCompletionType = "<c-n>"
-
-
-" ============================================================================ "
 " ===                             VIM-JAVASCRIPT                           === "
 " ============================================================================ "
 
@@ -200,18 +234,12 @@ let g:vue_pre_processors = []
 
 " Browse currently open buffers
 nmap <C-b> :Denite buffer<CR>
-" Browse list of files in current directory
-" nmap <C-t> :DeniteProjectDir file/rec<CR>
-" Search current directory for occurences of given term and close window if no results
-" nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
-" Search current directory for occurences of word under cursor
-" nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
 
 " Define mappings while in 'filter' mode
 autocmd FileType denite-filter call s:denite_filter_my_settings()
 function! s:denite_filter_my_settings() abort
   " Switch to normal mode inside of search results
-  imap <silent><buffer> <C-o>
+  imap <silent><buffer> <Esc>
   \ <Plug>(denite_filter_quit)
   " Exit denite window in any mode
   inoremap <silent><buffer><expr> <Esc>
@@ -222,14 +250,14 @@ function! s:denite_filter_my_settings() abort
   inoremap <silent><buffer><expr> <CR>
   \ denite#do_map('do_action')
   " Open currently selected file in a new tab
-  " inoremap <silent><buffer><expr> <C-t>
-  " \ denite#do_map('do_action', 'tabopen')
-  " Open currently selected file a vertical split
-  " inoremap <silent><buffer><expr> <C-v>
-  " \ denite#do_map('do_action', 'vsplit')
+  inoremap <silent><buffer><expr> <C-t>
+  \ denite#do_map('do_action', 'tabopen')
   " Open currently selected file in a horizontal split
-  " inoremap <silent><buffer><expr> <C-h>
-  " \ denite#do_map('do_action', 'split')
+  inoremap <silent><buffer><expr> <C-x>
+  \ denite#do_map('do_action', 'split')
+  " Open currently selected file a vertical split
+  inoremap <silent><buffer><expr> <C-v>
+  \ denite#do_map('do_action', 'vsplit')
 endfunction
 
 " Define mappings while in denite window
@@ -252,17 +280,15 @@ function! s:denite_my_settings() abort
   " Switch to insert mode inside of filter prompt
   nnoremap <silent><buffer><expr> i
   \ denite#do_map('open_filter_buffer')
-  " nnoremap <silent><buffer><expr> <C-o>
-  " \ denite#do_map('open_filter_buffer')
   " Open currently selected file in a new tab
-  " nnoremap <silent><buffer><expr> <C-t>
-  " \ denite#do_map('do_action', 'tabopen')
-  " Open currently selected file a vertical split
-  " nnoremap <silent><buffer><expr> <C-v>
-  " \ denite#do_map('do_action', 'vsplit')
+  nnoremap <silent><buffer><expr> <C-t>
+  \ denite#do_map('do_action', 'tabopen')
   " Open currently selected file in a horizontal split
-  " nnoremap <silent><buffer><expr> <C-h>
-  " \ denite#do_map('do_action', 'split')
+  nnoremap <silent><buffer><expr> <C-x>
+  \ denite#do_map('do_action', 'split')
+  " Open currently selected file a vertical split
+  nnoremap <silent><buffer><expr> <C-v>
+  \ denite#do_map('do_action', 'vsplit')
 endfunction
 
 
@@ -271,7 +297,7 @@ endfunction
 " ============================================================================ "
 
 " Fzf default command and options
-let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info --preview "bat --theme="gruvbox" --color=always --style=numbers --line-range :500 {}"'
+let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info --preview "bat --theme="gruvbox" --color=always --style=numbers --line-range :500 {}" --bind=shift-tab:up,tab:down --no-multi --cycle'
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/**" --glob "!build/**" --glob "!dist/**" --glob "!.dart_tool/**" --glob "!.idea" --glob "!node_modules"'
 
 " Open search popup

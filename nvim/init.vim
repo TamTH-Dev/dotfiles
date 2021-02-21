@@ -1,6 +1,6 @@
 " Source configuration files
 scriptencoding utf-8
-source ~/.config/nvim/vim-plug/plugins.vim
-source ~/.config/nvim/general/settings.vim
-source ~/.config/nvim/keys/mappings.vim
-source ~/.config/nvim/plug-config/settings.vim
+source ~/.config/nvim/installed-plugins/plugins.vim
+source ~/.config/nvim/key-bindings/mappings.vim
+source ~/.config/nvim/settings/general.vim
+source ~/.config/nvim/settings/plugins.vim

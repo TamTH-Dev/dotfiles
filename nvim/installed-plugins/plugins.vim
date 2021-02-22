@@ -3,6 +3,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Colorscheme
 Plug 'morhetz/gruvbox'
 Plug 'arcticicestudio/nord-vim'
+Plug 'phanviet/vim-monokai-pro'
 
 " Customized vim status line
 Plug 'vim-airline/vim-airline'
@@ -18,6 +19,9 @@ Plug 'octol/vim-cpp-enhanced-highlight'  " C++
 
 " Add icons
 Plug 'ryanoasis/vim-devicons'
+
+" Git wrapper
+Plug 'tpope/vim-fugitive'
 
 " Add multi cursors
 Plug 'terryma/vim-multiple-cursors'

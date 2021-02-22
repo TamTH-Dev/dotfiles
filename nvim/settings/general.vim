@@ -9,7 +9,7 @@ set termguicolors
 set t_Co=256
 syntax enable
 set background=dark
-colorscheme gruvbox
+colorscheme monokai_pro
 set number
 set numberwidth=4
 set cursorline

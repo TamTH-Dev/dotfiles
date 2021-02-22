@@ -8,7 +8,9 @@ export ZSH="/home/madlife/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="afowler"
+
+# ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="obraun"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -68,9 +70,22 @@ export UPDATE_ZSH_DAYS=5
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+
+plugins=(
+  git
+  # zsh-syntax-highlighting
+  # zsh-autosuggestions
+)
 
 source $ZSH/oh-my-zsh.sh
+
+# Auto jump
+[[ -s /home/madlife/.autojump/etc/profile.d/autojump.sh ]] && source /home/madlife/.autojump/etc/profile.d/autojump.sh
+autoload -U compinit && compinit -u
+
+# Load pure theme
+# autoload -U promptinit; promptinit
+# prompt pure
 
 # User configuration
 
@@ -85,6 +100,7 @@ source $ZSH/oh-my-zsh.sh
 # else
 #   export EDITOR='mvim'
 # fi
+export EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -95,16 +111,16 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias zshconfig="nvim ~/.zshrc"
+alias vi="nvim"
 
 # Export temp directory
 export TMPDIR="/tmp"
 
 # Configure fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-export FZF_DEFAULT_COMMAND='rg --files'
+export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border --preview "bat --theme="gruvbox" --style=numbers --color=always --line-range :500 {}" --bind=shift-tab:up,tab:down --no-multi --cycle'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git/**" --glob "!build/**" --glob "!dist/**" --glob "!.dart_tool/**" --glob "!.idea/**" --glob "!node_modules/**" --glob "!.npm/**" --glob "!.cache/**"'
 
 # Path env for npm packages
 export PATH=~/.npm-packages/bin:$PATH
@@ -115,3 +131,19 @@ export PATH=~/.yarn-packages/bin:$PATH
 # Path env for java
 export JAVA_HOME=/usr/lib/jvm/jdk-11.0.9
 export PATH=$JAVA_HOME/bin:$PATH
+
+# Path env for flutter
+export PATH=$PATH:~/flutter/bin
+
+# Path env for SQLServer
+export PATH=$PATH:/opt/mssql-tools/bin
+
+# Path env for ruby
+export GEM_HOME=~/.gem
+export PATH=~/.gem/bin:$PATH
+
+# Path for cargo
+export PATH=~/.cargo/bin:$PATH
+
+# Run tmux on startup
+[ -z "$TMUX" ] && { exec tmux new-session && exit;}

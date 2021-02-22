@@ -25,8 +25,10 @@ let g:multi_cursor_quit_key            = '<Esc>'
 " Toggle NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
+" Set default NERDTree's width 
+let g:NERDTreeWinSize=28
+
 " Change default mappings
-" let NERDTreeMapOpenInTab='<C-t>'
 let NERDTreeMapOpenSplit='<C-x>'
 let NERDTreeMapOpenVSplit='<C-v>'
 
@@ -65,8 +67,6 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 " Enable caching of the various syntax highlighting groups
 let g:airline_highlighting_cache = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " Enable powerline fonts
 let g:airline_powerline_fonts = 1
@@ -77,10 +77,10 @@ let g:airline_powerline_fonts = 1
 " ============================================================================ "
 
 " File extensions where this plugin is enabled
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js'
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.ts'
 
 " List of non-closing tags self-closing in the specified files
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
 
 " Make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
 let g:closetag_emptyTags_caseSensitive = 1
@@ -109,7 +109,7 @@ autocmd FileType html,css,javascript,javascriptreact,jsx,typescript,typescriptre
 
 " Set tagbar's width
 " The tagbar window will be set to 20 percent of the window width with a limit of no less than 25 characters.
-let g:tagbar_width = max([25, winwidth(0) / 5])
+let g:tagbar_width = max([25, winwidth(0) / 6])
 
 " Omit the short help at the top of the window and the blank lines in between top-level scopes
 let g:tagbar_compact = 1
@@ -297,7 +297,7 @@ endfunction
 " ============================================================================ "
 
 " Fzf default command and options
-let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info --preview "bat --theme="gruvbox" --color=always --style=numbers --line-range :500 {}" --bind=shift-tab:up,tab:down --no-multi --cycle'
+let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info --preview "bat --theme="OneHalfDark" --color=always --style=numbers --line-range :500 {}" --bind=shift-tab:up,tab:down --no-multi --cycle'
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/**" --glob "!build/**" --glob "!dist/**" --glob "!.dart_tool/**" --glob "!.idea" --glob "!node_modules"'
 
 " Open search popup
@@ -337,7 +337,7 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 
 " Advanced ripgrep integration
-let $BAT_THEME = 'gruvbox'
+let $BAT_THEME = 'OneHalfDark'
 function! RipgrepFzf(query, fullscreen)
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case  --glob "!.git/**" --glob "!node_modules/**" --glob "!package-lock.json" --glob "!yarn.lock" --glob "!build/**" --glob "!dist/**" --glob "!.idea/**" -- %s || true'
   let initial_command = printf(command_fmt, shellescape(a:query))

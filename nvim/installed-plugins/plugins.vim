@@ -1,8 +1,7 @@
 call plug#begin('~/.config/nvim/plugged')
 
 " Colorscheme
-Plug 'morhetz/gruvbox'
-Plug 'arcticicestudio/nord-vim'
+Plug 'gruvbox-community/gruvbox'
 Plug 'phanviet/vim-monokai-pro'
 
 " Customized vim status line

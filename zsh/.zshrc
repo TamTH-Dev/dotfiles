@@ -9,7 +9,6 @@ export ZSH="/home/madlife/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 
-# ZSH_THEME="powerlevel10k/powerlevel10k"
 ZSH_THEME="obraun"
 
 # Set list of themes to pick from when loading at random
@@ -119,14 +118,14 @@ export TMPDIR="/tmp"
 
 # Configure fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border --preview "bat --theme="gruvbox" --style=numbers --color=always --line-range :500 {}" --bind=shift-tab:up,tab:down --no-multi --cycle'
-export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git/**" --glob "!build/**" --glob "!dist/**" --glob "!.dart_tool/**" --glob "!.idea/**" --glob "!node_modules/**" --glob "!.npm/**" --glob "!.cache/**"'
+export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border --preview "bat --theme="OneHalfDark" --style=numbers --color=always --line-range :500 {}" --bind=shift-tab:up,tab:down --no-multi --cycle'
+export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules,.git,build,dist,.cache,cache,.idea}"'
 
 # Path env for npm packages
 export PATH=~/.npm-packages/bin:$PATH
 
 # Path env for yarn packages
-export PATH=~/.yarn-packages/bin:$PATH
+# export PATH=~/.yarn-packages/bin:$PATH
 
 # Path env for java
 export JAVA_HOME=/usr/lib/jvm/jdk-11.0.9

@@ -25,8 +25,8 @@ let g:multi_cursor_quit_key            = '<Esc>'
 " Toggle NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
-" Set default NERDTree's width 
-let g:NERDTreeWinSize=28
+" Set default NERDTree's width
+let g:NERDTreeWinSize=25
 
 " Change default mappings
 let NERDTreeMapOpenSplit='<C-x>'
@@ -105,7 +105,7 @@ nmap <leader>/  <Plug>CommentaryLine
 nmap <F8> :TagbarToggle<CR>
 
 " Open tagbar for specified filetypes
-autocmd FileType html,css,javascript,javascriptreact,jsx,typescript,typescriptreact,tsx,vue,python,c,cpp,java nested :TagbarOpen
+autocmd FileType javascript,javascriptreact,jsx,typescript,typescriptreact,tsx,vue,python,c,cpp,java nested :TagbarOpen
 
 " Set tagbar's width
 " The tagbar window will be set to 20 percent of the window width with a limit of no less than 25 characters.
@@ -298,7 +298,7 @@ endfunction
 
 " Fzf default command and options
 let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info --preview "bat --theme="OneHalfDark" --color=always --style=numbers --line-range :500 {}" --bind=shift-tab:up,tab:down --no-multi --cycle'
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/**" --glob "!build/**" --glob "!dist/**" --glob "!.dart_tool/**" --glob "!.idea" --glob "!node_modules"'
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden -g "!{node_modules,.git,.cache,cache,build,dist,.idea}"'
 
 " Open search popup
 nnoremap <C-p> :Files<CR>
@@ -339,7 +339,7 @@ let g:fzf_colors =
 " Advanced ripgrep integration
 let $BAT_THEME = 'OneHalfDark'
 function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case  --glob "!.git/**" --glob "!node_modules/**" --glob "!package-lock.json" --glob "!yarn.lock" --glob "!build/**" --glob "!dist/**" --glob "!.idea/**" -- %s || true'
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -g "!{node_modules,.git,.cache,cache,dist,build,.idea}" -- %s || true'
   let initial_command = printf(command_fmt, shellescape(a:query))
   let reload_command = printf(command_fmt, '{q}')
   let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}

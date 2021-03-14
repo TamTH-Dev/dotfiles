@@ -10,7 +10,7 @@ set t_Co=256
 syntax enable
 set background=dark
 colorscheme monokai_pro
-set number
+set relativenumber
 set numberwidth=4
 set cursorline
 set showcmd
@@ -24,6 +24,7 @@ filetype indent on
 set laststatus=2
 set hidden
 set updatetime=300
+set formatoptions-=c formatoptions-=r formatoptions-=o
 
 set nobackup
 set noswapfile
@@ -45,8 +46,12 @@ set magic
 " Save neovim yank to clipboard
 set clipboard+=unnamedplus
 
+" Disable inserting comment on new line automatically
+au BufEnter * set fo-=c fo-=r fo-=o
+
 " Set tab/space size for specific languages
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype ejs setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype css setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype javascriptreact setlocal tabstop=2 shiftwidth=2 softtabstop=2

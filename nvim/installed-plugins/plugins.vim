@@ -49,20 +49,8 @@ Plug 'mattn/emmet-vim'
 " File explorer
 Plug 'scrooloose/nerdtree'
 
-" Display tags in a window, ordered by scope
-Plug 'majutsushi/tagbar'
-
 " Fuzzy search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-
-" Fuzzy finding, buffer management
-if has('nvim')
-  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/denite.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
 
 call plug#end()

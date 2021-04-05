@@ -77,10 +77,10 @@ let g:airline_powerline_fonts = 1
 " ============================================================================ "
 
 " File extensions where this plugin is enabled
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.ts'
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.ts,*.vue'
 
 " List of non-closing tags self-closing in the specified files
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx,*.vuex'
 
 " Make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
 let g:closetag_emptyTags_caseSensitive = 1
@@ -102,23 +102,23 @@ nmap <leader>/  <Plug>CommentaryLine
 " ============================================================================ "
 
 " Toggle tagbar
-nmap <F8> :TagbarToggle<CR>
+" nmap <F8> :TagbarToggle<CR>
 
 " Open tagbar for specified filetypes
-autocmd FileType javascript,javascriptreact,jsx,typescript,typescriptreact,tsx,vue,python,c,cpp,java nested :TagbarOpen
+" autocmd FileType javascript,javascriptreact,jsx,typescript,typescriptreact,tsx,vue,python,c,cpp,java nested :TagbarOpen
 
 " Set tagbar's width
 " The tagbar window will be set to 20 percent of the window width with a limit of no less than 25 characters.
-let g:tagbar_width = max([25, winwidth(0) / 6])
+" let g:tagbar_width = max([25, winwidth(0) / 6])
 
 " Omit the short help at the top of the window and the blank lines in between top-level scopes
-let g:tagbar_compact = 1
+" let g:tagbar_compact = 1
 
 " Show absolute tags' line number
-let g:tagbar_show_tag_linenumbers = 1
+" let g:tagbar_show_tag_linenumbers = 1
 
 " Set icons for tagbar
-let g:tagbar_iconchars = ['▸', '▾']
+" let g:tagbar_iconchars = ['▸', '▾']
 
 
 " ============================================================================ "
@@ -226,70 +226,6 @@ let g:javascript_plugin_jsdoc = 1
 
 "Disable pre-processor languages altogether (only highlight HTML, JavaScript, and CSS)
 let g:vue_pre_processors = []
-
-
-" ============================================================================ "
-" ===                                DENITE                                === "
-" ============================================================================ "
-
-" Browse currently open buffers
-nmap <C-b> :Denite buffer<CR>
-
-" Define mappings while in 'filter' mode
-autocmd FileType denite-filter call s:denite_filter_my_settings()
-function! s:denite_filter_my_settings() abort
-  " Switch to normal mode inside of search results
-  imap <silent><buffer> <Esc>
-  \ <Plug>(denite_filter_quit)
-  " Exit denite window in any mode
-  inoremap <silent><buffer><expr> <Esc>
-  \ denite#do_map('quit')
-  nnoremap <silent><buffer><expr> <Esc>
-  \ denite#do_map('quit')
-  " Open currently selected file in any mode
-  inoremap <silent><buffer><expr> <CR>
-  \ denite#do_map('do_action')
-  " Open currently selected file in a new tab
-  inoremap <silent><buffer><expr> <C-t>
-  \ denite#do_map('do_action', 'tabopen')
-  " Open currently selected file in a horizontal split
-  inoremap <silent><buffer><expr> <C-x>
-  \ denite#do_map('do_action', 'split')
-  " Open currently selected file a vertical split
-  inoremap <silent><buffer><expr> <C-v>
-  \ denite#do_map('do_action', 'vsplit')
-endfunction
-
-" Define mappings while in denite window
-autocmd FileType denite call s:denite_my_settings()
-function! s:denite_my_settings() abort
-  " Opens currently selected file
-  nnoremap <silent><buffer><expr> <CR>
-  \ denite#do_map('do_action')
-  " Quit Denite window
-  nnoremap <silent><buffer><expr> q
-  \ denite#do_map('quit')
-  nnoremap <silent><buffer><expr> <Esc>
-  \ denite#do_map('quit')
-  " Delete currenly selected file
-  nnoremap <silent><buffer><expr> d
-  \ denite#do_map('do_action', 'delete')
-  " Preview currently selected file
-  nnoremap <silent><buffer><expr> p
-  \ denite#do_map('do_action', 'preview')
-  " Switch to insert mode inside of filter prompt
-  nnoremap <silent><buffer><expr> i
-  \ denite#do_map('open_filter_buffer')
-  " Open currently selected file in a new tab
-  nnoremap <silent><buffer><expr> <C-t>
-  \ denite#do_map('do_action', 'tabopen')
-  " Open currently selected file in a horizontal split
-  nnoremap <silent><buffer><expr> <C-x>
-  \ denite#do_map('do_action', 'split')
-  " Open currently selected file a vertical split
-  nnoremap <silent><buffer><expr> <C-v>
-  \ denite#do_map('do_action', 'vsplit')
-endfunction
 
 
 " ============================================================================ "

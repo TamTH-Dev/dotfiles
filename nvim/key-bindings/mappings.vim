@@ -46,3 +46,6 @@ imap jj <Esc>
 " Move vertically by visual line
 nnoremap j gj
 nnoremap k gk
+
+" Close all buffers except the last one
+nnoremap <leader>cb :w <bar> %bd <bar> e# <bar> bd# <CR>

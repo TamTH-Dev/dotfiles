@@ -67,3 +67,4 @@ autocmd Filetype cpp setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype java setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype php setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype sh setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype text setlocal tabstop=4 shiftwidth=4 softtabstop=4

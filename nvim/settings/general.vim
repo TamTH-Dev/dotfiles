@@ -26,6 +26,7 @@ set laststatus=2
 set hidden
 set updatetime=300
 set formatoptions-=c formatoptions-=r formatoptions-=o
+set switchbuf=useopen
 
 set nobackup
 set noswapfile

@@ -26,7 +26,7 @@ let g:multi_cursor_quit_key            = '<Esc>'
 map <C-n> :NERDTreeToggle<CR>
 
 " Set default NERDTree's width
-let g:NERDTreeWinSize=25
+let g:NERDTreeWinSize=30
 
 " Change default mappings
 let NERDTreeMapOpenSplit='<C-x>'
@@ -44,12 +44,28 @@ let NERDTreeMinimalUI = 1
 " Exit nvim if NERDTree is the only window left
 autocmd bufenter * if winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree() | q | endif
 
+" Prevent other buffers open in NERDTree buffer
+autocmd FileType nerdtree let t:nerdtree_winnr = bufwinnr('%')
+autocmd BufWinEnter * call PreventBuffersInNERDTree()
+function! PreventBuffersInNERDTree()
+  if bufname('#') =~ 'NERD_tree' && bufname('%') !~ 'NERD_tree'
+    \ && exists('t:nerdtree_winnr') && bufwinnr('%') == t:nerdtree_winnr
+    \ && &buftype == '' && !exists('g:launching_fzf')
+    let bufnum = bufnr('%')
+    close
+    exe 'b ' . bufnum
+    NERDTree
+  endif
+  if exists('g:launching_fzf') | unlet g:launching_fzf | endif
+endfunction
+
+
 " Open the existing NERDTree on each new tab.
 autocmd BufWinEnter * silent NERDTreeMirror
 
 " Change default arrows
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
+let g:NERDTreeDirArrowExpandable = ''
+let g:NERDTreeDirArrowCollapsible = ''
 
 " Ignore specified files
 let g:NERDTreeIgnore = ['^build$', '^dist$', '^node_modules$', '^.git$']
@@ -224,7 +240,7 @@ let g:javascript_plugin_jsdoc = 1
 
 
 " ============================================================================ "
-" ===                                VIM-VUE                               === "
+" ===                              VIM-VUE                                 === "
 " ============================================================================ "
 
 "Disable pre-processor languages altogether (only highlight HTML, JavaScript, and CSS)
@@ -232,22 +248,37 @@ let g:vue_pre_processors = []
 
 
 " ============================================================================ "
-" ===                            FZF && RIPGREP                            === "
+" ===                               CTRLP                                  === "
+" ============================================================================ "
+
+" Default mapping and the default command to invoke CtrlP
+" let g:ctrlp_map = '<c-P>'
+" let g:ctrlp_cmd = 'CtrlP'
+
+" Invoke CtrlP in find buffer
+nnoremap <C-b> :CtrlPBuffer<CR>
+
+
+" ============================================================================ "
+" ===                           FZF && RIPGREP                             === "
 " ============================================================================ "
 
 " Fzf default command and options
-let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info --preview "bat --theme="base16" --color=always --style=numbers --line-range :500 {}" --bind=shift-tab:up,tab:down --no-multi --cycle'
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden -g "!{node_modules,.git,.cache,cache,build,dist,.idea,package-lock.json}"'
+let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info --bind=shift-tab:up,tab:down --no-multi --cycle'
+let $FZF_DEFAULT_COMMAND = 'rg --files --smart-case --hidden -g "!{node_modules,.git,.cache,cache,build,dist,.idea,package-lock.json}" || true'
+
+" Fzf layout
+let g:fzf_layout = {'down': '~40%'}
+
+" Disable preview window
+let g:fzf_preview_window = ['right:hidden']
+
+" let g:fzf_nvim_statusline = 0
 
 " Open search popup
-nnoremap <C-p> :Files<CR>
-nnoremap <C-f> :Rg<CR>
-
-" Files searching with preview window
-command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, <bang>0)
-
-" Advanced file's content searching
-command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
+nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <C-f> :Rg<CR>
+nnoremap <silent> <C-b> :Buffers<CR>
 
 " Actions for fzf
 let g:fzf_action = {
@@ -256,31 +287,17 @@ let g:fzf_action = {
   \ 'ctrl-v': 'vsplit'
   \}
 
-" Fzf layout
-let g:fzf_layout = {'up': '~90%', 'window': {'width': 0.8, 'height': 0.7, 'yoffset':0.5, 'xoffset': 0.5, 'highlight': 'Todo', 'border': 'rounded'}}
+" Files searching with preview window
+command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, <bang>0)
 
-" Customize fzf colors to match color scheme
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+" Advanced file's content searching
+command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
 
 " Advanced ripgrep integration
-let $BAT_THEME = 'base16'
 function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -g "!{node_modules,.git,.cache,cache,dist,build,.idea,package-lock.json}" -- %s || true'
+  let command_fmt = 'rg --line-number --smart-case -g "!{node_modules,.git,.cache,cache,dist,build,.idea,package-lock.json}" -- %s || true'
   let initial_command = printf(command_fmt, shellescape(a:query))
   let reload_command = printf(command_fmt, '{q}')
   let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+  call fzf#vim#grep(initial_command, 1, a:fullscreen)
 endfunction

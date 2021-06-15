@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:$HOME/.local/bin/:/usr/local/bin:/usr/bin/:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/madlife/.oh-my-zsh"
@@ -8,8 +8,7 @@ export ZSH="/home/madlife/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-
-ZSH_THEME="obraun"
+ZSH_THEME="dpoggi"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -46,6 +45,8 @@ export UPDATE_ZSH_DAYS=5
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
+# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
+# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
 # COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -69,36 +70,18 @@ export UPDATE_ZSH_DAYS=5
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-
-plugins=(
-  git
-  # zsh-syntax-highlighting
-  # zsh-autosuggestions
-)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
-
-# Auto jump
-[[ -s /home/madlife/.autojump/etc/profile.d/autojump.sh ]] && source /home/madlife/.autojump/etc/profile.d/autojump.sh
-autoload -U compinit && compinit -u
-
-# Load pure theme
-# autoload -U promptinit; promptinit
-# prompt pure
 
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+# Preferred editor
 export EDITOR='nvim'
 
 # Compilation flags
@@ -112,37 +95,12 @@ export EDITOR='nvim'
 # Example aliases
 alias zshconfig="nvim ~/.zshrc"
 alias vi="nvim"
-
-# Export temp directory
-export TMPDIR="/tmp"
+alias python="python3"
 
 # Configure fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border --preview "bat --theme="OneHalfDark" --style=numbers --color=always --line-range :500 {}" --bind=shift-tab:up,tab:down --no-multi --cycle'
+export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border --bind=shift-tab:up,tab:down --no-multi --cycle'
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules,.git,build,dist,.cache,cache,.idea}"'
-
-# Path env for npm packages
-export PATH=~/.npm-packages/bin:$PATH
-
-# Path env for yarn packages
-# export PATH=~/.yarn-packages/bin:$PATH
-
-# Path env for java
-export JAVA_HOME=/usr/lib/jvm/jdk-11.0.9
-export PATH=$JAVA_HOME/bin:$PATH
-
-# Path env for flutter
-export PATH=$PATH:~/flutter/bin
-
-# Path env for SQLServer
-export PATH=$PATH:/opt/mssql-tools/bin
-
-# Path env for ruby
-export GEM_HOME=~/.gem
-export PATH=~/.gem/bin:$PATH
-
-# Path for cargo
-export PATH=~/.cargo/bin:$PATH
 
 # Run tmux on startup
 [ -z "$TMUX" ] && { exec tmux new-session && exit;}

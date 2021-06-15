@@ -9,8 +9,9 @@ set termguicolors
 set t_Co=256
 syntax enable
 set background=dark
-colorscheme monokai_pro
-set relativenumber
+" let g:gruvbox_contrast_dark='hard'
+colorscheme tomorrow_night
+set number
 set numberwidth=4
 set cursorline
 set showcmd
@@ -53,6 +54,8 @@ au BufEnter * set fo-=c fo-=r fo-=o
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype ejs setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype css setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype scss setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype sass setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype javascriptreact setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype jsx setlocal tabstop=2 shiftwidth=2 softtabstop=2

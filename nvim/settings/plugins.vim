@@ -65,6 +65,9 @@ let g:airline#extensions#tabline#enabled = 1
 " Path formatter
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
+" Disable buffer rendering on tabline
+let g:airline#extensions#tabline#show_buffers = 0
+
 " Enable caching of the various syntax highlighting groups
 let g:airline_highlighting_cache = 1
 
@@ -233,8 +236,8 @@ let g:vue_pre_processors = []
 " ============================================================================ "
 
 " Fzf default command and options
-let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info --preview "bat --theme="OneHalfDark" --color=always --style=numbers --line-range :500 {}" --bind=shift-tab:up,tab:down --no-multi --cycle'
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden -g "!{node_modules,.git,.cache,cache,build,dist,.idea}"'
+let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info --preview "bat --theme="base16" --color=always --style=numbers --line-range :500 {}" --bind=shift-tab:up,tab:down --no-multi --cycle'
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden -g "!{node_modules,.git,.cache,cache,build,dist,.idea,package-lock.json}"'
 
 " Open search popup
 nnoremap <C-p> :Files<CR>
@@ -273,9 +276,9 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 
 " Advanced ripgrep integration
-let $BAT_THEME = 'OneHalfDark'
+let $BAT_THEME = 'base16'
 function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -g "!{node_modules,.git,.cache,cache,dist,build,.idea}" -- %s || true'
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -g "!{node_modules,.git,.cache,cache,dist,build,.idea,package-lock.json}" -- %s || true'
   let initial_command = printf(command_fmt, shellescape(a:query))
   let reload_command = printf(command_fmt, '{q}')
   let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}

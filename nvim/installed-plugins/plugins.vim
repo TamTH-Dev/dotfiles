@@ -2,7 +2,9 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Colorscheme
 Plug 'gruvbox-community/gruvbox'
-Plug 'phanviet/vim-monokai-pro'
+Plug 'arcticicestudio/nord-vim'
+Plug 'sonph/onehalf'
+Plug 'chriskempson/tomorrow-theme'
 
 " Customized vim status line
 Plug 'vim-airline/vim-airline'

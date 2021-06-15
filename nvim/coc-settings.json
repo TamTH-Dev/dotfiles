@@ -2,6 +2,8 @@
   "clangd.path": "/home/madlife/.config/coc/extensions/coc-clangd-data/install/11.0.0/clangd_11.0.0/bin/clangd",
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
+    "scss",
+    "sass",
     "html",
     "javascript",
     "javascriptreact",
@@ -17,7 +19,7 @@
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
   "diagnostic.infoSign": "•",
-  "eslint.filetypes": [
+  "eslint.probe": [
     "javascript",
     "javascriptreact",
     "typescript",
@@ -26,7 +28,7 @@
     "tsx",
     "vue"
   ],
-  "eslint.nodePath": "/home/madlife/.config/yarn/global/node_modules/eslint",
+  "javascript.suggestionActions.enabled": false,
   "suggest.echodocSupport": true,
   "suggest.maxCompleteItemCount": 20
 }

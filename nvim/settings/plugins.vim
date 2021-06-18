@@ -11,9 +11,9 @@
 " ============================================================================ "
 
 " Keys mappings
-let g:multi_cursor_start_word_key      = '<C-d>'
-let g:multi_cursor_next_key            = '<C-d>'
-let g:multi_cursor_select_all_word_key = '<A-d>'
+let g:multi_cursor_start_word_key      = '<C-s>'
+let g:multi_cursor_next_key            = '<C-s>'
+let g:multi_cursor_select_all_word_key = '<A-s>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
@@ -37,6 +37,9 @@ let NERDTreeAutoDeleteBuffer = 1
 
 " Show hidden files
 let NERDTreeShowHidden=1
+
+" Disable cursorline for NERDTree
+let NERDTreeHighlightCursorline=0
 
 " Start NERDTree in minimal UI mode (No help lines)
 let NERDTreeMinimalUI = 1
@@ -264,7 +267,7 @@ nnoremap <C-b> :CtrlPBuffer<CR>
 " ============================================================================ "
 
 " Fzf default command and options
-let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info --bind=shift-tab:up,tab:down --no-multi --cycle'
+let $FZF_DEFAULT_OPTS = '--inline-info --bind=shift-tab:up,tab:down --no-multi --cycle'
 let $FZF_DEFAULT_COMMAND = 'rg --files --smart-case --hidden -g "!{node_modules,.git,.cache,cache,build,dist,.idea,package-lock.json}" || true'
 
 " Fzf layout

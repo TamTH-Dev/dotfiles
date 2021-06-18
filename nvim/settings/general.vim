@@ -8,12 +8,12 @@ set encoding=utf-8
 set termguicolors
 set t_Co=256
 syntax enable
-set background=dark
 " let g:gruvbox_contrast_dark='hard'
-colorscheme tomorrow_night
+set background=dark
+colorscheme OceanicNext
 set number
 set numberwidth=4
-set cursorline
+" set cursorline
 set showcmd
 set wildmenu
 set lazyredraw

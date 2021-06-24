@@ -8,12 +8,11 @@ set encoding=utf-8
 set termguicolors
 set t_Co=256
 syntax enable
-" let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_contrast_dark='hard'
 set background=dark
-colorscheme OceanicNext
+colorscheme gruvbox
 set number
 set numberwidth=4
-" set cursorline
 set showcmd
 set wildmenu
 set lazyredraw

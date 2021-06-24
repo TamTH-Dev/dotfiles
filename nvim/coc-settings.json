@@ -30,5 +30,6 @@
   ],
   "javascript.suggestionActions.enabled": false,
   "suggest.echodocSupport": true,
+  "suggest.enablePreview": true,
   "suggest.maxCompleteItemCount": 20
 }

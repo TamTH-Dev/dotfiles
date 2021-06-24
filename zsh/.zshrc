@@ -1,5 +1,12 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:/usr/lib/jvm/jdk-11.0.11/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/madlife/.oh-my-zsh"
@@ -8,7 +15,9 @@ export ZSH="/home/madlife/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="dpoggi"
+
+# ZSH_THEME="dpoggi"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -102,5 +111,15 @@ alias python="python3"
 export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border --bind=shift-tab:up,tab:down --no-multi --cycle'
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules,.git,build,dist,.cache,cache,.idea}"'
 
+# NPM path env
+export PATH=~/.npm-packages/bin:$PATH
+
+# GO and related packages path env
+export PATH=$PATH:/usr/local/go/bin
+export PATH=~/go/bin:$PATH
+
 # Run tmux on startup
-[ -z "$TMUX" ] && { exec tmux new-session && exit;}
+# [ -z "$TMUX" ] && { exec tmux new-session && exit;}
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+source ~/.p10k-madlife.zsh

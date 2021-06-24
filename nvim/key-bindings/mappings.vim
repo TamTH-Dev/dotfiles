@@ -14,8 +14,8 @@ nmap <leader>w :w!<cr>
 nmap <leader>q :q<cr>
 
 " Split windows
-" nnoremap <Leader>/ :vsplit<CR>
-" nnoremap <Leader>\ :split<CR>
+nnoremap <Leader>g/ :vsplit<CR>
+nnoremap <Leader>g\ :split<CR>
 
 " Smart way to move between windows
 map <A-j> <C-W>j

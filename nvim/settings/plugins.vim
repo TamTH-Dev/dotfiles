@@ -109,14 +109,14 @@ let g:closetag_emptyTags_caseSensitive = 1
 
 
 " ============================================================================ "
-" ===                             COMMENTARY                               === "
+" ===                           NERDCOMMENTER                              === "
 " ============================================================================ "
 
-" Keys mappings
-xmap <leader>/  <Plug>Commentary
-nmap <leader>/  <Plug>Commentary
-omap <leader>/  <Plug>Commentary
-nmap <leader>/  <Plug>CommentaryLine
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
 
 
 " ============================================================================ "

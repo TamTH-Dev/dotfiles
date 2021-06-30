@@ -3,11 +3,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Colorscheme
 Plug 'gruvbox-community/gruvbox'
 Plug 'arcticicestudio/nord-vim'
-Plug 'sonph/onehalf'
-Plug 'chriskempson/tomorrow-theme'
 Plug 'mhartington/oceanic-next'
-Plug 'ayu-theme/ayu-vim'
-Plug 'drewtempelmeyer/palenight.vim'
 
 " Customized vim status line
 Plug 'vim-airline/vim-airline'
@@ -31,7 +27,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'terryma/vim-multiple-cursors'
 
 " Commenter
-Plug 'tpope/vim-commentary'
+Plug 'scrooloose/nerdcommenter'
 
 " Support auto close
 Plug 'cohama/lexima.vim'

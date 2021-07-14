@@ -10,7 +10,7 @@ set t_Co=256
 syntax enable
 " let g:gruvbox_contrast_dark='hard'
 set background=dark
-colorscheme nord
+colorscheme onedark
 set relativenumber
 set numberwidth=4
 set showcmd
@@ -23,6 +23,7 @@ set smartindent
 filetype indent on
 set laststatus=2
 set hidden
+set ic
 set updatetime=300
 set formatoptions-=c formatoptions-=r formatoptions-=o
 set switchbuf=useopen

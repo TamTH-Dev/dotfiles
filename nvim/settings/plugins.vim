@@ -23,55 +23,55 @@ let g:multi_cursor_quit_key            = '<Esc>'
 " ============================================================================ "
 
 " Toggle NERDTree
-map <C-n> :NERDTreeToggle<CR>
+" map <C-n> :NERDTreeToggle<CR>
 
 " Set default NERDTree's width
-let g:NERDTreeWinSize=30
+" let g:NERDTreeWinSize=30
 
 " Change default mappings
-let NERDTreeMapOpenSplit='<C-x>'
-let NERDTreeMapOpenVSplit='<C-v>'
+" let NERDTreeMapOpenSplit='<C-x>'
+" let NERDTreeMapOpenVSplit='<C-v>'
 
 " Automatically delete the buffer after deleting or renaming a file
-let NERDTreeAutoDeleteBuffer = 1
+" let NERDTreeAutoDeleteBuffer = 1
 
 " Show hidden files
-let NERDTreeShowHidden=1
+" let NERDTreeShowHidden=1
 
 " Disable cursorline for NERDTree
-let NERDTreeHighlightCursorline=0
+" let NERDTreeHighlightCursorline=0
 
 " Start NERDTree in minimal UI mode (No help lines)
-let NERDTreeMinimalUI = 1
+" let NERDTreeMinimalUI = 1
 
 " Exit nvim if NERDTree is the only window left
-autocmd bufenter * if winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree() | q | endif
+" autocmd bufenter * if winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree() | q | endif
 
 " Prevent other buffers open in NERDTree buffer
-autocmd FileType nerdtree let t:nerdtree_winnr = bufwinnr('%')
-autocmd BufWinEnter * call PreventBuffersInNERDTree()
-function! PreventBuffersInNERDTree()
-  if bufname('#') =~ 'NERD_tree' && bufname('%') !~ 'NERD_tree'
-    \ && exists('t:nerdtree_winnr') && bufwinnr('%') == t:nerdtree_winnr
-    \ && &buftype == '' && !exists('g:launching_fzf')
-    let bufnum = bufnr('%')
-    close
-    exe 'b ' . bufnum
-    NERDTree
-  endif
-  if exists('g:launching_fzf') | unlet g:launching_fzf | endif
-endfunction
+" autocmd FileType nerdtree let t:nerdtree_winnr = bufwinnr('%')
+" autocmd BufWinEnter * call PreventBuffersInNERDTree()
+" function! PreventBuffersInNERDTree()
+  " if bufname('#') =~ 'NERD_tree' && bufname('%') !~ 'NERD_tree'
+    " \ && exists('t:nerdtree_winnr') && bufwinnr('%') == t:nerdtree_winnr
+    " \ && &buftype == '' && !exists('g:launching_fzf')
+    " let bufnum = bufnr('%')
+    " close
+    " exe 'b ' . bufnum
+    " NERDTree
+  " endif
+  " if exists('g:launching_fzf') | unlet g:launching_fzf | endif
+" endfunction
 
 
 " Open the existing NERDTree on each new tab.
-autocmd BufWinEnter * silent NERDTreeMirror
+" autocmd BufWinEnter * silent NERDTreeMirror
 
 " Change default arrows
-let g:NERDTreeDirArrowExpandable = ''
-let g:NERDTreeDirArrowCollapsible = ''
+" let g:NERDTreeDirArrowExpandable = ''
+" let g:NERDTreeDirArrowCollapsible = ''
 
 " Ignore specified files
-let g:NERDTreeIgnore = ['^build$', '^dist$', '^node_modules$', '^.git$']
+" let g:NERDTreeIgnore = ['^build$', '^dist$', '^node_modules$', '^.git$']
 
 
 " ============================================================================ "
@@ -166,6 +166,7 @@ let g:coc_global_extensions = [
        \'coc-clangd',
        \'coc-css',
        \'coc-eslint',
+       \'coc-explorer',
        \'coc-html',
        \'coc-java',
        \'coc-json',
@@ -228,6 +229,9 @@ nmap <silent> <leader>gr <Plug>(coc-references)
 " nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 " nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" Open coc explorer
+nmap <C-n> :CocCommand explorer<CR>
 
 
 " ============================================================================ "

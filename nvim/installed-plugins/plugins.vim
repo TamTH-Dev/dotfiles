@@ -4,6 +4,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'gruvbox-community/gruvbox'
 Plug 'arcticicestudio/nord-vim'
 Plug 'mhartington/oceanic-next'
+Plug 'joshdick/onedark.vim'
 
 " Customized vim status line
 Plug 'vim-airline/vim-airline'
@@ -48,7 +49,8 @@ Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
 
 " File explorer
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
+" Plug 'shougo/defx.nvim'
 
 " Fuzzy search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }

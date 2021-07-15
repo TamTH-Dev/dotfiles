@@ -28,15 +28,18 @@
     "tsx",
     "vue"
   ],
-  "explorer.width": 30,
+  "explorer.file.reveal.auto": false,
+  "explorer.file.root.template": "[icon & 1] PROJECT ([root])",
+  "explorer.file.showHiddenFiles": true,
   "explorer.icon.enableNerdfont": true,
-  "explorer.previewAction.onHover": false,
+  "explorer.icon.source": "vim-devicons",
   "explorer.keyMappings.global": {
     "<cr>": ["expandable?", "expand", "open"],
     "x": "open:split",
     "v": "open:vsplit"
   },
-  "explorer.file.showHiddenFiles": true,
+  "explorer.previewAction.onHover": false,
+  "explorer.width": 30,
   "javascript.suggestionActions.enabled": false,
   "suggest.echodocSupport": true,
   "suggest.enablePreview": true,

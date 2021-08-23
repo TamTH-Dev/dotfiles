@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:/usr/lib/jvm/jdk-11.0.11/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:$HOME/nvim-linux64/bin:$HOME/.npm-packages/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/madlife/.oh-my-zsh"
@@ -15,8 +15,6 @@ export ZSH="/home/madlife/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-
-# ZSH_THEME="dpoggi"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
@@ -39,7 +37,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=5
+# export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -90,8 +88,12 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
-# Preferred editor
-export EDITOR='nvim'
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -104,6 +106,7 @@ export EDITOR='nvim'
 # Example aliases
 alias zshconfig="nvim ~/.zshrc"
 alias vi="nvim"
+alias la="ls -la"
 alias python="python3"
 
 # Configure fzf
@@ -111,15 +114,7 @@ alias python="python3"
 export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border --bind=shift-tab:up,tab:down --no-multi --cycle'
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules,.git,build,dist,.cache,cache,.idea}"'
 
-# NPM path env
-export PATH=~/.npm-packages/bin:$PATH
-
-# GO and related packages path env
-export PATH=$PATH:/usr/local/go/bin
-export PATH=~/go/bin:$PATH
-
-# Run tmux on startup
-# [ -z "$TMUX" ] && { exec tmux new-session && exit;}
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 source ~/.p10k-madlife.zsh

@@ -12,6 +12,7 @@ let g:gruvbox_contrast_dark='hard'
 set background=dark
 colorscheme gruvbox
 set relativenumber
+set number
 set numberwidth=4
 set showcmd
 set wildmenu

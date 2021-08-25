@@ -2,7 +2,8 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Colorscheme
 Plug 'gruvbox-community/gruvbox'
-Plug 'sonph/onehalf'
+Plug 'ghifarit53/tokyonight-vim'
+" Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 " Plug 'arcticicestudio/nord-vim'
 " Plug 'mhartington/oceanic-next'
 " Plug 'joshdick/onedark.vim'
@@ -18,6 +19,9 @@ Plug 'posva/vim-vue'  " Vue
 Plug 'herringtondarkholme/yats.vim'  " Typescript
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}  " Python
 Plug 'octol/vim-cpp-enhanced-highlight'  " C++
+
+" Parser
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Add icons
 Plug 'ryanoasis/vim-devicons'

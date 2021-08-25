@@ -8,9 +8,10 @@ set encoding=utf-8
 set termguicolors
 set t_Co=256
 syntax enable
-let g:gruvbox_contrast_dark='hard'
 set background=dark
-colorscheme gruvbox
+" let g:gruvbox_contrast_dark='hard'
+let g:tokyonight_style = 'night' " available: night, storm
+colorscheme tokyonight
 set relativenumber
 set number
 set numberwidth=4
@@ -73,3 +74,4 @@ autocmd Filetype java setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype php setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype sh setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype text setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype vim setlocal tabstop=2 shiftwidth=2 softtabstop=2

@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:$HOME/.local/bin:$HOME/nvim-linux64/bin:$HOME/.npm-packages/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:/usr/local/bin:/usr/bin:/usr/sbin:/usr/local/sbin:/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/madlife/.oh-my-zsh"
@@ -37,7 +37,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+export UPDATE_ZSH_DAYS=5
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -86,7 +86,7 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-export LANG=en_US.UTF-8
+# export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -104,10 +104,23 @@ export LANG=en_US.UTF-8
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshconfig="nvim ~/.zshrc"
 alias vi="nvim"
+alias zshconfig="vi ~/.zshrc"
 alias la="ls -la"
-alias python="python3"
+
+# Path env for perl
+PATH="/home/madlife/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/madlife/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/madlife/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/madlife/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/madlife/perl5"; export PERL_MM_OPT;
+
+# Path env for nvm 
+source $HOME/.nvm/nvm.sh
+export PATH=$HOME/.nvm/versions/node/v14.17.5/bin:$PATH
+
+# Path env for ruby
+export PATH=$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH
 
 # Configure fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -115,6 +128,4 @@ export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border --bind=shift-tab
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules,.git,build,dist,.cache,cache,.idea}"'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-source ~/.p10k-madlife.zsh
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

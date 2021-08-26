@@ -124,7 +124,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Lock Screen
-bindsym $mod+Shift+b exec i3lock --color "#000000"
+bindsym $mod+Shift+b exec betterlockscreen -l blur --time-format "%I:%M %p"
 
 # Start programs automatically
 exec_always feh --bg-scale /home/madlife/Pictures/background.png

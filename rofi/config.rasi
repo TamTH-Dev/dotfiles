@@ -1,0 +1,91 @@
+/* Tokyo Night color scheme */
+/* NAME: config.rasi */
+/* DESCRIPTION: Custom scheme for rofi */
+/* AUTHOR: TamTH-Dev */
+
+configuration {
+  modi: "drun";
+  font: "JetBrainsMono Nerd Font 11";
+  show-icons: true;
+  icon-theme: "Flatery-Dark";
+  terminal: "kitty";
+  drun-display-format: "{icon} {name}";
+  display-drun: "  ";
+  location: 0;
+  separator-style: "solid";
+  disable-history: false;
+  hide-scrollbar: true;
+}
+
+* {
+  background-color: #24283b;
+  border-color: #f7768e;
+  text-color: #a9b1d6;
+  separator-color: @border-color;
+  font: "JetBrainsMono Nerd Font 11";
+  show-icons: true;
+}
+
+window {
+  width: 600px;
+  height: 350px;
+  padding: 20px;
+  border: 3px;
+  border-radius: 1px;
+  border-color: #f7768e;
+}
+
+mainbox {
+  padding: 5px;
+  border-radius: 13px;
+}
+
+inputbar {
+  children: [prompt,entry];
+}
+
+prompt {
+  background-color: #7aa2f7;
+  padding: 5px 5px 0px;
+  text-color: @background-color;
+  border-radius: 2px;
+}
+
+textbox-prompt-colon {
+  expand: false;
+  str: ":";
+}
+
+entry {
+  padding: 5px;
+}
+
+listview {
+  border: 0px 0px 0px;
+  padding: 10px 0px 0px;
+  columns: 1;
+}
+
+element {
+  padding: 5px;
+  border-radius: 2px;
+}
+
+element-icon {
+  size: 24px;
+}
+
+element selected {
+  background-color: #414868;
+  text-color: #c0caf5;
+}
+
+element urgent {
+  background-color: #BF616A;
+  text-color: @background-color;
+}
+
+element active {
+  background-color: #EBCB8B;
+  text-color: @background-color;
+}

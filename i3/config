@@ -2,7 +2,7 @@
 set $mod Mod4
 
 # Font
-font pango:Blex Mono Medium Nerd Font Complete Mono 10 
+font pango:Blex Mono Medium Nerd Font Complete Mono 10
 
 # Gaps
 gaps inner 8
@@ -12,12 +12,12 @@ gaps outer 2
 for_window [class=".*"] border pixel 0
 
 # Capture Screen
-bindsym --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/Screenshots && mv $f ~/Pictures/Screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/Screenshots/`ls -1 -t ~/Pictures/Screenshots | head -1`' 
-bindsym --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/Screenshots && mv $f ~/Pictures/Screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/Screenshots/`ls -1 -t ~/Pictures/Screenshots | head -1`' 
+bindsym --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/Screenshots && mv $f ~/Pictures/Screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/Screenshots/`ls -1 -t ~/Pictures/Screenshots | head -1`'
+bindsym --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/Screenshots && mv $f ~/Pictures/Screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/Screenshots/`ls -1 -t ~/Pictures/Screenshots | head -1`'
 
 # Sreen brightness controls
-bindsym $mod+F5 exec xbacklight -dec 4 
-bindsym $mod+F6 exec xbacklight -inc 4
+bindsym $mod+F5 exec --no-startup-id light -U 5 # decrease screen brightness
+bindsym $mod+F6 exec --no-startup-id light -A 5 # increase screen brightness
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -29,8 +29,8 @@ bindsym $mod+Return exec kitty
 bindsym $mod+Shift+q kill
 
 # Start programs launcher
-bindsym $mod+d exec dmenu_run
-# bindsym $mod+d exec rofi -show run
+bindsym $mod+d exec rofi -show
+# bindsym $mod+d exec dmenu_run
 
 # Change focus
 bindsym $mod+h focus left
@@ -68,7 +68,7 @@ bindsym $mod+f floating toggle
 # Use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
 set $ws2 "2"
-set $ws3 "3" 
+set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
@@ -124,7 +124,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Lock Screen
-bindsym $mod+Shift+b exec i3lock --color "#000000" 
+bindsym $mod+Shift+b exec i3lock --color "#000000"
 
 # Start programs automatically
 exec_always feh --bg-scale /home/madlife/Pictures/background.png

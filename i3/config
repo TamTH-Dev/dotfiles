@@ -120,11 +120,10 @@ mode "resize" {
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
-
 bindsym $mod+r mode "resize"
 
 # Lock Screen
-bindsym $mod+Shift+b exec betterlockscreen -l blur --time-format "%I:%M %p"
+bindsym $mod+Shift+b exec betterlockscreen -l --time-format "%I:%M %p"
 
 # Start programs automatically
 exec_always feh --bg-scale /home/madlife/Pictures/background.png

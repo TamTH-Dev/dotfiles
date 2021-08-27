@@ -1,0 +1,42 @@
+@import "colors.rasi"
+
+* {
+  background-color: @background;
+  text-color: @foreground;
+  font: "JetBrainsMono Nerd Font 10";
+}
+
+window {
+  width: 225px;
+  height: "auto";
+  padding: 15;
+  border: 3px;
+  border-radius: 0;
+  border-color: @color1;
+  location: center;
+  y-offset: -2em;
+}
+
+entry {
+  expand: true;
+  text-color: @foreground;
+}
+
+inputbar {
+  children: [prompt,entry];
+}
+
+prompt {
+  background-color: @background;
+  padding: 5px 0 0px;
+  text-color: @foreground;
+}
+
+textbox-prompt-colon {
+  expand: false;
+  str: "";
+}
+
+entry {
+  padding: 5px;
+}

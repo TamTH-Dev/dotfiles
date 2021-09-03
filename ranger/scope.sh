@@ -36,8 +36,8 @@ FILE_EXTENSION_LOWER=$(echo ${FILE_EXTENSION} | tr '[:upper:]' '[:lower:]')
 # Settings
 HIGHLIGHT_SIZE_MAX=262143  # 256KiB
 HIGHLIGHT_TABWIDTH=8
-HIGHLIGHT_STYLE='pablo'
-PYGMENTIZE_STYLE='autumn'
+HIGHLIGHT_STYLE='base16/onedark'
+PYGMENTIZE_STYLE='base16/onedark'
 
 
 handle_extension() {
@@ -173,8 +173,10 @@ handle_mime() {
                 exit 2
             fi
             if [[ "$( tput colors )" -ge 256 ]]; then
-                local pygmentize_format='terminal256'
-                local highlight_format='xterm256'
+                # local pygmentize_format='terminal256'
+                # local highlight_format='xterm256'
+                local pygmentize_format='terminal'
+                local highlight_format='ansi'
             else
                 local pygmentize_format='terminal'
                 local highlight_format='ansi'

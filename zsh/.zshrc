@@ -5,11 +5,14 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/.local/bin:/usr/local/bin:/usr/bin:/usr/sbin:/usr/local/sbin:/bin:$PATH
 
+
 # Path to your oh-my-zsh installation.
 export ZSH="/home/madlife/.oh-my-zsh"
+
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -17,11 +20,6 @@ export ZSH="/home/madlife/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -81,22 +79,39 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
+# User configuration
+# Path env for perl
+PATH="/home/madlife/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/madlife/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/madlife/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/madlife/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/madlife/perl5"; export PERL_MM_OPT;
+
+# Path env for nvm
+source $HOME/.nvm/nvm.sh
+export PATH=$HOME/.nvm/versions/node/v14.17.5/bin:$PATH
+
+# Path env for ruby
+export PATH=$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH
+
+# Configure fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border --bind=shift-tab:up,tab:down --no-multi --cycle'
+export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules,.git,build,dist,.cache,cache,.idea}"'
+
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
+
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+export EDITOR='nvim'
+
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
+
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -108,24 +123,6 @@ alias vi="nvim"
 alias zshconfig="vi ~/.zshrc"
 alias la="ls -la"
 
-# Path env for perl
-PATH="/home/madlife/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/madlife/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/madlife/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/madlife/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/madlife/perl5"; export PERL_MM_OPT;
-
-# Path env for nvm 
-source $HOME/.nvm/nvm.sh
-export PATH=$HOME/.nvm/versions/node/v14.17.5/bin:$PATH
-
-# Path env for ruby
-export PATH=$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH
-
-# Configure fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border --bind=shift-tab:up,tab:down --no-multi --cycle'
-export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules,.git,build,dist,.cache,cache,.idea}"'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

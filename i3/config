@@ -23,7 +23,7 @@ bindsym $mod+F6 exec --no-startup-id light -A 5 # increase screen brightness
 floating_modifier $mod
 
 # Start kitty
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec kitty tmux
 
 # Kill focused window
 bindsym $mod+Shift+q kill
@@ -126,7 +126,7 @@ bindsym $mod+r mode "resize"
 bindsym $mod+Shift+b exec betterlockscreen -l --time-format "%I:%M %p"
 
 # Start programs automatically
-exec_always feh --bg-scale /home/madlife/Pictures/background.png
+exec_always feh --bg-scale /home/madlife/Pictures/backgrounds/beautiful-landscape-digital-art.jpg
 exec_always --no-startup-id /home/madlife/.config/polybar/launch.sh
 exec_always --no-startup-id nm-applet
 # exec_always compton -f

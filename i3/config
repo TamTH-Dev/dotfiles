@@ -129,4 +129,4 @@ bindsym $mod+Shift+b exec betterlockscreen -l --time-format "%I:%M %p"
 exec_always feh --bg-scale /home/madlife/Pictures/backgrounds/beautiful-landscape-digital-art.jpg
 exec_always --no-startup-id /home/madlife/.config/polybar/launch.sh
 exec_always --no-startup-id nm-applet
-# exec_always compton -f
+exec_always picom

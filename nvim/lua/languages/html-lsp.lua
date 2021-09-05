@@ -1,9 +1,9 @@
-local util = require'lspconfig/util'
+local lspconfig = require 'lspconfig'
+local util = require 'lspconfig/util'
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-require'lspconfig'.html.setup {
+lspconfig.html.setup {
   capabilities = capabilities,
   cmd = { "vscode-html-language-server", "--stdio" },
   filetypes = { "html" },

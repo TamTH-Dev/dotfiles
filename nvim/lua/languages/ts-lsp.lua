@@ -1,6 +1,7 @@
-local util = require'lspconfig/util'
+local lspconfig = require 'lspconfig'
+local util = require 'lspconfig/util'
 
-require'lspconfig'.tsserver.setup {
+lspconfig.tsserver.setup {
   cmd = { "typescript-language-server", "--stdio" },
   filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
   init_options = {

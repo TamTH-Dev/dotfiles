@@ -1,5 +1,15 @@
-require'telescope'.setup {
+local telescope = require 'telescope'
+local actions = require 'telescope.actions'
+local sorters = require 'telescope.sorters'
+local previewers = require 'telescope.previewers'
+
+telescope.setup {
   defaults = {
+    mappings = {
+      n = {
+        ['q'] = actions.close,
+      }
+    },
     vimgrep_arguments = {
       'rg',
       '--color=never',
@@ -9,12 +19,12 @@ require'telescope'.setup {
       '--column',
       '--smart-case'
     },
-    prompt_prefix = "> ",
-    selection_caret = "> ",
+    prompt_prefix = " ",
+    selection_caret = "黎",
     entry_prefix = "  ",
     initial_mode = "insert",
     selection_strategy = "reset",
-    sorting_strategy = "descending",
+    sorting_strategy = "ascending",
     layout_strategy = "horizontal",
     layout_config = {
       horizontal = {
@@ -24,22 +34,21 @@ require'telescope'.setup {
         mirror = false,
       },
     },
-    file_sorter =  require'telescope.sorters'.get_fuzzy_file,
+    file_sorter =  sorters.get_fuzzy_file,
     file_ignore_patterns = {},
-    generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+    generic_sorter =  sorters.get_generic_fuzzy_sorter,
     winblend = 0,
     border = {},
-    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+    -- borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+    borderchars = {"─", "│", "─", "│", "┌", "┐", "┘", "└"},
     disable_devicons = false,
     color_devicons = true,
     use_less = true,
     path_display = {},
     set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
-    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
-    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
-    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
-
-    -- Developer configurations: Not meant for general override
-    buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
+    file_previewer = previewers.vim_buffer_cat.new,
+    grep_previewer = previewers.vim_buffer_vimgrep.new,
+    qflist_previewer = previewers.vim_buffer_qflist.new,
+    buffer_previewer_maker = previewers.buffer_previewer_maker
   }
 }

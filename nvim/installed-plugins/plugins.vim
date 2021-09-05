@@ -8,13 +8,6 @@ Plug 'ghifarit53/tokyonight-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-" Syntax highlighting
-" Plug 'maxmellon/vim-jsx-pretty'  " Jsx
-" Plug 'posva/vim-vue'  " Vue
-" Plug 'herringtondarkholme/yats.vim'  " Typescript
-" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}  " Python
-" Plug 'octol/vim-cpp-enhanced-highlight'  " C++
-
 " Parser
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
@@ -23,7 +16,6 @@ Plug 'nvim-treesitter/playground'
 Plug 'simrat39/symbols-outline.nvim'
 
 " Add icons
-" Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
 
 " Git wrapper
@@ -49,7 +41,6 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Snippets
 Plug 'honza/vim-snippets'
@@ -58,13 +49,10 @@ Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
 
 " File explorer
-" Plug 'scrooloose/nerdtree'
 " Plug 'shougo/defx.nvim'
 
 " Fuzzy search
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-lua/plenary.nvim'
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-" Plug 'junegunn/fzf.vim'
 
 call plug#end()

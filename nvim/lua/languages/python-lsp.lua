@@ -1,6 +1,7 @@
-local util = require'lspconfig/util'
+local lspconfig = require 'lspconfig'
+local util = require 'lspconfig/util'
 
-require'lspconfig'.pyright.setup {
+lspconfig.pyright.setup {
   cmd = { "pyright-langserver", "--stdio" },
   filetypes = { "python" },
   root_dir = function(fname)

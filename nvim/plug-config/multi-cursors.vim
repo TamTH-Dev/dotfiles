@@ -1,0 +1,5 @@
+let g:multi_cursor_start_word_key      = '<C-s>'
+let g:multi_cursor_next_key            = '<C-s>'
+let g:multi_cursor_select_all_word_key = '<A-s>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'

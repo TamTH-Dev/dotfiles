@@ -3,28 +3,28 @@ call plug#begin('~/.config/nvim/plugged')
 " Colorscheme
 Plug 'gruvbox-community/gruvbox'
 Plug 'ghifarit53/tokyonight-vim'
-" Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
-" Plug 'arcticicestudio/nord-vim'
-" Plug 'mhartington/oceanic-next'
-" Plug 'joshdick/onedark.vim'
 
 " Customized vim status line
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Syntax highlighting
-Plug 'pangloss/vim-javascript'  " Javascript
-Plug 'maxmellon/vim-jsx-pretty'  " Jsx
-Plug 'posva/vim-vue'  " Vue
-Plug 'herringtondarkholme/yats.vim'  " Typescript
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}  " Python
-Plug 'octol/vim-cpp-enhanced-highlight'  " C++
+" Plug 'maxmellon/vim-jsx-pretty'  " Jsx
+" Plug 'posva/vim-vue'  " Vue
+" Plug 'herringtondarkholme/yats.vim'  " Typescript
+" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}  " Python
+" Plug 'octol/vim-cpp-enhanced-highlight'  " C++
 
 " Parser
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
+
+" Symbols outline
+Plug 'simrat39/symbols-outline.nvim'
 
 " Add icons
-Plug 'ryanoasis/vim-devicons'
+" Plug 'ryanoasis/vim-devicons'
+Plug 'kyazdani42/nvim-web-devicons'
 
 " Git wrapper
 Plug 'tpope/vim-fugitive'
@@ -44,8 +44,12 @@ Plug 'alvan/vim-closetag'
 " Surround parentheses, brackets, quotes, XML tags, and more
 Plug 'tpope/vim-surround'
 
-" Conquer of Completion
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" LSP support
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-compe'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Snippets
 Plug 'honza/vim-snippets'
@@ -58,9 +62,9 @@ Plug 'mattn/emmet-vim'
 " Plug 'shougo/defx.nvim'
 
 " Fuzzy search
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-lua/plenary.nvim'
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Plug 'junegunn/fzf.vim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
 
 call plug#end()

@@ -9,7 +9,6 @@ set termguicolors
 set t_Co=256
 syntax enable
 set background=dark
-" let g:gruvbox_contrast_dark='hard'
 let g:tokyonight_style = 'night' " available: night, storm
 colorscheme tokyonight
 set relativenumber
@@ -53,20 +52,12 @@ set clipboard+=unnamedplus
 " Disable inserting comment on new line automatically
 au BufEnter * set fo-=c fo-=r fo-=o
 
-" Set tab/space size for specific languages
-autocmd Filetype html setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype ejs setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype css setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype scss setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype sass setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype javascriptreact setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype jsx setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype typescriptreact setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype tsx setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype vue setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype json setlocal tabstop=2 shiftwidth=2 softtabstop=2
+" Set common tab/space
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
+
+" Set tab/space for specific languages
 autocmd Filetype python setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype c setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype cpp setlocal tabstop=4 shiftwidth=4 softtabstop=4
@@ -74,4 +65,3 @@ autocmd Filetype java setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype php setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype sh setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype text setlocal tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Filetype vim setlocal tabstop=2 shiftwidth=2 softtabstop=2

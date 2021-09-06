@@ -1,11 +1,10 @@
 local cmp = require 'cmp'
 local compare = require 'cmp.config.compare'
 local types = require 'cmp.types'
-local luasnip = require 'luasnip'
 
 local WIDE_HEIGHT = 40
 
-vim.o.completeopt = 'menuone,noselect,noinsert'
+vim.o.completeopt = 'menu,menuone,noselect,noinsert'
 
 local check_back_space = function()
   local col = vim.fn.col '.' - 1
@@ -30,7 +29,7 @@ cmp.setup {
   },
   snippet = {
     expand = function(args)
-      luasnip.lsp_expand(args.body)
+      vim.fn["vsnip#anonymous"](args.body)
     end,
   },
   preselect = types.cmp.PreselectMode.Item,
@@ -66,8 +65,8 @@ cmp.setup {
     ['<Tab>'] = cmp.mapping(function(fallback)
       if vim.fn.pumvisible() == 1 then
         vim.fn.feedkeys(t('<C-n>'), 'n')
-      elseif luasnip.expand_or_jumpable() then
-        vim.fn.feedkeys(t('<Plug>luasnip-expand-or-jump'), '')
+      elseif vim.fn.call('vsnip#available', {1}) == 1 then
+        vim.fn.feedkeys(t('<Plug>vsnip-expand-or-jump'), '')
       else
         fallback()
       end
@@ -78,8 +77,8 @@ cmp.setup {
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if vim.fn.pumvisible() == 1 then
         vim.fn.feedkeys(t('<C-p>'), 'n')
-      elseif luasnip.jumpable(-1) then
-        vim.fn.feedkeys(t('<Plug>luasnip-jump-prev'), '')
+      elseif vim.fn.call('vsnip#jumpable', {-1}) == 1 then
+        vim.fn.feedkeys(t('<Plug>vsnip-jump-prev'), '')
       else
         fallback()
       end
@@ -101,6 +100,7 @@ cmp.setup {
     { name = 'path' },
     { name = 'buffer' },
     { name = 'nvim_lsp' },
+    { name = 'vsnip' },
     { name = 'luasnip' },
     { name = 'treesitter' }
   }

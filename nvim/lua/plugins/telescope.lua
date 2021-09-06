@@ -3,6 +3,8 @@ local actions = require 'telescope.actions'
 local sorters = require 'telescope.sorters'
 local previewers = require 'telescope.previewers'
 
+local options = { silent = true }
+
 telescope.setup {
   defaults = {
     mappings = {
@@ -19,7 +21,7 @@ telescope.setup {
       '--column',
       '--smart-case'
     },
-    prompt_prefix = ' ',
+    prompt_prefix = '➤ ',
     selection_caret = '黎',
     entry_prefix = '  ',
     initial_mode = 'insert',
@@ -52,3 +54,8 @@ telescope.setup {
     buffer_previewer_maker = previewers.buffer_previewer_maker
   }
 }
+
+-- Find files using Telescope command-line sugar.
+vim.api.nvim_set_keymap('n', '<C-p>', '<cmd>Telescope find_files<cr>', options)
+vim.api.nvim_set_keymap('n', '<C-f>', '<cmd>Telescope live_grep<cr>', options)
+vim.api.nvim_set_keymap('n', '<C-b>', '<cmd>Telescope buffers<cr>', options)

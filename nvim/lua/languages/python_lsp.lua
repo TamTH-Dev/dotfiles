@@ -21,7 +21,7 @@ function python_lsp:config()
       python = {
         analysis = {
           autoSearchPaths = true,
-          diagnosticMode = 'workspace',
+          diagnosticMode = "workspace",
           useLibraryCodeForTypes = true
         }
       }

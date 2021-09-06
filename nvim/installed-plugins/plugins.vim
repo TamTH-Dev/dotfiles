@@ -25,7 +25,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'terryma/vim-multiple-cursors'
 
 " Commenter
-Plug 'scrooloose/nerdcommenter'
+" Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-commentary'
 
 " Support auto close
 Plug 'cohama/lexima.vim'
@@ -38,23 +39,26 @@ Plug 'tpope/vim-surround'
 
 " LSP support
 Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-compe'
+Plug 'glepnir/lspsaga.nvim'
 Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'L3MON4D3/LuaSnip'
-" Plug 'hrsh7th/vim-vsnip'
-" Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+" Plug 'hrsh7th/nvim-compe'
+" Plug 'saadparwaiz1/cmp_luasnip'
+" Plug 'L3MON4D3/LuaSnip'
 
-" Snippets
-Plug 'honza/vim-snippets'
+" Formatter
+Plug 'sbdchd/neoformat'
 
 " Emmet for nvim
 Plug 'mattn/emmet-vim'
 
 " File explorer
-" Plug 'shougo/defx.nvim'
+Plug 'kevinhwang91/rnvimr'
 
 " Fuzzy search
 Plug 'nvim-telescope/telescope.nvim'

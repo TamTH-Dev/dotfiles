@@ -15,8 +15,7 @@ function html_lsp:config()
     },
     root_dir = function(fname)
       return util.root_pattern('package.json', '.git')(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
-    end,
-    settings = {}
+    end
   }
 end
 

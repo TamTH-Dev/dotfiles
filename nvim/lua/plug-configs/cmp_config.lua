@@ -25,7 +25,7 @@ cmp.setup {
   },
   snippet = {
     expand = function(args)
-			luasnip.lsp_expand(args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
   preselect = types.cmp.PreselectMode.Item,
@@ -61,7 +61,7 @@ cmp.setup {
     ['<Tab>'] = cmp.mapping(function(fallback)
       if fn.pumvisible() == 1 then
         fn.feedkeys(replace_termcodes('<C-n>'), 'n')
-		  elseif luasnip.expand_or_jumpable() then
+      elseif luasnip.expand_or_jumpable() then
         vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"), "")
       else
         fallback()
@@ -73,7 +73,7 @@ cmp.setup {
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if fn.pumvisible() == 1 then
         fn.feedkeys(replace_termcodes('<C-p>'), 'n')
-		  elseif luasnip.jumpable(-1) then
+      elseif luasnip.jumpable(-1) then
         vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
       else
         fallback()

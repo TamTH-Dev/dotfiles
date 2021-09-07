@@ -9,6 +9,8 @@ options.backup = false
 options.belloff = 'all'
 options.clipboard = options.clipboard + 'unnamedplus'
 options.completeopt = 'menu,menuone,noselect,noinsert'
+options.expandtab = true
+options.formatoptions = options.formatoptions - 'c'
 options.hidden = true
 options.history = 50
 options.ic = true
@@ -35,7 +37,6 @@ options.writebackup = false
 
 cmd	'au BufEnter * set fo-=c fo-=r fo-=o'
 cmd 'colorscheme tokyonight'
-cmd	'filetype indent on'
 cmd 'noswapfile'
 cmd	'syntax enable'
 

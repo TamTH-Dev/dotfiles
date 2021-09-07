@@ -15,8 +15,9 @@ return require('packer').startup(function()
   use { 'ghifarit53/tokyonight-vim' }
 
   -- Customized status line
-  use { 'vim-airline/vim-airline' }
-  use { 'vim-airline/vim-airline-themes' }
+  -- use { 'vim-airline/vim-airline' }
+  -- use { 'vim-airline/vim-airline-themes' }
+  use { 'itchyny/lightline.vim' }
 
   -- Fancy start screen
   use { 'mhinz/vim-startify' }
@@ -56,7 +57,7 @@ return require('packer').startup(function()
   use { 'mattn/emmet-vim' }
 
   -- File explorer
-  use { 'kevinhwang91/rnvimr' }
+  use { 'kyazdani42/nvim-tree.lua' }
 
   -- Fuzzy search
   use { 'nvim-telescope/telescope.nvim' }
@@ -78,4 +79,7 @@ return require('packer').startup(function()
       { 'hrsh7th/cmp-path' }
     }
   }
+
+  -- Measure startup time
+  use { 'dstein64/vim-startuptime' }
 end)

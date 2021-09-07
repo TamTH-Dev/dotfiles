@@ -1,33 +1,56 @@
-vim.g.tokyonight_style = 'night'
+local options = vim.opt
+local global = vim.g
+local cmd = vim.cmd
+local api = vim.api
 
-vim.o.termguicolors = true
-vim.o.lazyredraw = true
-vim.o.joinspaces = false
-vim.o.hidden = true
-vim.o.laststatus = 2
-vim.o.ic = true
-vim.o.updatetime = 300
-vim.o.switchbuf = 'useopen'
-vim.o.backup = false
-vim.o.writebackup = false
-vim.o.splitbelow = true
-vim.o.splitright = true
-vim.o.smarttab = true
-vim.o.smartcase = true
+global.tokyonight_style = 'night'
 
-vim.wo.relativenumber = true
-vim.wo.number = true
-vim.wo.numberwidth = 4
+options.backup = false
+options.belloff = 'all'
+options.clipboard = options.clipboard + 'unnamedplus'
+options.completeopt = 'menu,menuone,noselect,noinsert'
+options.hidden = true
+options.history = 50
+options.ic = true
+options.joinspaces = false
+options.laststatus = 2
+options.lazyredraw = true
+options.magic = true
+options.number = true
+options.numberwidth = 4
+options.relativenumber = true
+options.shiftwidth = 2
+options.smartcase = true
+options.smartindent = true
+options.smarttab = true
+options.softtabstop = 2
+options.splitbelow = true
+options.splitright = true
+options.switchbuf = 'useopen'
+options.tabstop = 2
+options.termguicolors = true
+options.updatetime = 300
+options.undofile = false
+options.writebackup = false
 
-vim.bo.smartindent = true
-vim.bo.smartindent = true
-vim.bo.undofile = false
-vim.bo.tabstop = 2
-vim.bo.softtabstop = 2
+cmd	'au BufEnter * set fo-=c fo-=r fo-=o'
+cmd 'colorscheme tokyonight'
+cmd	'filetype indent on'
+cmd 'noswapfile'
+cmd	'syntax enable'
 
-vim.opt.history = 50
-vim.opt.magic = true
-vim.opt.shiftwidth = 2
+local set_4_spaces_for_specific_file_type = function(file_type)
+	if not file_type then return nil end
+	local command = 'autocmd Filetype '
+	command = command .. file_type
+	command = command .. ' setlocal tabstop=4 shiftwidth=4 softtabstop=4'
+	cmd (command)
+end
 
-vim.cmd 'colorscheme tokyonight'
-vim.cmd 'noswapfile'
+set_4_spaces_for_specific_file_type('python')
+set_4_spaces_for_specific_file_type('c')
+set_4_spaces_for_specific_file_type('cpp')
+set_4_spaces_for_specific_file_type('java')
+set_4_spaces_for_specific_file_type('php')
+set_4_spaces_for_specific_file_type('sh')
+set_4_spaces_for_specific_file_type('text')

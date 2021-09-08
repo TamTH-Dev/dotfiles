@@ -1,6 +1,6 @@
-local api = vim.api
+local map = vim.api.nvim_set_keymap
 
 local options = { silent = true }
 
-api.nvim_set_keymap('n', '<leader>/', 'gcc', options)
-api.nvim_set_keymap('v', '<leader>/', 'gc', options)
+map('n', '<leader>/', 'gcc', options)
+map('v', '<leader>/', 'gc', options)

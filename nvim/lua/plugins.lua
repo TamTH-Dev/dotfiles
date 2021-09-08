@@ -15,7 +15,8 @@ return require('packer').startup(function()
   use { 'ghifarit53/tokyonight-vim' }
 
   -- Customized status line
-  use { 'hoob3rt/lualine.nvim' }
+  -- use { 'hoob3rt/lualine.nvim' }
+  use { 'glepnir/galaxyline.nvim' }
 
   -- Fancy start screen
   use { 'glepnir/dashboard-nvim' }
@@ -40,6 +41,12 @@ return require('packer').startup(function()
 
   -- Git wrapper
   use { 'tpope/vim-fugitive' }
+  use {
+      'lewis6991/gitsigns.nvim',
+      event = { 'BufRead', 'BufNewFile' },
+      config = require('plug-configs.gitsigns').config,
+      requires = { 'nvim-lua/plenary.nvim' },
+  }
 
   -- Multiple cursors
   use { 'terryma/vim-multiple-cursors' }
@@ -63,8 +70,12 @@ return require('packer').startup(function()
   use { 'kyazdani42/nvim-tree.lua' }
 
   -- Fuzzy search
-  use { 'nvim-telescope/telescope.nvim' }
-  use { 'nvim-lua/plenary.nvim' }
+  use { 
+    'nvim-telescope/telescope.nvim',
+    requires = {
+      { 'nvim-lua/plenary.nvim' }
+    }
+  }
 
   -- Formatter
   use { 'sbdchd/neoformat' }

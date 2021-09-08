@@ -1,17 +1,14 @@
 local compe = require 'compe'
 
 local api = vim.api
+local map = api.nvim_set_keymap
 
 local options = { expr = true }
 
-local set_keymap = function(mode, boundTo, boundFrom, options)
-  api.nvim_set_keymap(mode, boundTo, boundFrom, options)
-end
-
-set_keymap('i', '<Tab>', 'v:lua.tab_complete()', options)
-set_keymap('s', '<Tab>', 'v:lua.tab_complete()', options)
-set_keymap('i', '<S-Tab>', 'v:lua.s_tab_complete()', options)
-set_keymap('s', '<S-Tab>', 'v:lua.s_tab_complete()', options)
+map('i', '<Tab>', 'v:lua.tab_complete()', options)
+map('s', '<Tab>', 'v:lua.tab_complete()', options)
+map('i', '<S-Tab>', 'v:lua.s_tab_complete()', options)
+map('s', '<S-Tab>', 'v:lua.s_tab_complete()', options)
 
 compe.setup {
   enabled = true;
@@ -40,8 +37,8 @@ compe.setup {
     treesitter = true;
   };
 }
-local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
+local replace_termcodes = function(str)
+  return api.nvim_replace_termcodes(str, true, true, true)
 end
 
 local check_back_space = function()
@@ -58,22 +55,21 @@ end
 --- jump to prev/next snippet's placeholder
 _G.tab_complete = function()
   if vim.fn.pumvisible() == 1 then
-    return t '<C-n>'
+    return replace_termcodes('<C-n>')
   elseif vim.fn.call('vsnip#available', {1}) == 1 then
-    return t '<Plug>(vsnip-expand-or-jump)'
+    return replace_termcodes('<Plug>(vsnip-expand-or-jump)')
   elseif check_back_space() then
-    return t '<Tab>'
+    return replace_termcodes('<Tab>')
   else
     return vim.fn['compe#complete']()
   end
 end
 _G.s_tab_complete = function()
   if vim.fn.pumvisible() == 1 then
-    return t '<C-p>'
+    return replace_termcodes('<C-p>')
   elseif vim.fn.call('vsnip#jumpable', {-1}) == 1 then
-    return t '<Plug>(vsnip-jump-prev)'
+    return replace_termcodes('<Plug>(vsnip-jump-prev)')
   else
-    -- If <S-Tab> is not working in your terminal, change it to <C-h>
-    return t '<S-Tab>'
+    return replace_termcodes('<S-Tab>')
   end
 end

@@ -20,7 +20,7 @@ require 'plug-configs/lightline'
 require 'plug-configs/multi-cursors'
 require 'plug-configs/neoformat'
 require 'plug-configs/nvim-tree'
-require 'plug-configs/saga'
+-- require 'plug-configs/saga'
 require 'plug-configs/telescope'
 require 'plug-configs/treesitter'
 

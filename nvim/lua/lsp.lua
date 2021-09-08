@@ -47,10 +47,23 @@ for server, config in pairs(servers) do
   end
 end
 
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics,
+    {
+        virtual_text = {
+          prefix = "",
+          spacing = 0,
+        },
+        underline = true,
+        severity_sort = true,
+    }
+)
 
--- local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
-
--- for type, icon in pairs(signs) do
---   local hl = "LspDiagnosticsSign" .. type
---   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
--- end
+vim.fn.sign_define("LspDiagnosticsSignError",
+    {text = "", texthl = "markdownH1"})
+vim.fn.sign_define("LspDiagnosticsSignWarning",
+    {text = "", texthl = "markdownH2"})
+vim.fn.sign_define("LspDiagnosticsSignInformation",
+    {text = "", texthl = "markdownH5"})
+vim.fn.sign_define("LspDiagnosticsSignHint",
+    {text = "", texthl = "markdownH4"})

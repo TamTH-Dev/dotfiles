@@ -68,7 +68,7 @@ return require('packer').startup(function()
 
   -- LSP supporter
   use { 'neovim/nvim-lspconfig' }
-  use { 'glepnir/lspsaga.nvim' }
+  -- use { 'glepnir/lspsaga.nvim' }
   use {
     'hrsh7th/nvim-cmp',
     requires = {

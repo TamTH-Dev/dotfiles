@@ -18,6 +18,7 @@ options.joinspaces = false
 options.laststatus = 2
 options.lazyredraw = true
 options.magic = true
+options.mouse = options.mouse + 'a'
 options.number = true
 options.numberwidth = 4
 options.relativenumber = true

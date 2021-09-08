@@ -15,12 +15,10 @@ return require('packer').startup(function()
   use { 'ghifarit53/tokyonight-vim' }
 
   -- Customized status line
-  -- use { 'vim-airline/vim-airline' }
-  -- use { 'vim-airline/vim-airline-themes' }
-  use { 'itchyny/lightline.vim' }
+  use { 'hoob3rt/lualine.nvim' }
 
   -- Fancy start screen
-  use { 'mhinz/vim-startify' }
+  use { 'glepnir/dashboard-nvim' }
 
   -- Parser
   use {
@@ -33,7 +31,12 @@ return require('packer').startup(function()
   use { 'simrat39/symbols-outline.nvim' }
 
   -- Icons
-  use { 'kyazdani42/nvim-web-devicons' }
+  use { 
+    'romgrk/barbar.nvim',
+    requires = {
+      { 'kyazdani42/nvim-web-devicons' }
+    }
+  }
 
   -- Git wrapper
   use { 'tpope/vim-fugitive' }
@@ -68,7 +71,7 @@ return require('packer').startup(function()
 
   -- LSP supporter
   use { 'neovim/nvim-lspconfig' }
-  -- use { 'glepnir/lspsaga.nvim' }
+  use { 'glepnir/lspsaga.nvim' }
   use {
     'hrsh7th/nvim-cmp',
     requires = {

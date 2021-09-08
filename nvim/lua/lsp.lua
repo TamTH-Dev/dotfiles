@@ -50,6 +50,7 @@ end
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics,
     {
+        signs = true,
         virtual_text = {
           prefix = "",
           spacing = 0,
@@ -59,11 +60,11 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     }
 )
 
-vim.fn.sign_define("LspDiagnosticsSignError",
-    {text = "", texthl = "markdownH1"})
-vim.fn.sign_define("LspDiagnosticsSignWarning",
-    {text = "", texthl = "markdownH2"})
-vim.fn.sign_define("LspDiagnosticsSignInformation",
-    {text = "", texthl = "markdownH5"})
-vim.fn.sign_define("LspDiagnosticsSignHint",
-    {text = "", texthl = "markdownH4"})
+-- vim.fn.sign_define("LspDiagnosticsSignError",
+--     {text = "", texthl = "markdownH1"})
+-- vim.fn.sign_define("LspDiagnosticsSignWarning",
+--     {text = "", texthl = "markdownH2"})
+-- vim.fn.sign_define("LspDiagnosticsSignInformation",
+--     {text = "", texthl = "markdownH5"})
+-- vim.fn.sign_define("LspDiagnosticsSignHint",
+--     {text = "", texthl = "markdownH4"})

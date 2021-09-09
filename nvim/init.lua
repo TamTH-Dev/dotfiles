@@ -1,6 +1,3 @@
--- Source configuration files
--- scriptencoding utf-8
-
 -- Installed plugins
 require 'plugins'
 

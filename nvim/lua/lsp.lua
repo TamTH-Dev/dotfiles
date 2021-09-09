@@ -1,9 +1,13 @@
 local nvim_lsp = require 'lspconfig'
 local configs = require 'lspconfig/configs'
+local cmp = require 'cmp_nvim_lsp'
 
 local ts_lsp = require 'languages/ts_lsp'
 local python_lsp = require 'languages/python_lsp'
+local clang_lsp = require 'languages/clang_lsp'
 local lua_lsp = require 'languages/lua_lsp'
+local yaml_lsp = require 'languages/yaml_lsp'
+local json_lsp = require 'languages/json_lsp'
 local html_lsp = require 'languages/html_lsp'
 local css_lsp = require 'languages/css_lsp'
 
@@ -35,18 +39,28 @@ local on_attach = function(_, bufnr)
   buf_set_keymap('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
 end
 
--- Update capabilities
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-
--- Enable the language servers
+-- Enabled language servers
 local servers = {
-  tsserver = ts_lsp:config(),
-  pyright = python_lsp:config(),
-  sumneko_lua = lua_lsp:config(),
-  html = html_lsp:config(),
-  cssls = css_lsp:config()
+  tsserver = ts_lsp:config(), -- Typescript
+  pyright = python_lsp:config(), -- Python
+  clangd = clang_lsp:config(), -- C, C++
+  sumneko_lua = lua_lsp:config(), -- Lua
+  ansiblels = yaml_lsp:config(), -- Yaml
+  jsonls = json_lsp:config(), -- JSON
+  html = html_lsp:config(), -- Html
+  cssls = css_lsp:config() -- Css
 }
+
+-- Update capabilities
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    'documentation',
+    'detail',
+    'additionalTextEdits',
+  },
+}
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities = cmp.update_capabilities(capabilities)
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
@@ -64,12 +78,12 @@ for server, config in pairs(servers) do
   end
 end
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics,
     {
         signs = true,
         virtual_text = {
-          prefix = "",
+          prefix = '',
           spacing = 0,
         },
         underline = true,

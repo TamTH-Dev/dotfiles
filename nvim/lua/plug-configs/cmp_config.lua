@@ -7,6 +7,35 @@ local api = vim.api
 local fn = vim.fn
 local WIDE_HEIGHT = 40
 
+-- Icon for custom item kinds
+local icons = {
+  Class = '',
+  Color = '',
+  Constant = '',
+  Constructor = '',
+  Enum = '練',
+  EnumMember = '',
+  Event = '',
+  Field = '',
+  File = '',
+  Folder = '',
+  Function = '',
+  Interface = '',
+  Keyword = ' ',
+  Method = '',
+  Module = '',
+  Operator = '',
+  Property = '',
+  Reference = '',
+  Snippet = '',
+  Struct = '',
+  Text = '',
+  TypeParameter = '',
+  Unit = '塞',
+  Value = '',
+  Variable = '',
+}
+
 local replace_termcodes = function(str)
   return api.nvim_replace_termcodes(str, true, true, true)
 end
@@ -16,7 +45,7 @@ cmp.setup {
     autocomplete = {
       types.cmp.TriggerEvent.TextChanged,
     },
-    completeopt = 'menuone,noselect,noinsert',
+    completeopt = 'menu,menuone,noselect,noinsert',
     keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
     keyword_length = 1,
     get_trigger_characters = function(trigger_characters)
@@ -84,10 +113,25 @@ cmp.setup {
     }),
   },
   formatting = {
-    deprecated = true,
-    format = function(_, vim_item)
+    format = function(entry, vim_item)
+      vim_item.kind = icons[vim_item.kind]
+      vim_item.menu = ({
+        nvim_lsp = '(LSP)',
+        emoji = '(Emoji)',
+        path = '(Path)',
+        calc = '(Calc)',
+        cmp_tabnine = '(Tabnine)',
+        vsnip = '(Snippet)',
+        luasnip = '(Snippet)',
+        buffer = '(Buffer)',
+      })[entry.source.name]
+      vim_item.dup = ({
+        buffer = 1,
+        path = 1,
+        nvim_lsp = 0,
+      })[entry.source.name] or 0
       return vim_item
-    end
+    end,
   },
   experimental = {
     ghost_text = false,

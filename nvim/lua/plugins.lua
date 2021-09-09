@@ -6,7 +6,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
   vim.cmd 'packadd packer.nvim'
 end
 
-return require('packer').startup(function()
+return require('packer').startup(function(use)
   -- Packer can manage itself
   use { 'wbthomason/packer.nvim' }
 
@@ -15,8 +15,12 @@ return require('packer').startup(function()
   use { 'ghifarit53/tokyonight-vim' }
 
   -- Customized status line
-  -- use { 'hoob3rt/lualine.nvim' }
-  use { 'glepnir/galaxyline.nvim' }
+  use {
+    'glepnir/galaxyline.nvim',
+    requires = {
+      { 'kyazdani42/nvim-web-devicons' }
+    }
+  }
 
   -- Fancy start screen
   use { 'glepnir/dashboard-nvim' }
@@ -32,7 +36,7 @@ return require('packer').startup(function()
   use { 'simrat39/symbols-outline.nvim' }
 
   -- Icons
-  use { 
+  use {
     'romgrk/barbar.nvim',
     requires = {
       { 'kyazdani42/nvim-web-devicons' }
@@ -44,7 +48,6 @@ return require('packer').startup(function()
   use {
       'lewis6991/gitsigns.nvim',
       event = { 'BufRead', 'BufNewFile' },
-      config = require('plug-configs.gitsigns').config,
       requires = { 'nvim-lua/plenary.nvim' },
   }
 
@@ -70,7 +73,7 @@ return require('packer').startup(function()
   use { 'kyazdani42/nvim-tree.lua' }
 
   -- Fuzzy search
-  use { 
+  use {
     'nvim-telescope/telescope.nvim',
     requires = {
       { 'nvim-lua/plenary.nvim' }

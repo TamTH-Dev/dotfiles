@@ -2,6 +2,7 @@ local compe = require 'compe'
 
 local api = vim.api
 local map = api.nvim_set_keymap
+local fn = vim.fn
 
 local options = { expr = true }
 
@@ -42,8 +43,8 @@ local replace_termcodes = function(str)
 end
 
 local check_back_space = function()
-    local col = vim.fn.col('.') - 1
-    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+    local col = fn.col('.') - 1
+    if col == 0 or fn.getline('.'):sub(col, col):match('%s') then
         return true
     else
         return false
@@ -54,20 +55,20 @@ end
 --- move to prev/next item in completion menuone
 --- jump to prev/next snippet's placeholder
 _G.tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
+  if fn.pumvisible() == 1 then
     return replace_termcodes('<C-n>')
-  elseif vim.fn.call('vsnip#available', {1}) == 1 then
+  elseif fn.call('vsnip#available', {1}) == 1 then
     return replace_termcodes('<Plug>(vsnip-expand-or-jump)')
   elseif check_back_space() then
     return replace_termcodes('<Tab>')
   else
-    return vim.fn['compe#complete']()
+    return fn['compe#complete']()
   end
 end
 _G.s_tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
+  if fn.pumvisible() == 1 then
     return replace_termcodes('<C-p>')
-  elseif vim.fn.call('vsnip#jumpable', {-1}) == 1 then
+  elseif fn.call('vsnip#jumpable', {-1}) == 1 then
     return replace_termcodes('<Plug>(vsnip-jump-prev)')
   else
     return replace_termcodes('<S-Tab>')

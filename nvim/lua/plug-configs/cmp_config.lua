@@ -62,7 +62,7 @@ cmp.setup {
       if fn.pumvisible() == 1 then
         fn.feedkeys(replace_termcodes('<C-n>'), 'n')
       elseif luasnip.expand_or_jumpable() then
-        vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"), "")
+        vim.fn.feedkeys(replace_termcodes('<Plug>luasnip-expand-or-jump'), '')
       else
         fallback()
       end
@@ -74,7 +74,7 @@ cmp.setup {
       if fn.pumvisible() == 1 then
         fn.feedkeys(replace_termcodes('<C-p>'), 'n')
       elseif luasnip.jumpable(-1) then
-        vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
+        vim.fn.feedkeys(replace_termcodes('<Plug>luasnip-jump-prev'), '')
       else
         fallback()
       end

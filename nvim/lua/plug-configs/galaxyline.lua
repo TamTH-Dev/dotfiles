@@ -1,10 +1,10 @@
 local gl = require 'galaxyline'
-local diagnostic = require 'galaxyline.provider_diagnostic'
+-- local diagnostic = require 'galaxyline.provider_diagnostic'
 local vcs = require 'galaxyline.provider_vcs'
-local fileinfo = require 'galaxyline.provider_fileinfo'
+-- local fileinfo = require 'galaxyline.provider_fileinfo'
 local extensions = require 'galaxyline.provider_extensions'
-local buffer = require 'galaxyline.provider_buffer'
-local lspclient = require 'galaxyline.provider_lsp'
+-- local buffer = require 'galaxyline.provider_buffer'
+-- local lspclient = require 'galaxyline.provider_lsp'
 local condition = require 'galaxyline.condition'
 -- local whitespace = require 'galaxyline.provider_whitespace'
 
@@ -13,31 +13,31 @@ local bo = vim.bo
 local api = vim.api
 local gls = gl.section
 
-local DiagnosticError = diagnostic.get_diagnostic_error
-local DiagnosticWarn = diagnostic.get_diagnostic_warn
-local DiagnosticHint = diagnostic.get_diagnostic_hint
-local DiagnosticInfo = diagnostic.get_diagnostic_info
+-- local DiagnosticError = diagnostic.get_diagnostic_error
+-- local DiagnosticWarn = diagnostic.get_diagnostic_warn
+-- local DiagnosticHint = diagnostic.get_diagnostic_hint
+-- local DiagnosticInfo = diagnostic.get_diagnostic_info
 
 local GitBranch = vcs.get_git_branch
-local DiffAdd = vcs.diff_add
-local DiffModified = vcs.diff_modified
-local DiffRemove = vcs.diff_remove
+-- local DiffAdd = vcs.diff_add
+-- local DiffModified = vcs.diff_modified
+-- local DiffRemove = vcs.diff_remove
 
-local LineColumn = fileinfo.line_column
-local FileFormat = fileinfo.get_file_format
-local FileEncode = fileinfo.get_file_encode
-local FileSize = fileinfo.get_file_size
-local FileIcon = fileinfo.get_file_icon
-local FileName = fileinfo.get_current_file_name
-local LinePercent = fileinfo.current_line_percent
+-- local LineColumn = fileinfo.line_column
+-- local FileFormat = fileinfo.get_file_format
+-- local FileEncode = fileinfo.get_file_encode
+-- local FileSize = fileinfo.get_file_size
+-- local FileIcon = fileinfo.get_file_icon
+-- local FileName = fileinfo.get_current_file_name
+-- local LinePercent = fileinfo.current_line_percent
 
 local ScrollBar = extensions.scrollbar_instance
 
-local BufferIcon  = buffer.get_buffer_type_icon
-local BufferNumber = buffer.get_buffer_number
-local FileTypeName = buffer.get_buffer_filetype
+-- local BufferIcon  = buffer.get_buffer_type_icon
+-- local BufferNumber = buffer.get_buffer_number
+-- local FileTypeName = buffer.get_buffer_filetype
 
-local GetLspClient = lspclient.get_lsp_client
+-- local GetLspClient = lspclient.get_lsp_client
 
 -- Colors
 local colors = {
@@ -61,7 +61,7 @@ local is_show_git_diff = function()
   return hide_in_width() and check_git_workspace()
 end
 
-function is_valid_file_type()
+local is_valid_file_type = function()
   local f_type = bo.filetype
   if not f_type or f_type == '' then
       return false
@@ -144,8 +144,8 @@ gls.left[4] = {
 
 gls.left[5] = {
   GitIcon = {
-    provider = function() 
-      return '' 
+    provider = function()
+      return ''
     end,
     condition = check_git_workspace,
     highlight = { colors.orange, colors.bg },
@@ -241,6 +241,7 @@ gls.right[1]= {
 gls.right[2]= {
   GetLspClient = {
     provider = 'GetLspClient',
+    icon = ' ',
     highlight = { colors.yellow, colors.bg },
     separator = ' | ',
     separator_highlight = { colors.fg, colors.bg },
@@ -249,9 +250,10 @@ gls.right[2]= {
 
 gls.right[3]= {
   FileFormat = {
-    provider = function() 
+    provider = function()
       return bo.filetype
     end,
+    icon = ' ',
     highlight = { colors.blue, colors.bg },
     separator = ' | ',
     separator_highlight = { colors.fg, colors.bg },
@@ -261,6 +263,7 @@ gls.right[3]= {
 gls.right[4] = {
   LineInfo = {
     provider = 'LineColumn',
+    icon = ' ',
     highlight = { colors.magenta, colors.bg },
     separator = ' | ',
     separator_highlight = { colors.fg, colors.bg },
@@ -270,6 +273,7 @@ gls.right[4] = {
 gls.right[5] = {
   PerCent = {
     provider = 'LinePercent',
+    icon = '',
     highlight = { colors.red, colors.bg },
     separator = ' | ',
     separator_highlight = { colors.fg, colors.bg },

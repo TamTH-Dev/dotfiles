@@ -3,11 +3,13 @@ local configs = require 'lspconfig/configs'
 
 local ts_lsp = require 'languages/ts_lsp'
 local python_lsp = require 'languages/python_lsp'
+local lua_lsp = require 'languages/lua_lsp'
 local html_lsp = require 'languages/html_lsp'
 local css_lsp = require 'languages/css_lsp'
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-local nvim_command = vim.api.nvim_command
+local api = vim.api
+local nvim_command = api.nvim_command
 
 -- Colors
 local colors = {
@@ -24,9 +26,9 @@ local colors = {
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+local on_attach = function(_, bufnr)
+  local function buf_set_keymap(...) api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) api.nvim_buf_set_option(bufnr, ...) end
   local opts = { noremap = true, silent = true } -- Mappings
   -- Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -41,6 +43,7 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local servers = {
   tsserver = ts_lsp:config(),
   pyright = python_lsp:config(),
+  sumneko_lua = lua_lsp:config(),
   html = html_lsp:config(),
   cssls = css_lsp:config()
 }

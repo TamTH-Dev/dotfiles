@@ -4,8 +4,22 @@ local sorters = require 'telescope.sorters'
 local previewers = require 'telescope.previewers'
 
 local map = vim.api.nvim_set_keymap
+local nvim_command = vim.api.nvim_command
 
 local options = { silent = true }
+
+-- Colors
+local colors = {
+  bg = '#24283b',
+  fg = '#c0caf5',
+  red = '#f7768e',
+  green = '#9ece6a',
+  orange = '#ff9e64',
+  blue = '#7aa2f7',
+  magenta = '#bb9af7',
+  cyan = '#7dcfff',
+  yellow = '#e0af68',
+}
 
 telescope.setup {
   defaults = {
@@ -62,3 +76,11 @@ telescope.setup {
 map('n', '<C-p>', '<cmd>Telescope find_files<cr>', options)
 map('n', '<C-f>', '<cmd>Telescope live_grep<cr>', options)
 map('n', '<C-b>', '<cmd>Telescope buffers<cr>', options)
+
+nvim_command('highlight TelescopeBorder guifg='..colors.blue)
+nvim_command('highlight TelescopePromptPrefix guifg='..colors.orange)
+nvim_command('highlight TelescopeNormal guifg='..colors.fg)
+nvim_command('highlight TelescopeSelection guifg=#7aa2f7 guibg='..colors.bg)
+nvim_command('highlight TelescopeSelectionCaret guifg=#ff9e64 guibg='..colors.bg)
+nvim_command('highlight TelescopeMultiSelection guifg='..colors.fg)
+nvim_command('highlight TelescopeMatching guifg='..colors.red)

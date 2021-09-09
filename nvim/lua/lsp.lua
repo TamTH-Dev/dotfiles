@@ -7,6 +7,20 @@ local html_lsp = require 'languages/html_lsp'
 local css_lsp = require 'languages/css_lsp'
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+local nvim_command = vim.api.nvim_command
+
+-- Colors
+local colors = {
+  bg = '#24283b',
+  fg = '#c0caf5',
+  red = '#f7768e',
+  green = '#9ece6a',
+  orange = '#ff9e64',
+  blue = '#7aa2f7',
+  magenta = '#bb9af7',
+  cyan = '#7dcfff',
+  yellow = '#e0af68',
+}
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -60,11 +74,8 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     }
 )
 
--- vim.fn.sign_define("LspDiagnosticsSignError",
---     {text = "", texthl = "markdownH1"})
--- vim.fn.sign_define("LspDiagnosticsSignWarning",
---     {text = "", texthl = "markdownH2"})
--- vim.fn.sign_define("LspDiagnosticsSignInformation",
---     {text = "", texthl = "markdownH5"})
--- vim.fn.sign_define("LspDiagnosticsSignHint",
---     {text = "", texthl = "markdownH4"})
+-- Change highlight color of diagnostics
+nvim_command('highlight LspDiagnosticsDefaultError guifg='..colors.red)
+nvim_command('highlight LspDiagnosticsDefaultWarning guifg='..colors.orange)
+nvim_command('highlight LspDiagnosticsDefaultInformation guifg='..colors.magenta)
+nvim_command('highlight LspDiagnosticsDefaultHint guifg='..colors.blue)

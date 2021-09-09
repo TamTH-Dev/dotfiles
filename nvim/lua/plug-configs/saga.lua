@@ -1,8 +1,22 @@
 local saga = require 'lspsaga'
 
 local map = vim.api.nvim_set_keymap
+local nvim_command = vim.api.nvim_command
 
 local options = { silent = true }
+
+-- Colors
+local colors = {
+  bg = '#24283b',
+  fg = '#c0caf5',
+  red = '#f7768e',
+  green = '#9ece6a',
+  orange = '#ff9e64',
+  blue = '#7aa2f7',
+  magenta = '#bb9af7',
+  cyan = '#7dcfff',
+  yellow = '#e0af68',
+}
 
 saga.init_lsp_saga {
 	use_saga_diagnostic_sign = true,
@@ -64,3 +78,13 @@ map('n', '<leader>gp', ':Lspsaga diagnostic_jump_prev<cr>', options)
 
 -- lsp provider to find the cursor word definition and reference
 map('n', '<leader>gf', ':Lspsaga lsp_finder<cr>', options)
+
+nvim_command('highlight LspFloatWinBorder	guifg='..colors.cyan)
+nvim_command('highlight LspSagaRenameBorder guifg='..colors.cyan)
+nvim_command('highlight LspSagaHoverBorder guifg='..colors.cyan)
+nvim_command('highlight LspSagaSignatureHelpBorder guifg='..colors.cyan)
+nvim_command('highlight LspSagaCodeActionBorder guifg='..colors.cyan)
+nvim_command('highlight LspSagaDefPreviewBorder guifg='..colors.cyan)
+nvim_command('highlight LspLinesDiagBorder guifg='..colors.cyan)
+nvim_command('highlight LspSagaRenamePromptPrefix guifg='..colors.orange)
+nvim_command('highlight LspSagaCodeActionTitle guifg='..colors.red)

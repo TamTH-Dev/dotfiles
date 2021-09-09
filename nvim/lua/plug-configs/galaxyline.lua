@@ -217,7 +217,7 @@ gls.left[12] = {
   DiagnosticInfo = {
     provider = 'DiagnosticInfo',
     icon = '  ',
-    highlight = { colors.blue, colors.bg },
+    highlight = { colors.magenta, colors.bg },
   }
 }
 
@@ -225,7 +225,7 @@ gls.left[13] = {
   DiagnosticHint = {
     provider = 'DiagnosticHint',
     icon = '  ',
-    highlight = { colors.magenta, colors.bg },
+    highlight = { colors.blue, colors.bg },
   }
 }
 
@@ -270,7 +270,7 @@ gls.right[4] = {
 gls.right[5] = {
   PerCent = {
     provider = 'LinePercent',
-    highlight = { colors.cyan, colors.bg },
+    highlight = { colors.red, colors.bg },
     separator = ' | ',
     separator_highlight = { colors.fg, colors.bg },
   }
@@ -281,7 +281,7 @@ gls.right[6] = {
     provider = function()
       return ScrollBar()..' '
     end,
-    highlight = { colors.cyan, colors.bg },
+    highlight = { colors.red, colors.bg },
   }
 }
 

@@ -95,6 +95,9 @@ export PATH=$HOME/.nvm/versions/node/v14.17.5/bin:$PATH
 # Path env for ruby
 export PATH=$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH
 
+# Path env for lua lsp
+export PATH=$HOME/lua-language-server/bin/Linux:$PATH
+
 # Configure fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border --bind=shift-tab:up,tab:down --no-multi --cycle'
@@ -122,7 +125,7 @@ export EDITOR='nvim'
 alias vi="nvim"
 alias zshconfig="vi ~/.zshrc"
 alias la="ls -la"
-
+alias luamake=/home/madlife/lua-language-server/3rd/luamake/luamake
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

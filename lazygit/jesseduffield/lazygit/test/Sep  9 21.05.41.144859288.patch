@@ -1,0 +1,10 @@
+--- a/src/index.css
++++ b/src/index.css
+@@ -10,6 +10,7 @@ body {
+ }
+ 
+ code {
+   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
++  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+     monospace;
+ }

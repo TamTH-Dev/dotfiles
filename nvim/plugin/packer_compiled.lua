@@ -78,20 +78,26 @@ _G.packer_plugins = {
     path = "/home/madlife/.local/share/nvim/site/pack/packer/start/barbar.nvim"
   },
   ["cmp-buffer"] = {
+    after_files = { "/home/madlife/.local/share/nvim/site/pack/packer/opt/cmp-buffer/after/plugin/cmp_buffer.lua" },
     loaded = true,
-    path = "/home/madlife/.local/share/nvim/site/pack/packer/start/cmp-buffer"
+    needs_bufread = false,
+    path = "/home/madlife/.local/share/nvim/site/pack/packer/opt/cmp-buffer"
   },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "/home/madlife/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp"
   },
   ["cmp-path"] = {
+    after_files = { "/home/madlife/.local/share/nvim/site/pack/packer/opt/cmp-path/after/plugin/cmp_path.lua" },
     loaded = true,
-    path = "/home/madlife/.local/share/nvim/site/pack/packer/start/cmp-path"
+    needs_bufread = false,
+    path = "/home/madlife/.local/share/nvim/site/pack/packer/opt/cmp-path"
   },
   cmp_luasnip = {
+    after_files = { "/home/madlife/.local/share/nvim/site/pack/packer/opt/cmp_luasnip/after/plugin/cmp_luasnip.lua" },
     loaded = true,
-    path = "/home/madlife/.local/share/nvim/site/pack/packer/start/cmp_luasnip"
+    needs_bufread = false,
+    path = "/home/madlife/.local/share/nvim/site/pack/packer/opt/cmp_luasnip"
   },
   ["dashboard-nvim"] = {
     loaded = true,
@@ -106,13 +112,9 @@ _G.packer_plugins = {
     path = "/home/madlife/.local/share/nvim/site/pack/packer/start/galaxyline.nvim"
   },
   ["gitsigns.nvim"] = {
-    loaded = false,
-    needs_bufread = false,
-    path = "/home/madlife/.local/share/nvim/site/pack/packer/opt/gitsigns.nvim"
-  },
-  gruvbox = {
+    config = { "\27LJ\1\0026\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\rgitsigns\frequire\0" },
     loaded = true,
-    path = "/home/madlife/.local/share/nvim/site/pack/packer/start/gruvbox"
+    path = "/home/madlife/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
   },
   ["lexima.vim"] = {
     loaded = true,
@@ -197,14 +199,10 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
-vim.cmd [[augroup packer_load_aucmds]]
-vim.cmd [[au!]]
-  -- Event lazy-loads
-time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au BufNewFile * ++once lua require("packer.load")({'gitsigns.nvim'}, { event = "BufNewFile *" }, _G.packer_plugins)]]
-vim.cmd [[au BufRead * ++once lua require("packer.load")({'gitsigns.nvim'}, { event = "BufRead *" }, _G.packer_plugins)]]
-time([[Defining lazy-load event autocommands]], false)
-vim.cmd("augroup END")
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\1\0026\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
 if should_profile then save_profiles() end
 
 end)

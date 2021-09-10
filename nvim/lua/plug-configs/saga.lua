@@ -1,9 +1,10 @@
 local saga = require 'lspsaga'
 
-local map = vim.api.nvim_set_keymap
-local nvim_command = vim.api.nvim_command
+local api = vim.api
+local map = api.nvim_set_keymap
+local cmd = api.nvim_command
 
-local options = { silent = true }
+local opts = { silent = true }
 
 -- Colors
 local colors = {
@@ -57,34 +58,34 @@ saga.init_lsp_saga {
 }
 
 -- show hover doc
-map('n', '<leader>gk', ':Lspsaga hover_doc<cr>', options)
+map('n', '<leader>gk', ':Lspsaga hover_doc<cr>', opts)
 
 -- code action
-map('n', '<leader>ga', ':Lspsaga code_action<CR>', options)
-map('v', '<leader>ga', ':<C-U>Lspsaga range_code_action<CR>', options)
+map('n', '<leader>ga', ':Lspsaga code_action<CR>', opts)
+map('v', '<leader>ga', ':<C-U>Lspsaga range_code_action<CR>', opts)
 
 -- show signature help
-map('n', '<leader>gs', ':Lspsaga signature_help<cr>', options)
+map('n', '<leader>gs', ':Lspsaga signature_help<cr>', opts)
 
 -- show diagnostic
-map('n', '<leader>gl', ':Lspsaga show_line_diagnostics<CR>', options)
+map('n', '<leader>gl', ':Lspsaga show_line_diagnostics<CR>', opts)
 
 -- rename
-map('n', '<leader>gr', ':Lspsaga rename<cr>', options)
+map('n', '<leader>gr', ':Lspsaga rename<cr>', opts)
 
 -- jump diagnostic
-map('n', '<leader>gn', ':Lspsaga diagnostic_jump_next<cr>', options)
-map('n', '<leader>gp', ':Lspsaga diagnostic_jump_prev<cr>', options)
+map('n', '<leader>gn', ':Lspsaga diagnostic_jump_next<cr>', opts)
+map('n', '<leader>gp', ':Lspsaga diagnostic_jump_prev<cr>', opts)
 
 -- lsp provider to find the cursor word definition and reference
-map('n', '<leader>gf', ':Lspsaga lsp_finder<cr>', options)
+map('n', '<leader>gf', ':Lspsaga lsp_finder<cr>', opts)
 
-nvim_command('highlight LspFloatWinBorder	guifg='..colors.cyan)
-nvim_command('highlight LspSagaRenameBorder guifg='..colors.cyan)
-nvim_command('highlight LspSagaHoverBorder guifg='..colors.cyan)
-nvim_command('highlight LspSagaSignatureHelpBorder guifg='..colors.cyan)
-nvim_command('highlight LspSagaCodeActionBorder guifg='..colors.cyan)
-nvim_command('highlight LspSagaDefPreviewBorder guifg='..colors.cyan)
-nvim_command('highlight LspLinesDiagBorder guifg='..colors.cyan)
-nvim_command('highlight LspSagaRenamePromptPrefix guifg='..colors.orange)
-nvim_command('highlight LspSagaCodeActionTitle guifg='..colors.red)
+cmd('highlight LspFloatWinBorder	guifg='..colors.cyan)
+cmd('highlight LspSagaRenameBorder guifg='..colors.cyan)
+cmd('highlight LspSagaHoverBorder guifg='..colors.cyan)
+cmd('highlight LspSagaSignatureHelpBorder guifg='..colors.cyan)
+cmd('highlight LspSagaCodeActionBorder guifg='..colors.cyan)
+cmd('highlight LspSagaDefPreviewBorder guifg='..colors.cyan)
+cmd('highlight LspLinesDiagBorder guifg='..colors.cyan)
+cmd('highlight LspSagaRenamePromptPrefix guifg='..colors.orange)
+cmd('highlight LspSagaCodeActionTitle guifg='..colors.red)

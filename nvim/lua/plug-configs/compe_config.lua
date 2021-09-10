@@ -4,12 +4,12 @@ local api = vim.api
 local map = api.nvim_set_keymap
 local fn = vim.fn
 
-local options = { expr = true }
+local opts = { expr = true }
 
-map('i', '<Tab>', 'v:lua.tab_complete()', options)
-map('s', '<Tab>', 'v:lua.tab_complete()', options)
-map('i', '<S-Tab>', 'v:lua.s_tab_complete()', options)
-map('s', '<S-Tab>', 'v:lua.s_tab_complete()', options)
+map('i', '<Tab>', 'v:lua.tab_complete()', opts)
+map('s', '<Tab>', 'v:lua.tab_complete()', opts)
+map('i', '<S-Tab>', 'v:lua.s_tab_complete()', opts)
+map('s', '<S-Tab>', 'v:lua.s_tab_complete()', opts)
 
 compe.setup {
   enabled = true;

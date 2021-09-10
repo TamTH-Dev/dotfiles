@@ -5,6 +5,7 @@ local luasnip = require 'luasnip'
 
 local api = vim.api
 local fn = vim.fn
+
 local WIDE_HEIGHT = 40
 
 -- Icon for custom item kinds
@@ -35,6 +36,11 @@ local icons = {
   Value = '',
   Variable = '',
 }
+
+local check_back_space = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col == 0 or vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') ~= nil
+end
 
 local replace_termcodes = function(str)
   return api.nvim_replace_termcodes(str, true, true, true)
@@ -87,11 +93,18 @@ cmp.setup {
     ['<C-m>'] = cmp.mapping.select_prev_item(),
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<cr>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
     ['<Tab>'] = cmp.mapping(function(fallback)
       if fn.pumvisible() == 1 then
         fn.feedkeys(replace_termcodes('<C-n>'), 'n')
       elseif luasnip.expand_or_jumpable() then
-        vim.fn.feedkeys(replace_termcodes('<Plug>luasnip-expand-or-jump'), '')
+        fn.feedkeys(replace_termcodes('<Plug>luasnip-expand-or-jump'), '')
+      elseif check_back_space() then
+        fn.feedkeys(replace_termcodes('<Tab>'), 'n')
       else
         fallback()
       end
@@ -103,7 +116,7 @@ cmp.setup {
       if fn.pumvisible() == 1 then
         fn.feedkeys(replace_termcodes('<C-p>'), 'n')
       elseif luasnip.jumpable(-1) then
-        vim.fn.feedkeys(replace_termcodes('<Plug>luasnip-jump-prev'), '')
+        fn.feedkeys(replace_termcodes('<Plug>luasnip-jump-prev'), '')
       else
         fallback()
       end

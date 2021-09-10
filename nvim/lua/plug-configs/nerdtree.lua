@@ -1,10 +1,12 @@
-local map = vim.api.nvim_set_keymap
-local cmd = vim.cmd
+local api = vim.api
+local map = api.nvim_set_keymap
+local cmd = api.nvim_command
 local global = vim.g
-local options = { silent = true, nowait = true }
+
+local opts = { silent = true, nowait = true }
 
 -- Open the existing NERDTree on each new tab.
-cmd 'autocmd BufWinEnter * silent NERDTreeMirror'
+cmd('autocmd BufWinEnter * silent NERDTreeMirror')
 
 -- Set default NERDTree's width
 global.NERDTreeWinSize = 30
@@ -26,14 +28,14 @@ global.NERDTreeHighlightCursorline=0
 global.NERDTreeMinimalUI = 1
 
 -- Toggle NERDTree
-map('n', '<C-n>', ':NERDTreeToggle<cr>', options)
+map('n', '<C-n>', ':NERDTreeToggle<cr>', opts)
 
 -- Exit nvim if NERDTree is the only window left
-cmd [[ autocmd bufenter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | q | endif ]]
+cmd([[ autocmd bufenter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | q | endif ]])
 
 -- Prevent other buffers open in NERDTree buffer
-cmd [[ autocmd FileType nerdtree let t:nerdtree_winnr = bufwinnr('%') ]]
-cmd 'autocmd BufWinEnter * call PreventBuffersInNERDTree()'
+cmd([[ autocmd FileType nerdtree let t:nerdtree_winnr = bufwinnr('%') ]])
+cmd('autocmd BufWinEnter * call PreventBuffersInNERDTree()')
 -- function! PreventBuffersInNERDTree()
 --   if bufname('#') =~ 'NERD_tree' && bufname('%') !~ 'NERD_tree'
 --     \ && exists('t:nerdtree_winnr') && bufwinnr('%') == t:nerdtree_winnr

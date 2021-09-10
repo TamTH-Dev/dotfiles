@@ -1,8 +1,41 @@
-local map = vim.api.nvim_set_keymap
+local api = vim.api
+local map = api.nvim_set_keymap
+local cmd = api.nvim_command
+local global = vim.g
 
-local options = { silent = true }
+local opts = { silent = true }
 
-map('n', '<C-n>', ':NvimTreeToggle<CR>', options)
-map('n', '<leader>r', ':NvimTreeRefresh<CR>', options)
+map('n', '<C-n>', ':NvimTreeToggle<cr>', opts)
+map('n', '<leader>r', ':NvimTreeRefresh<cr>', opts)
 
--- vim.g.nvim_tree_icons = { git = { unstaged = '±', staged = '', deleted = '✗' } }
+global.nvim_tree_icons = {
+  default= '',
+  symlink= '',
+  git= {
+    unstaged= '±',
+    staged= '',
+    unmerged= '',
+    renamed= '',
+    untracked= '',
+    deleted= '',
+    ignored= ''
+  },
+  folder= {
+    arrow_open= '',
+    arrow_closed= '',
+    default= '',
+    open= '',
+    empty= '',
+    empty_open= '',
+    symlink= '',
+    symlink_open= '',
+  },
+  lsp= {
+    error= '',
+    warning= '',
+    info= '',
+    hint= '',
+  }
+}
+
+cmd('highlight NvimTreeFolderIcon guifg=#7aa2f7')

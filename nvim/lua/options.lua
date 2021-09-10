@@ -1,7 +1,6 @@
 local options = vim.opt
 local global = vim.g
-local cmd = vim.cmd
-local api = vim.api
+local cmd = vim.api.nvim_command
 
 global.tokyonight_style = 'night'
 
@@ -23,6 +22,7 @@ options.number = true
 options.numberwidth = 4
 options.relativenumber = true
 options.shiftwidth = 2
+options.showmode = false
 options.smartcase = true
 options.smartindent = true
 options.smarttab = true
@@ -36,17 +36,17 @@ options.updatetime = 300
 options.undofile = false
 options.writebackup = false
 
-cmd	'au BufEnter * set fo-=c fo-=r fo-=o'
-cmd 'colorscheme tokyonight'
-cmd 'noswapfile'
-cmd	'syntax enable'
+cmd('au BufEnter * set fo-=c fo-=r fo-=o')
+cmd('colorscheme tokyonight')
+cmd('noswapfile')
+cmd('syntax enable')
 
 local set_4_spaces_for_specific_file_type = function(file_type)
 	if not file_type then return nil end
 	local command = 'autocmd Filetype '
 	command = command .. file_type
 	command = command .. ' setlocal tabstop=4 shiftwidth=4 softtabstop=4'
-	cmd (command)
+	cmd(command)
 end
 
 set_4_spaces_for_specific_file_type('python')

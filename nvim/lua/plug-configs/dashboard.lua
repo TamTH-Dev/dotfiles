@@ -1,6 +1,6 @@
 local global = vim.g
-local cmd = vim.cmd
 local api = vim.api
+local cmd = api.nvim_command
 
 global.dashboard_custom_header = {
     '          ▀████▀▄▄              ▄█ ',
@@ -37,7 +37,7 @@ global.dashboard_custom_section = {
   },
 }
 
-cmd "let packages = len(globpath('~/.local/share/nvim/site/pack/packer/start', '*', 0, 1))"
+cmd([[ let packages = len(globpath('~/.local/share/nvim/site/pack/packer/start', '*', 0, 1)) ]])
 
 api.nvim_exec(
   [[

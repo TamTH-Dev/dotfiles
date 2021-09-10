@@ -1,8 +1,10 @@
 local global = vim.g
-local nvim_command = vim.api.nvim_command
+local cmd = vim.api.nvim_command
 local map = vim.api.nvim_set_keymap
 
-local options = { noremap = true, silent = true }
+local opts = { noremap = true, silent = true }
+
+-- Color
 local colors = {
   bg = '#24283b',
   fg = '#c0caf5',
@@ -16,35 +18,35 @@ local colors = {
 }
 
 -- Move to previous/next
-map('n', '<leader><S-Tab>', ':BufferPrevious<cr>', options)
-map('n', '<leader><Tab>', ':BufferNext<cr>', options)
+map('n', '<leader><S-Tab>', ':BufferPrevious<cr>', opts)
+map('n', '<leader><Tab>', ':BufferNext<cr>', opts)
 
 -- Re-order to previous/next
-map('n', '<leader><', ':BufferMovePrevious<cr>', options)
-map('n', '<leader>>', ' :BufferMoveNext<cr>', options)
+map('n', '<leader><', ':BufferMovePrevious<cr>', opts)
+map('n', '<leader>>', ' :BufferMoveNext<cr>', opts)
 
 -- Goto buffer in position...
-map('n', '<leader>1', ':BufferGoto 1<cr>', options)
-map('n', '<leader>2', ':BufferGoto 2<cr>', options)
-map('n', '<leader>3', ':BufferGoto 3<cr>', options)
-map('n', '<leader>4', ':BufferGoto 4<cr>', options)
-map('n', '<leader>5', ':BufferGoto 5<cr>', options)
-map('n', '<leader>6', ':BufferGoto 6<cr>', options)
-map('n', '<leader>7', ':BufferGoto 7<cr>', options)
-map('n', '<leader>8', ':BufferGoto 8<cr>', options)
-map('n', '<leader>9', ':BufferGoto 9<cr>', options)
-map('n', '<leader>10', ':BufferGoto 10<cr>', options)
-map('n', '<leader>0', ':BufferLast<cr>', options)
+map('n', '<leader>1', ':BufferGoto 1<cr>', opts)
+map('n', '<leader>2', ':BufferGoto 2<cr>', opts)
+map('n', '<leader>3', ':BufferGoto 3<cr>', opts)
+map('n', '<leader>4', ':BufferGoto 4<cr>', opts)
+map('n', '<leader>5', ':BufferGoto 5<cr>', opts)
+map('n', '<leader>6', ':BufferGoto 6<cr>', opts)
+map('n', '<leader>7', ':BufferGoto 7<cr>', opts)
+map('n', '<leader>8', ':BufferGoto 8<cr>', opts)
+map('n', '<leader>9', ':BufferGoto 9<cr>', opts)
+map('n', '<leader>10', ':BufferGoto 10<cr>', opts)
+map('n', '<leader>0', ':BufferLast<cr>', opts)
 
 -- Close all buffer but accept the current one
-map('n', '<leader>cb', ':BufferCloseAllButCurrent<cr>', options)
+map('n', '<leader>cb', ':BufferCloseAllButCurrent<cr>', opts)
 
 -- Sort buffer
-map('n', '<leader>bb', ':BufferOrderByBufferNumber<cr>', options)
-map('n', '<leader>bd', ':BufferOrderByDirectory<cr>', options)
-map('n', '<leader>bl', ':BufferOrderByLanguage<cr>', options)
+map('n', '<leader>bb', ':BufferOrderByBufferNumber<cr>', opts)
+map('n', '<leader>bd', ':BufferOrderByDirectory<cr>', opts)
+map('n', '<leader>bl', ':BufferOrderByLanguage<cr>', opts)
 
--- Set barbar's options
+-- Set barbar's opts
 global.bufferline = {
   -- Enable/disable animations
   animation = true,
@@ -111,11 +113,10 @@ global.bufferline = {
   no_name_title = 'New buffer',
 }
 
--- local bg_inactive =
-nvim_command('highlight BufferCurrentSign guifg='..colors.red)
-
-nvim_command('highlight BufferVisible guifg='..colors.fg..' guibg='..colors.bg)
-nvim_command('highlight BufferVisibleIndex guifg='..colors.fg..' guibg='..colors.bg)
-nvim_command('highlight BufferVisibleMod guifg='..colors.fg..' guibg='..colors.bg)
-nvim_command('highlight BufferVisibleSign guifg='..colors.magenta..' guibg='..colors.bg)
-nvim_command('highlight BufferVisibleTarget guifg='..colors.fg..' guibg='..colors.bg)
+cmd('highlight BufferCurrentSign guifg='..colors.red)
+cmd('highlight BufferCurrentMod guifg='..colors.blue)
+cmd('highlight BufferVisible guifg='..colors.fg..' guibg='..colors.bg)
+cmd('highlight BufferVisibleIndex guifg='..colors.fg..' guibg='..colors.bg)
+cmd('highlight BufferVisibleMod guifg='..colors.fg..' guibg='..colors.bg)
+cmd('highlight BufferVisibleSign guifg='..colors.magenta..' guibg='..colors.bg)
+cmd('highlight BufferVisibleTarget guifg='..colors.fg..' guibg='..colors.bg)

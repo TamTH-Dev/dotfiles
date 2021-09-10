@@ -12,9 +12,9 @@ local json_lsp = require 'languages/json_lsp'
 local html_lsp = require 'languages/html_lsp'
 local css_lsp = require 'languages/css_lsp'
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local lsp = vim.lsp
 local api = vim.api
-local nvim_command = api.nvim_command
+local cmd = api.nvim_command
 
 -- Colors
 local colors = {
@@ -37,7 +37,7 @@ local on_attach = function(_, bufnr)
   local opts = { noremap = true, silent = true } -- Mappings
   -- Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-  buf_set_keymap('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
 end
 
 -- Enabled language servers
@@ -54,6 +54,7 @@ local servers = {
 }
 
 -- Update capabilities
+local capabilities = lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.resolveSupport = {
   properties = {
     'documentation',
@@ -80,8 +81,8 @@ for server, config in pairs(servers) do
   end
 end
 
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics,
+lsp.handlers['textDocument/publishDiagnostics'] = lsp.with(
+    lsp.diagnostic.on_publish_diagnostics,
     {
         signs = true,
         virtual_text = {
@@ -94,7 +95,7 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
 )
 
 -- Change highlight color of diagnostics
-nvim_command('highlight LspDiagnosticsDefaultError guifg='..colors.red)
-nvim_command('highlight LspDiagnosticsDefaultWarning guifg='..colors.orange)
-nvim_command('highlight LspDiagnosticsDefaultInformation guifg='..colors.magenta)
-nvim_command('highlight LspDiagnosticsDefaultHint guifg='..colors.blue)
+cmd('highlight LspDiagnosticsDefaultError guifg='..colors.red)
+cmd('highlight LspDiagnosticsDefaultWarning guifg='..colors.orange)
+cmd('highlight LspDiagnosticsDefaultInformation guifg='..colors.magenta)
+cmd('highlight LspDiagnosticsDefaultHint guifg='..colors.blue)

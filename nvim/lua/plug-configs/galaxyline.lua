@@ -1,43 +1,33 @@
 local gl = require 'galaxyline'
--- local diagnostic = require 'galaxyline.provider_diagnostic'
 local vcs = require 'galaxyline.provider_vcs'
--- local fileinfo = require 'galaxyline.provider_fileinfo'
 local extensions = require 'galaxyline.provider_extensions'
--- local buffer = require 'galaxyline.provider_buffer'
--- local lspclient = require 'galaxyline.provider_lsp'
 local condition = require 'galaxyline.condition'
--- local whitespace = require 'galaxyline.provider_whitespace'
+local fileinfo = require('galaxyline.provider_fileinfo')
 
 local fn = vim.fn
 local bo = vim.bo
 local api = vim.api
 local gls = gl.section
 
--- local DiagnosticError = diagnostic.get_diagnostic_error
--- local DiagnosticWarn = diagnostic.get_diagnostic_warn
--- local DiagnosticHint = diagnostic.get_diagnostic_hint
--- local DiagnosticInfo = diagnostic.get_diagnostic_info
-
+-- Supporters
 local GitBranch = vcs.get_git_branch
--- local DiffAdd = vcs.diff_add
--- local DiffModified = vcs.diff_modified
--- local DiffRemove = vcs.diff_remove
-
--- local LineColumn = fileinfo.line_column
--- local FileFormat = fileinfo.get_file_format
--- local FileEncode = fileinfo.get_file_encode
--- local FileSize = fileinfo.get_file_size
--- local FileIcon = fileinfo.get_file_icon
--- local FileName = fileinfo.get_current_file_name
--- local LinePercent = fileinfo.current_line_percent
-
 local ScrollBar = extensions.scrollbar_instance
+local buffer_not_empty = condition.buffer_not_empty
+local hide_in_width = condition.hide_in_width
+local check_git_workspace = condition.check_git_workspace
+local file_icon_color = fileinfo.get_file_icon_color
 
--- local BufferIcon  = buffer.get_buffer_type_icon
--- local BufferNumber = buffer.get_buffer_number
--- local FileTypeName = buffer.get_buffer_filetype
+local is_git_workspace_showed = function()
+  return hide_in_width() and check_git_workspace()
+end
 
--- local GetLspClient = lspclient.get_lsp_client
+local is_file_type_valid = function()
+  local f_type = bo.filetype
+  if not f_type or f_type == '' then
+      return false
+  end
+  return true
+end
 
 -- Colors
 local colors = {
@@ -52,26 +42,9 @@ local colors = {
   yellow = '#e0af68',
 }
 
--- Supporters
-local buffer_not_empty = condition.buffer_not_empty
-local hide_in_width = condition.hide_in_width
-local check_git_workspace = condition.check_git_workspace
-
-local is_show_git_diff = function()
-  return hide_in_width() and check_git_workspace()
-end
-
-local is_valid_file_type = function()
-  local f_type = bo.filetype
-  if not f_type or f_type == '' then
-      return false
-  end
-  return true
-end
-
 local get_mode_color = function()
   local mode_colors = {
-    n = colors.cyan,
+    n = colors.blue,
     i = colors.green,
     c = colors.orange,
     V = colors.magenta,
@@ -89,11 +62,11 @@ end
 -- Short line list
 gl.short_line_list = { 'nvim-tree', 'packer' }
 
--- Left side
+-- Left section
 gls.left[1] = {
   Bar = {
     provider = function() return '▋' end,
-    highlight = { colors.cyan, colors.bg },
+    highlight = { colors.red, colors.bg },
     separator = ' ',
     separator_highlight = { colors.bg, colors.bg },
   },
@@ -116,196 +89,210 @@ gls.left[2] = {
       if alias_mode == nil then
         alias_mode = fn.mode()
       end
-      return alias_mode..' '
+      return alias_mode
     end,
     highlight = { colors.bg, colors.bg },
-    separator = ' ',
-    separator_highlight = { colors.bg, colors.bg },
-  },
+    separator = '  ',
+    separator_highlight = { colors.bg, colors.bg }
+  }
 }
 
 gls.left[3] ={
   FileIcon = {
-    provider = 'FileIcon',
     condition = buffer_not_empty,
-    highlight = { require('galaxyline.provider_fileinfo').get_file_icon_color, colors.bg },
-  },
+    provider = 'FileIcon',
+    highlight = { file_icon_color, colors.bg }
+  }
 }
 
 gls.left[4] = {
   FileName = {
-    provider = 'FileName',
     condition = buffer_not_empty,
+    provider = 'FileName',
     highlight = { colors.fg, colors.bg },
     separator = ' ',
-    separator_highlight = { colors.bg, colors.bg },
+    separator_highlight = { colors.bg, colors.bg }
   }
 }
 
 gls.left[5] = {
   GitIcon = {
-    provider = function()
-      return ''
-    end,
-    condition = check_git_workspace,
+    condition = is_git_workspace_showed,
+    provider = function() return '' end,
     highlight = { colors.orange, colors.bg },
     separator = ' ',
-    separator_highlight = { colors.bg, colors.bg },
+    separator_highlight = { colors.bg, colors.bg }
   }
 }
 
 gls.left[6] = {
   GitBranch = {
+    condition = is_git_workspace_showed,
     provider = function()
       local branch_name = GitBranch()
       if not branch_name then
-        return 'No branch'
+        return 'Undefined'
       end
       if (branch_name and string.len(branch_name) > 28) then
         return string.sub(branch_name, 1, 25)..'...'
       end
       return branch_name
     end,
-    condition = check_git_workspace,
     highlight = { colors.fg,colors.bg },
     separator = ' ',
-    separator_highlight = { colors.bg, colors.bg },
+    separator_highlight = { colors.bg, colors.bg }
   }
 }
 
 gls.left[7] = {
   DiffAdd = {
+    condition = is_git_workspace_showed,
     provider = 'DiffAdd',
-    condition = is_show_git_diff,
     icon = '  ',
-    highlight = { colors.green, colors.bg },
+    highlight = { colors.green, colors.bg }
   }
 }
 
 gls.left[8] = {
   DiffModified = {
+    condition = is_git_workspace_showed,
     provider = 'DiffModified',
-    condition = is_show_git_diff,
     icon = '  ',
-    highlight = { colors.orange, colors.bg },
+    highlight = { colors.orange, colors.bg }
   }
 }
 
 gls.left[9] = {
   DiffRemove = {
+    condition = is_git_workspace_showed,
     provider = 'DiffRemove',
-    condition = is_show_git_diff,
     icon = '  ',
-    highlight = { colors.red,colors.bg },
+    highlight = { colors.red,colors.bg }
   }
 }
 
 gls.left[10] = {
-  DiagnosticError = {
-    provider = 'DiagnosticError',
-    icon = '  ',
-    highlight = { colors.red, colors.bg },
+  Space = {
+    condition = is_git_workspace_showed,
+    provider = 'WhiteSpace',
+    highlight = { colors.cyan, colors.bg },
+    separator = ' ',
+    separator_highlight = { colors.bg, colors.bg }
   }
 }
 
 gls.left[11] = {
-  DiagnosticWarn = {
-    provider = 'DiagnosticWarn',
-    icon = '  ',
-    highlight = { colors.orange, colors.bg },
+  DiagnosticError = {
+    provider = 'DiagnosticError',
+    icon = ' ',
+    highlight = { colors.red, colors.bg },
   }
 }
 
 gls.left[12] = {
-  DiagnosticInfo = {
-    provider = 'DiagnosticInfo',
-    icon = '  ',
-    highlight = { colors.magenta, colors.bg },
+  DiagnosticWarn = {
+    provider = 'DiagnosticWarn',
+    icon = ' ',
+    highlight = { colors.orange, colors.bg }
   }
 }
 
 gls.left[13] = {
-  DiagnosticHint = {
-    provider = 'DiagnosticHint',
-    icon = '  ',
-    highlight = { colors.blue, colors.bg },
+  DiagnosticInfo = {
+    provider = 'DiagnosticInfo',
+    icon = ' ',
+    highlight = { colors.magenta, colors.bg }
   }
 }
 
--- Right side
+gls.left[14] = {
+  DiagnosticHint = {
+    provider = 'DiagnosticHint',
+    icon = ' ',
+    highlight = { colors.blue, colors.bg }
+  }
+}
+
+-- Right section
 gls.right[1]= {
   BufferNumber = {
+    condition = hide_in_width,
     provider = 'BufferNumber',
     icon = '﬘ ',
-    highlight = { colors.green, colors.bg },
+    highlight = { colors.green, colors.bg }
   }
 }
 
 gls.right[2]= {
   GetLspClient = {
+    condition = hide_in_width,
     provider = 'GetLspClient',
     icon = ' ',
     highlight = { colors.yellow, colors.bg },
     separator = ' | ',
-    separator_highlight = { colors.fg, colors.bg },
+    separator_highlight = { colors.fg, colors.bg }
   }
 }
 
 gls.right[3]= {
   FileFormat = {
+    condition = hide_in_width,
     provider = function()
       return bo.filetype
     end,
     icon = ' ',
     highlight = { colors.blue, colors.bg },
     separator = ' | ',
-    separator_highlight = { colors.fg, colors.bg },
+    separator_highlight = { colors.fg, colors.bg }
   }
 }
 
 gls.right[4] = {
   LineInfo = {
+    condition = hide_in_width,
     provider = 'LineColumn',
     icon = ' ',
     highlight = { colors.magenta, colors.bg },
     separator = ' | ',
-    separator_highlight = { colors.fg, colors.bg },
+    separator_highlight = { colors.fg, colors.bg }
   },
 }
 
 gls.right[5] = {
   PerCent = {
+    condition = hide_in_width,
     provider = 'LinePercent',
     icon = '',
     highlight = { colors.red, colors.bg },
     separator = ' | ',
-    separator_highlight = { colors.fg, colors.bg },
+    separator_highlight = { colors.fg, colors.bg }
   }
 }
 
 gls.right[6] = {
   ScrollBar = {
+    condition = hide_in_width,
     provider = function()
       return ScrollBar()..' '
     end,
-    highlight = { colors.red, colors.bg },
+    highlight = { colors.red, colors.bg }
   }
 }
 
 -- Short status line
 gls.short_line_left[1] = {
   BufferType = {
-    condition = is_valid_file_type,
+    condition = is_file_type_valid,
     provider = 'FileTypeName',
-    highlight = { colors.fg, colors.bg },
+    highlight = { colors.fg, colors.bg }
   }
 }
 
 gls.short_line_right[1] = {
   BufferIcon = {
-    condition = is_valid_file_type,
+    condition = is_file_type_valid,
     provider= 'BufferIcon',
-    highlight = { colors.green, colors.bg },
+    highlight = { colors.fg, colors.bg }
   }
 }
 

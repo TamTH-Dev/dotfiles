@@ -1,6 +1,7 @@
 local map = vim.api.nvim_set_keymap
 local global = vim.g
-local options = { silent = true, nowait = true }
+
+local opts = { silent = true, nowait = true }
 
 -- Specify plugins to install
 global.coc_global_extensions = {
@@ -51,25 +52,25 @@ global.coc_disable_startup_warning = 1
 
 -- Mappings for CoCList
 -- Show all diagnostics.
-map('n', '<leader>a', ':<C-u>CocList diagnostics<cr>', options)
+map('n', '<leader>a', ':<C-u>CocList diagnostics<cr>', opts)
 -- Manage extensions.
-map('n', '<leader>ge', ':<C-u>CocList extensions<cr>', options)
+map('n', '<leader>ge', ':<C-u>CocList extensions<cr>', opts)
 -- Show commands.
-map('n', '<leader>gc', ':<C-u>CocList commands<cr>', options)
+map('n', '<leader>gc', ':<C-u>CocList commands<cr>', opts)
 -- Find symbol of current document.
-map('n', '<leader>go', ':<C-u>CocList outline<cr>', options)
+map('n', '<leader>go', ':<C-u>CocList outline<cr>', opts)
 -- Move to definition (function, variables,...)
-map('n', '<leader>gd', '<Plug>(coc-definition)', options)
+map('n', '<leader>gd', '<Plug>(coc-definition)', opts)
 -- Move to references (function, variables,...)
-map('n', '<leader>gr', '<Plug>(coc-references)', options)
+map('n', '<leader>gr', '<Plug>(coc-references)', opts)
 -- Search workspace symbols.
-map('n', '<space>s', ':<C-u>CocList -I symbols<cr>', options)
+map('n', '<space>s', ':<C-u>CocList -I symbols<cr>', opts)
 -- Do default action for next item.
-map('n', '<space>j', ':<C-u>CocNext<CR>', options)
+map('n', '<space>j', ':<C-u>CocNext<CR>', opts)
 -- Do default action for previous item.
-map('n', '<space>k', ':<C-u>CocPrev<CR>', options)
+map('n', '<space>k', ':<C-u>CocPrev<CR>', opts)
 -- Resume latest coc list.
-map('n', '<space>k', ':<C-u>CocListResume<CR>', options)
+map('n', '<space>k', ':<C-u>CocListResume<CR>', opts)
 
 -- Open coc explorer
-map('n', '<C-n>', ':CocCommand explorer<CR>', options)
+map('n', '<C-n>', ':CocCommand explorer<CR>', opts)

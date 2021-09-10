@@ -158,7 +158,10 @@ gls.left[6] = {
   GitBranch = {
     provider = function()
       local branch_name = GitBranch()
-      if (string.len(branch_name) > 28) then
+      if not branch_name then
+        return 'No branch'
+      end
+      if (branch_name and string.len(branch_name) > 28) then
         return string.sub(branch_name, 1, 25)..'...'
       end
       return branch_name
@@ -200,7 +203,7 @@ gls.left[9] = {
 gls.left[10] = {
   DiagnosticError = {
     provider = 'DiagnosticError',
-    icon = '  ',
+    icon = '  ',
     highlight = { colors.red, colors.bg },
   }
 }

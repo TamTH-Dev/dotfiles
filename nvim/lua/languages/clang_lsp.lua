@@ -4,8 +4,8 @@ local clang_lsp = {}
 
 function clang_lsp:config()
   return {
-    cmd = { "clangd", "--background-index" },
-    filetypes = { "c", "cpp", "objc", "objcpp" },
+    cmd = { 'clangd', '--background-index' },
+    filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
     root_dir = function(fname)
       local root_files = {
         'compile_commands.json',

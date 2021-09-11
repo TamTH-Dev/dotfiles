@@ -1,21 +1,16 @@
-local present, gl = pcall(require, 'galaxyline')
-local present2, vcs = pcall(require, 'galaxyline.provider_vcs')
-local present3, extensions = pcall(require, 'galaxyline.provider_extensions')
-local present4, condition = pcall(require, 'galaxyline.condition')
-local present5, fileinfo = pcall(require, 'galaxyline.provider_fileinfo')
+local is_galaxyline_loaded, gl = pcall(require, 'galaxyline')
+local is_provider_vcs_loaded, vcs = pcall(require, 'galaxyline.provider_vcs')
+local is_provider_extensions_loaded, extensions = pcall(require, 'galaxyline.provider_extensions')
+local is_conditions_loaded, condition = pcall(require, 'galaxyline.condition')
+local is_provider_fileinfo_loaded, fileinfo = pcall(require, 'galaxyline.provider_fileinfo')
 
-if not present then
+if not (is_galaxyline_loaded or is_provider_vcs_loaded or is_provider_extensions_loaded or is_conditions_loaded or is_provider_fileinfo_loaded) then
    return
 end
--- local gl = require 'galaxyline'
--- local vcs = require 'galaxyline.provider_vcs'
--- local extensions = require 'galaxyline.provider_extensions'
--- local condition = require 'galaxyline.condition'
--- local fileinfo = require 'galaxyline.provider_fileinfo'
 
 local fn = vim.fn
 local bo = vim.bo
-local cmd = vim.api.nvim_command
+local cmd = vim.cmd
 local gls = gl.section
 
 -- Supporters
@@ -308,5 +303,5 @@ gls.short_line_right[1] = {
   }
 }
 
--- Force manual load so that nvim boots with a status line
-gl.load_galaxyline()
+-- -- Force manual load so that nvim boots with a status line
+-- gl.load_galaxyline()

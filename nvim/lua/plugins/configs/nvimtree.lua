@@ -1,17 +1,11 @@
--- local present, _ = pcall(require, "nvim-tree")
--- if not present then
-   -- return
--- end
+local utils = require "core.utils"
 
-local api = vim.api
-local map = api.nvim_set_keymap
+local map = utils.map
 local cmd = vim.cmd
 local global = vim.g
 
-local opts = { silent = true }
-
-map('n', '<C-n>', ':NvimTreeToggle<cr>', opts)
-map('n', '<leader>r', ':NvimTreeRefresh<cr>', opts)
+map('n', '<C-n>', ':NvimTreeToggle<cr>')
+map('n', '<leader>r', ':NvimTreeRefresh<cr>')
 
 global.nvim_tree_icons = {
   default= '',

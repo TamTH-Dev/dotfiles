@@ -1,6 +1,5 @@
 local options = vim.opt
 local global = vim.g
-local cmd = vim.api.nvim_command
 
 global.tokyonight_style = 'night'
 
@@ -36,23 +35,28 @@ options.updatetime = 300
 options.undofile = false
 options.writebackup = false
 
-cmd('au BufEnter * set fo-=c fo-=r fo-=o')
--- cmd('colorscheme tokyonight')
-cmd('noswapfile')
-cmd('syntax enable')
+-- Disable some builtin vim plugins
+local disabled_built_ins = {
+   '2html_plugin',
+   'getscript',
+   'getscriptPlugin',
+   'gzip',
+   'logipat',
+   'netrw',
+   'netrwPlugin',
+   'netrwSettings',
+   'netrwFileHandlers',
+   'matchit',
+   'tar',
+   'tarPlugin',
+   'rrhelper',
+   'spellfile_plugin',
+   'vimball',
+   'vimballPlugin',
+   'zip',
+   'zipPlugin',
+}
 
-local set_4_spaces_for_specific_file_type = function(file_type)
-	if not file_type then return nil end
-	local command = 'autocmd Filetype '
-	command = command .. file_type
-	command = command .. ' setlocal tabstop=4 shiftwidth=4 softtabstop=4'
-	cmd(command)
+for _, plugin in pairs(disabled_built_ins) do
+   global['loaded_' .. plugin] = 1
 end
-
-set_4_spaces_for_specific_file_type('python')
-set_4_spaces_for_specific_file_type('c')
-set_4_spaces_for_specific_file_type('cpp')
-set_4_spaces_for_specific_file_type('java')
-set_4_spaces_for_specific_file_type('php')
-set_4_spaces_for_specific_file_type('sh')
-set_4_spaces_for_specific_file_type('text')

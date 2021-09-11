@@ -11,8 +11,6 @@ local utils = require "core.utils"
 local map = utils.map
 local cmd = vim.cmd
 
-local opts = { silent = true }
-
 -- Colors
 local colors = {
   bg = '#24283b',
@@ -78,9 +76,9 @@ telescope.setup {
   }
 }
 
-map('n', '<C-p>', '<cmd>Telescope find_files<cr>', opts)
-map('n', '<C-f>', '<cmd>Telescope live_grep<cr>', opts)
-map('n', '<C-b>', '<cmd>Telescope buffers<cr>', opts)
+map('n', '<C-p>', '<cmd>Telescope find_files<cr>')
+map('n', '<C-f>', '<cmd>Telescope live_grep<cr>')
+map('n', '<C-b>', '<cmd>Telescope buffers<cr>')
 
 cmd('highlight TelescopeBorder guifg='..colors.blue)
 cmd('highlight TelescopePromptPrefix guifg='..colors.magenta)

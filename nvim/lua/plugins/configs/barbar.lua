@@ -1,8 +1,8 @@
-local global = vim.g
-local cmd = vim.api.nvim_command
-local map = vim.api.nvim_set_keymap
+local utils = require "core.utils"
 
-local opts = { noremap = true, silent = true }
+local map = utils.map
+local cmd = vim.cmd
+local global = vim.g
 
 -- Color
 local colors = {
@@ -18,33 +18,33 @@ local colors = {
 }
 
 -- Move to previous/next
-map('n', '<leader><S-Tab>', ':BufferPrevious<cr>', opts)
-map('n', '<leader><Tab>', ':BufferNext<cr>', opts)
+map('n', '<leader><S-Tab>', ':BufferPrevious<cr>')
+map('n', '<leader><Tab>', ':BufferNext<cr>')
 
 -- Re-order to previous/next
-map('n', '<leader><', ':BufferMovePrevious<cr>', opts)
-map('n', '<leader>>', ' :BufferMoveNext<cr>', opts)
+map('n', '<leader><', ':BufferMovePrevious<cr>')
+map('n', '<leader>>', ' :BufferMoveNext<cr>')
 
 -- Goto buffer in position...
-map('n', '<leader>1', ':BufferGoto 1<cr>', opts)
-map('n', '<leader>2', ':BufferGoto 2<cr>', opts)
-map('n', '<leader>3', ':BufferGoto 3<cr>', opts)
-map('n', '<leader>4', ':BufferGoto 4<cr>', opts)
-map('n', '<leader>5', ':BufferGoto 5<cr>', opts)
-map('n', '<leader>6', ':BufferGoto 6<cr>', opts)
-map('n', '<leader>7', ':BufferGoto 7<cr>', opts)
-map('n', '<leader>8', ':BufferGoto 8<cr>', opts)
-map('n', '<leader>9', ':BufferGoto 9<cr>', opts)
-map('n', '<leader>10', ':BufferGoto 10<cr>', opts)
-map('n', '<leader>0', ':BufferLast<cr>', opts)
+map('n', '<leader>1', ':BufferGoto 1<cr>')
+map('n', '<leader>2', ':BufferGoto 2<cr>')
+map('n', '<leader>3', ':BufferGoto 3<cr>')
+map('n', '<leader>4', ':BufferGoto 4<cr>')
+map('n', '<leader>5', ':BufferGoto 5<cr>')
+map('n', '<leader>6', ':BufferGoto 6<cr>')
+map('n', '<leader>7', ':BufferGoto 7<cr>')
+map('n', '<leader>8', ':BufferGoto 8<cr>')
+map('n', '<leader>9', ':BufferGoto 9<cr>')
+map('n', '<leader>10', ':BufferGoto 10<cr>')
+map('n', '<leader>0', ':BufferLast<cr>')
 
 -- Close all buffer but accept the current one
-map('n', '<leader>cb', ':BufferCloseAllButCurrent<cr>', opts)
+map('n', '<leader>cb', ':BufferCloseAllButCurrent<cr>')
 
 -- Sort buffer
-map('n', '<leader>bb', ':BufferOrderByBufferNumber<cr>', opts)
-map('n', '<leader>bd', ':BufferOrderByDirectory<cr>', opts)
-map('n', '<leader>bl', ':BufferOrderByLanguage<cr>', opts)
+map('n', '<leader>bb', ':BufferOrderByBufferNumber<cr>')
+map('n', '<leader>bd', ':BufferOrderByDirectory<cr>')
+map('n', '<leader>bl', ':BufferOrderByLanguage<cr>')
 
 -- Set barbar's opts
 global.bufferline = {

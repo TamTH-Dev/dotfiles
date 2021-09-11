@@ -1,10 +1,7 @@
-local utils = require "core.utils"
+local utils = require 'core.utils'
 
 local map = utils.map
 local global = vim.g
-
--- local map = vim.api.nvim_set_keymap
--- local = { silent = true }
 
 -- Leader key
 global.mapleader = ','
@@ -28,7 +25,7 @@ M.misc = function()
   map('n', '<A-h>', '<C-W>h')
   map('n', '<A-l>', '<C-W>l')
 
-  -- " Disable highlight
+  -- Disable highlight
   map('n', '<leader><space>', ':nohl<cr>')
 
   -- Use tab with text block
@@ -52,16 +49,16 @@ M.misc = function()
 end
 
 -- M.nvimtree = function()
-   -- map("n", '<C-n>', ":NvimTreeToggle<CR>")
-   -- map("n", '<leader>r', ":NvimTreeRefresh<CR>")
+   -- map('n', '<C-n>', ':NvimTreeToggle<CR>')
+   -- map('n', '<leader>r', ':NvimTreeRefresh<CR>')
 -- end
 
 -- M.telescope = function()
    -- local m = plugin_maps.telescope_media
 
-   -- map("n", m.search_file, "<cmd>Telescope find_files<cr>")
-   -- map("n", m.search_word, "<cmd>Telescope live_grep<cr>")
-   -- map("n", m.search_buffer, "<cmd>Telescope buffers<cr>")
+   -- map('n', m.search_file, '<cmd>Telescope find_files<cr>')
+   -- map('n', m.search_word, '<cmd>Telescope live_grep<cr>')
+   -- map('n', m.search_buffer, '<cmd>Telescope buffers<cr>')
 -- end
 
 return M

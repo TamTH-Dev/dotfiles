@@ -1,6 +1,5 @@
 local nvim_lsp = require 'lspconfig'
 local configs = require 'lspconfig/configs'
--- local cmp = require 'cmp_nvim_lsp'
 
 local ts_lsp = require 'languages/ts_lsp'
 local python_lsp = require 'languages/python_lsp'
@@ -15,7 +14,7 @@ local css_lsp = require 'languages/css_lsp'
 
 local lsp = vim.lsp
 local api = vim.api
-local cmd = api.nvim_command
+local cmd = vim.cmd
 
 -- Colors
 local colors = {

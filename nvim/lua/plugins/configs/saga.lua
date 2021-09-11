@@ -1,9 +1,7 @@
 local saga = require 'lspsaga'
+local utils = require "core.utils"
 
-local api = vim.api
-local map = api.nvim_set_keymap
-
-local opts = { silent = true }
+local map = utils.map
 
 saga.init_lsp_saga {
 	use_saga_diagnostic_sign = true,
@@ -44,24 +42,24 @@ saga.init_lsp_saga {
 }
 
 -- show hover doc
-map('n', '<leader>gk', ':Lspsaga hover_doc<cr>', opts)
+map('n', '<leader>gk', ':Lspsaga hover_doc<cr>')
 
 -- code action
-map('n', '<leader>ga', ':Lspsaga code_action<CR>', opts)
-map('v', '<leader>ga', ':<C-U>Lspsaga range_code_action<CR>', opts)
+map('n', '<leader>ga', ':Lspsaga code_action<CR>')
+map('v', '<leader>ga', ':<C-U>Lspsaga range_code_action<CR>')
 
 -- show signature help
-map('n', '<leader>gs', ':Lspsaga signature_help<cr>', opts)
+map('n', '<leader>gs', ':Lspsaga signature_help<cr>')
 
 -- show diagnostic
-map('n', '<leader>gl', ':Lspsaga show_line_diagnostics<CR>', opts)
+map('n', '<leader>gl', ':Lspsaga show_line_diagnostics<CR>')
 
 -- rename
-map('n', '<leader>gr', ':Lspsaga rename<cr>', opts)
+map('n', '<leader>gr', ':Lspsaga rename<cr>')
 
 -- jump diagnostic
-map('n', '<leader>gn', ':Lspsaga diagnostic_jump_next<cr>', opts)
-map('n', '<leader>gp', ':Lspsaga diagnostic_jump_prev<cr>', opts)
+map('n', '<leader>gn', ':Lspsaga diagnostic_jump_next<cr>')
+map('n', '<leader>gp', ':Lspsaga diagnostic_jump_prev<cr>')
 
 -- lsp provider to find the cursor word definition and reference
-map('n', '<leader>gf', ':Lspsaga lsp_finder<cr>', opts)
+map('n', '<leader>gf', ':Lspsaga lsp_finder<cr>')

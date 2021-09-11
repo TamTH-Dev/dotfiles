@@ -1,5 +1,5 @@
-local is_autopairs_loaded, autopairs = pcall(require, "nvim-autopairs")
-local is_autopairs_completion_loaded, autopairs_completion = pcall(require, "nvim-autopairs.completion.cmp")
+local is_autopairs_loaded, autopairs = pcall(require, 'nvim-autopairs')
+local is_autopairs_completion_loaded, autopairs_completion = pcall(require, 'nvim-autopairs.completion.cmp')
 if not (is_autopairs_loaded or is_autopairs_completion_loaded) then
   return
 end

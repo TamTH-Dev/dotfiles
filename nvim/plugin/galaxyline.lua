@@ -1,8 +1,8 @@
-local gl = pcall(require, 'galaxyline')
-local vcs = pcall(require, 'galaxyline.provider_vcs')
-local extensions = pcall(require, 'galaxyline.provider_extensions')
-local condition = pcall(require, 'galaxyline.condition')
-local fileinfo = pcall(require, 'galaxyline.provider_fileinfo')
+local gl = require 'galaxyline'
+local vcs = require 'galaxyline.provider_vcs'
+local extensions = require 'galaxyline.provider_extensions'
+local condition = require 'galaxyline.condition'
+local fileinfo = require('galaxyline.provider_fileinfo')
 
 local fn = vim.fn
 local bo = vim.bo

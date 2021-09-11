@@ -1,8 +1,17 @@
-local gl = require 'galaxyline'
-local vcs = require 'galaxyline.provider_vcs'
-local extensions = require 'galaxyline.provider_extensions'
-local condition = require 'galaxyline.condition'
-local fileinfo = require('galaxyline.provider_fileinfo')
+local present, gl = pcall(require, 'galaxyline')
+local present2, vcs = pcall(require, 'galaxyline.provider_vcs')
+local present3, extensions = pcall(require, 'galaxyline.provider_extensions')
+local present4, condition = pcall(require, 'galaxyline.condition')
+local present5, fileinfo = pcall(require, 'galaxyline.provider_fileinfo')
+
+if not present then
+   return
+end
+-- local gl = require 'galaxyline'
+-- local vcs = require 'galaxyline.provider_vcs'
+-- local extensions = require 'galaxyline.provider_extensions'
+-- local condition = require 'galaxyline.condition'
+-- local fileinfo = require 'galaxyline.provider_fileinfo'
 
 local fn = vim.fn
 local bo = vim.bo

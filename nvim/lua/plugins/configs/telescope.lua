@@ -1,8 +1,10 @@
-local telescope = pcall(require, 'telescope')
-local actions = pcall(require, 'telescope.actions')
-local sorters = pcall(require, 'telescope.sorters')
-local previewers = pcall(require, 'telescope.previewers')
-
+local is_telescope_loaded, telescope = pcall(require, 'telescope')
+local is_telescope_actions_loaded, actions = pcall(require, 'telescope.actions')
+local is_telescope_sorters_loaded, sorters = pcall(require, 'telescope.sorters')
+local is_telescope_previewers_loaded, previewers = pcall(require, 'telescope.previewers')
+if not (is_telescope_loaded or is_telescope_actions_loaded or is_telescope_sorters_loaded or is_telescope_previewers_loaded) then
+  return
+end
 
 local utils = require "core.utils"
 
@@ -81,9 +83,9 @@ map('n', '<C-f>', '<cmd>Telescope live_grep<cr>', opts)
 map('n', '<C-b>', '<cmd>Telescope buffers<cr>', opts)
 
 cmd('highlight TelescopeBorder guifg='..colors.blue)
-cmd('highlight TelescopePromptPrefix guifg='..colors.orange)
+cmd('highlight TelescopePromptPrefix guifg='..colors.magenta)
 cmd('highlight TelescopeNormal guifg='..colors.fg)
 cmd('highlight TelescopeSelection guifg='..colors.blue)
-cmd('highlight TelescopeSelectionCaret guifg='..colors.orange)
+cmd('highlight TelescopeSelectionCaret guifg='..colors.blue)
 cmd('highlight TelescopeMultiSelection guifg='..colors.fg)
-cmd('highlight TelescopeMatching guifg='..colors.red)
+cmd('highlight TelescopeMatching guifg='..colors.yellow)

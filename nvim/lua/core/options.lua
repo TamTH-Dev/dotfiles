@@ -6,10 +6,10 @@ global.tokyonight_style = 'night'
 
 options.backup = false
 options.belloff = 'all'
-options.clipboard = options.clipboard + 'unnamedplus'
+options.clipboard = 'unnamedplus'
 options.completeopt = 'menu,menuone,noselect,noinsert'
 options.expandtab = true
-options.formatoptions = options.formatoptions - 'c'
+options.formatoptions = options.formatoptions - 'orc'
 options.hidden = true
 options.history = 50
 options.ic = true
@@ -37,7 +37,7 @@ options.undofile = false
 options.writebackup = false
 
 cmd('au BufEnter * set fo-=c fo-=r fo-=o')
-cmd('colorscheme tokyonight')
+-- cmd('colorscheme tokyonight')
 cmd('noswapfile')
 cmd('syntax enable')
 

@@ -36,6 +36,20 @@ end
 -- Color
 local colors = highlights.colors
 
+local is_buffer_number_valid = function()
+  local buffers = {}
+  for _,val in ipairs(vim.fn.range(1,vim.fn.bufnr('$'))) do
+    if vim.fn.bufexists(val) == 1 and vim.fn.buflisted(val) == 1 then
+      table.insert(buffers,val)
+    end
+  end
+  for _, nr in ipairs(buffers) do
+    if nr == vim.fn.bufnr('') then
+      return true
+    end
+  end
+end
+
 local get_mode_color = function()
   local mode_colors = {
     n = colors.blue,
@@ -220,18 +234,30 @@ gls.right[1]= {
   }
 }
 
-gls.right[2]= {
+gls.right[2] = {
+  Separator = {
+    condition = is_buffer_number_valid,
+    provider = function()
+      return '| '
+    end,
+    highlight = { colors.white, colors.bg },
+    separator = ' ',
+    separator_highlight = { colors.bg, colors.bg },
+  },
+}
+
+gls.right[3]= {
   GetLspClient = {
     condition = hide_in_width,
     provider = 'GetLspClient',
     icon = ' ',
     highlight = { colors.yellow, colors.bg },
-    separator = ' | ',
-    separator_highlight = { colors.fg, colors.bg }
+    -- separator = ' | ',
+    -- separator_highlight = { colors.fg, colors.bg }
   }
 }
 
-gls.right[3]= {
+gls.right[4]= {
   FileFormat = {
     condition = hide_in_width,
     provider = function()
@@ -244,7 +270,7 @@ gls.right[3]= {
   }
 }
 
-gls.right[4] = {
+gls.right[5] = {
   LineInfo = {
     condition = hide_in_width,
     provider = 'LineColumn',
@@ -255,7 +281,7 @@ gls.right[4] = {
   },
 }
 
-gls.right[5] = {
+gls.right[6] = {
   PerCent = {
     condition = hide_in_width,
     provider = 'LinePercent',
@@ -266,7 +292,7 @@ gls.right[5] = {
   }
 }
 
-gls.right[6] = {
+gls.right[7] = {
   ScrollBar = {
     condition = hide_in_width,
     provider = function()

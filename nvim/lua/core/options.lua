@@ -1,41 +1,29 @@
 local options = vim.opt
 local global = vim.g
 
--- Style for tokyonight colorscheme
-global.tokyonight_style = 'night'
-
+-- Core options
 options.backup = false
-options.belloff = 'all'
-options.clipboard = 'unnamedplus'
-options.completeopt = 'menu,menuone,noselect,noinsert'
-options.expandtab = true
-options.formatoptions = options.formatoptions - 'orc'
+options.formatoptions = options.formatoptions - 'ocr'
 options.hidden = true
 options.history = 50
-options.ic = true
 options.joinspaces = false
-options.laststatus = 2
 options.lazyredraw = true
-options.magic = true
 options.mouse = options.mouse + 'a'
-options.number = true
-options.numberwidth = 4
-options.relativenumber = true
 options.shell = '/bin/bash'
-options.shiftwidth = 2
-options.showmode = false
-options.smartcase = true
-options.smartindent = true
-options.smarttab = true
-options.softtabstop = 2
 options.splitbelow = true
 options.splitright = true
+options.swapfile = false
 options.switchbuf = 'useopen'
-options.tabstop = 2
 options.termguicolors = true
-options.updatetime = 300
+options.updatetime = 250
 options.undofile = false
 options.writebackup = false
+
+-- User options
+local user_options = require 'core.utils'.load_config().options
+for key, value in pairs(user_options) do
+  options[key] = value
+end
 
 -- Disable some builtin vim plugins
 local disabled_built_ins = {

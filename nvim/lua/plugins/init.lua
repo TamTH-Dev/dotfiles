@@ -14,7 +14,6 @@ packer.startup(function()
   -- Colorscheme
   use {
     'folke/tokyonight.nvim',
-    after = 'packer.nvim',
     config = function()
        require('colors').init()
     end,
@@ -102,46 +101,51 @@ packer.startup(function()
   use {
     'tpope/vim-fugitive',
     cmd = {
-       'Git',
-       'Gdiff',
-       'Gdiffsplit',
-       'Gvdiffsplit',
-       'Gwrite',
-       'Gw',
+      'Git',
+      'Gdiff',
+      'Gdiffsplit',
+      'Gvdiffsplit',
+      'Gwrite',
+      'Gw',
     },
   }
   use {
-      'lewis6991/gitsigns.nvim',
-      requires = { 'nvim-lua/plenary.nvim' },
-      config = function()
-         require 'plugins.configs.gitsigns'
-      end,
+    'lewis6991/gitsigns.nvim',
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require 'plugins.configs.gitsigns'
+    end,
   }
 
   -- Multiple cursors
-  -- TODO: Need to check again
   use {
-    'mg979/vim-visual-multi',
-    branch = 'master',
-    event = 'BufAdd',
-    config = function()
+    'terryma/vim-multiple-cursors',
+    event = 'BufEnter',
+    setup = function()
       local global = vim.g
-      global.VM_maps['Find Under'] = '<C-s>'
-      global.VM_maps['Find Subword Under'] = '<C-s>'
-    end,
+      global.multi_cursor_use_default_mapping = 0
+      global.multi_cursor_start_word_key = '<C-s>'
+      global.multi_cursor_select_all_word_key = '<A-s>'
+      global.multi_cursor_next_key = '<C-s>'
+      global.multi_cursor_prev_key = '<C-p>'
+      global.multi_cursor_skip_key = '<C-x>'
+      global.multi_cursor_quit_key = '<Esc>'
+    end
   }
 
   -- Commenter
   use {
     'terrortylor/nvim-comment',
+    event = 'BufEnter',
     config = function()
-       require 'plugins.configs.comment'
+      require 'plugins.configs.comment'
     end,
   }
 
   -- Auto close (X)HTML tags
   use {
     'alvan/vim-closetag',
+    event = 'BufEnter',
     config = function()
       local global = vim.g
       -- File extensions where this plugin is enabled
@@ -154,11 +158,15 @@ packer.startup(function()
   }
 
   -- Surround parentheses, brackets, quotes, XML tags, and more
-  use { 'tpope/vim-surround' }
+  use {
+    'tpope/vim-surround',
+    event = 'BufEnter',
+  }
 
   -- Emmet
   use {
     'mattn/emmet-vim',
+    event = 'BufEnter',
     config = function()
       local global = vim.g
       -- Remap the default emmet's leader key
@@ -192,18 +200,16 @@ packer.startup(function()
   -- LSP supporter
   use {
     'neovim/nvim-lspconfig',
-    requires = {
-      {
-        'glepnir/lspsaga.nvim',
-        config = function()
-          require 'plugins.configs.saga'
-          require 'core.mappings'.saga()
-        end
-      },
-    },
     config = function()
       require 'plugins.configs.lsp'
     end,
+  }
+  use {
+    'glepnir/lspsaga.nvim',
+    config = function()
+      require 'plugins.configs.saga'
+      require 'core.mappings'.saga()
+    end
   }
   use {
     'hrsh7th/nvim-cmp',

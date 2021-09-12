@@ -32,7 +32,7 @@ cmd([[ let packages = len(globpath('~/.local/share/nvim/site/pack/packer/start',
 
 api.nvim_exec(
   [[
-    let g:dashboard_custom_footer = [ 'Neovim loaded '..packages..' plugins ', '', 'Stay Hungry. Stay Foolish' ]
+    let g:dashboard_custom_footer = [ 'Madvim has loaded '..packages..' plugins ', '', '  Stay Hungry. Stay Foolish' ]
   ]],
   false
 )

@@ -40,6 +40,11 @@ local icons = {
   Variable = '',
 }
 
+local check_back_space = function()
+  local col = vim.fn.col "." - 1
+  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+end
+
 local replace_termcodes = function(str)
   return api.nvim_replace_termcodes(str, true, true, true)
 end
@@ -87,11 +92,8 @@ cmp.setup {
     }
   },
   mapping = {
-    ['<C-m>'] = cmp.mapping.select_prev_item(),
-    ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<cr>'] = cmp.mapping.confirm {
+    ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
@@ -100,6 +102,8 @@ cmp.setup {
         fn.feedkeys(replace_termcodes('<C-n>'), 'n')
       elseif luasnip.expand_or_jumpable() then
         fn.feedkeys(replace_termcodes('<Plug>luasnip-expand-or-jump'), '')
+      elseif check_back_space() then
+        vim.fn.feedkeys(replace_termcodes('<Tab>'), 'n')
       else
         fallback()
       end

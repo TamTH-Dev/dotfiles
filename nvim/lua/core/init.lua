@@ -6,11 +6,8 @@ local core_modules = {
 }
 
 for _, module in ipairs(core_modules) do
-   local ok, err = pcall(require, module)
-   if not ok then
-      error('Error loading ' .. module .. '\n\n' .. err)
+   local is_loaded_success, error_message = pcall(require, module)
+   if not is_loaded_success then
+      error('Error loading ' .. module .. '\n\n' .. error_message)
    end
 end
-
--- set all the non plugin mappings
-require('core.mappings').misc()

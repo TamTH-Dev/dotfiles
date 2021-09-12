@@ -1,11 +1,4 @@
-local utils = require "core.utils"
-
-local map = utils.map
-local cmd = vim.cmd
 local global = vim.g
-
-map('n', '<C-n>', ':NvimTreeToggle<cr>')
-map('n', '<leader>r', ':NvimTreeRefresh<cr>')
 
 global.nvim_tree_icons = {
   default= '',
@@ -36,5 +29,3 @@ global.nvim_tree_icons = {
     hint= '',
   }
 }
-
-cmd('highlight NvimTreeFolderIcon guifg=#7aa2f7')

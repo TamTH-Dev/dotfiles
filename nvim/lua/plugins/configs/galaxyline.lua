@@ -1,10 +1,10 @@
+local is_colors_loaded, highlights = pcall(require, 'colors.highlights')
 local is_galaxyline_loaded, gl = pcall(require, 'galaxyline')
 local is_provider_vcs_loaded, vcs = pcall(require, 'galaxyline.provider_vcs')
 local is_provider_extensions_loaded, extensions = pcall(require, 'galaxyline.provider_extensions')
 local is_conditions_loaded, condition = pcall(require, 'galaxyline.condition')
 local is_provider_fileinfo_loaded, fileinfo = pcall(require, 'galaxyline.provider_fileinfo')
-
-if not (is_galaxyline_loaded or is_provider_vcs_loaded or is_provider_extensions_loaded or is_conditions_loaded or is_provider_fileinfo_loaded) then
+if not (is_colors_loaded or is_galaxyline_loaded or is_provider_vcs_loaded or is_provider_extensions_loaded or is_conditions_loaded or is_provider_fileinfo_loaded) then
    return
 end
 
@@ -33,18 +33,8 @@ local is_file_type_valid = function()
   return true
 end
 
--- Colors
-local colors = {
-  bg = '#24283b',
-  fg = '#c0caf5',
-  red = '#f7768e',
-  green = '#9ece6a',
-  orange = '#ff9e64',
-  blue = '#7aa2f7',
-  magenta = '#bb9af7',
-  cyan = '#7dcfff',
-  yellow = '#e0af68',
-}
+-- Color
+local colors = highlights.colors
 
 local get_mode_color = function()
   local mode_colors = {
@@ -302,6 +292,3 @@ gls.short_line_right[1] = {
     highlight = { colors.fg, colors.bg }
   }
 }
-
--- -- Force manual load so that nvim boots with a status line
--- gl.load_galaxyline()

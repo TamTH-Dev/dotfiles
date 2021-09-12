@@ -6,24 +6,6 @@ if not (is_telescope_loaded or is_telescope_actions_loaded or is_telescope_sorte
   return
 end
 
-local utils = require "core.utils"
-
-local map = utils.map
-local cmd = vim.cmd
-
--- Colors
-local colors = {
-  bg = '#24283b',
-  fg = '#c0caf5',
-  red = '#f7768e',
-  green = '#9ece6a',
-  orange = '#ff9e64',
-  blue = '#7aa2f7',
-  magenta = '#bb9af7',
-  cyan = '#7dcfff',
-  yellow = '#e0af68',
-}
-
 telescope.setup {
   defaults = {
     mappings = {
@@ -75,15 +57,3 @@ telescope.setup {
     buffer_previewer_maker = previewers.buffer_previewer_maker
   }
 }
-
-map('n', '<C-p>', '<cmd>Telescope find_files<cr>')
-map('n', '<C-f>', '<cmd>Telescope live_grep<cr>')
-map('n', '<C-b>', '<cmd>Telescope buffers<cr>')
-
-cmd('highlight TelescopeBorder guifg='..colors.blue)
-cmd('highlight TelescopePromptPrefix guifg='..colors.magenta)
-cmd('highlight TelescopeNormal guifg='..colors.fg)
-cmd('highlight TelescopeSelection guifg='..colors.blue)
-cmd('highlight TelescopeSelectionCaret guifg='..colors.blue)
-cmd('highlight TelescopeMultiSelection guifg='..colors.fg)
-cmd('highlight TelescopeMatching guifg='..colors.yellow)

@@ -1,20 +1,11 @@
+local is_colors_loaded, highlights = pcall(require, 'colors.highlights')
 local is_devicons_loaded, icons = pcall(require, 'nvim-web-devicons')
-if not is_devicons_loaded then
+if not (is_devicons_loaded or is_colors_loaded) then
    return
 end
 
 -- Colors
-local colors = {
-  bg = '#24283b',
-  fg = '#c0caf5',
-  red = '#f7768e',
-  green = '#9ece6a',
-  orange = '#ff9e64',
-  blue = '#7aa2f7',
-  magenta = '#bb9af7',
-  cyan = '#7dcfff',
-  yellow = '#e0af68',
-}
+local colors = highlights.colors
 
 icons.setup {
    override = {

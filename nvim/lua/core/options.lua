@@ -1,6 +1,7 @@
 local options = vim.opt
 local global = vim.g
 
+-- Style for tokyonight colorscheme
 global.tokyonight_style = 'night'
 
 options.backup = false
@@ -20,6 +21,7 @@ options.mouse = options.mouse + 'a'
 options.number = true
 options.numberwidth = 4
 options.relativenumber = true
+options.shell = '/bin/bash'
 options.shiftwidth = 2
 options.showmode = false
 options.smartcase = true

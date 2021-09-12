@@ -1,7 +1,7 @@
-local saga = require 'lspsaga'
-local utils = require "core.utils"
-
-local map = utils.map
+local is_saga_loaded, saga = pcall(require, 'lspsaga')
+if not is_saga_loaded then
+  return
+end
 
 saga.init_lsp_saga {
 	use_saga_diagnostic_sign = true,
@@ -40,26 +40,3 @@ saga.init_lsp_saga {
 	border_style = 'single', -- 'single' 'double' 'round' 'plus'
 	rename_prompt_prefix = '➤'
 }
-
--- show hover doc
-map('n', '<leader>gk', ':Lspsaga hover_doc<cr>')
-
--- code action
-map('n', '<leader>ga', ':Lspsaga code_action<CR>')
-map('v', '<leader>ga', ':<C-U>Lspsaga range_code_action<CR>')
-
--- show signature help
-map('n', '<leader>gs', ':Lspsaga signature_help<cr>')
-
--- show diagnostic
-map('n', '<leader>gl', ':Lspsaga show_line_diagnostics<CR>')
-
--- rename
-map('n', '<leader>gr', ':Lspsaga rename<cr>')
-
--- jump diagnostic
-map('n', '<leader>gn', ':Lspsaga diagnostic_jump_next<cr>')
-map('n', '<leader>gp', ':Lspsaga diagnostic_jump_prev<cr>')
-
--- lsp provider to find the cursor word definition and reference
-map('n', '<leader>gf', ':Lspsaga lsp_finder<cr>')

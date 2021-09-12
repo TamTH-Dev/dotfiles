@@ -49,6 +49,7 @@ packer.startup(function()
     },
     config = function()
       require 'plugins.configs.barbar'
+      require 'core.mappings'.barbar()
     end,
   }
 
@@ -61,6 +62,7 @@ packer.startup(function()
     },
     config = function()
        require 'plugins.configs.nvimtree'
+       require 'core.mappings'.nvimtree()
     end,
   }
 
@@ -75,7 +77,6 @@ packer.startup(function()
   -- Parser
   use {
     'nvim-treesitter/nvim-treesitter',
-    event = 'BufRead',
     run = ':TSUpdate',
     config = function()
       require 'plugins.configs.treesitter'
@@ -124,7 +125,9 @@ packer.startup(function()
     branch = 'master',
     event = 'BufAdd',
     config = function()
-       require 'plugins.configs.visualmulti'
+      local global = vim.g
+      global.VM_maps['Find Under'] = '<C-s>'
+      global.VM_maps['Find Subword Under'] = '<C-s>'
     end,
   }
 
@@ -170,7 +173,8 @@ packer.startup(function()
       { 'nvim-lua/plenary.nvim' }
     },
     config = function()
-       require 'plugins.configs.telescope'
+      require 'plugins.configs.telescope'
+      require 'core.mappings'.telescope()
     end,
   }
 
@@ -193,6 +197,7 @@ packer.startup(function()
         'glepnir/lspsaga.nvim',
         config = function()
           require 'plugins.configs.saga'
+          require 'core.mappings'.saga()
         end
       },
     },
@@ -204,7 +209,7 @@ packer.startup(function()
     'hrsh7th/nvim-cmp',
     requires = {
       { 'L3MON4D3/LuaSnip' },
-      { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
+      { 'saadparwaiz1/cmp_luasnip', after = 'LuaSnip' },
       { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
       { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
       { 'hrsh7th/cmp-path', after = 'nvim-cmp' }
@@ -219,7 +224,7 @@ packer.startup(function()
     'windwp/nvim-autopairs',
     after = 'nvim-cmp',
     config = function()
-       require 'plugins.configs.autopairs'
+      require 'plugins.configs.autopairs'
     end,
   }
 

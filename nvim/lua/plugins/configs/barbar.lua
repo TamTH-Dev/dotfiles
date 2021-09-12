@@ -1,50 +1,4 @@
-local utils = require "core.utils"
-
-local map = utils.map
-local cmd = vim.cmd
 local global = vim.g
-
--- Color
-local colors = {
-  bg = '#24283b',
-  fg = '#c0caf5',
-  red = '#f7768e',
-  green = '#9ece6a',
-  orange = '#ff9e64',
-  blue = '#7aa2f7',
-  magenta = '#bb9af7',
-  cyan = '#7dcfff',
-  yellow = '#e0af68',
-}
-
--- Move to previous/next
-map('n', '<leader><S-Tab>', ':BufferPrevious<cr>')
-map('n', '<leader><Tab>', ':BufferNext<cr>')
-
--- Re-order to previous/next
-map('n', '<leader><', ':BufferMovePrevious<cr>')
-map('n', '<leader>>', ' :BufferMoveNext<cr>')
-
--- Goto buffer in position...
-map('n', '<leader>1', ':BufferGoto 1<cr>')
-map('n', '<leader>2', ':BufferGoto 2<cr>')
-map('n', '<leader>3', ':BufferGoto 3<cr>')
-map('n', '<leader>4', ':BufferGoto 4<cr>')
-map('n', '<leader>5', ':BufferGoto 5<cr>')
-map('n', '<leader>6', ':BufferGoto 6<cr>')
-map('n', '<leader>7', ':BufferGoto 7<cr>')
-map('n', '<leader>8', ':BufferGoto 8<cr>')
-map('n', '<leader>9', ':BufferGoto 9<cr>')
-map('n', '<leader>10', ':BufferGoto 10<cr>')
-map('n', '<leader>0', ':BufferLast<cr>')
-
--- Close all buffer but accept the current one
-map('n', '<leader>cb', ':BufferCloseAllButCurrent<cr>')
-
--- Sort buffer
-map('n', '<leader>bb', ':BufferOrderByBufferNumber<cr>')
-map('n', '<leader>bd', ':BufferOrderByDirectory<cr>')
-map('n', '<leader>bl', ':BufferOrderByLanguage<cr>')
 
 -- Set barbar's opts
 global.bufferline = {
@@ -112,11 +66,3 @@ global.bufferline = {
   -- where X is the buffer number. But only a static string is accepted here.
   no_name_title = 'New buffer',
 }
-
-cmd('highlight BufferCurrentSign guifg='..colors.red)
-cmd('highlight BufferCurrentMod guifg='..colors.blue)
-cmd('highlight BufferVisible guifg='..colors.fg..' guibg='..colors.bg)
-cmd('highlight BufferVisibleIndex guifg='..colors.fg..' guibg='..colors.bg)
-cmd('highlight BufferVisibleMod guifg='..colors.fg..' guibg='..colors.bg)
-cmd('highlight BufferVisibleSign guifg='..colors.magenta..' guibg='..colors.bg)
-cmd('highlight BufferVisibleTarget guifg='..colors.fg..' guibg='..colors.bg)

@@ -14,20 +14,6 @@ local css_lsp = require 'languages/css_lsp'
 
 local lsp = vim.lsp
 local api = vim.api
-local cmd = vim.cmd
-
--- Colors
-local colors = {
-  bg = '#24283b',
-  fg = '#c0caf5',
-  red = '#f7768e',
-  green = '#9ece6a',
-  orange = '#ff9e64',
-  blue = '#7aa2f7',
-  magenta = '#bb9af7',
-  cyan = '#7dcfff',
-  yellow = '#e0af68',
-}
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -107,9 +93,3 @@ lsp.handlers['textDocument/publishDiagnostics'] = lsp.with(
         severity_sort = true,
     }
 )
-
--- Change highlight color of diagnostics
-cmd('highlight LspDiagnosticsDefaultError guifg='..colors.red)
-cmd('highlight LspDiagnosticsDefaultWarning guifg='..colors.orange)
-cmd('highlight LspDiagnosticsDefaultInformation guifg='..colors.magenta)
-cmd('highlight LspDiagnosticsDefaultHint guifg='..colors.blue)

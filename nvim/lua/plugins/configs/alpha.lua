@@ -1,8 +1,6 @@
 local is_alpha_loaded, alpha = pcall(require, 'alpha')
 if not is_alpha_loaded then return end
 
-local cmd = vim.cmd
-
 local header = {
   type = 'text',
   val = {
@@ -24,7 +22,7 @@ local header = {
   }
 }
 
-local handler = io.popen('fd -d 2 . $HOME"/.local/share/nvim/site/pack/packer" | head -n -2 | wc -l | tr -d "\n" ')
+local handler = io.popen('fd -d 1 . $HOME"/.local/share/nvim/site/pack/packer/start" | wc -l | tr -d "\n" ')
 local plugins_total = handler:read('*a')
 handler:close()
 local plugins_total_stats = {
@@ -32,7 +30,7 @@ local plugins_total_stats = {
   val = 'Madvim has loaded '..plugins_total..' plugins ',
   opts = {
     position = 'center',
-    hl = 'DevIconSln',
+    hl = 'LspSagaCodeActionContent',
   }
 }
 
@@ -46,7 +44,7 @@ local function set_button(sc, text, keybind)
     width = 24,
     align_shortcut = 'right',
     hl_shortcut = 'Special',
-    hl = 'DevIconSass',
+    hl = 'LspSagaSignatureHelpBorder',
   }
   if keybind then
     opts.keymap = { 'n', sc_, keybind, { noremap = true, silent = true } }
@@ -81,7 +79,7 @@ local footer = {
   val = 'A clever person solves a problem.\n    A wise person AVOIDS it.',
   opts = {
     position = 'center',
-    hl = 'Constant',
+    hl = 'LspDiagnosticsDefaultWarning',
   }
 }
 
@@ -94,7 +92,7 @@ local section = {
 
 local opts = {
   layout = {
-    { type = 'padding', val = 1 },
+    { type = 'padding', val = 2 },
     section.header,
     { type = 'padding', val = 1 },
     section.plugins_total_stats,
@@ -112,4 +110,4 @@ local opts = {
 alpha.setup(opts)
 
 -- -- Disable folding on alpha buffer
-cmd('autocmd FileType alpha setlocal nofoldenable')
+vim.cmd('autocmd FileType alpha setlocal nofoldenable')

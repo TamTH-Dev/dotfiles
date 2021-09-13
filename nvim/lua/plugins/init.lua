@@ -1,7 +1,5 @@
 local is_packer_init_loaded, packer = pcall(require, 'plugins.packerInit')
-if not is_packer_init_loaded then
-   return false
-end
+if not is_packer_init_loaded then return end
 
 local use = packer.use
 packer.startup(function()
@@ -44,15 +42,17 @@ packer.startup(function()
 
   -- Buffer bar
   use {
-    'romgrk/barbar.nvim',
+    'akinsho/bufferline.nvim',
     after = 'nvim-web-devicons',
     requires = {
       'kyazdani42/nvim-web-devicons'
     },
-    setup = function()
-      require 'plugins.configs.barbar'
-      require 'core.mappings'.barbar()
+    config = function()
+      require 'plugins.configs.bufferline'
     end,
+    setup = function()
+      require 'plugins.mappings'.bufferline()
+    end
   }
 
   -- File explorer
@@ -64,8 +64,8 @@ packer.startup(function()
       'kyazdani42/nvim-web-devicons'
     },
     setup = function()
-       require 'plugins.configs.nvimtree'
-       require 'core.mappings'.nvimtree()
+      require 'plugins.configs.nvimtree'
+      require 'plugins.mappings'.nvimtree()
     end,
   }
 
@@ -98,6 +98,14 @@ packer.startup(function()
     config = function()
       require 'plugins.configs.colorizer'
     end,
+  }
+
+  use {
+    'lukas-reineke/indent-blankline.nvim',
+    event = 'BufEnter',
+    setup = function()
+      require 'plugins.configs.indent_blankline'
+    end
   }
 
   -- Symbols outline
@@ -142,7 +150,7 @@ packer.startup(function()
   -- Commenter
   use {
     'terrortylor/nvim-comment',
-    keys = { '<leader>cl', '<leader>c' },
+    event = 'BufEnter',
     config = function()
       require 'plugins.configs.comment'
     end,
@@ -196,8 +204,8 @@ packer.startup(function()
       require 'plugins.configs.telescope'
     end,
     setup = function()
-      require 'core.mappings'.telescope()
-    end
+      require 'plugins.mappings'.telescope()
+    end,
   }
 
   -- Formatter
@@ -224,7 +232,7 @@ packer.startup(function()
       require 'plugins.configs.saga'
     end,
     setup = function()
-      require 'core.mappings'.saga()
+      require 'plugins.mappings'.saga()
     end,
   }
 

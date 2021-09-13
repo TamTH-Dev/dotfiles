@@ -14,6 +14,7 @@ M.init = function()
   -- Style if colorscheme is tokyonight
   if theme == 'tokyonight' then
     global.tokyonight_style = ui.style
+    global.tokyonight_sidebars = { 'qf', 'vista_kind', 'terminal', 'packer' }
   end
   -- Set colorscheme
   cmd('colorscheme '..theme)

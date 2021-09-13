@@ -11,6 +11,9 @@ packer.startup(function()
     event = 'VimEnter',
   }
 
+  -- Speed up loading Lua modules
+  use { 'lewis6991/impatient.nvim', rocks = 'mpack' }
+
   -- Colorscheme
   use {
     'folke/tokyonight.nvim',
@@ -46,7 +49,7 @@ packer.startup(function()
     requires = {
       'kyazdani42/nvim-web-devicons'
     },
-    config = function()
+    setup = function()
       require 'plugins.configs.barbar'
       require 'core.mappings'.barbar()
     end,
@@ -56,10 +59,11 @@ packer.startup(function()
   use {
     'kyazdani42/nvim-tree.lua',
     after = 'nvim-web-devicons',
+    cmd = { 'NvimTreeToggle', 'NvimTreeOpen' },
     requires = {
       'kyazdani42/nvim-web-devicons'
     },
-    config = function()
+    setup = function()
        require 'plugins.configs.nvimtree'
        require 'core.mappings'.nvimtree()
     end,
@@ -83,7 +87,9 @@ packer.startup(function()
   }
   use {
     'nvim-treesitter/playground',
-    after = 'nvim-treesitter'
+    cmd = 'TSPlaygroundToggle',
+    after = 'nvim-treesitter',
+    opt = true,
   }
 
   -- Color
@@ -136,7 +142,7 @@ packer.startup(function()
   -- Commenter
   use {
     'terrortylor/nvim-comment',
-    event = 'BufEnter',
+    keys = { '<leader>cl', '<leader>c' },
     config = function()
       require 'plugins.configs.comment'
     end,
@@ -145,8 +151,9 @@ packer.startup(function()
   -- Auto close (X)HTML tags
   use {
     'alvan/vim-closetag',
-    event = 'BufEnter',
-    config = function()
+    event = 'InsertEnter',
+    ft = { 'html', 'javascript', 'javascriptreact', 'vue', 'typescript', 'typescriptreact' },
+    setup = function()
       local global = vim.g
       -- File extensions where this plugin is enabled
       global.closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.ts,*.vue'
@@ -160,13 +167,14 @@ packer.startup(function()
   -- Surround parentheses, brackets, quotes, XML tags, and more
   use {
     'tpope/vim-surround',
-    event = 'BufEnter',
+    event = 'InsertEnter',
   }
 
   -- Emmet
   use {
     'mattn/emmet-vim',
-    event = 'BufEnter',
+    event = 'InsertEnter',
+    ft = { 'html', 'css', 'javascript', 'javascriptreact', 'vue', 'typescript', 'typescriptreact' },
     config = function()
       local global = vim.g
       -- Remap the default emmet's leader key
@@ -178,12 +186,18 @@ packer.startup(function()
   use {
     'nvim-telescope/telescope.nvim',
     requires = {
-      { 'nvim-lua/plenary.nvim' }
+      { 'nvim-lua/plenary.nvim' },
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        run = 'make',
+      },
     },
     config = function()
       require 'plugins.configs.telescope'
-      require 'core.mappings'.telescope()
     end,
+    setup = function()
+      require 'core.mappings'.telescope()
+    end
   }
 
   -- Formatter
@@ -212,13 +226,19 @@ packer.startup(function()
     end
   }
   use {
+    'L3MON4D3/LuaSnip',
+    event = 'InsertEnter',
+  }
+  use {
     'hrsh7th/nvim-cmp',
+    after = { 'LuaSnip' },
     requires = {
-      { 'L3MON4D3/LuaSnip' },
-      { 'saadparwaiz1/cmp_luasnip', after = 'LuaSnip' },
-      { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
-      { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
-      { 'hrsh7th/cmp-path', after = 'nvim-cmp' }
+      { 'saadparwaiz1/cmp_luasnip', after = { 'nvim-cmp', 'LuaSnip' }, opt = true },
+      { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp', opt = true },
+      { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', opt = true },
+      { 'hrsh7th/cmp-calc', after = 'nvim-cmp', opt = true },
+      { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', opt = true },
+      { 'hrsh7th/cmp-path', after = 'nvim-cmp', opt = true }
     },
     config = function()
       require 'plugins.configs.cmp'
@@ -229,6 +249,7 @@ packer.startup(function()
   use {
     'windwp/nvim-autopairs',
     after = 'nvim-cmp',
+    opt = true,
     config = function()
       require 'plugins.configs.autopairs'
     end,

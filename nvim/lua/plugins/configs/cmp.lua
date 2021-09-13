@@ -151,8 +151,10 @@ cmp.setup {
   sources = {
     { name = 'path' },
     { name = 'buffer' },
+    { name = 'calc' },
     { name = 'nvim_lsp' },
+    { name = 'nvim_lua' },
     { name = 'luasnip' },
-    { name = 'treesitter' }
+    { name = 'treesitter' },
   }
 }

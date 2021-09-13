@@ -68,14 +68,14 @@ local get_mode_color = function()
 end
 
 -- Short line list
-gl.short_line_list = { 'nvim-tree', 'packer' }
+gl.short_line_list = { 'NvimTree', 'packer' }
 
 -- Left section
 gls.left[1] = {
   EmptyBar = {
     provider = function()
       cmd('hi GalaxyEmptyBar guifg='..get_mode_color())
-      return '▋'
+      return '▊'
     end,
     highlight = { colors.red, colors.bg },
     separator = ' ',
@@ -95,12 +95,25 @@ gls.left[2] = {
         v = 'VISUAL',
         R = 'REPLACE',
       }
+      local icons = {
+        n = ' ',
+        i = ' ',
+        c = 'גּ ',
+        V = '﬏ ',
+        [''] = '﬏ ',
+        v = '﬏ ',
+        R = ' ',
+      }
       cmd('hi GalaxyViMode guifg='..get_mode_color())
       local alias_mode = alias[fn.mode()]
-      if alias_mode == nil then
+      local icon = icons[fn.mode()]
+      if not alias_mode then
         alias_mode = fn.mode()
       end
-      return alias_mode
+      if not icon then
+        icon = ''
+      end
+      return icon..alias_mode
     end,
     highlight = { colors.bg, colors.bg },
     separator = '  ',
@@ -159,7 +172,7 @@ gls.left[7] = {
   DiffAdd = {
     condition = is_git_workspace_showed,
     provider = 'DiffAdd',
-    icon = '  ',
+    icon = '  ',
     highlight = { colors.green, colors.bg }
   }
 }
@@ -168,7 +181,7 @@ gls.left[8] = {
   DiffModified = {
     condition = is_git_workspace_showed,
     provider = 'DiffModified',
-    icon = '  ',
+    icon = '  ',
     highlight = { colors.orange, colors.bg }
   }
 }
@@ -177,7 +190,7 @@ gls.left[9] = {
   DiffRemove = {
     condition = is_git_workspace_showed,
     provider = 'DiffRemove',
-    icon = '  ',
+    icon = '  ',
     highlight = { colors.red,colors.bg }
   }
 }
@@ -252,8 +265,6 @@ gls.right[3]= {
     provider = 'GetLspClient',
     icon = ' ',
     highlight = { colors.yellow, colors.bg },
-    -- separator = ' | ',
-    -- separator_highlight = { colors.fg, colors.bg }
   }
 }
 

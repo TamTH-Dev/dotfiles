@@ -71,10 +71,10 @@ packer.startup(function()
 
   -- Fancy start screen
   use {
-    'glepnir/dashboard-nvim',
-    config = function()
-      require 'plugins.configs.dashboard'
-    end,
+    'goolord/alpha-nvim',
+    config = function ()
+      require 'plugins.configs.alpha'
+    end
   }
 
   -- Parser
@@ -222,9 +222,13 @@ packer.startup(function()
     'glepnir/lspsaga.nvim',
     config = function()
       require 'plugins.configs.saga'
+    end,
+    setup = function()
       require 'core.mappings'.saga()
-    end
+    end,
   }
+
+  -- Completion plugins
   use {
     'L3MON4D3/LuaSnip',
     event = 'InsertEnter',
@@ -244,6 +248,25 @@ packer.startup(function()
       require 'plugins.configs.cmp'
     end
   }
+  -- use {
+  --   'ms-jpq/coq_nvim',
+  --   after = { 'coq.artifacts' },
+  --   branch = 'coq',
+  --   setup = function()
+  --     vim.g.coq_settings = { auto_start = false }
+  --   end,
+  --   config = function()
+  --     vim.g.coq_settings = { ['display.icons.mode'] = 'short', ['display.pum.kind_context'] = { '','' }, ['display.pum.source_context'] = { '' ,'' } }
+  --     if vim.o.ft ~= 'lua' and vim.o.ft ~= 'sql' and vim.o.ft ~= 'vim' then
+  --       vim.cmd('COQnow')
+  --     end
+  --   end
+  -- } -- main one
+  -- use {
+  --   'ms-jpq/coq.artifacts',
+  --   branch= 'artifacts',
+  --   event = 'InsertEnter',
+  -- } -- 9000+ Snippets
 
   -- Autopairs supporter
   use {

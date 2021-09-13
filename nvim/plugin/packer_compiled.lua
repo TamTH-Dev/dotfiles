@@ -75,6 +75,11 @@ _G.packer_plugins = {
     needs_bufread = false,
     path = "/home/madlife/.local/share/nvim/site/pack/packer/opt/LuaSnip"
   },
+  ["alpha-nvim"] = {
+    config = { "\27LJ\1\0025\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\26plugins.configs.alpha\frequire\0" },
+    loaded = true,
+    path = "/home/madlife/.local/share/nvim/site/pack/packer/start/alpha-nvim"
+  },
   ["barbar.nvim"] = {
     load_after = {},
     loaded = true,
@@ -136,11 +141,6 @@ _G.packer_plugins = {
     needs_bufread = false,
     path = "/home/madlife/.local/share/nvim/site/pack/packer/opt/cmp_luasnip"
   },
-  ["dashboard-nvim"] = {
-    config = { "\27LJ\1\0029\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\30plugins.configs.dashboard\frequire\0" },
-    loaded = true,
-    path = "/home/madlife/.local/share/nvim/site/pack/packer/start/dashboard-nvim"
-  },
   ["emmet-vim"] = {
     config = { "\27LJ\1\2=\0\0\2\0\4\0\0054\0\0\0007\0\1\0%\1\3\0:\1\2\0G\0\1\0\n<C-y>\26user_emmet_leader_key\6g\bvim\0" },
     loaded = false,
@@ -164,9 +164,10 @@ _G.packer_plugins = {
     path = "/home/madlife/.local/share/nvim/site/pack/packer/start/impatient.nvim"
   },
   ["lspsaga.nvim"] = {
-    config = { "\27LJ\1\2[\0\0\2\0\4\0\t4\0\0\0%\1\1\0>\0\2\0014\0\0\0%\1\2\0>\0\2\0027\0\3\0>\0\1\1G\0\1\0\tsaga\18core.mappings\25plugins.configs.saga\frequire\0" },
+    config = { "\27LJ\1\0024\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\25plugins.configs.saga\frequire\0" },
     loaded = true,
-    path = "/home/madlife/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
+    needs_bufread = false,
+    path = "/home/madlife/.local/share/nvim/site/pack/packer/opt/lspsaga.nvim"
   },
   neoformat = {
     commands = { "Neoformat" },
@@ -224,7 +225,7 @@ _G.packer_plugins = {
     only_config = true
   },
   ["nvim-web-devicons"] = {
-    after = { "galaxyline.nvim", "nvim-tree.lua", "barbar.nvim" },
+    after = { "barbar.nvim", "galaxyline.nvim", "nvim-tree.lua" },
     config = { "\27LJ\1\0025\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\26plugins.configs.icons\frequire\0" },
     load_after = {},
     loaded = true,
@@ -305,22 +306,29 @@ time([[packadd for telescope.nvim]], false)
 time([[Setup for vim-closetag]], true)
 try_loadstring("\27LJ\1\2À\1\0\0\2\0\a\0\t4\0\0\0007\0\1\0%\1\3\0:\1\2\0%\1\5\0:\1\4\0'\1\1\0:\1\6\0G\0\1\0%closetag_emptyTags_caseSensitive\31*.xhtml,*.jsx,*.tsx,*.vuex\29closetag_xhtml_filenames+*.html,*.xhtml,*.phtml,*.js,*.ts,*.vue\23closetag_filenames\6g\bvim\0", "setup", "vim-closetag")
 time([[Setup for vim-closetag]], false)
--- Setup for: nvim-tree.lua
-time([[Setup for nvim-tree.lua]], true)
-try_loadstring("\27LJ\1\2c\0\0\2\0\4\0\t4\0\0\0%\1\1\0>\0\2\0014\0\0\0%\1\2\0>\0\2\0027\0\3\0>\0\1\1G\0\1\0\rnvimtree\18core.mappings\29plugins.configs.nvimtree\frequire\0", "setup", "nvim-tree.lua")
-time([[Setup for nvim-tree.lua]], false)
+-- Setup for: lspsaga.nvim
+time([[Setup for lspsaga.nvim]], true)
+try_loadstring("\27LJ\1\2:\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\tsaga\18core.mappings\frequire\0", "setup", "lspsaga.nvim")
+time([[Setup for lspsaga.nvim]], false)
+time([[packadd for lspsaga.nvim]], true)
+vim.cmd [[packadd lspsaga.nvim]]
+time([[packadd for lspsaga.nvim]], false)
 -- Setup for: barbar.nvim
 time([[Setup for barbar.nvim]], true)
 try_loadstring("\27LJ\1\2_\0\0\2\0\4\0\t4\0\0\0%\1\1\0>\0\2\0014\0\0\0%\1\2\0>\0\2\0027\0\3\0>\0\1\1G\0\1\0\vbarbar\18core.mappings\27plugins.configs.barbar\frequire\0", "setup", "barbar.nvim")
 time([[Setup for barbar.nvim]], false)
+-- Setup for: nvim-tree.lua
+time([[Setup for nvim-tree.lua]], true)
+try_loadstring("\27LJ\1\2c\0\0\2\0\4\0\t4\0\0\0%\1\1\0>\0\2\0014\0\0\0%\1\2\0>\0\2\0027\0\3\0>\0\1\1G\0\1\0\rnvimtree\18core.mappings\29plugins.configs.nvimtree\frequire\0", "setup", "nvim-tree.lua")
+time([[Setup for nvim-tree.lua]], false)
 -- Setup for: vim-multiple-cursors
 time([[Setup for vim-multiple-cursors]], true)
 try_loadstring("\27LJ\1\2¥\2\0\0\2\0\14\0\0174\0\0\0007\0\1\0'\1\0\0:\1\2\0%\1\4\0:\1\3\0%\1\6\0:\1\5\0%\1\4\0:\1\a\0%\1\t\0:\1\b\0%\1\v\0:\1\n\0%\1\r\0:\1\f\0G\0\1\0\n<Esc>\26multi_cursor_quit_key\n<C-x>\26multi_cursor_skip_key\n<C-p>\26multi_cursor_prev_key\26multi_cursor_next_key\n<A-s>%multi_cursor_select_all_word_key\n<C-s> multi_cursor_start_word_key%multi_cursor_use_default_mapping\6g\bvim\0", "setup", "vim-multiple-cursors")
 time([[Setup for vim-multiple-cursors]], false)
--- Config for: dashboard-nvim
-time([[Config for dashboard-nvim]], true)
-try_loadstring("\27LJ\1\0029\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\30plugins.configs.dashboard\frequire\0", "config", "dashboard-nvim")
-time([[Config for dashboard-nvim]], false)
+-- Config for: tokyonight.nvim
+time([[Config for tokyonight.nvim]], true)
+try_loadstring("\27LJ\1\0023\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\tinit\vcolors\frequire\0", "config", "tokyonight.nvim")
+time([[Config for tokyonight.nvim]], false)
 -- Config for: nvim-lspconfig
 time([[Config for nvim-lspconfig]], true)
 try_loadstring("\27LJ\1\0023\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\24plugins.configs.lsp\frequire\0", "config", "nvim-lspconfig")
@@ -331,7 +339,7 @@ try_loadstring("\27LJ\1\0028\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\29plugi
 time([[Config for gitsigns.nvim]], false)
 -- Config for: lspsaga.nvim
 time([[Config for lspsaga.nvim]], true)
-try_loadstring("\27LJ\1\2[\0\0\2\0\4\0\t4\0\0\0%\1\1\0>\0\2\0014\0\0\0%\1\2\0>\0\2\0027\0\3\0>\0\1\1G\0\1\0\tsaga\18core.mappings\25plugins.configs.saga\frequire\0", "config", "lspsaga.nvim")
+try_loadstring("\27LJ\1\0024\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\25plugins.configs.saga\frequire\0", "config", "lspsaga.nvim")
 time([[Config for lspsaga.nvim]], false)
 -- Config for: nvim-colorizer.lua
 time([[Config for nvim-colorizer.lua]], true)
@@ -345,10 +353,10 @@ time([[Config for telescope.nvim]], false)
 time([[Config for nvim-treesitter]], true)
 try_loadstring("\27LJ\1\2:\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\31plugins.configs.treesitter\frequire\0", "config", "nvim-treesitter")
 time([[Config for nvim-treesitter]], false)
--- Config for: tokyonight.nvim
-time([[Config for tokyonight.nvim]], true)
-try_loadstring("\27LJ\1\0023\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\tinit\vcolors\frequire\0", "config", "tokyonight.nvim")
-time([[Config for tokyonight.nvim]], false)
+-- Config for: alpha-nvim
+time([[Config for alpha-nvim]], true)
+try_loadstring("\27LJ\1\0025\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\26plugins.configs.alpha\frequire\0", "config", "alpha-nvim")
+time([[Config for alpha-nvim]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd nvim-web-devicons ]]
@@ -367,21 +375,21 @@ time([[Sequenced loading]], false)
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Gdiff lua require("packer.load")({'vim-fugitive'}, { cmd = "Gdiff", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file NvimTreeToggle lua require("packer.load")({'nvim-tree.lua'}, { cmd = "NvimTreeToggle", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
+pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Gwrite lua require("packer.load")({'vim-fugitive'}, { cmd = "Gwrite", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file NvimTreeOpen lua require("packer.load")({'nvim-tree.lua'}, { cmd = "NvimTreeOpen", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Neoformat lua require("packer.load")({'neoformat'}, { cmd = "Neoformat", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Gvdiffsplit lua require("packer.load")({'vim-fugitive'}, { cmd = "Gvdiffsplit", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Gdiffsplit lua require("packer.load")({'vim-fugitive'}, { cmd = "Gdiffsplit", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file TSPlaygroundToggle lua require("packer.load")({'playground'}, { cmd = "TSPlaygroundToggle", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Git lua require("packer.load")({'vim-fugitive'}, { cmd = "Git", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Gw lua require("packer.load")({'vim-fugitive'}, { cmd = "Gw", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Gwrite lua require("packer.load")({'vim-fugitive'}, { cmd = "Gwrite", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
+pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file NvimTreeToggle lua require("packer.load")({'nvim-tree.lua'}, { cmd = "NvimTreeToggle", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
+pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Git lua require("packer.load")({'vim-fugitive'}, { cmd = "Git", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
 time([[Defining lazy-load commands]], false)
 
 -- Keymap lazy-loads
 time([[Defining lazy-load keymaps]], true)
-vim.cmd [[noremap <silent> <leader>c <cmd>lua require("packer.load")({'nvim-comment'}, { keys = "<lt>leader>c", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[noremap <silent> <leader>cl <cmd>lua require("packer.load")({'nvim-comment'}, { keys = "<lt>leader>cl", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> <leader>c <cmd>lua require("packer.load")({'nvim-comment'}, { keys = "<lt>leader>c", prefix = "" }, _G.packer_plugins)<cr>]]
 time([[Defining lazy-load keymaps]], false)
 
 vim.cmd [[augroup packer_load_aucmds]]
@@ -399,7 +407,7 @@ time([[Defining lazy-load filetype autocommands]], false)
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
 vim.cmd [[au VimEnter * ++once lua require("packer.load")({'packer.nvim'}, { event = "VimEnter *" }, _G.packer_plugins)]]
-vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'emmet-vim', 'vim-closetag', 'vim-surround', 'LuaSnip'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'vim-surround', 'emmet-vim', 'vim-closetag', 'LuaSnip'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
 vim.cmd [[au BufEnter * ++once lua require("packer.load")({'vim-multiple-cursors'}, { event = "BufEnter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")

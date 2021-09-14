@@ -5,7 +5,7 @@ local cmd = vim.cmd
 local M = {}
 
 -- If theme given, load given theme if given, otherwise nvchad_theme
-M.init = function()
+function M.init()
   local ui = utils.load_config().ui
   local theme = ui.theme
   local is_theme_loaded = pcall(require, theme)
@@ -30,7 +30,7 @@ end
 
 -- Returns a table of colors for given or current theme
 -- TODO: Research more
-M.get = function(theme)
+function M.get(theme)
    if not theme then
       theme = vim.g.default_theme
    end

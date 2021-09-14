@@ -3,6 +3,9 @@ if not is_packer_init_loaded then return end
 
 local use = packer.use
 packer.startup(function()
+  -- Import plugins config
+  local config = require 'plugins.config'
+
   -- Packer can manage itself
   use {
     'wbthomason/packer.nvim',
@@ -16,16 +19,15 @@ packer.startup(function()
   use {
     'folke/tokyonight.nvim',
     config = function()
-       require('colors').init()
+      require 'colors'.init()
     end,
   }
 
+  -- Icons suppliers for Madvim
   use {
     'kyazdani42/nvim-web-devicons',
     after = 'tokyonight.nvim',
-    config = function()
-       require 'plugins.configs.icons'
-    end,
+    config = config.icons(),
   }
 
   -- Status line
@@ -35,21 +37,17 @@ packer.startup(function()
     requires = {
       'kyazdani42/nvim-web-devicons'
     },
-    config = function()
-      require 'plugins.configs.galaxyline'
-    end,
+    config = config.galaxyline(),
   }
 
-  -- Buffer bar
+  -- Buffer management bar
   use {
     'akinsho/bufferline.nvim',
     after = 'nvim-web-devicons',
     requires = {
       'kyazdani42/nvim-web-devicons'
     },
-    config = function()
-      require 'plugins.configs.bufferline'
-    end,
+    config = config.bufferline(),
     setup = function()
       require 'plugins.mappings'.bufferline()
     end
@@ -72,18 +70,14 @@ packer.startup(function()
   -- Fancy start screen
   use {
     'goolord/alpha-nvim',
-    config = function ()
-      require 'plugins.configs.alpha'
-    end
+    config = config.alpha(),
   }
 
   -- Parser
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    config = function()
-      require 'plugins.configs.treesitter'
-    end,
+    config = config.treesitter(),
   }
   use {
     'nvim-treesitter/playground',
@@ -95,9 +89,7 @@ packer.startup(function()
   -- Color
   use {
     'norcalli/nvim-colorizer.lua',
-    config = function()
-      require 'plugins.configs.colorizer'
-    end,
+    config = config.colorizer(),
   }
 
   use {
@@ -126,9 +118,7 @@ packer.startup(function()
   use {
     'lewis6991/gitsigns.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
-    config = function()
-      require 'plugins.configs.gitsigns'
-    end,
+    config = config.gitsigns(),
   }
 
   -- Multiple cursors
@@ -151,9 +141,7 @@ packer.startup(function()
   use {
     'terrortylor/nvim-comment',
     event = 'BufEnter',
-    config = function()
-      require 'plugins.configs.comment'
-    end,
+    config = config.comment(),
   }
 
   -- Auto close (X)HTML tags
@@ -200,9 +188,7 @@ packer.startup(function()
       --   run = 'make',
       -- },
     },
-    config = function()
-      require 'plugins.configs.telescope'
-    end,
+    config = config.telescope(),
     setup = function()
       require 'plugins.mappings'.telescope()
     end,
@@ -222,9 +208,7 @@ packer.startup(function()
   -- LSP supporter
   use {
     'neovim/nvim-lspconfig',
-    config = function()
-      require 'plugins.configs.lsp'
-    end,
+    config = config.lsp(),
   }
   use {
     'ray-x/lsp_signature.nvim',
@@ -233,9 +217,7 @@ packer.startup(function()
   use {
     'glepnir/lspsaga.nvim',
     after = 'nvim-lspconfig',
-    config = function()
-      require 'plugins.configs.saga'
-    end,
+    config = config.saga(),
     setup = function()
       require 'plugins.mappings'.saga()
     end,
@@ -257,9 +239,7 @@ packer.startup(function()
       { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-path', after = 'nvim-cmp', opt = true }
     },
-    config = function()
-      require 'plugins.configs.cmp'
-    end
+    config = config.cmp(),
   }
 
   -- use {
@@ -287,9 +267,7 @@ packer.startup(function()
     'windwp/nvim-autopairs',
     after = 'nvim-cmp',
     opt = true,
-    config = function()
-      require 'plugins.configs.autopairs'
-    end,
+    config = config.autopairs(),
   }
 
   -- Measure startup time

@@ -51,7 +51,6 @@ lsp.handlers['textDocument/publishDiagnostics'] = lsp.with(
     {
         signs = true,
         virtual_text = {
-          -- prefix = '',
           prefix = '😈',
           spacing = 0,
         },

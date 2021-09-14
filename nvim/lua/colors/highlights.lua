@@ -59,20 +59,6 @@ bg('LspDiagnosticsVirtualTextHint', 'default')
 -- Indent_blankline
 fg('IndentBlanklineContextChar', colors.yellow)
 
--- Gitsigns
-bg('GitSignsAddLn', 'default')
-bg('GitSignsAdd', 'default')
-bg('GitSignsChangeLn', 'default')
-bg('GitSignsChange', 'default')
-bg('GitSignsDeleteLn', 'default')
-bg('GitSignsDelete', 'default')
-
-fg('GitSignsAddLn', 'default')
-fg('GitSignsAdd', 'default')
-fg('GitSignsChangeLn', 'default')
-fg('GitSignsDeleteLn', 'default')
-fg('GitSignsChange', 'default')
-
 -- Barbar
 -- fg('BufferCurrentSign', colors.red)
 -- fg('BufferCurrentMod', colors.blue)

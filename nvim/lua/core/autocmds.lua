@@ -4,7 +4,7 @@ local cmd = vim.cmd
 -- vim.cmd [[ autocmd BufEnter * if &buftype != 'terminal' | lcd %:p:h | endif ]]
 
 -- auto close file exploer when quiting incase a single buffer is left
-cmd([[ autocmd BufEnter * if (winnr('$') == 1 && &filetype == 'nvimtree') | q | endif ]])
+-- cmd([[ autocmd BufEnter * if (winnr('$') == 1 && &filetype == 'nvimtree') | q | endif ]])
 
 -- Set space for specific file types
 local set_spaces = function(file_type, space)

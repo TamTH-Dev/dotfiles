@@ -195,10 +195,10 @@ packer.startup(function()
     'nvim-telescope/telescope.nvim',
     requires = {
       { 'nvim-lua/plenary.nvim' },
-      {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        run = 'make',
-      },
+      -- {
+      --   'nvim-telescope/telescope-fzf-native.nvim',
+      --   run = 'make',
+      -- },
     },
     config = function()
       require 'plugins.configs.telescope'
@@ -227,7 +227,12 @@ packer.startup(function()
     end,
   }
   use {
+    'ray-x/lsp_signature.nvim',
+    after = 'nvim-lspconfig',
+  }
+  use {
     'glepnir/lspsaga.nvim',
+    after = 'nvim-lspconfig',
     config = function()
       require 'plugins.configs.saga'
     end,
@@ -256,6 +261,7 @@ packer.startup(function()
       require 'plugins.configs.cmp'
     end
   }
+
   -- use {
   --   'ms-jpq/coq_nvim',
   --   after = { 'coq.artifacts' },

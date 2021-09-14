@@ -39,10 +39,10 @@ telescope.setup {
         mirror = false,
       },
     },
-    file_sorter =  sorters.get_fuzzy_file,
+    file_sorter =  sorters.get_fzy_sorter,
     file_ignore_patterns = {},
     generic_sorter =  sorters.get_generic_fuzzy_sorter,
-    winblend = 0,
+    winblend = 10,
     border = {},
     borderchars = {'─', '│', '─', '│', '┌', '┐', '┘', '└'},
     -- borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
@@ -56,14 +56,14 @@ telescope.setup {
     qflist_previewer = previewers.vim_buffer_qflist.new,
     buffer_previewer_maker = previewers.buffer_previewer_maker
   },
-  extensions = {
-    fzf = {
-      fuzzy = true, -- false will only do exact matching
-      override_generic_sorter = true, -- override the generic sorter
-      override_file_sorter = true, -- override the file sorter
-      case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
-    },
-  }
+  -- extensions = {
+  --   fzf = {
+  --     fuzzy = true, -- false will only do exact matching
+  --     override_generic_sorter = true, -- override the generic sorter
+  --     override_file_sorter = true, -- override the file sorter
+  --     case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
+  --   },
+  -- }
 }
 
-telescope.load_extension('fzf')
+-- telescope.load_extension('fzf')

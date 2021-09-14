@@ -169,8 +169,15 @@ _G.packer_plugins = {
     needs_bufread = false,
     path = "/home/madlife/.local/share/nvim/site/pack/packer/opt/indent-blankline.nvim"
   },
+  ["lsp_signature.nvim"] = {
+    load_after = {},
+    loaded = true,
+    needs_bufread = false,
+    path = "/home/madlife/.local/share/nvim/site/pack/packer/opt/lsp_signature.nvim"
+  },
   ["lspsaga.nvim"] = {
     config = { "\27LJ\1\0024\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\25plugins.configs.saga\frequire\0" },
+    load_after = {},
     loaded = true,
     needs_bufread = false,
     path = "/home/madlife/.local/share/nvim/site/pack/packer/opt/lspsaga.nvim"
@@ -213,9 +220,9 @@ _G.packer_plugins = {
     path = "/home/madlife/.local/share/nvim/site/pack/packer/opt/nvim-comment"
   },
   ["nvim-lspconfig"] = {
-    config = { "\27LJ\1\0023\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\24plugins.configs.lsp\frequire\0" },
+    after = { "lsp_signature.nvim", "lspsaga.nvim" },
     loaded = true,
-    path = "/home/madlife/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
+    only_config = true
   },
   ["nvim-tree.lua"] = {
     commands = { "NvimTreeToggle", "NvimTreeOpen" },
@@ -256,10 +263,6 @@ _G.packer_plugins = {
   ["symbols-outline.nvim"] = {
     loaded = true,
     path = "/home/madlife/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim"
-  },
-  ["telescope-fzf-native.nvim"] = {
-    loaded = true,
-    path = "/home/madlife/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim"
   },
   ["telescope.nvim"] = {
     config = { "\27LJ\1\0029\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\30plugins.configs.telescope\frequire\0" },
@@ -315,9 +318,6 @@ time([[Setup for vim-closetag]], false)
 time([[Setup for lspsaga.nvim]], true)
 try_loadstring("\27LJ\1\2=\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\tsaga\21plugins.mappings\frequire\0", "setup", "lspsaga.nvim")
 time([[Setup for lspsaga.nvim]], false)
-time([[packadd for lspsaga.nvim]], true)
-vim.cmd [[packadd lspsaga.nvim]]
-time([[packadd for lspsaga.nvim]], false)
 -- Setup for: bufferline.nvim
 time([[Setup for bufferline.nvim]], true)
 try_loadstring("\27LJ\1\2C\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\15bufferline\21plugins.mappings\frequire\0", "setup", "bufferline.nvim")
@@ -334,10 +334,6 @@ time([[Setup for nvim-tree.lua]], false)
 time([[Setup for vim-multiple-cursors]], true)
 try_loadstring("\27LJ\1\2¥\2\0\0\2\0\14\0\0174\0\0\0007\0\1\0'\1\0\0:\1\2\0%\1\4\0:\1\3\0%\1\6\0:\1\5\0%\1\4\0:\1\a\0%\1\t\0:\1\b\0%\1\v\0:\1\n\0%\1\r\0:\1\f\0G\0\1\0\n<Esc>\26multi_cursor_quit_key\n<C-x>\26multi_cursor_skip_key\n<C-p>\26multi_cursor_prev_key\26multi_cursor_next_key\n<A-s>%multi_cursor_select_all_word_key\n<C-s> multi_cursor_start_word_key%multi_cursor_use_default_mapping\6g\bvim\0", "setup", "vim-multiple-cursors")
 time([[Setup for vim-multiple-cursors]], false)
--- Config for: nvim-colorizer.lua
-time([[Config for nvim-colorizer.lua]], true)
-try_loadstring("\27LJ\1\0029\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\30plugins.configs.colorizer\frequire\0", "config", "nvim-colorizer.lua")
-time([[Config for nvim-colorizer.lua]], false)
 -- Config for: tokyonight.nvim
 time([[Config for tokyonight.nvim]], true)
 try_loadstring("\27LJ\1\0023\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\tinit\vcolors\frequire\0", "config", "tokyonight.nvim")
@@ -346,10 +342,10 @@ time([[Config for tokyonight.nvim]], false)
 time([[Config for gitsigns.nvim]], true)
 try_loadstring("\27LJ\1\0028\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\29plugins.configs.gitsigns\frequire\0", "config", "gitsigns.nvim")
 time([[Config for gitsigns.nvim]], false)
--- Config for: lspsaga.nvim
-time([[Config for lspsaga.nvim]], true)
-try_loadstring("\27LJ\1\0024\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\25plugins.configs.saga\frequire\0", "config", "lspsaga.nvim")
-time([[Config for lspsaga.nvim]], false)
+-- Config for: nvim-colorizer.lua
+time([[Config for nvim-colorizer.lua]], true)
+try_loadstring("\27LJ\1\0029\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\30plugins.configs.colorizer\frequire\0", "config", "nvim-colorizer.lua")
+time([[Config for nvim-colorizer.lua]], false)
 -- Config for: telescope.nvim
 time([[Config for telescope.nvim]], true)
 try_loadstring("\27LJ\1\0029\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\30plugins.configs.telescope\frequire\0", "config", "telescope.nvim")
@@ -368,6 +364,12 @@ try_loadstring("\27LJ\1\0025\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\26plugi
 time([[Config for alpha-nvim]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
+vim.cmd [[ packadd lspsaga.nvim ]]
+
+-- Config for: lspsaga.nvim
+try_loadstring("\27LJ\1\0024\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\25plugins.configs.saga\frequire\0", "config", "lspsaga.nvim")
+
+vim.cmd [[ packadd lsp_signature.nvim ]]
 vim.cmd [[ packadd nvim-web-devicons ]]
 
 -- Config for: nvim-web-devicons

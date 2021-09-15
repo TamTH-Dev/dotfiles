@@ -5,6 +5,9 @@ function M.alpha()
     local is_alpha_loaded, alpha = pcall(require, 'alpha')
     if not is_alpha_loaded then return end
 
+    local api = vim.api
+    local cmd = vim.cmd
+
     local header = {
       type = 'text',
       val = {
@@ -57,8 +60,8 @@ function M.alpha()
         type = 'button',
         val = text,
         on_press = function()
-          local key = vim.api.nvim_replace_termcodes(sc_, true, false, true)
-          vim.api.nvim_feedkeys(key, 'normal', false)
+          local key = api.nvim_replace_termcodes(sc_, true, false, true)
+          api.nvim_feedkeys(key, 'normal', false)
         end,
         opts = opts,
       }
@@ -114,7 +117,7 @@ function M.alpha()
     alpha.setup(opts)
 
     -- -- Disable folding on alpha buffer
-    vim.cmd('autocmd FileType alpha setlocal nofoldenable')
+    cmd('autocmd FileType alpha setlocal nofoldenable')
   end
 end
 
@@ -140,6 +143,8 @@ function M.bufferline()
     local is_bufferline_loaded, bufferline =  pcall(require, 'bufferline')
     if not is_bufferline_loaded then return end
 
+    local fn = vim.fn
+
     bufferline.setup {
       options = {
         numbers = 'none',
@@ -157,7 +162,7 @@ function M.bufferline()
         name_formatter = function(buf)  -- buf contains a 'name', 'path' and 'bufnr'
           -- remove extension from markdown files for example
           if buf.name:match('%.md') then
-            return vim.fn.fnamemodify(buf.name)
+            return fn.fnamemodify(buf.name)
           end
         end,
         max_name_length = 14,
@@ -191,6 +196,7 @@ function M.cmp()
 
     local api = vim.api
     local fn = vim.fn
+    local opt = vim.o
 
     local WIDE_HEIGHT = 40
 
@@ -224,8 +230,8 @@ function M.cmp()
     }
 
     local check_back_space = function()
-      local col = vim.fn.col "." - 1
-      return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+      local col = fn.col "." - 1
+      return col == 0 or fn.getline("."):sub(col, col):match "%s"
     end
 
     local replace_termcodes = function(str)
@@ -253,8 +259,8 @@ function M.cmp()
       documentation = {
         border = { '', '', '', ' ', '', '', '', ' ' },
         winhighlight = 'NormalFloat:CmpDocumentation,FloatBorder:CmpDocumentationBorder',
-        maxwidth = math.floor((WIDE_HEIGHT * 2) * (vim.o.columns / (WIDE_HEIGHT * 2 * 16 / 9))),
-        maxheight = math.floor(WIDE_HEIGHT * (WIDE_HEIGHT / vim.o.lines)),
+        maxwidth = math.floor((WIDE_HEIGHT * 2) * (opt.columns / (WIDE_HEIGHT * 2 * 16 / 9))),
+        maxheight = math.floor(WIDE_HEIGHT * (WIDE_HEIGHT / opt.lines)),
       },
       confirmation = {
         default_behavior = types.cmp.ConfirmBehavior.Insert,
@@ -286,7 +292,7 @@ function M.cmp()
           elseif luasnip.expand_or_jumpable() then
             fn.feedkeys(replace_termcodes('<Plug>luasnip-expand-or-jump'), '')
           elseif check_back_space() then
-            vim.fn.feedkeys(replace_termcodes('<Tab>'), 'n')
+            fn.feedkeys(replace_termcodes('<Tab>'), 'n')
           else
             fallback()
           end
@@ -427,13 +433,13 @@ function M.galaxyline()
 
     local is_buffer_number_valid = function()
       local buffers = {}
-      for _,val in ipairs(vim.fn.range(1,vim.fn.bufnr('$'))) do
-        if vim.fn.bufexists(val) == 1 and vim.fn.buflisted(val) == 1 then
+      for _,val in ipairs(fn.range(1,fn.bufnr('$'))) do
+        if fn.bufexists(val) == 1 and fn.buflisted(val) == 1 then
           table.insert(buffers,val)
         end
       end
       for _, nr in ipairs(buffers) do
-        if nr == vim.fn.bufnr('') then
+        if nr == fn.bufnr('') then
           return true
         end
       end
@@ -1036,313 +1042,112 @@ end
 
 function M.lsp()
   return function()
-    local is_lsp_loaded, nvim_lsp = pcall(require, 'lspconfig')
-    local is_util_loaded, util = pcall(require, 'lspconfig/util')
-    if not (is_lsp_loaded or is_util_loaded) then return end
+    local is_lspinstall_loaded, lspinstall = pcall(require, 'lspinstall')
+    local is_lspconfig_loaded, lspconfig = pcall(require, 'lspconfig')
+    if not (is_lspinstall_loaded or is_lspconfig_loaded) then return end
 
-    local lsp = vim.lsp
     local api = vim.api
+    local cmd = vim.cmd
+    local lsp = vim.lsp
+    local fn = vim.fn
+    local split = vim.split
 
-    lsp.handlers['textDocument/publishDiagnostics'] = lsp.with(
-        lsp.diagnostic.on_publish_diagnostics,
-        {
-            signs = true,
-            virtual_text = {
-              prefix = '😈',
-              spacing = 0,
-            },
-            underline = true,
-            severity_sort = true,
-        }
-    )
-
-    -- Use an on_attach function to only map the following keys
-    -- after the language server attaches to the current buffer
-    local on_attach = function(_, bufnr)
-       require 'lsp_signature'.on_attach({
-        bind = true, -- This is mandatory, otherwise border config won't get registered.
-        handler_opts = {
-          border = 'single',
-          use_lspsaga = true,
-          hint_prefix = 'U+1f608',
-        }
-      }, bufnr)
-
-      local function buf_set_keymap(...) api.nvim_buf_set_keymap(bufnr, ...) end
-      local function buf_set_option(...) api.nvim_buf_set_option(bufnr, ...) end
+    local on_attach = function(client, bufnr)
+      --  require 'lsp_signature'.on_attach({
+      --   bind = true, -- This is mandatory, otherwise border config won't get registered.
+      --   handler_opts = {
+      --     border = 'single',
+      --     use_lspsaga = true,
+      --     hint_prefix = '🦊',
+      --   }
+      -- }, bufnr)
+      local buf_set_keymap = function(...) api.nvim_buf_set_keymap(bufnr, ...) end
+      local buf_set_option = function(...) api.nvim_buf_set_option(bufnr, ...) end
       local opts = { noremap = true, silent = true } -- Mappings
       -- Enable completion triggered by <c-x><c-o>
       buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
       buf_set_keymap('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
+      -- Set autocommands conditional on server_capabilities
+      if client.resolved_capabilities.document_highlight then
+        api.nvim_exec([[
+        augroup lsp_document_highlight
+        autocmd! * <buffer>
+        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+        augroup END
+        ]], false)
+      end
     end
-
-    -- Update capabilities
-    local capabilities = lsp.protocol.make_client_capabilities()
-    capabilities.textDocument.completion.completionItem.resolveSupport = {
-      properties = {
-        'documentation',
-        'detail',
-        'additionalTextEdits',
-      },
-    }
-    capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
-    capabilities.textDocument.completion.completionItem.preselectSupport = true
-    capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
-    capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
-    capabilities.textDocument.completion.completionItem.deprecatedSupport = true
-    capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
-    capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
-    capabilities.textDocument.completion.completionItem.resolveSupport = {
-       properties = {
-          "documentation",
-          "detail",
-          "additionalTextEdits",
-       },
-    }
-
-    local eslint = {
-      lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
-      lintStdin = true,
-      lintFormats = {"%f:%l:%c: %m"},
-      lintIgnoreExitCode = true,
-      formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
-      formatStdin = true
-    }
-
-    -- Typescript, Javascript
-    nvim_lsp.tsserver.setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      cmd = { 'typescript-language-server', '--stdio' },
-      init_options = {
-        hostInfo = 'neovim'
-      },
-      root_dir = function(fname)
-        local root_files = {
-          'package.json',
-          'tsconfig.json',
-          'jsconfig.json',
-          '.git',
-        }
-        return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
-      end,
-      settings = {
-        languages = {
-          javascript = { eslint },
-          javascriptreact = { eslint },
-          ["javascript.jsx"] = { eslint },
-          typescript = { eslint },
-          ["typescript.tsx"] = { eslint },
-          typescriptreact = { eslint }
-        }
-      },
-      filetypes = {
-        "javascript",
-        "javascriptreact",
-        "javascript.jsx",
-        "typescript",
-        "typescript.tsx",
-        "typescriptreact"
+    -- Config that activates keymaps and enables snippet support
+    local make_config = function()
+      local capabilities = lsp.protocol.make_client_capabilities()
+      capabilities.textDocument.completion.completionItem.snippetSupport = true
+      return {
+        -- Enable snippet support
+        capabilities = capabilities,
+        -- Map buffer local keybindings when the language server attaches
+        on_attach = on_attach,
       }
-    }
-
-    -- Python
-    nvim_lsp.pyright.setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      cmd = { 'pyright-langserver', '--stdio' },
-      filetypes = { 'python' },
-      root_dir = function(fname)
-        local root_files = {
-          'pyproject.toml',
-          'setup.py',
-          'setup.cfg',
-          'requirements.txt',
-          'Pipfile',
-          'pyrightconfig.json',
-        }
-        return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
-      end,
-      settings = {
-        python = {
-          analysis = {
-            autoSearchPaths = true,
-            diagnosticMode = "workspace",
-            useLibraryCodeForTypes = true
-          }
-        }
-      }
-    }
-
-    -- C, C++
-    nvim_lsp.clangd.setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      cmd = { 'clangd', '--background-index' },
-      filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
-      root_dir = function(fname)
-        local root_files = {
-          'compile_commands.json',
-          'compile_flags.txt',
-          '.git',
-        }
-        return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
-      end,
-    }
-
-    -- Java
-    nvim_lsp.jdtls.setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      cmd = { '/home/madlife/scripts/jdtls-launcher.sh' },
-      filetypes = { "java" },
-      root_dir = function(fname)
-        local root_files = {
-          'build.xml', -- Ant
-          'pom.xml', -- Maven
-          'build.gradle', -- Gradle
-          'settings.gradle', -- Gradle
-          'settings.gradle.kts', -- Gradle
-        }
-        return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
-      end,
-    }
-
-    -- Lua
-    nvim_lsp.sumneko_lua.setup {
-      cmd = {
-        vim.fn.expand("$HOME")..'/lua-language-server/bin/Linux/lua-language-server',
-        '-E',
-        vim.fn.expand("$HOME")..'/lua-language-server/main.lua'
-      },
-      settings = {
-        Lua = {
-          runtime = {
-            -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-            version = 'LuaJIT',
-            -- Setup your lua path
-            path = vim.split(package.path, ";"),
-          },
-          diagnostics = {
-            -- Get the language server to recognize the `vim` global
-            enable = true,
-            globals = { 'vim', 'nvim' },
-          },
-          workspace = {
-            -- Make the server aware of Neovim runtime files
-            library = {
-              [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-              [vim.fn.expand('$VIMRUNTIME/lua/vim')] = true,
-              [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
-            }
+    end
+    -- Configure lua language server for neovim development
+    local lua_settings = {
+      Lua = {
+        runtime = {
+          -- LuaJIT in the case of Neovim
+          version = 'LuaJIT',
+          path = split(package.path, ';'),
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = {'vim'},
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = {
+            [fn.expand('$VIMRUNTIME/lua')] = true,
+            [fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
           },
         },
       }
     }
+    -- Config lspinstall
+    local function setup_servers()
+      lspinstall.setup()
+      -- Get all installed servers
+      local servers = lspinstall.installed_servers()
+      -- Add manually installed servers
+      -- table.insert(servers, "clangd")
 
-    -- Bash
-    nvim_lsp.bashls.setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      cmd = { 'bash-language-server', 'start' },
-      cmd_env = {
-        GLOB_PATTERN = '*@(.sh|.inc|.bash|.command)'
-      },
-      filetypes = { 'sh' },
-      root_dir = function(fname)
-        return util.root_pattern('.git')(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
+      for _, server in pairs(servers) do
+        local config = make_config()
+        -- Language specific config
+        if server == "lua" then
+          config.settings = lua_settings
+        end
+        -- Apply config
+        lspconfig[server].setup(config)
       end
-    }
-
-    -- JSON
-    nvim_lsp.jsonls.setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      cmd = { "vscode-json-language-server", "--stdio" },
-      filetypes = { "json" },
-      init_options = {
-        provideFormatter = true
-      },
-      root_dir = function(fname)
-        local root_files = {
-          'package.json',
-          'tsconfig.json',
-          'jsconfig.json',
-          '.git',
-        }
-        return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
-      end,
-    }
-
-    -- YAML
-    nvim_lsp.ansiblels.setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      cmd = { 'ansible-language-server', '--stdio' },
-      filetypes = { 'yaml' },
-      root_dir = function(fname)
-        local root_files = {
-          '*.yml',
-          '*.yaml',
-        }
-        return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
-      end,
-      settings = {
-        ansible = {
-          ansible = {
-            path = 'ansible'
-          },
-          ansibleLint = {
-            enabled = false,
-            path = 'ansible-lint'
-          },
-          python = {
-            interpreterPath = 'python'
-          }
-        }
-      }
-    }
-
-    -- HTML
-    nvim_lsp.html.setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      cmd = { 'vscode-html-language-server', '--stdio' },
-      filetypes = { 'html' },
-      init_options = {
-        configurationSection = { 'html', 'css', 'javascript' },
-        embeddedLanguages = {
-          css = true,
-          javascript = true
-        }
-      },
-      root_dir = function(fname)
-        return util.root_pattern('package.json', '.git')(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
-      end
-    }
-
-    -- CSS
-    nvim_lsp.cssls.setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      cmd = { 'vscode-css-language-server', '--stdio' },
-      filetypes = { 'css', 'scss', 'less' },
-      root_dir = function(fname)
-        return util.root_pattern('package.json', '.git')(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
-      end,
-      settings = {
-        css = {
-          validate = true
+    end
+    -- Invoke lspinstall
+    setup_servers()
+    -- Config lsp diagnostics
+    lsp.handlers['textDocument/publishDiagnostics'] = lsp.with(
+      lsp.diagnostic.on_publish_diagnostics,
+      {
+        signs = true,
+        virtual_text = {
+          prefix = '😈',
+          spacing = 0,
         },
-        less = {
-          validate = true
-        },
-        scss = {
-          validate = true
-        }
+        underline = true,
+        severity_sort = false,
       }
-    }
+    )
+    -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
+    lspinstall.post_install_hook = function ()
+      setup_servers() -- reload installed servers
+      cmd('bufdo e') -- this triggers the FileType autocmd that starts the server
+    end
   end
 end
 

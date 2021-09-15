@@ -3,8 +3,9 @@ if not is_packer_init_loaded then return end
 
 local use = packer.use
 packer.startup(function()
-  -- Import plugins config
+  -- Import plugins config and setup
   local config = require 'plugins.config'
+  local setup = require 'plugins.setup'
 
   -- Packer can manage itself
   use {
@@ -13,7 +14,10 @@ packer.startup(function()
   }
 
   -- Speed up loading Lua modules
-  use { 'lewis6991/impatient.nvim', rocks = 'mpack' }
+  use {
+    'lewis6991/impatient.nvim',
+    rocks = 'mpack'
+  }
 
   -- Colorscheme
   use {
@@ -34,9 +38,7 @@ packer.startup(function()
   use {
     'glepnir/galaxyline.nvim',
     after = 'nvim-web-devicons',
-    requires = {
-      'kyazdani42/nvim-web-devicons'
-    },
+    requires = 'kyazdani42/nvim-web-devicons',
     config = config.galaxyline(),
   }
 
@@ -44,13 +46,9 @@ packer.startup(function()
   use {
     'akinsho/bufferline.nvim',
     after = 'nvim-web-devicons',
-    requires = {
-      'kyazdani42/nvim-web-devicons'
-    },
+    requires = 'kyazdani42/nvim-web-devicons',
     config = config.bufferline(),
-    setup = function()
-      require 'plugins.mappings'.bufferline()
-    end
+    setup = setup.bufferline(),
   }
 
   -- File explorer
@@ -61,10 +59,7 @@ packer.startup(function()
     requires = {
       'kyazdani42/nvim-web-devicons'
     },
-    setup = function()
-      require 'plugins.configs.nvimtree'
-      require 'plugins.mappings'.nvimtree()
-    end,
+    setup = setup.nvimtree(),
   }
 
   -- Fancy start screen
@@ -95,9 +90,7 @@ packer.startup(function()
   use {
     'lukas-reineke/indent-blankline.nvim',
     event = 'BufEnter',
-    setup = function()
-      require 'plugins.configs.indent_blankline'
-    end
+    setup = setup.indent_blankline(),
   }
 
   -- Symbols outline
@@ -189,9 +182,7 @@ packer.startup(function()
       -- },
     },
     config = config.telescope(),
-    setup = function()
-      require 'plugins.mappings'.telescope()
-    end,
+    setup = setup.telescope(),
   }
 
   -- Formatter
@@ -208,19 +199,21 @@ packer.startup(function()
   -- LSP supporter
   use {
     'neovim/nvim-lspconfig',
+  }
+  use {
+    'kabouzeid/nvim-lspinstall',
+    -- event = "VimEnter",
     config = config.lsp(),
   }
-  use {
-    'ray-x/lsp_signature.nvim',
-    after = 'nvim-lspconfig',
-  }
+  -- use {
+  --   'ray-x/lsp_signature.nvim',
+  --   after = 'nvim-lspconfig',
+  -- }
   use {
     'glepnir/lspsaga.nvim',
-    after = 'nvim-lspconfig',
+    after = 'nvim-lspinstall',
     config = config.saga(),
-    setup = function()
-      require 'plugins.mappings'.saga()
-    end,
+    setup = setup.saga(),
   }
 
   -- Completion plugins

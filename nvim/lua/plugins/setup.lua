@@ -163,6 +163,8 @@ function M.telescope()
     map('n', '<C-p>', ':Telescope find_files<cr>', opts)
     map('n', '<C-f>', ':Telescope live_grep<cr>', opts)
     map('n', '<C-b>', ':Telescope buffers<cr>', opts)
+    map('n', '<C-e>', ':Telescope lsp_document_diagnostics<cr>', opts)
+    map('n', '<C-w>', ':Telescope lsp_workspace_diagnostics<cr>', opts)
   end
 end
 

@@ -19,12 +19,4 @@ M.load_config = function(reload)
   return _G.DEFAULT_CONFIG
 end
 
-M.map = function(mode, keys, cmd, opt)
-  local options = { noremap = true, silent = true }
-  if opt then
-    options = vim.tbl_extend('force', options, opt)
-  end
-  vim.api.nvim_set_keymap(mode, keys, cmd, options)
-end
-
 return M

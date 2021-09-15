@@ -40,7 +40,7 @@ fg('TelescopeNormal', colors.fg)
 fg('TelescopeSelection', colors.blue)
 fg('TelescopeSelectionCaret', colors.blue)
 fg('TelescopeMultiSelection', colors.fg)
-fg('TelescopeMatching', colors.yellow)
+fg('TelescopeMatching', colors.orange)
 
 -- LSP
 fg('LspDiagnosticsDefaultError', colors.red)

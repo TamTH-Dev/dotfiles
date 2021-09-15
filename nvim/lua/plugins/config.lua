@@ -70,13 +70,14 @@ function M.alpha()
     local buttons = {
       type = 'group',
       val = {
-        set_button('p', '  Find File' , ':Telescope find_files<cr>'),
-        set_button('f', '  Find Word' , ':Telescope live_grep<cr>'),
-        set_button('n', '  New File' , ':ene <BAR> startinsert<cr>'),
-        set_button('s', '  Settings' , ':e $MYVIMRC | :cd %:p:h | split . | wincmd k | pwd<cr>'),
+        set_button('p', '  Find File', ':Telescope find_files<cr>'),
+        set_button('f', '  Find Word', ':Telescope live_grep<cr>'),
+        set_button('r', '  Recent Files', ':Telescope oldfiles<cr>'),
+        set_button('s', '  Settings', ':e $HOME/.config/nvim/lua/default_config.lua<cr>'),
         set_button('q', '  Quit', ':qa<cr>'),
       },
       opts = {
+        position = 'center',
         spacing = 1,
       }
     }
@@ -428,6 +429,20 @@ function M.galaxyline()
       return true
     end
 
+    -- Custom gitsigns checking
+    local get_diff = function(opts)
+      local git_dict = vim.b.gitsigns_status_dict
+      if not git_dict or not git_dict.head or #git_dict.head <= 0 then return end
+      local choices = {
+        [0] = git_dict.added or 0,
+        [1] = git_dict.changed or 0,
+        [2] = git_dict.removed or 0,
+      }
+      local value = choices[opts.status]
+      if not value then return '' end
+      return string.format('%s ', value)
+    end
+
     -- Color
     local colors = highlights.colors
 
@@ -566,7 +581,7 @@ function M.galaxyline()
     gls.left[7] = {
       DiffAdd = {
         condition = is_git_workspace_showed,
-        provider = 'DiffAdd',
+        provider = function() return get_diff({ status = 0 }) end,
         icon = '  ',
         highlight = { colors.green, colors.bg }
       }
@@ -575,7 +590,7 @@ function M.galaxyline()
     gls.left[8] = {
       DiffModified = {
         condition = is_git_workspace_showed,
-        provider = 'DiffModified',
+        provider = function() return get_diff({ status = 1 }) end,
         icon = '  ',
         highlight = { colors.orange, colors.bg }
       }
@@ -584,7 +599,7 @@ function M.galaxyline()
     gls.left[9] = {
       DiffRemove = {
         condition = is_git_workspace_showed,
-        provider = 'DiffRemove',
+        provider = function() return get_diff({ status = 2 }) end,
         icon = '  ',
         highlight = { colors.red,colors.bg }
       }
@@ -884,162 +899,6 @@ function M.icons()
   end
 end
 
-function M.saga()
-  return function()
-    local is_saga_loaded, saga = pcall(require, 'lspsaga')
-    if not is_saga_loaded then return end
-
-    saga.init_lsp_saga {
-      use_saga_diagnostic_sign = true,
-      error_sign = ' ',
-      warn_sign = ' ',
-      hint_sign = ' ',
-      infor_sign = ' ',
-      dianostic_header_icon = ' ',
-      code_action_icon = ' ',
-      code_action_prompt = {
-        enable = true,
-        sign = true,
-        sign_priority = 20,
-        virtual_text = true
-      },
-      finder_definition_icon = ' ',
-      finder_reference_icon = ' ',
-      max_preview_lines = 10, -- preview lines of lsp_finder and definition preview
-      finder_action_keys = {
-        open = '<cr>',
-        vsplit = '<C-v>',
-        split = '<C-x>',
-        quit = 'q',
-        scroll_down = '<C-j>',
-        scroll_up = '<C-k>'
-      },
-      code_action_keys = {
-        quit = 'q',
-        exec = '<cr>'
-      },
-      rename_action_keys = {
-        quit = '<C-c>',
-        exec = '<cr>'
-      },
-      definition_preview_icon = ' ',
-      border_style = 'single', -- 'single' 'double' 'round' 'plus'
-      rename_prompt_prefix = '➤'
-    }
-  end
-end
-
-function M.telescope()
-  return function()
-    local is_telescope_loaded, telescope = pcall(require, 'telescope')
-    local is_telescope_actions_loaded, actions = pcall(require, 'telescope.actions')
-    local is_telescope_sorters_loaded, sorters = pcall(require, 'telescope.sorters')
-    local is_telescope_previewers_loaded, previewers = pcall(require, 'telescope.previewers')
-    if not (is_telescope_loaded or is_telescope_actions_loaded or is_telescope_sorters_loaded or is_telescope_previewers_loaded) then
-      return
-    end
-
-    telescope.setup {
-      defaults = {
-        mappings = {
-          n = {
-            ['q'] = actions.close,
-          }
-        },
-        vimgrep_arguments = {
-          'rg',
-          '--color=never',
-          '--no-heading',
-          '--with-filename',
-          '--line-number',
-          '--column',
-          '--smart-case'
-        },
-        prompt_prefix = '  ',
-        selection_caret = '  ',
-        entry_prefix = '  ',
-        initial_mode = 'insert',
-        selection_strategy = 'reset',
-        sorting_strategy = 'ascending',
-        layout_strategy = 'horizontal',
-        layout_config = {
-          width = 0.75,
-          prompt_position = 'top',
-          horizontal = {
-            mirror = false,
-          },
-          vertical = {
-            mirror = false,
-          },
-        },
-        file_sorter =  sorters.get_fzy_sorter,
-        file_ignore_patterns = {},
-        generic_sorter =  sorters.get_generic_fuzzy_sorter,
-        winblend = 10,
-        border = {},
-        borderchars = {'─', '│', '─', '│', '┌', '┐', '┘', '└'},
-        -- borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-        disable_devicons = false,
-        color_devicons = true,
-        use_less = true,
-        path_display = {},
-        set_env = { ['COLORTERM'] = 'truecolor' },
-        file_previewer = previewers.vim_buffer_cat.new,
-        grep_previewer = previewers.vim_buffer_vimgrep.new,
-        qflist_previewer = previewers.vim_buffer_qflist.new,
-        buffer_previewer_maker = previewers.buffer_previewer_maker
-      },
-      -- extensions = {
-      --   fzf = {
-      --     fuzzy = true, -- false will only do exact matching
-      --     override_generic_sorter = true, -- override the generic sorter
-      --     override_file_sorter = true, -- override the file sorter
-      --     case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
-      --   },
-      -- }
-    }
-
-    -- telescope.load_extension('fzf')
-  end
-end
-
-function M.treesitter()
-  return function()
-    local is_treesitter_loaded, treesitter_configs = pcall(require, 'nvim-treesitter.configs')
-    if not is_treesitter_loaded then return end
-
-    treesitter_configs.setup {
-      highlight = {
-        enable = true,
-        disable = {}
-      },
-      indent = {
-        enable = false,
-        disable = {}
-      },
-      ensure_installed = 'all',
-      playground = {
-        enable = true,
-        disable = {},
-        updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-        persist_queries = false, -- Whether the query persists across vim sessions
-        keybindings = {
-          toggle_query_editor = 'o',
-          toggle_hl_groups = 'i',
-          toggle_injected_languages = 't',
-          toggle_anonymous_nodes = 'a',
-          toggle_language_display = 'I',
-          focus_language = 'f',
-          unfocus_language = 'F',
-          update = 'R',
-          goto_node = '<cr>',
-          show_help = '?',
-        },
-      }
-    }
-  end
-end
-
 function M.lsp()
   return function()
     local is_lspinstall_loaded, lspinstall = pcall(require, 'lspinstall')
@@ -1148,6 +1007,183 @@ function M.lsp()
       setup_servers() -- reload installed servers
       cmd('bufdo e') -- this triggers the FileType autocmd that starts the server
     end
+  end
+end
+
+function M.saga()
+  return function()
+    local is_saga_loaded, saga = pcall(require, 'lspsaga')
+    if not is_saga_loaded then return end
+
+    saga.init_lsp_saga {
+      use_saga_diagnostic_sign = true,
+      error_sign = ' ',
+      warn_sign = ' ',
+      hint_sign = ' ',
+      infor_sign = ' ',
+      dianostic_header_icon = ' ',
+      code_action_icon = ' ',
+      code_action_prompt = {
+        enable = true,
+        sign = true,
+        sign_priority = 20,
+        virtual_text = true
+      },
+      finder_definition_icon = ' ',
+      finder_reference_icon = ' ',
+      max_preview_lines = 10, -- preview lines of lsp_finder and definition preview
+      finder_action_keys = {
+        open = '<cr>',
+        vsplit = '<C-v>',
+        split = '<C-x>',
+        quit = 'q',
+        scroll_down = '<C-j>',
+        scroll_up = '<C-k>'
+      },
+      code_action_keys = {
+        quit = 'q',
+        exec = '<cr>'
+      },
+      rename_action_keys = {
+        quit = '<C-c>',
+        exec = '<cr>'
+      },
+      definition_preview_icon = ' ',
+      border_style = 'single', -- 'single' 'double' 'round' 'plus'
+      rename_prompt_prefix = '➤'
+    }
+  end
+end
+
+function M.session()
+  return function()
+    local is_session_loaded, session = pcall(require, 'auto-session')
+    if not is_session_loaded then return end
+
+    local opts = {
+      log_level = 'info',
+      auto_session_enable_last_session = false,
+      auto_session_root_dir = vim.fn.stdpath('data') .. '/sessions/',
+      auto_session_enabled = true,
+      auto_save_enabled = true,
+      auto_restore_enabled = false,
+      auto_session_suppress_dirs = nil
+    }
+    session.setup(opts)
+  end
+end
+
+function M.telescope()
+  return function()
+    local is_telescope_loaded, telescope = pcall(require, 'telescope')
+    local is_telescope_actions_loaded, actions = pcall(require, 'telescope.actions')
+    local is_telescope_sorters_loaded, sorters = pcall(require, 'telescope.sorters')
+    local is_telescope_previewers_loaded, previewers = pcall(require, 'telescope.previewers')
+    if not (is_telescope_loaded or is_telescope_actions_loaded or is_telescope_sorters_loaded or is_telescope_previewers_loaded) then
+      return
+    end
+
+    telescope.setup {
+      defaults = {
+        mappings = {
+          n = {
+            ['q'] = actions.close,
+            ['<leader>ga'] = actions.smart_send_to_qflist + actions.open_qflist,
+          },
+          i = {
+            ['<leader>ga'] = actions.smart_send_to_qflist + actions.open_qflist,
+          }
+        },
+        vimgrep_arguments = {
+          'rg',
+          '--color=never',
+          '--no-heading',
+          '--with-filename',
+          '--line-number',
+          '--column',
+          '--smart-case'
+        },
+        prompt_prefix = '  ',
+        selection_caret = '  ',
+        entry_prefix = '  ',
+        initial_mode = 'insert',
+        selection_strategy = 'reset',
+        sorting_strategy = 'ascending',
+        layout_strategy = 'horizontal',
+        layout_config = {
+          width = 0.75,
+          prompt_position = 'top',
+          horizontal = {
+            mirror = false,
+          },
+          vertical = {
+            mirror = false,
+          },
+        },
+        file_sorter =  sorters.get_fzy_sorter,
+        file_ignore_patterns = {},
+        generic_sorter =  sorters.get_generic_fuzzy_sorter,
+        winblend = 10,
+        border = {},
+        borderchars = {'─', '│', '─', '│', '┌', '┐', '┘', '└'},
+        -- borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+        disable_devicons = false,
+        color_devicons = true,
+        use_less = true,
+        path_display = {},
+        set_env = { ['COLORTERM'] = 'truecolor' },
+        file_previewer = previewers.vim_buffer_cat.new,
+        grep_previewer = previewers.vim_buffer_vimgrep.new,
+        qflist_previewer = previewers.vim_buffer_qflist.new,
+        buffer_previewer_maker = previewers.buffer_previewer_maker
+      },
+      -- extensions = {
+      --   fzf = {
+      --     fuzzy = true, -- false will only do exact matching
+      --     override_generic_sorter = true, -- override the generic sorter
+      --     override_file_sorter = true, -- override the file sorter
+      --     case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
+      --   },
+      -- }
+    }
+    -- telescope.load_extension('fzf')
+  end
+end
+
+function M.treesitter()
+  return function()
+    local is_treesitter_loaded, treesitter_configs = pcall(require, 'nvim-treesitter.configs')
+    if not is_treesitter_loaded then return end
+
+    treesitter_configs.setup {
+      highlight = {
+        enable = true,
+        disable = {}
+      },
+      indent = {
+        enable = false,
+        disable = {}
+      },
+      ensure_installed = 'all',
+      playground = {
+        enable = true,
+        disable = {},
+        updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+        persist_queries = false, -- Whether the query persists across vim sessions
+        keybindings = {
+          toggle_query_editor = 'o',
+          toggle_hl_groups = 'i',
+          toggle_injected_languages = 't',
+          toggle_anonymous_nodes = 'a',
+          toggle_language_display = 'I',
+          focus_language = 'f',
+          unfocus_language = 'F',
+          update = 'R',
+          goto_node = '<cr>',
+          show_help = '?',
+        },
+      }
+    }
   end
 end
 

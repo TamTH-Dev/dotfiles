@@ -22,9 +22,7 @@ packer.startup(function()
   -- Colorscheme
   use {
     'folke/tokyonight.nvim',
-    config = function()
-      require 'colors'.init()
-    end,
+    config = function() require 'colors'.init() end,
   }
 
   -- Icons suppliers for Madvim
@@ -56,9 +54,7 @@ packer.startup(function()
     'kyazdani42/nvim-tree.lua',
     after = 'nvim-web-devicons',
     cmd = { 'NvimTreeToggle', 'NvimTreeOpen' },
-    requires = {
-      'kyazdani42/nvim-web-devicons'
-    },
+    requires = 'kyazdani42/nvim-web-devicons',
     setup = setup.nvimtree(),
   }
 
@@ -67,6 +63,12 @@ packer.startup(function()
     'goolord/alpha-nvim',
     config = config.alpha(),
   }
+
+  -- Session management
+  -- use {
+  --   'rmagatti/auto-session',
+  --   config = config.session(),
+  -- }
 
   -- Parser
   use {
@@ -110,7 +112,7 @@ packer.startup(function()
   }
   use {
     'lewis6991/gitsigns.nvim',
-    requires = { 'nvim-lua/plenary.nvim' },
+    requires = 'nvim-lua/plenary.nvim',
     config = config.gitsigns(),
   }
 
@@ -202,7 +204,6 @@ packer.startup(function()
   }
   use {
     'kabouzeid/nvim-lspinstall',
-    -- event = "VimEnter",
     config = config.lsp(),
   }
   -- use {
@@ -223,7 +224,7 @@ packer.startup(function()
   }
   use {
     'hrsh7th/nvim-cmp',
-    after = { 'LuaSnip' },
+    after = 'LuaSnip',
     requires = {
       { 'saadparwaiz1/cmp_luasnip', after = { 'nvim-cmp', 'LuaSnip' }, opt = true },
       { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp', opt = true },

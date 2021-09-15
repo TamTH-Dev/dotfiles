@@ -9,6 +9,7 @@ options.history = 50
 options.joinspaces = false
 options.lazyredraw = true
 options.mouse = options.mouse + 'a'
+options.sessionoptions = 'blank,buffers,curdir,folds,help,options,tabpages,winsize,resize,winpos,terminal'
 options.shell = '/bin/bash'
 options.splitbelow = true
 options.splitright = true

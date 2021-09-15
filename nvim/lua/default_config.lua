@@ -5,6 +5,8 @@ M.ui, M.options, M.mappings = {}, {}, {}
 M.ui = {
   theme = 'tokyonight', -- Default colorscheme
   style = 'night', -- Available: night, storm, day
+  dark_sidebar = false, -- Only available for tokyonight theme
+  dark_float = false, -- Only available for tokyonight theme
 }
 
 -- User custom options, can add more options. See ":help options" for more options

@@ -1022,15 +1022,15 @@ function M.saga()
       hint_sign = ' ',
       infor_sign = ' ',
       dianostic_header_icon = ' ',
-      code_action_icon = ' ',
+      code_action_icon = ' ',
       code_action_prompt = {
         enable = true,
         sign = true,
         sign_priority = 20,
         virtual_text = true
       },
-      finder_definition_icon = ' ',
-      finder_reference_icon = ' ',
+      finder_definition_icon = ' ',
+      finder_reference_icon = ' ',
       max_preview_lines = 10, -- preview lines of lsp_finder and definition preview
       finder_action_keys = {
         open = '<cr>',
@@ -1045,7 +1045,7 @@ function M.saga()
         exec = '<cr>'
       },
       rename_action_keys = {
-        quit = '<C-c>',
+        quit = 'q',
         exec = '<cr>'
       },
       definition_preview_icon = ' ',

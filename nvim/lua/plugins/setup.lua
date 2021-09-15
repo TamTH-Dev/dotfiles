@@ -138,6 +138,9 @@ function M.saga()
 
     -- show hover doc
     map('n', '<leader>gk', ':Lspsaga hover_doc<cr>', opts)
+    -- scroll action
+    map('n', '<C-j>', '<cmd>lua require(\'lspsaga.action\').smart_scroll_with_saga(1)<cr>', opts)
+    map('n', '<C-k>', '<cmd>lua require(\'lspsaga.action\').smart_scroll_with_saga(-1)<cr>', opts)
     -- code action
     map('n', '<leader>ga', ':Lspsaga code_action<cr>', opts)
     map('v', '<leader>ga', ':<C-U>Lspsaga range_code_action<cr>', opts)

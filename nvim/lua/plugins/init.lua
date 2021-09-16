@@ -186,6 +186,11 @@ packer.startup(function()
     config = config.telescope(),
     setup = setup.telescope(),
   }
+  -- use { 'junegunn/fzf', run = 'fzf#install()' }
+  -- use {
+  --   'junegunn/fzf.vim',
+  --   config = config.fzf()
+  -- }
 
   -- Formatter
   use {

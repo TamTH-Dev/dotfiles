@@ -394,6 +394,69 @@ function M.comment()
   end
 end
 
+function M.fzf()
+  return function()
+    local api = vim.api
+    local map = api.nvim_set_keymap
+    local global = vim.g
+    local opts = { noremap = true, silent = true }
+
+    -- Fzf layout
+    global.fzf_layout = { down = '~40%' }
+
+    -- Disable preview window
+    global.fzf_preview_window = { right = 'hidden' }
+
+    global.fzf_nvim_statusline = 0
+
+    -- Open search popup
+    map('n', '<C-p>', ':Files<cr>', opts)
+    map('n', '<C-f>', ':Rg<cr>', opts)
+    map('n', '<C-b>', ':Buffers<cr>', opts)
+
+    global.fzf_colors = {
+      fg      = { 'fg', 'BufferLineBufferSelected' },
+      bg      = { 'bg', 'BufferLineDiagnosticVisible' },
+      hl      = { 'fg', 'BufferLineWarningSelected' },
+      ['fg+'] = { 'fg', 'NvimTreeRootFolder' },
+      ['bg+'] = { 'bg', 'BufferLineDiagnosticVisible' },
+      ['hl+'] = { 'fg', 'BufferLineWarningSelected' },
+      info    = { 'fg', 'BufferLineInfoSelected' },
+      border  = { 'fg', 'NvimTreeRootFolder' },
+      prompt  = { 'fg', 'BufferLinePickVisible' },
+      pointer = { 'fg', 'NvimTreeRootFolder' },
+      marker  = { 'fg', 'NvimTreeRootFolder' },
+      spinner = { 'fg', 'NvimTreeRootFolder' },
+      header  = { 'fg', 'BufferLineInfoSelected' }
+    }
+
+    -- Actions for fzf
+    global.fzf_action = {
+       ['ctrl-t'] = 'tab split',
+       ['ctrl-x'] = 'split',
+       ['ctrl-v'] = 'vsplit'
+    }
+
+    -- Files searching
+    api.nvim_exec([[command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, <bang>0)]], false)
+
+    -- Buffers searching
+    api.nvim_exec([[command! -bang -nargs=? -complete=dir Buffers call fzf#vim#buffers(<q-args>, <bang>0)]], false)
+
+    -- Advanced ripgrep integration
+    api.nvim_exec([[
+      function! RipgrepFzf(query, fullscreen)
+        let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s -g "!{node_modules,.git,build,dist,.cache,cache,.idea}" || true'
+        let initial_command = printf(command_fmt, shellescape(a:query))
+        let reload_command = printf(command_fmt, '{q}')
+        let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+        call fzf#vim#grep(initial_command, 1, a:fullscreen)
+      endfunction
+      command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
+    ]], false)
+  end
+end
+
 function M.galaxyline()
   return function()
     local is_colors_loaded, highlights = pcall(require, 'colors.highlights')
@@ -478,7 +541,7 @@ function M.galaxyline()
     end
 
     -- Short line list
-    gl.short_line_list = { 'NvimTree', 'packer' }
+    gl.short_line_list = { 'NvimTree', 'packer', 'fzf' }
 
     -- Left section
     gls.left[1] = {

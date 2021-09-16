@@ -134,7 +134,7 @@ export PATH=$HOME/.local/bin:/usr/local/bin:/usr/bin:/usr/sbin:/usr/local/sbin:/
 
 # Configure fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border --bind=shift-tab:up,tab:down --no-multi --cycle'
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --bind=shift-tab:up,tab:down --no-multi --cycle'
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules,.git,build,dist,.cache,cache,.idea}"'
 
 # Path env for perl

@@ -35,7 +35,6 @@
     vcs                       # git status
     nodeenv                   # node.js environment
     virtualenv                # python virtual environment
-    # command_execution_time  # previous command duration
     # =========================[ Line #2 ]=========================
     newline                   # \n
     prompt_char               # prompt symbol
@@ -45,8 +44,6 @@
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
     command_execution_time    # previous command duration
-    # virtualenv              # python virtual environment
-    context                   # user@host
     time                      # current time
     # =========================[ Line #2 ]=========================
     newline                   # \n
@@ -71,9 +68,9 @@
   # Default prompt symbol.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION='➜'
   # Prompt symbol in command vi mode.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VICMD_CONTENT_EXPANSION='❮'
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VICMD_CONTENT_EXPANSION=''
   # Prompt symbol in visual vi mode is the same as in command mode.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIVIS_CONTENT_EXPANSION='❮'
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIVIS_CONTENT_EXPANSION=''
   # Prompt symbol in overwrite vi mode is the same as in command mode.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OVERWRITE_STATE=false
 
@@ -94,7 +91,7 @@
 
   # Directory.
   typeset -g POWERLEVEL9K_DIR_FOREGROUND=$blue
-  typeset -g POWERLEVEL9K_DIR_VISUAL_IDENTIFIER_EXPANSION=''
+  typeset -g POWERLEVEL9K_DIR_VISUAL_IDENTIFIER_EXPANSION=''
   typeset -g POWERLEVEL9K_DIR_HOME_VISUAL_IDENTIFIER_EXPANSION=''
 
   # Context format when root: user@host. The first part white, the rest grey.

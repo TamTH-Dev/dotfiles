@@ -1052,6 +1052,7 @@ function M.lsp()
     end
     -- Invoke lspinstall
     setup_servers()
+
     -- Config lsp diagnostics
     lsp.handlers['textDocument/publishDiagnostics'] = lsp.with(
       lsp.diagnostic.on_publish_diagnostics,
@@ -1065,6 +1066,16 @@ function M.lsp()
         severity_sort = false,
       }
     )
+    -- Custom virtual text
+    local original_set_virtual_text = vim.lsp.diagnostic.set_virtual_text
+    local custom_virtual_text = function(diagnostics, bufnr, client_id, sign_ns, opts)
+        opts = opts or {}
+        -- Show all diagnostics has specific level and above
+        -- opts.severity_limit = "Warning" -- Options: Hint, Information, Warning, Error
+        original_set_virtual_text(diagnostics, bufnr, client_id, sign_ns, opts)
+    end
+    vim.lsp.diagnostic.set_virtual_text = custom_virtual_text
+
     -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
     lspinstall.post_install_hook = function ()
       setup_servers() -- reload installed servers

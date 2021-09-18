@@ -29,8 +29,7 @@ bindsym $mod+Return exec kitty tmux
 bindsym $mod+Shift+q kill
 
 # Start programs launcher
-bindsym $mod+d exec rofi -show
-# bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec rofi -show drun -modi drun -show-icons -location 0 -disable-history -hide-scrollbar -terminal kitty -display-drun "  "
 
 # Change focus
 bindsym $mod+h focus left

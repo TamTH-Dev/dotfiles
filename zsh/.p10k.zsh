@@ -15,15 +15,15 @@
   autoload -Uz is-at-least && is-at-least 5.1 || return
 
   # Prompt colors.
-  local grey='#646e9c'
   local red='#f7768e'
-  local green='#9ece6a'
   local orange='#ff9e64'
-  local blue='#7aa2f7'
+  local brown='#e0af68'
+  local green='#9ece6a'
   local magenta='#bb9af7'
+  local blue='#2ac3de'
   local cyan='#7dcfff'
+  local grey='#565f89'
   local white='#c0caf5'
-  local yellow='#e0af68'
 
   # Left prompt segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
@@ -87,10 +87,10 @@
 
   # User
   typeset -g POWERLEVEL9K_USER_VISUAL_IDENTIFIER_EXPANSION=''
-  typeset -g POWERLEVEL9K_USER_FOREGROUND=$green
+  typeset -g POWERLEVEL9K_USER_FOREGROUND=$blue
 
   # Directory.
-  typeset -g POWERLEVEL9K_DIR_FOREGROUND=$blue
+  typeset -g POWERLEVEL9K_DIR_FOREGROUND=$red
   typeset -g POWERLEVEL9K_DIR_VISUAL_IDENTIFIER_EXPANSION=''
   typeset -g POWERLEVEL9K_DIR_HOME_VISUAL_IDENTIFIER_EXPANSION=''
 
@@ -125,7 +125,7 @@
       # Styling for up-to-date Git status.
       local       meta=$grey  # default foreground
       local      clean=$grey  # green foreground
-      local   modified=$grey  # yellow foreground
+      local   modified=$grey  # brown foreground
       local  untracked=$grey  # blue foreground
       local conflicted=$grey  # red foreground
     else

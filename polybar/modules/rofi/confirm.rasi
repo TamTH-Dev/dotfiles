@@ -1,7 +1,7 @@
 @import "colors.rasi"
 
 * {
-  background-color: @background;
+  background-color: @nightBackground;
   text-color: @foreground;
   font: "JetBrainsMono Nerd Font 10";
 }
@@ -27,7 +27,7 @@ inputbar {
 }
 
 prompt {
-  background-color: @background;
+  background-color: @nightBackground;
   padding: 5px 0 0px;
   text-color: @foreground;
 }

@@ -1,7 +1,7 @@
 @import "colors.rasi"
 
 * {
-  background-color: @background;
+  background-color: @nightBackground;
   text-color: @foreground;
   font: "JetBrainsMono Nerd Font 10";
 }
@@ -11,8 +11,8 @@ window {
   height: "auto";
   padding: 25px;
   border: 3px;
-  border-radius: 0px;
-  border-color: @color1;
+  border-radius: 0;
+  border-color: @red;
   location: center;
 }
 

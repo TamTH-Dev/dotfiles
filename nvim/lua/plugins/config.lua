@@ -737,7 +737,7 @@ function M.galaxyline()
         condition = hide_in_width,
         provider = 'GetLspClient',
         icon = ' ',
-        highlight = { colors.yellow, colors.bg },
+        highlight = { colors.orange, colors.bg },
       }
     }
 

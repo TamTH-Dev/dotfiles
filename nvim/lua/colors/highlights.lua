@@ -11,12 +11,13 @@ local colors = {
   bg = '#24283b',
   fg = '#c0caf5',
   red = '#f7768e',
-  green = '#9ece6a',
   orange = '#ff9e64',
-  blue = '#7aa2f7',
+  brown = '#e0af68',
+  green = '#9ece6a',
   magenta = '#bb9af7',
+  blue = '#2ac3de',
   cyan = '#7dcfff',
-  yellow = '#e0af68',
+  lightBlue = '#73daca',
 }
 
 -- Define fg color
@@ -57,7 +58,7 @@ bg('LspDiagnosticsVirtualTextInformation', 'default')
 bg('LspDiagnosticsVirtualTextHint', 'default')
 
 -- Indent_blankline
-fg('IndentBlanklineContextChar', colors.yellow)
+fg('IndentBlanklineContextChar', colors.orange)
 
 -- Barbar
 -- fg('BufferCurrentSign', colors.red)

@@ -21,7 +21,7 @@
 }
 
 * {
-  background-color: @nightBackground;
+  background-color: @stormBackground;
   font: "JetBrainsMono Nerd Font 11";
 }
 
@@ -30,7 +30,7 @@ window {
   height: 350px;
   padding: 20px;
   border: 3px;
-  background-color: @nightBackground;
+  background-color: @stormBackground;
   border-color: @red;
 }
 
@@ -45,7 +45,7 @@ inputbar {
 prompt {
   padding: 5px 5px 0;
   background-color: @blue;
-  text-color: @nightBackground;
+  text-color: @stormBackground;
 }
 
 textbox-prompt-colon {
@@ -56,7 +56,7 @@ textbox-prompt-colon {
 entry {
   padding: 5px;
   text-color: @foreground;
-  background-color: @nightBackground;
+  background-color: @stormBackground;
   placeholder-color: @comment;
 }
 
@@ -77,52 +77,52 @@ element-icon {
 
 element normal.normal {
   padding:          0px 15px;
-  background-color: @nightBackground;
+  background-color: @stormBackground;
   text-color:       @foreground;
 }
 
 element normal.urgent {
-  background-color: @nightBackground;
+  background-color: @stormBackground;
   text-color:       @foreground;
 }
 
 element normal.active {
-  background-color: @nightBackground;
+  background-color: @stormBackground;
   text-color:       @foreground;
 }
 
 element selected.normal {
   background-color: @orange;
-  text-color: @nightBackground;
+  text-color: @stormBackground;
 }
 
 element selected.urgent {
   background-color: @orange;
-  text-color:       @nightBackground;
+  text-color:       @stormBackground;
 }
 
 element selected.active {
   background-color: @orange;
-  text-color:       @nightBackground;
+  text-color:       @stormBackground;
 }
 
 element alternate.normal {
-  background-color: @nightBackground;
+  background-color: @stormBackground;
   text-color:       @foreground;
 }
 
 element alternate.urgent {
-  background-color: @nightBackground;
+  background-color: @stormBackground;
   text-color:       @foreground;
 }
 
 element alternate.active {
-  background-color: @nightBackground;
+  background-color: @stormBackground;
   text-color:       @foreground;
 }
 
 scrollbar {
-  background-color: @nightBackground;
-  handle-color:     @nightBackground;
+  background-color: @stormBackground;
+  handle-color:     @stormBackground;
   handle-width:     0;
 }

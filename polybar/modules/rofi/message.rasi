@@ -1,7 +1,7 @@
 @import "colors.rasi"
 
 * {
-  background-color: @nightBackground;
+  background-color: @stormBackground;
   text-color: @foreground;
   font: "JetBrainsMono Nerd Font 10";
 }

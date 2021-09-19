@@ -14,10 +14,10 @@ configuration {
 
 window {
   transparency: "real";
-  background-color: @background;
+  background-color: @stormBackground;
   text-color: @fg;
   border: 0;
-  border-color:	@background;
+  border-color:	@stormBackground;
   border-radius: 0;
   width: 550px;
   location: center;
@@ -28,15 +28,15 @@ window {
 prompt {
   enabled: true;
   padding: 10px 15px 10px 15px;
-  background-color: @background;
-  text-color: @color15;
+  background-color: @stormBackground;
+  text-color: @red;
   font: "Iosevka Nerd Font 8";
 }
 
 entry {
-  background-color: @background;
-  text-color: @color15;
-  placeholder-color: @color15;
+  background-color: @stormBackground;
+  text-color: @red;
+  placeholder-color: @red;
   expand: true;
   horizontal-align: 0;
   placeholder: "Search...";
@@ -48,17 +48,17 @@ entry {
 
 inputbar {
   children: [prompt, entry];
-  background-color: @background;
-  text-color: @color15;
+  background-color: @stormBackground;
+  text-color: @red;
   expand: false;
   border:	0;
   border-radius: 0;
-  border-color: @background;
+  border-color: @stormBackground;
   spacing: 0;
 }
 
 listview {
-  background-color: @background;
+  background-color: @stormBackground;
   padding: 10px 10px 10px 10px;
   columns: 2;
   lines: 7;
@@ -69,17 +69,17 @@ listview {
 }
 
 mainbox {
-  background-color: @background;
+  background-color: @stormBackground;
   border: 0;
   border-radius: 0;
-  border-color: @background;
+  border-color: @stormBackground;
   children: [inputbar, listview];
   spacing: 0;
   padding: 0;
 }
 
 element {
-  background-color: @background;
+  background-color: @stormBackground;
   text-color: @foreground;
   orientation: horizontal;
   border-radius: 0;
@@ -99,9 +99,9 @@ element-text {
 }
 
 element selected {
-  background-color: @background;
-  text-color: @background;
+  background-color: @stormBackground;
+  text-color: @stormBackground;
   border: 0;
   border-radius: 0;
-  border-color: @background;
+  border-color: @stormBackground;
 }

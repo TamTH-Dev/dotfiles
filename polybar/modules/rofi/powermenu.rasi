@@ -12,7 +12,7 @@ window {
   width: 320px;
   height: "auto";
   transparency: "real";
-  background-color: @nightBackground;
+  background-color: @stormBackground;
   border: 3px;
   border-color: @red;
   border-radius: 0;
@@ -26,7 +26,7 @@ prompt {
   enabled: true;
   padding: 10px 0 10px 10px;
   background-color: @orange;
-  text-color: @nightBackground;
+  text-color: @stormBackground;
   font: "JetBrainsMono Nerd Font 10";
 }
 
@@ -35,7 +35,7 @@ textbox-prompt-colon {
   font: "JetBrainsMono Nerd Font 10";
   text-style: bold;
   background-color: @orange;
-  text-color: @nightBackground;
+  text-color: @stormBackground;
   expand: false;
   str: "⏳";
 }
@@ -47,7 +47,7 @@ entry {
 inputbar {
   children: [ textbox-prompt-colon, prompt ];
   background-color: @orange;
-  text-color: @nightBackground;
+  text-color: @stormBackground;
   expand: false;
   border: 0;
   border-radius: 0;
@@ -56,7 +56,7 @@ inputbar {
 }
 
 listview {
-  background-color: @nightBackground;
+  background-color: @stormBackground;
   padding: 0;
   columns: 1;
   lines: 5;
@@ -68,38 +68,38 @@ listview {
 }
 
 mainbox {
-  background-color: @nightBackground;
+  background-color: @stormBackground;
   border: 0;
   border-radius: 0;
-  border-color: @nightBackground;
+  border-color: @stormBackground;
   children: [ inputbar, listview ];
   spacing: 0;
   padding: 0;
 }
 
 element {
-  background-color: @nightBackground;
-  text-color: @nightBackground;
+  background-color: @stormBackground;
+  text-color: @stormBackground;
   padding: 8px;
 }
 
 element-text {
-  background-color: @nightBackground;
+  background-color: @stormBackground;
   text-color: @foreground;
 }
 
 element selected.normal {
   background-color: @blue;
-  text-color: @nightBackground;
+  text-color: @stormBackground;
 }
 
 element-text selected.normal {
   background-color: @blue;
-  text-color: @nightBackground;
+  text-color: @stormBackground;
 }
 
 scrollbar {
-  background-color: @nightBackground;
-  handle-color:     @nightBackground;
+  background-color: @stormBackground;
+  handle-color:     @stormBackground;
   handle-width:     0;
 }

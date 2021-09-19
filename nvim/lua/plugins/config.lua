@@ -569,7 +569,7 @@ function M.galaxyline()
             R = 'REPLACE',
           }
           local icons = {
-            n = ' ',
+            n = ' ',
             i = ' ',
             c = 'גּ ',
             V = '﬏ ',
@@ -671,10 +671,8 @@ function M.galaxyline()
     gls.left[10] = {
       Space = {
         condition = is_git_workspace_showed,
-        provider = 'WhiteSpace',
-        highlight = { colors.cyan, colors.bg },
-        separator = ' ',
-        separator_highlight = { colors.bg, colors.bg }
+        provider = function() return ' ' end,
+        highlight = { colors.bg, colors.bg },
       }
     }
 
@@ -745,6 +743,7 @@ function M.galaxyline()
       FileFormat = {
         condition = hide_in_width,
         provider = function()
+          if not bo.filetype or bo.filetype == '' then return 'undefined' end
           return bo.filetype
         end,
         icon = ' ',
@@ -1059,22 +1058,13 @@ function M.lsp()
       {
         signs = true,
         virtual_text = {
-          prefix = '😈',
+          prefix = '🦊',
           spacing = 0,
         },
         underline = true,
         severity_sort = false,
       }
     )
-    -- Custom virtual text
-    local original_set_virtual_text = vim.lsp.diagnostic.set_virtual_text
-    local custom_virtual_text = function(diagnostics, bufnr, client_id, sign_ns, opts)
-        opts = opts or {}
-        -- Show all diagnostics has specific level and above
-        -- opts.severity_limit = "Warning" -- Options: Hint, Information, Warning, Error
-        original_set_virtual_text(diagnostics, bufnr, client_id, sign_ns, opts)
-    end
-    vim.lsp.diagnostic.set_virtual_text = custom_virtual_text
 
     -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
     lspinstall.post_install_hook = function ()

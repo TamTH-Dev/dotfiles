@@ -5,8 +5,10 @@ set $mod Mod4
 font pango:Blex Mono Medium Nerd Font Complete Mono 10
 
 # Gaps
-gaps inner 8
-gaps outer 2
+# gaps inner 8
+# gaps outer 2
+gaps inner 0
+gaps outer 0
 
 # Border
 for_window [class=".*"] border pixel 0
@@ -29,7 +31,7 @@ bindsym $mod+Return exec kitty tmux
 bindsym $mod+Shift+q kill
 
 # Start programs launcher
-bindsym $mod+d exec rofi -show drun -modi drun -show-icons -location 0 -disable-history -hide-scrollbar -terminal kitty -display-drun "  "
+bindsym $mod+d exec rofi -show
 
 # Change focus
 bindsym $mod+h focus left

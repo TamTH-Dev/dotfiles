@@ -3,6 +3,21 @@
 /* DESCRIPTION: Custom scheme for rofi */
 /* AUTHOR: TamTH-Dev */
 
+configuration {
+  modi: "drun";
+  font: "JetBrainsMono Nerd Font 11";
+  display-drun: "  ";
+  show-icons: true;
+  icon-theme: "Papirus";
+  drun-display-format: "{icon} {name}";
+  location: 0;
+  terminal: "kitty";
+  disable-history: true;
+  separator-style: "solid";
+  hide-srollbar: true;
+  background-color: @stormBackground;
+}
+
 /* Tokyo night colorscheme */
 * {
   stormBackground: #24283b;
@@ -18,11 +33,6 @@
   blue: #2ac3de;
   cyan: #7dcfff;
   lightBlue: #73daca;
-}
-
-* {
-  background-color: @stormBackground;
-  font: "JetBrainsMono Nerd Font 11";
 }
 
 window {

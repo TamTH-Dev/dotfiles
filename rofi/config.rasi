@@ -15,7 +15,8 @@ configuration {
   disable-history: true;
   separator-style: "solid";
   hide-srollbar: true;
-  background-color: @stormBackground;
+  fullscreen: false;
+  sidebar-mode: false;
 }
 
 /* Tokyo night colorscheme */

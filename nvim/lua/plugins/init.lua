@@ -63,6 +63,10 @@ packer.startup(function()
     'goolord/alpha-nvim',
     config = config.alpha(),
   }
+  -- use {
+  --   'glepnir/dashboard-nvim',
+  --   setup = setup.dashboard(),
+  -- }
 
   -- Session management
   -- use {

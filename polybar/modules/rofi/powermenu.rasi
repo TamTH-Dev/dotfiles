@@ -1,9 +1,12 @@
 configuration {
   font: "JetBrainsMono Nerd Font 10";
+  show-icons: false;
   disable-history: false;
   fullscreen: false;
   hide-scrollbar: true;
   sidebar-mode: false;
+  location: 0;
+  terminal: "kitty";
 }
 
 @import "colors.rasi"

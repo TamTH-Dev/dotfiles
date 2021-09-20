@@ -57,6 +57,66 @@ function M.bufferline()
   end
 end
 
+function M.dashboard()
+  return function()
+    local global = vim.g
+    local cmd = vim.cmd
+    local api = vim.api
+
+    global.dashboard_default_executive = 'telescope'
+
+    global.dashboard_custom_header = {
+        '   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣿⣶⣿⣦⣼⣆          ',
+        '    ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ',
+        '          ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷    ⠻⠿⢿⣿⣧⣄     ',
+        '           ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀⠄⠢⣀⡀⠈⠙⠿⠄    ',
+        '          ⢠⣿⣿⣿⠈    ⣻⣿⣿⣿⣿⣿⣿⣿⣛⣳⣤⣀⣀   ',
+        '   ⢠⣧⣶⣥⡤⢄ ⣸⣿⣿⠘  ⢀⣴⣿⣿⡿⠛⣿⣿⣧⠈⢿⠿⠟⠛⠻⠿⠄  ',
+        '  ⣰⣿⣿⠛⠻⣿⣿⡦⢹⣿⣷   ⢊⣿⣿⡏  ⢸⣿⣿⡇ ⢀⣠⣄⣾⠄   ',
+        ' ⣠⣿⠿⠛ ⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄  ',
+        ' ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇ ⠛⠻⢷⣄ ',
+        '    ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆       ',
+        '       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ',
+    }
+
+    global.dashboard_custom_section = {
+      a = {
+        description = { '  Find File' },
+        command = 'Telescope find_files',
+      },
+      b = {
+        description = { '  Find Word' },
+        command = 'Telescope live_grep',
+      },
+      c = {
+        description = { '  Recent Files' },
+        command = 'Telescope oldfiles',
+      },
+      d = {
+        description = { '  Settings' },
+        command = 'e $HOME/.config/nvim/lua/default_config.lua',
+      },
+      e = {
+        description = { '  Quit' },
+        command = 'qa',
+      },
+    }
+
+    cmd([[let packages = len(globpath('~/.local/share/nvim/site/pack/packer/start', '*', 1, 1))]])
+
+    api.nvim_exec(
+      [[
+      let g:dashboard_custom_footer = ['Madvim loaded '..packages..' plugins  ']
+  ]],
+      false
+    )
+
+    api.nvim_exec([[
+       autocmd FileType dashboard nnoremap <silent> <buffer> q :q<CR>
+    ]], false)
+  end
+end
+
 function M.indent_blankline()
   return function()
     local global = vim.g

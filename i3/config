@@ -124,10 +124,15 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Lock Screen
-bindsym $mod+Shift+b exec betterlockscreen -l --time-format "%I:%M %p"
+bindsym $mod+Shift+b exec ~/.config/i3/lock.sh
+
+# Swap caps lock and escape
+exec_always --no-startup-id xmodmap -e "clear lock"
+exec_always --no-startup-id xmodmap -e "keycode 9 = Caps_Lock NoSymbol Caps_Lock"
+exec_always --no-startup-id xmodmap -e "keycode 66 = Escape NoSymbol Escape"
 
 # Start programs automatically
-exec_always feh --bg-scale /home/madlife/Pictures/backgrounds/beautiful-landscape-digital-art.jpg
-exec_always --no-startup-id /home/madlife/.config/polybar/launch.sh
+exec_always feh --bg-scale ~/Pictures/backgrounds/grayscale_natural.png
+exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec_always --no-startup-id nm-applet
 exec_always picom

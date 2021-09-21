@@ -15,10 +15,11 @@ window {
   transparency: "real";
   background-color: @stormBackground;
   text-color: @foreground;
-  border: 0;
+  border: 3px;
   border-color: @red;
   border-radius: 0;
   width: 400px;
+  padding: 15px;
   location: center;
   x-offset: 0;
   y-offset: 0;
@@ -26,19 +27,17 @@ window {
 
 prompt {
   enabled: true;
-  padding: 10px 15px 10px 15px;
+  padding: 10px 0 10px 10px;
   background-color: @stormBackground;
   text-color: #FFFFFF;
-  font: "Terminus 9";
 }
 
 textbox-prompt-colon {
-  padding: 8px 15px 10px 15px;
-  font: "Iosevka Nerd Font 8";
+  padding: 10px 0 10px 10px;
   background-color: @stormBackground;
   text-color: @foreground;
   expand: false;
-  str: "直";
+  str: "";
 }
 
 entry {
@@ -87,28 +86,27 @@ mainbox {
 
 element {
   background-color: @stormBackground;
-  text-color: @foreground;
-  orientation: horizontal;
-  border-radius: 0;
-  padding: 6px;
-}
-
-element-icon {
-  size: 24px;
-  border: 0;
+  text-color: @stormBackground;
+  padding: 8px;
 }
 
 element-text {
-  expand: true;
-  horizontal-align: 0;
-  vertical-align: 0.5;
-  margin: 0 2.5px 0 2.5px;
-}
-
-element selected {
   background-color: @stormBackground;
   text-color: @foreground;
-  border: 0;
-  border-radius: 0;
-  border-color: @stormBackground;
+}
+
+element selected.normal {
+  background-color: @blue;
+  text-color: @stormBackground;
+}
+
+element-text selected.normal {
+  background-color: @blue;
+  text-color: @stormBackground;
+}
+
+scrollbar {
+  background-color: @stormBackground;
+  handle-color:     @stormBackground;
+  handle-width:     0;
 }

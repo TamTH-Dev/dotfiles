@@ -28,29 +28,27 @@ window {
 prompt {
   enabled: true;
   padding: 10px 0 10px 10px;
-  background-color: @orange;
-  text-color: @stormBackground;
-  font: "JetBrainsMono Nerd Font 10";
+  background-color: @stormBackground;
+  text-color: @foreground;
 }
 
 textbox-prompt-colon {
   padding: 10px 0 10px 10px;
-  font: "JetBrainsMono Nerd Font 10";
   text-style: bold;
-  background-color: @orange;
-  text-color: @stormBackground;
+  background-color: @stormBackground;
+  text-color: @foreground;
   expand: false;
   str: "⏳";
 }
 
 entry {
-  background-color: @orange;
+  background-color: @stormBackground;
 }
 
 inputbar {
   children: [ textbox-prompt-colon, prompt ];
-  background-color: @orange;
-  text-color: @stormBackground;
+  background-color: @stormBackground;
+  text-color: @foreground;
   expand: false;
   border: 0;
   border-radius: 0;

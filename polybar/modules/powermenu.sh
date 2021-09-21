@@ -57,7 +57,7 @@ case $chosen in
             ORANGE='#ff9e64'
             BLUE='#2ac3de'
 
-            i3lock \
+            sleep 0.5 && i3lock \
             --insidever-color=$NIGHT     \
             --ringver-color=$ORANGE      \
             \

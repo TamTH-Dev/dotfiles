@@ -846,6 +846,16 @@ function M.icons()
            color = colors.blue,
            name = 'c',
         },
+        cc = {
+           icon = '',
+           color = colors.blue,
+           name = 'cc',
+        },
+        cpp = {
+           icon = '',
+           color = colors.blue,
+           name = 'cpp',
+        },
         css = {
            icon = '',
            color = colors.blue,
@@ -865,6 +875,11 @@ function M.icons()
            icon = '',
            color = colors.orange,
            name = 'html',
+        },
+        java = {
+          icon = '',
+          color = colors.red,
+          name = 'java',
         },
         jpeg = {
            icon = '',
@@ -965,13 +980,12 @@ function M.lsp()
   return function()
     local is_lspinstall_loaded, lspinstall = pcall(require, 'lspinstall')
     local is_lspconfig_loaded, lspconfig = pcall(require, 'lspconfig')
-    if not (is_lspinstall_loaded or is_lspconfig_loaded) then return end
+    local is_languages_loaded, languages = pcall(require, 'plugins/languages')
+    if not (is_lspinstall_loaded or is_lspconfig_loaded or is_languages_loaded) then return end
 
     local api = vim.api
     local cmd = vim.cmd
     local lsp = vim.lsp
-    local fn = vim.fn
-    local split = vim.split
 
     local on_attach = function(client, bufnr)
       --  require 'lsp_signature'.on_attach({
@@ -991,11 +1005,11 @@ function M.lsp()
       -- Set autocommands conditional on server_capabilities
       if client.resolved_capabilities.document_highlight then
         api.nvim_exec([[
-        augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-        augroup END
+          augroup lsp_document_highlight
+          autocmd! * <buffer>
+          autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+          autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+          augroup END
         ]], false)
       end
     end
@@ -1010,27 +1024,6 @@ function M.lsp()
         on_attach = on_attach,
       }
     end
-    -- Configure lua language server for neovim development
-    local lua_settings = {
-      Lua = {
-        runtime = {
-          -- LuaJIT in the case of Neovim
-          version = 'LuaJIT',
-          path = split(package.path, ';'),
-        },
-        diagnostics = {
-          -- Get the language server to recognize the `vim` global
-          globals = {'vim'},
-        },
-        workspace = {
-          -- Make the server aware of Neovim runtime files
-          library = {
-            [fn.expand('$VIMRUNTIME/lua')] = true,
-            [fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-          },
-        },
-      }
-    }
     -- Config lspinstall
     local function setup_servers()
       lspinstall.setup()
@@ -1042,8 +1035,20 @@ function M.lsp()
       for _, server in pairs(servers) do
         local config = make_config()
         -- Language specific config
-        if server == "lua" then
-          config.settings = lua_settings
+        local language = languages[server]
+        if language then
+          if language.init_options then
+            config.init_options = language.init_options
+          end
+          if language.settings then
+            config.settings = language.settings
+          end
+          if language.root_dir then
+            config.root_dir = language.root_dir
+          end
+          if language.filetypes then
+            config.filetypes = language.filetypes
+          end
         end
         -- Apply config
         lspconfig[server].setup(config)

@@ -151,8 +151,15 @@ function M.nvimtree()
 
     map('n', '<C-n>', ':NvimTreeToggle<cr>', opts)
     map('n', '<leader>r', ':NvimTreeRefresh<cr>', opts)
+    map('n', '<leader>f', ':NvimTreeFindFile<cr>', opts)
     -- Don't auto open tree on specific filetypes
     global.nvim_tree_auto_ignore_ft = { 'startify', 'dashboard', 'alpha' }
+    -- List of filenames that gets highlighted with NvimTreeSpecialFile
+    global.vim_tree_special_files = {
+      ['README.md'] = 1,
+      Makefile = 1,
+      MAKEFILE = 1
+    }
     -- Closes the tree when it's the last window
     global.nvim_tree_auto_close = 1
     global.nvim_tree_root_folder_modifier = ':~'

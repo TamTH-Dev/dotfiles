@@ -720,7 +720,7 @@ function M.galaxyline()
 
     gls.right[2] = {
       Separator = {
-        condition = is_buffer_number_valid,
+        condition = function() return hide_in_width() and is_buffer_number_valid() end,
         provider = function()
           return '| '
         end,
@@ -739,23 +739,33 @@ function M.galaxyline()
       }
     }
 
-    gls.right[4]= {
-      FileFormat = {
+    gls.right[4] = {
+      Separator = {
         condition = hide_in_width,
+        provider = function()
+          return '| '
+        end,
+        highlight = { colors.white, colors.bg },
+        separator = ' ',
+        separator_highlight = { colors.bg, colors.bg },
+      },
+    }
+
+    gls.right[5]= {
+      FileFormat = {
         provider = function()
           if not bo.filetype or bo.filetype == '' then return 'undefined' end
           return bo.filetype
         end,
         icon = ' ',
         highlight = { colors.blue, colors.bg },
-        separator = ' | ',
-        separator_highlight = { colors.fg, colors.bg }
+        -- separator = ' | ',
+        -- separator_highlight = { colors.fg, colors.bg }
       }
     }
 
-    gls.right[5] = {
+    gls.right[6] = {
       LineInfo = {
-        condition = hide_in_width,
         provider = 'LineColumn',
         icon = ' ',
         highlight = { colors.magenta, colors.bg },
@@ -764,7 +774,7 @@ function M.galaxyline()
       },
     }
 
-    gls.right[6] = {
+    gls.right[7] = {
       PerCent = {
         condition = hide_in_width,
         provider = 'LinePercent',
@@ -775,7 +785,7 @@ function M.galaxyline()
       }
     }
 
-    gls.right[7] = {
+    gls.right[8] = {
       ScrollBar = {
         condition = hide_in_width,
         provider = function()
@@ -1076,6 +1086,35 @@ function M.lsp()
       setup_servers() -- reload installed servers
       cmd('bufdo e') -- this triggers the FileType autocmd that starts the server
     end
+  end
+end
+
+function M.neoscroll()
+  return function()
+    local is_neoscroll_loaded, neoscroll = pcall(require, 'neoscroll')
+    local is_config_loaded, config = pcall(require, 'neoscroll.config')
+    if not (is_neoscroll_loaded or is_config_loaded) then return end
+
+    neoscroll.setup({
+      -- All these keys will be mapped to their corresponding default scrolling animation
+      mappings = { '<C-u>', '<C-d>', '<C-b>', '<C-f>',
+                   '<C-y>', '<C-e>', 'zt', 'zz', 'zb' },
+      hide_cursor = true,          -- Hide cursor while scrolling
+      stop_eof = true,             -- Stop at <EOF> when scrolling downwards
+      use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
+      respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+      cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
+      easing_function = nil,        -- Default easing function
+      pre_hook = nil,              -- Function to run before the scrolling animation starts
+      post_hook = nil,              -- Function to run after the scrolling animation ends
+    })
+
+    local mappings = {}
+    mappings['<C-u>'] = { 'scroll', { '-vim.wo.scroll', 'true', '150' } }
+    mappings['<C-d>'] = { 'scroll', { 'vim.wo.scroll', 'true', '150' } }
+    mappings['<C-b>'] = { 'scroll', { '-vim.api.nvim_win_get_height(0)', 'true', '150' } }
+    mappings['<C-f>'] = { 'scroll', { 'vim.api.nvim_win_get_height(0)', 'true', '150' } }
+    config.set_mappings(mappings)
   end
 end
 

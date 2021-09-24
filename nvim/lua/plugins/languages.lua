@@ -45,7 +45,7 @@ M.css = {
 
 M.html = {
     init_options = {
-      configurationSection = { 'html', 'css', 'javascript' },
+      configurationSection = { 'html', 'css', 'javascript', 'markdown' },
       embeddedLanguages = {
         css = true,
         javascript = true
@@ -55,7 +55,7 @@ M.html = {
       local util = require 'lspconfig/util'
       return util.root_pattern('package.json', '.git')(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
     end,
-    filetypes = { 'html' },
+    filetypes = { 'html', 'markdown' },
 }
 
 M.java = {

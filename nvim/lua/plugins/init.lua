@@ -117,7 +117,15 @@ packer.startup(function()
   use {
     'lewis6991/gitsigns.nvim',
     requires = 'nvim-lua/plenary.nvim',
+    event = 'BufEnter',
     config = config.gitsigns(),
+  }
+
+  -- Smooth scroll for neovim
+  use {
+    'karb94/neoscroll.nvim',
+    event = 'BufEnter',
+    config = config.neoscroll(),
   }
 
   -- Multiple cursors

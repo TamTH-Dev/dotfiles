@@ -154,8 +154,22 @@ export PATH=$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH
 # Path env for lua lsp
 export PATH=$HOME/lua-language-server/bin/Linux:$PATH
 
+# Path env for cargo
+export PATH=$HOME/.cargo/bin:$PATH
+
+# Path env for emacs
+export PATH=$HOME/.emacs.d/bin:$PATH
+
+# Path env for wine
+export WINEARCH=win32
+export WINEPREFIX=~/.wine32
+
 # The minimal, blazing-fast, and infinitely customizable prompt
 # eval "$(starship init zsh)"
+
+# RANDOM COLOR SCRIPT
+# https://aur.archlinux.org/packages/shell-color-scripts/
+# colorscript random
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

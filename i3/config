@@ -5,10 +5,10 @@ set $mod Mod4
 font pango:Blex Mono Medium Nerd Font Complete Mono 10
 
 # Gaps
-# gaps inner 8
-# gaps outer 2
-gaps inner 0
-gaps outer 0
+gaps inner 4
+gaps outer 4
+# gaps inner 0
+# gaps outer 0
 
 # Border
 for_window [class=".*"] border pixel 0
@@ -107,27 +107,20 @@ bindsym $mod+Shift+c reload
 # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # Exit i3 (logs out of X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec ~/.config/i3/modules/confirm.sh
 
-# Resize window (you can also use the mouse for that)
-mode "resize" {
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym j resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
-
-        # Back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
-}
-bindsym $mod+r mode "resize"
+# Resize windows
+bindsym $mod+Ctrl+h resize shrink width 4 px or 4 ppt
+bindsym $mod+Ctrl+k resize grow height 4 px or 4 ppt
+bindsym $mod+Ctrl+j resize shrink height 4 px or 4 ppt
+bindsym $mod+Ctrl+l resize grow width 4 px or 4 ppt
 
 # Lock Screen
-bindsym $mod+Shift+b exec ~/.config/i3/lock.sh
+bindsym $mod+Shift+b exec ~/.config/i3/modules/lock.sh
 
 # Start programs automatically
 exec_always feh --bg-scale ~/Pictures/wallpapers/tokyonight.jpg
 exec_always --no-startup-id ~/.config/polybar/launch.sh
-exec_always --no-startup-id nm-applet
 exec_always picom
+# exec_always --no-startup-id nm-applet

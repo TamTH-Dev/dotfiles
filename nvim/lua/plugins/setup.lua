@@ -57,6 +57,18 @@ function M.bufferline()
   end
 end
 
+function M.close_tag()
+  return function()
+    local global = vim.g
+    -- File extensions where this plugin is enabled
+    global.closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.ts,*.vue'
+    -- List of non-closing tags self-closing in the specified files
+    global.closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx,*.vuex'
+    -- Make the list of non-closing tags case-sensitive (e.g. `<Link>` will be>
+    global.closetag_emptyTags_caseSensitive = 1
+  end
+end
+
 function M.dashboard()
   return function()
     local global = vim.g
@@ -117,6 +129,14 @@ function M.dashboard()
   end
 end
 
+function M.emmet()
+  return function()
+    local global = vim.g
+    -- Remap the default emmet's leader key
+    global.user_emmet_leader_key = '<C-y>'
+  end
+end
+
 function M.indent_blankline()
   return function()
     local global = vim.g
@@ -140,6 +160,19 @@ function M.indent_blankline()
     global.indent_blankline_use_treesitter = true
     global.indent_blankline_show_current_context = true
     global.indent_blankline_enabled = true
+  end
+end
+
+function M.multiple_cursors()
+  return function()
+    local global = vim.g
+    global.multi_cursor_use_default_mapping = 0
+    global.multi_cursor_start_word_key = '<C-s>'
+    global.multi_cursor_select_all_word_key = '<A-s>'
+    global.multi_cursor_next_key = '<C-s>'
+    global.multi_cursor_prev_key = '<C-p>'
+    global.multi_cursor_skip_key = '<C-x>'
+    global.multi_cursor_quit_key = '<Esc>'
   end
 end
 

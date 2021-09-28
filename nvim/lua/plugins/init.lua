@@ -45,8 +45,8 @@ packer.startup(function()
     'akinsho/bufferline.nvim',
     after = 'nvim-web-devicons',
     requires = 'kyazdani42/nvim-web-devicons',
-    config = config.bufferline(),
     setup = setup.bufferline(),
+    config = config.bufferline(),
   }
 
   -- File explorer
@@ -56,6 +56,7 @@ packer.startup(function()
     cmd = { 'NvimTreeToggle', 'NvimTreeOpen' },
     requires = 'kyazdani42/nvim-web-devicons',
     setup = setup.nvimtree(),
+    config = config.nvimtree(),
   }
 
   -- Fancy start screen
@@ -132,16 +133,7 @@ packer.startup(function()
   use {
     'terryma/vim-multiple-cursors',
     event = 'BufEnter',
-    setup = function()
-      local global = vim.g
-      global.multi_cursor_use_default_mapping = 0
-      global.multi_cursor_start_word_key = '<C-s>'
-      global.multi_cursor_select_all_word_key = '<A-s>'
-      global.multi_cursor_next_key = '<C-s>'
-      global.multi_cursor_prev_key = '<C-p>'
-      global.multi_cursor_skip_key = '<C-x>'
-      global.multi_cursor_quit_key = '<Esc>'
-    end
+    setup = setup.multiple_cursors(),
   }
 
   -- Commenter
@@ -156,15 +148,7 @@ packer.startup(function()
     'alvan/vim-closetag',
     event = 'InsertEnter',
     ft = { 'html', 'javascript', 'javascriptreact', 'vue', 'typescript', 'typescriptreact' },
-    setup = function()
-      local global = vim.g
-      -- File extensions where this plugin is enabled
-      global.closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.ts,*.vue'
-      -- List of non-closing tags self-closing in the specified files
-      global.closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx,*.vuex'
-      -- Make the list of non-closing tags case-sensitive (e.g. `<Link>` will be>
-      global.closetag_emptyTags_caseSensitive = 1
-    end
+    setup = setup.close_tag()
   }
 
   -- Surround parentheses, brackets, quotes, XML tags, and more
@@ -178,11 +162,7 @@ packer.startup(function()
     'mattn/emmet-vim',
     event = 'InsertEnter',
     ft = { 'html', 'css', 'javascript', 'javascriptreact', 'vue', 'typescript', 'typescriptreact' },
-    config = function()
-      local global = vim.g
-      -- Remap the default emmet's leader key
-      global.user_emmet_leader_key = '<C-y>'
-    end
+    setup = setup.emmet(),
   }
 
   -- Fuzzy search
@@ -195,8 +175,8 @@ packer.startup(function()
       --   run = 'make',
       -- },
     },
-    config = config.telescope(),
     setup = setup.telescope(),
+    config = config.telescope(),
   }
   -- use { 'junegunn/fzf', run = 'fzf#install()' }
   -- use {
@@ -230,8 +210,8 @@ packer.startup(function()
   use {
     'glepnir/lspsaga.nvim',
     after = 'nvim-lspinstall',
-    config = config.saga(),
     setup = setup.saga(),
+    config = config.saga(),
   }
 
   -- Completion plugins

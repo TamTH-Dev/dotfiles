@@ -99,8 +99,15 @@ M.lua = {
         path = vim.split(package.path, ';'),
       },
       diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { 'vim' },
+        globals = {
+          -- Global var for neovim
+          'vim',
+          -- Global var for awesome
+          'awesome',
+          'root',
+          'client',
+          'screen'
+        },
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
@@ -138,6 +145,15 @@ M.python = {
   }
 }
 
+local eslint = {
+  lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
+  lintStdin = true,
+  lintFormats = {"%f:%l:%c: %m"},
+  lintIgnoreExitCode = true,
+  formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
+  formatStdin = true
+}
+
 M.typescript = {
   root_dir = function(fname)
     local util = require 'lspconfig/util'
@@ -151,12 +167,12 @@ M.typescript = {
   end,
   settings = {
     languages = {
-      javascript = { },
-      javascriptreact = { },
-      ["javascript.jsx"] = { },
-      typescript = { },
-      ["typescript.tsx"] = { },
-      typescriptreact = { }
+      javascript = { eslint },
+      javascriptreact = { eslint },
+      ["javascript.jsx"] = { eslint },
+      typescript = { eslint },
+      ["typescript.tsx"] = { eslint },
+      typescriptreact = { eslint },
     }
   },
   filetypes = {

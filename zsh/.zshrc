@@ -126,6 +126,7 @@ export EDITOR='nvim'
 # Aliases
 alias vi="nvim"
 alias zshconfig="vi ~/.zshrc"
+# alias ls="ls"
 alias la="ls -la"
 alias luamake=/home/madlife/lua-language-server/3rd/luamake/luamake
 
@@ -150,19 +151,6 @@ export PATH=$HOME/.nvm/versions/node/v14.17.5/bin:$PATH
 
 # Path env for ruby
 export PATH=$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH
-
-# Path env for lua lsp
-export PATH=$HOME/lua-language-server/bin/Linux:$PATH
-
-# Path env for cargo
-export PATH=$HOME/.cargo/bin:$PATH
-
-# Path env for emacs
-export PATH=$HOME/.emacs.d/bin:$PATH
-
-# Path env for wine
-export WINEARCH=win32
-export WINEPREFIX=~/.wine32
 
 # The minimal, blazing-fast, and infinitely customizable prompt
 # eval "$(starship init zsh)"

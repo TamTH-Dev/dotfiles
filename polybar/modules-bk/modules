@@ -40,8 +40,10 @@ label-unfocused-foreground = ${colors.foreground}
 label-unfocused-padding = 1
 
 label-visible = %icon%
+label-visible-padding = 1
 
 label-urgent = %icon%
+label-urgent-padding = 1
 
 [module/date]
 type = internal/date

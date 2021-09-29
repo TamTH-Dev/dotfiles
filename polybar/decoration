@@ -1,0 +1,36 @@
+;; Decoration
+
+[module/sep]
+type = custom/text
+content = -
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+content-background = ${colors.BG}
+content-foreground = ${colors.BG}
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/dot]
+type = custom/text
+content = 
+
+content-background = ${colors.BG}
+content-foreground = ${colors.BGL}
+content-padding = 2
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/LD]
+type = custom/text
+content = "%{T3}%{T-}"
+content-background = ${colors.BG}
+content-foreground = ${colors.BGL}
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/RD]
+type = custom/text
+content = "%{T3}%{T-}"
+content-background = ${colors.BG}
+content-foreground = ${colors.BGL}

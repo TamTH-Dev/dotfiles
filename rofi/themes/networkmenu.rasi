@@ -15,7 +15,7 @@ window {
   text-color: @foreground;
   border: 0;
   border-color: @selected;
-  border-radius: 8px;
+  border-radius: 16px;
   width:450px;
   location: center;
   anchor: center;
@@ -37,10 +37,10 @@ prompt {
 textbox-prompt-colon {
 	expand: false;
 	str: "";
-  border-radius: 8px;
+  border-radius: 16px;
   background-color: @highlight;
   text-color: @background;
-  padding: 6px 10px 6px 10px;
+  padding: 6px 8px 6px 8px;
 	font:	"JetBrainsMono Nerd Font 10";
 }
 
@@ -123,7 +123,7 @@ element selected {
   background-color: @selected;
   text-color: @background;
   border: 0;
-  border-radius: 8px;
+  border-radius: 16px;
   border-color: @selected;
 }
 

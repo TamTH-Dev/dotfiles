@@ -25,7 +25,7 @@ configuration {
 window {
   border: 0;
   border-color: @selected;
-  border-radius: 8px;
+  border-radius: 16px;
   width: 600px;
   height: 0;
 }
@@ -33,7 +33,7 @@ window {
 prompt {
   spacing: 0;
   border: 0;
-  border-radius: 8px;
+  border-radius: 100%;
   background-color: @highlight;
   text-color: @background;
   padding: 6px 10px 6px 10px;
@@ -120,7 +120,7 @@ element selected.normal {
   background-color: @selected;
   text-color: @background;
   border: 0;
-  border-radius: 8px;
+  border-radius: 16px;
   border-color: @selected;
 }
 
@@ -163,7 +163,7 @@ button {
   background-color: @highlight;
   text-color: @background;
   border: 0;
-  border-radius: 8px;
+  border-radius: 16px;
   border-color: @selected;
 }
 
@@ -171,7 +171,7 @@ button selected {
   background-color: @on;
   text-color: @background;
   border: 0;
-  border-radius: 8px;
+  border-radius: 16px;
   border-color: @selected;
 }
 

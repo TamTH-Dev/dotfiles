@@ -40,7 +40,7 @@ case $chosen in
         fi
         ;;
     $lock)
-        ~/.config/rofi/bin/lock.sh
+        ~/.config/i3/bin/lock.sh
         ;;
     $suspend)
 		ans=$($HOME/.config/rofi/bin/confirm &)

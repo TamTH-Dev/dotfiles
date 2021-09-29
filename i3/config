@@ -116,10 +116,7 @@ bindsym $mod+Ctrl+j resize shrink height 4 px or 4 ppt
 bindsym $mod+Ctrl+l resize grow width 4 px or 4 ppt
 
 # Lock Screen
-bindsym $mod+Shift+b exec ~/.config/rofi/bin/lock.sh
+bindsym $mod+Shift+b exec ~/.config/i3/bin/lock.sh
 
 # Start programs automatically
-exec_always feh --bg-scale ~/Pictures/wallpapers/tokyonight.jpg
-exec_always --no-startup-id ~/.config/polybar/launch.sh
-exec_always picom
-# exec_always --no-startup-id nm-applet
+exec_always --no-startup-id 	~/.config/i3/bin/autostart.sh

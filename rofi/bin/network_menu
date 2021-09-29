@@ -1,17 +1,4 @@
 #!/usr/bin/env python3
-# encoding:utf8
-"""NetworkManager command line dmenu script.
-
-To add new connections or enable/disable networking requires policykit
-permissions setup per:
-https://wiki.archlinux.org/index.php/NetworkManager#Set_up_PolicyKit_permissions
-
-OR running the script as root
-
-Add dmenu formatting options and default terminal if desired to
-$HOME/.config/i3/rofi/themes/networkmenu_config.ini
-
-"""
 import pathlib
 import struct
 import configparser
@@ -37,7 +24,7 @@ LOOP = GLib.MainLoop()
 CONNS = CLIENT.get_connections()
 
 CONF = configparser.ConfigParser()
-CONF.read(expanduser("~/.config/i3/rofi/themes/networkmenu_config.ini"))
+CONF.read(expanduser("~/.config/rofi/themes/networkmenu_config.ini"))
 
 def dmenu_cmd(num_lines, prompt="Networks", active_lines=None):  # pylint: disable=too-many-branches
     """Parse nmd.ini if it exists and add options to the dmenu command
@@ -49,14 +36,15 @@ def dmenu_cmd(num_lines, prompt="Networks", active_lines=None):  # pylint: disab
 
     """
     dmenu_command = "dmenu"
+    dmenu_args = []
+    args = CONF.items('dmenu')
+    args_dict = dict(args)
+    lines = ""
     if not CONF.sections():
         res = [dmenu_command, "-i", "-l", str(num_lines), "-p", str(prompt)]
         res.extend(sys.argv[1:])
         return res
     if CONF.has_section('dmenu'):
-        args = CONF.items('dmenu')
-        args_dict = dict(args)
-        dmenu_args = []
         if "dmenu_command" in args_dict:
             command = shlex.split(args_dict["dmenu_command"])
             dmenu_command = command[0]
@@ -184,8 +172,8 @@ def create_other_actions(client):
     if bluetooth_enabled is not None:
         actions.append(Action("{} Bluetooth".format(bluetooth_action),
                               toggle_bluetooth, not bluetooth_enabled))
-    actions += [Action("Launch Connection Manager", launch_connection_editor),
-                Action("Delete a Connection", delete_connection)]
+    actions.append(Action("Launch Connection Manager", launch_connection_editor))
+    actions.append(Action("Delete a Connection", delete_connection))
     if wifi_enabled:
         actions.append(Action("Rescan Wifi Networks", rescan_wifi))
     return actions
@@ -207,7 +195,7 @@ def rescan_wifi():
                     raise err
 
 
-def rescan_cb(dev, res, data):
+def rescan_cb(dev, res, _):
     """Callback for rescan_wifi. Just for notifications
 
     """
@@ -690,7 +678,7 @@ def delete_connection():
     LOOP.run()
 
 
-def delete_cb(dev, res, data):
+def delete_cb(dev, res, _):
     """Notification if delete completed successfully
 
     """
@@ -896,5 +884,3 @@ def run():
 
 if __name__ == '__main__':
     run()
-
-# vim: set et ts=4 sw=4 :

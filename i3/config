@@ -33,7 +33,7 @@ bindsym $mod+d exec --no-startup-id ~/.config/rofi/bin/launcher
 bindsym $mod+w exec --no-startup-id ~/.config/rofi/bin/windows
 bindsym $mod+x exec --no-startup-id ~/.config/rofi/bin/powermenu
 bindsym $mod+s exec --no-startup-id ~/.config/rofi/bin/screenshot
-# bindsym $mod+n 			  exec --no-startup-id ~/.config/rofi/bin/network_menu
+bindsym $mod+n exec --no-startup-id ~/.config/rofi/bin/network_menu
 
 # Change focus
 bindsym $mod+h focus left

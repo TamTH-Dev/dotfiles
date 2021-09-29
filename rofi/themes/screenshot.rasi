@@ -13,10 +13,10 @@ window {
   transparency: "real";
   background-color: @background;
   text-color: @foreground;
-  border: 0px;
+  border: 0;
   border-color: @selected;
-  border-radius: 12px;
-  width: 450px;
+  border-radius: 8px;
+  width: 320px;
   location: center;
   anchor: center;
   x-offset: 0;
@@ -37,7 +37,7 @@ prompt {
 textbox-prompt-colon {
 	expand: false;
 	str: "";
-  border-radius: 10px;
+  border-radius: 8px;
   background-color: @highlight;
   text-color: @background;
   padding: 6px 10px 6px 10px;
@@ -60,12 +60,12 @@ inputbar {
   spacing: 0;
   background-color: @background;
   text-color: @foreground;
-  border: 0px;
-  border-radius: 0px;
+  border: 0;
+  border-radius: 0;
   border-color: @selected;
   expand: false;
-  margin: 0px 0px 0px 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   position: center;
 }
 
@@ -80,7 +80,7 @@ listview {
   background-color: @background;
   columns: 3;
   lines: 1;
-  spacing: 10px;
+  spacing: 36px;
   cycle: true;
   dynamic: true;
   layout: vertical;
@@ -89,7 +89,7 @@ listview {
 mainbox {
   background-color: @background;
   children: [ inputbar, listview ];
-  spacing: 10px;
+  spacing: 15px;
   padding: 20px;
 }
 
@@ -117,13 +117,13 @@ element-text {
   expand: true;
   horizontal-align: 0.5;
   vertical-align: 0.5;
-  margin: 0px;
+  margin: 0;
 }
 
 element selected {
   background-color: @selected;
   text-color: @background;
-  border: 0px;
+  border: 0;
   border-radius: 100%;
   border-color: @selected;
 }

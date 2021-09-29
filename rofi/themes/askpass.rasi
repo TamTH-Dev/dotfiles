@@ -1,24 +1,24 @@
 @import "colors.rasi"
 
 * {
-    background-color:       @background;
-    text-color:             @foreground;
-	font:				 	"JetBrainsMono Nerd Font 10";
+  background-color: @background;
+  text-color: @foreground;
+	font:	"JetBrainsMono Nerd Font 10";
 }
 
 window {
-    width:      			280px;
-    padding:    			20px;
-    border:					2px;
-    border-radius:          8px;
-    border-color:           @selected;
-    location:               center;
-    x-offset:               0;
-    y-offset:               -4%;
+  width: 280px;
+  padding: 20px;
+  border:	2px;
+  border-radius: 8px;
+  border-color: @selected;
+  location: center;
+  x-offset: 0;
+  y-offset: -4%;
 }
 
 entry {
-    expand: 				true;
-    width: 					150px;
-    text-color:				@selected;
+  expand: true;
+  width: 150px;
+  text-color:	@selected;
 }

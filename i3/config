@@ -2,13 +2,11 @@
 set $mod Mod4
 
 # Font
-font pango:Blex Mono Medium Nerd Font Complete Mono 10
+font pango:JetBrainsMono Nerd Font 10
 
 # Gaps
-gaps inner 4
-gaps outer 4
-# gaps inner 0
-# gaps outer 0
+gaps inner 15
+gaps outer 0
 
 # Border
 for_window [class=".*"] border pixel 0
@@ -31,7 +29,11 @@ bindsym $mod+Return exec kitty tmux
 bindsym $mod+Shift+q kill
 
 # Start programs launcher
-bindsym $mod+d exec rofi -show
+bindsym $mod+d exec --no-startup-id ~/.config/rofi/bin/launcher
+bindsym $mod+w exec --no-startup-id ~/.config/rofi/bin/windows
+bindsym $mod+x exec --no-startup-id ~/.config/rofi/bin/powermenu
+bindsym $mod+s exec --no-startup-id ~/.config/rofi/bin/screenshot
+# bindsym $mod+n 			  exec --no-startup-id ~/.config/rofi/bin/network_menu
 
 # Change focus
 bindsym $mod+h focus left
@@ -54,9 +56,9 @@ bindsym $mod+Shift+x split v
 bindsym $mod+Shift+f fullscreen toggle
 
 # Change container layout (stacked, tabbed, toggle split, floating)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+# bindsym $mod+s layout stacking
+# bindsym $mod+w layout tabbed
+# bindsym $mod+e layout toggle split
 bindsym $mod+f floating toggle
 
 # Change focus between tiling / floating windows
@@ -106,9 +108,6 @@ bindsym $mod+Shift+10 move container to workspace $ws10
 bindsym $mod+Shift+c reload
 # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# Exit i3 (logs out of X session)
-# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Shift+e exec ~/.config/i3/modules/confirm.sh
 
 # Resize windows
 bindsym $mod+Ctrl+h resize shrink width 4 px or 4 ppt
@@ -117,7 +116,7 @@ bindsym $mod+Ctrl+j resize shrink height 4 px or 4 ppt
 bindsym $mod+Ctrl+l resize grow width 4 px or 4 ppt
 
 # Lock Screen
-bindsym $mod+Shift+b exec ~/.config/i3/modules/lock.sh
+bindsym $mod+Shift+b exec ~/.config/rofi/bin/lock.sh
 
 # Start programs automatically
 exec_always feh --bg-scale ~/Pictures/wallpapers/tokyonight.jpg

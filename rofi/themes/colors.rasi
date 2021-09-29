@@ -5,6 +5,6 @@
 	selected: #2ac3de;
 	highlight: #f7768e;
 	urgent:	#ff9e64;
-	on:	#9ece6a;
-	off: #bb9af7;
+	on:	#50fa7b;
+	off: #c678dd;
 }

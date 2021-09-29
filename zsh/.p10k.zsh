@@ -17,12 +17,12 @@
   # Prompt colors.
   local red='#f7768e'
   local orange='#ff9e64'
-  local brown='#e0af68'
-  local green='#9ece6a'
+  local yellow='#f1fa8c'
+  local green='#50fa7b'
   local magenta='#bb9af7'
   local blue='#2ac3de'
   local cyan='#7dcfff'
-  local grey='#565f89'
+  local grey='#414868'
   local white='#c0caf5'
 
   # Left prompt segments.
@@ -125,7 +125,7 @@
       # Styling for up-to-date Git status.
       local       meta=$grey  # default foreground
       local      clean=$grey  # green foreground
-      local   modified=$grey  # brown foreground
+      local   modified=$grey  # yellow foreground
       local  untracked=$grey  # blue foreground
       local conflicted=$grey  # red foreground
     else

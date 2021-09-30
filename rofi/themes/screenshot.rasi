@@ -37,10 +37,10 @@ prompt {
 textbox-prompt-colon {
 	expand: false;
 	str: "";
-  border-radius: 16px;
+  border-radius: 100%;
   background-color: @highlight;
   text-color: @background;
-  padding: 6px 10px 6px 10px;
+  padding: 6px 8px 6px 8px;
 	font:	"JetBrainsMono Nerd Font 10";
 }
 

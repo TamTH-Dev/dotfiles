@@ -9,9 +9,9 @@ dir="Pictures/screenshots"
 file="Screenshot_${time}_${geometry}.png"
 
 # Buttons
-screen=""
-area=""
-window=""
+screen=""
+area=""
+window=""
 
 # Take shots
 shot_full () {

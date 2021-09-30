@@ -119,9 +119,9 @@ module-margin-right = 0
 ; See the Fonts wiki page for more details
 
 font-0 = "JetBrainsMono Nerd Font:bold:size=10;3"
-font-1 = "Iosevka,Iosevka Nerd Font:size=12;3"
-font-2 = "Iosevka,Iosevka Nerd Font:size=15;4"
-font-3 = "Iosevka,Iosevka Nerd Font:bold:size=12;4"
+font-1 = "Iosevka Nerd Font:size=11;3"
+font-2 = "Iosevka Nerd Font:size=16;4"
+font-3 = "Iosevka Nerd Font:bold:size=11;4"
 
 ; Modules are added to one of the available blocks
 ;   modules-left = cpu ram

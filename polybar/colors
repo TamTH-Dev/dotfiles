@@ -1,14 +1,15 @@
 [colors]
-BG = #1a1b26
-BGL = #24283b
+BG = #24283b
+BGL = #303757
 FG = #c0caf5
 FGA = #565f89
 
 BLACK = #000000
 WHITE = #FFFFFF
 RED = #f7768e
+ORANGE = #ff9e64
 GREEN = #9ece6a
-YELLOW = #ff9e64
+YELLOW = #f1fa8c
 BLUE = #2ac3de
-PURPLE = #c678dd
+PURPLE = #bb9af7
 CYAN = #7dcfff

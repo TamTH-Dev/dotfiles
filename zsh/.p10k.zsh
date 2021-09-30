@@ -18,7 +18,7 @@
   local red='#f7768e'
   local orange='#ff9e64'
   local yellow='#f1fa8c'
-  local green='#50fa7b'
+  local green='#9ece6a'
   local magenta='#bb9af7'
   local blue='#2ac3de'
   local cyan='#7dcfff'

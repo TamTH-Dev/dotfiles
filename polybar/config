@@ -131,7 +131,7 @@ font-3 = "Iosevka,Iosevka Nerd Font:bold:size=12;4"
 # Default
 modules-left = menu dot LD i3 RD
 modules-center = 
-modules-right = volume dot backlight dot battery dot network dot LD date RD dot sysmenu
+modules-right = cpu dot memory dot volume dot backlight dot battery dot network dot LD date RD dot sysmenu
 
 ; The separator will be inserted between the output of each module
 separator =

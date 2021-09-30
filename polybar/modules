@@ -2,7 +2,7 @@
 type = custom/text
 
 content = " "
-content-font = 3
+content-font = 2
 content-foreground = ${colors.GREEN}
 content-padding = 0
 
@@ -624,7 +624,7 @@ label-foreground = ${colors.CYAN}
 type = custom/text
 
 content = " "
-content-font = 3
+content-font = 2
 content-foreground = ${colors.RED}
 content-padding = 0
 

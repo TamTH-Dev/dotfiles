@@ -18,7 +18,7 @@ configuration {
 @import "colors.rasi"
 
 * {
-  font: "JetBrainsMono Nerd Font 10";
+  font: "JetBrains Mono 10";
   background-color: @background;
 }
 
@@ -36,7 +36,7 @@ prompt {
   border-radius: 100%;
   background-color: @highlight;
   text-color: @background;
-  padding: 6px 10px 6px 10px;
+  padding: 6px 14px 6px 10px;
 }
 
 textbox-prompt-colon {
@@ -120,7 +120,7 @@ element selected.normal {
   background-color: @selected;
   text-color: @background;
   border: 0;
-  border-radius: 16px;
+  border-radius: 10px;
   border-color: @selected;
 }
 
@@ -163,7 +163,7 @@ button {
   background-color: @highlight;
   text-color: @background;
   border: 0;
-  border-radius: 16px;
+  border-radius: 10px;
   border-color: @selected;
 }
 
@@ -171,7 +171,7 @@ button selected {
   background-color: @on;
   text-color: @background;
   border: 0;
-  border-radius: 16px;
+  border-radius: 10px;
   border-color: @selected;
 }
 

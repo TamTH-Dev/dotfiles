@@ -1,5 +1,5 @@
 configuration {
-  font: "JetBrainsMono Nerd Font 10";
+  font: "JetBrains Mono 10";
   show-icons: false;
   display-drun: "";
   drun-display-format: "{icon} {name}";
@@ -40,8 +40,8 @@ textbox-prompt-colon {
   border-radius: 100%;
   background-color: @highlight;
   text-color: @background;
-  padding: 6px 8px 6px 8px;
-	font:	"JetBrainsMono Nerd Font 10";
+  padding: 6px 14px 6px 8px;
+	font:	"JetBrains Mono 10";
 }
 
 entry {
@@ -113,7 +113,7 @@ element-icon {
 element-text {
   background-color: inherit;
   text-color: inherit;
-	font:	"JetBrainsMono Nerd Font 10";
+	font: "Iosevka Nerd Font 10";
   expand: true;
   horizontal-align: 0.5;
   vertical-align: 0.5;

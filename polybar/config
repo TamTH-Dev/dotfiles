@@ -119,7 +119,7 @@ module-margin-right = 0
 ; See the Fonts wiki page for more details
 
 font-0 = "JetBrains Mono Medium:size=10;3"
-font-1 = "Iosevka Nerd Font:size=10;3"
+font-1 = "Iosevka Nerd Font:size=11;4"
 font-2 = "Iosevka Nerd Font:size=15;4"
 
 ; Modules are added to one of the available blocks
@@ -128,7 +128,7 @@ font-2 = "Iosevka Nerd Font:size=15;4"
 ;   modules-right = ipc clock
 
 # Default
-modules-left = menu dot LD i3 RD
+modules-left = menu dot LD i3 RD dot LD mpd RD
 modules-center = 
 modules-right = cpu dot memory dot volume dot backlight dot battery dot network dot LD date RD dot sysmenu
 

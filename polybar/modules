@@ -117,7 +117,7 @@ label-visible-background = ${colors.BGL}
 ;   %index%
 ;   %output%
 ; Default: %icon%  %name%
-label-urgent = %icon%
+label-urgent = 
 label-urgent-foreground = ${colors.RED}
 label-urgent-background = ${colors.BGL}
 
@@ -198,7 +198,7 @@ label-song-ellipsis = true
 ;   %elapsed%
 ;   %total%
 ; Default: %elapsed% / %total%
-;;abel-time = %elapsed% / %total%
+;;label-time = %elapsed% / %total%
 
 ; Available tokens:
 ;   None
@@ -213,10 +213,10 @@ icon-pause-font = 2
 icon-pause-foreground = ${colors.RED}
 icon-stop = 
 icon-stop-foreground = ${colors.RED}
-icon-prev = 玲
+icon-prev = "玲 "
 icon-prev-font = 3
 icon-prev-foreground = ${colors.CYAN}
-icon-next = 怜 
+icon-next = " 怜" 
 icon-next-font = 3
 icon-next-foreground = ${colors.CYAN}
 

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+inc_volume() {
+	amixer -Mq set Master,0 5%+ unmute
+}
+
+dec_volume() {
+	amixer -Mq set Master,0 5%- unmute
+}
+
+toggle_mute() {
+	status=`amixer get Master | tail -n1 | grep -wo 'on'`
+
+	if [[ "$status" == "on" ]]; then
+		amixer set Master toggle
+	else
+		amixer set Master toggle
+	fi
+}
+
+# Execute accordingly
+if [[ "$1" == "--inc" ]]; then
+	inc_volume
+elif [[ "$1" == "--dec" ]]; then
+	dec_volume
+elif [[ "$1" == "--toggle" ]]; then
+	toggle_mute
+fi
+
+exit 0

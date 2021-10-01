@@ -1,0 +1,34 @@
+#!/bin/bash
+
+time=`date +%Y-%m-%d-%I-%M-%S`
+geometry=`xrandr | head -n1 | cut -d',' -f2 | tr -d '[:blank:],current'`
+dir="$HOME/Pictures/screenshots"
+file="Screenshot_${time}_${geometry}.png"
+
+shot_full () {
+	cd ${dir} && maim -u -f png "$file" && viewnior "$file"
+}
+
+shot_window () {
+	cd ${dir} && maim -u -f png -i `xdotool getactivewindow` "$file" && viewnior "$file"
+}
+
+shot_area () {
+	cd ${dir} && maim -u -f png -s -b 2 -c 0.35,0.55,0.85,0.25 -l "$file" && viewnior "$file"
+}
+
+if [[ ! -d "$dir" ]]; then
+	mkdir -p "$dir"
+fi
+
+if [[ "$1" == "--full" ]]; then
+	shot_full
+elif [[ "$1" == "--window" ]]; then
+    shot_window
+elif [[ "$1" == "--area" ]]; then
+    shot_area
+else
+	echo -e "Available Options : --full --window --area"
+fi
+
+exit 0

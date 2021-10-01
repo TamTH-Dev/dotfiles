@@ -315,7 +315,7 @@ format-prefix-foreground = ${colors.RED}
 ;   %gb_swap_free%
 ;   %gb_swap_used%
 
-label = %gb_used%
+label = %mb_used%
 
 ;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 
@@ -338,7 +338,7 @@ interval = 5
 ;   <label-volume> (default)
 ;   <ramp-volume>
 ;   <bar-volume>
-format-volume = <ramp-volume> <bar-volume>
+format-volume = <ramp-volume> <label-volume>
 
 ; Available tags:
 ;   <label-muted> (default)
@@ -390,6 +390,9 @@ ramp-volume-8 = 
 ramp-volume-9 = 
 ramp-volume-font = 2
 ramp-volume-foreground = ${colors.BLUE}
+
+; Launch pavucontrol on right click
+click-right = pavucontrol
 
 ;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 

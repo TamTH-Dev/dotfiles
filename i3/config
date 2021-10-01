@@ -1,23 +1,53 @@
-# Set mod button
-set $mod Mod4
+# Colors
+# class                 border  backgr. text    indicator child_border
+client.focused          #f7768e #f7768e #c0caf5 #2ac3de   #f7768e
+client.focused_inactive #ff8e64 #ff8e64 #1a1b26 #2ac3de   #ff8e64
+client.unfocused        #24283b #24283b #c0caf5 #2ac3de   #24283b
+client.urgent           #bb9af7 #bb9af7 #c0caf5 #2ac3de   #bb9af7
+client.placeholder      #565f89 #565f89 #c0caf5 #2ac3de   #565f89
 
-# Font
-font pango:JetBrainsMono Nerd Font 10
+client.background       #24283b
+
+# Autostart
+exec_always --no-startup-id 	~/.config/i3/bin/autostart.sh
+
+# Set mod keys
+set $mod Mod4
+set $alt Mod1
+
+# Font (Global)
+font pango:JetBrains Mono Medium 10
 
 # Gaps
 gaps inner 15
 gaps outer 0
 
-# Border
+# Title bar text alignment
+title_align center
+
+# Uncomment this to disable title bars
 for_window [class=".*"] border pixel 0
 
-# Capture Screen
-bindsym --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`'
-bindsym --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`'
+# Window rules
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [class="feh|Viewnior|Gpicview|Gimp|MPlayer"] floating enable
+for_window [class="Lxappearance|Nitrogen"] floating enable
+for_window [class="Pavucontrol"] floating enable
 
-# Sreen brightness controls
-bindsym $mod+F5 exec --no-startup-id light -U 5 # decrease screen brightness
-bindsym $mod+F6 exec --no-startup-id light -A 5 # increase screen brightness
+# Brightness controls
+bindsym $mod+F5 exec --no-startup-id light -U 5 # decrease brightness
+bindsym $mod+F6 exec --no-startup-id light -A 5 # increase brightness
+
+# Volume controls
+bindsym $mod+F1 exec --no-startup-id "volume --toggle"
+bindsym $mod+F2 exec --no-startup-id "volume --dec"
+bindsym $mod+F3 exec --no-startup-id "volume --inc"
+
+# Screenshots
+bindsym Print 					    exec --no-startup-id "takeshot --full"
+bindsym Control+Print 			exec --no-startup-id "takeshot --window"
+bindsym $mod+Control+Print  exec --no-startup-id "takeshot --area"
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -117,6 +147,3 @@ bindsym $mod+Ctrl+l resize grow width 4 px or 4 ppt
 
 # Lock Screen
 bindsym $mod+Shift+b exec ~/.config/i3/bin/lock.sh
-
-# Start programs automatically
-exec_always --no-startup-id 	~/.config/i3/bin/autostart.sh

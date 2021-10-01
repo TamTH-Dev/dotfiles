@@ -1,9 +1,9 @@
 [module/menu]
 type = custom/text
 
-content = " "
-content-font = 2
-content-foreground = ${colors.GREEN}
+content = " "
+content-font = 3
+content-foreground = ${colors.ORANGE}
 content-padding = 0
 
 click-left = ~/.config/rofi/bin/launcher
@@ -518,7 +518,7 @@ interval = 1.0
 ; A value of 0 disables the feature
 ; NOTE: Experimental (needs more testing)
 ; Default: 0
-;ping-interval = 3
+; ping-interval = 3
 
 ; @deprecated: Define min width using token specifiers (%downspeed:min% and %upspeed:min%)
 ; Minimum output width of upload/download rate
@@ -615,7 +615,6 @@ format-background = ${colors.BGL}
 ;   %time%
 ; Default: %date%
 label = %time%
-label-font = 4
 label-foreground = ${colors.CYAN}
 
 ;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
@@ -624,7 +623,7 @@ label-foreground = ${colors.CYAN}
 type = custom/text
 
 content = " "
-content-font = 2
+content-font = 3
 content-foreground = ${colors.RED}
 content-padding = 0
 

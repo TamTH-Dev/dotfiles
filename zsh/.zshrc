@@ -5,17 +5,34 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Start configuration added by Zim install {{{
+#
+# User configuration sourced by interactive shells
+#
+
+# -----------------
+# Zsh configuration
+# -----------------
+
+#
+# History
+#
+
 # Remove older command from the history if a duplicate is to be added.
 setopt HIST_IGNORE_ALL_DUPS
+
+#
+# Input/output
+#
 
 # Set editor default keymap to emacs (`-e`) or vi (`-v`)
 bindkey -v
 
 # Prompt for spelling correction of commands.
-# setopt CORRECT
+#setopt CORRECT
 
 # Customize spelling correction prompt.
-# SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
+#SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 
 # Remove path separator from WORDCHARS.
 WORDCHARS=${WORDCHARS//[\/]}
@@ -60,7 +77,7 @@ WORDCHARS=${WORDCHARS//[\/]}
 # Set a custom terminal title format using prompt expansion escape sequences.
 # See http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Simple-Prompt-Escapes
 # If none is provided, the default '%n@%m: %~' is used.
-# zstyle ':zim:termtitle' format '%1~'
+#zstyle ':zim:termtitle' format '%1~'
 
 #
 # zsh-autosuggestions
@@ -68,7 +85,7 @@ WORDCHARS=${WORDCHARS//[\/]}
 
 # Customize the style that the suggestions are shown with.
 # See https://github.com/zsh-users/zsh-autosuggestions/blob/master/README.md#suggestion-highlight-style
-# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
+#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
 
 #
 # zsh-syntax-highlighting
@@ -80,8 +97,8 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
 # Customize the main highlighter styles.
 # See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md#how-to-tweak-it
-# typeset -A ZSH_HIGHLIGHT_STYLES
-# ZSH_HIGHLIGHT_STYLES[comment]='fg=242'
+#typeset -A ZSH_HIGHLIGHT_STYLES
+#ZSH_HIGHLIGHT_STYLES[comment]='fg=242'
 
 # ------------------
 # Initialize modules
@@ -116,26 +133,26 @@ bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
+# }}} End configuration added by Zim install
 
 # Language environment
 export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-export EDITOR='nvim'
+export EDITOR='nvim'                                                       
 
 # Aliases
 alias vi="nvim"
 alias zshconfig="vi ~/.zshrc"
-# alias ls="ls"
 alias la="ls -la"
+alias music="ncmpcpp"
 alias luamake=/home/madlife/lua-language-server/3rd/luamake/luamake
 
 # System path env
-export PATH=$HOME/.local/bin:/usr/local/bin:/usr/bin:/usr/sbin:/usr/local/sbin:/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/.config/bin:/usr/local/bin:/usr/bin:/usr/sbin:/usr/local/sbin:/bin:$PATH
 
 # Configure fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --bind=shift-tab:up,tab:down --no-multi --cycle'
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh                                     export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --bind=shift-tab:up,tab:down --no-multi --cycle'
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules,.git,build,dist,.cache,cache,.idea}"'
 
 # Path env for perl
@@ -153,13 +170,6 @@ export PATH=$HOME/.nvm/versions/node/v14.17.5/bin:$PATH
 
 # Path env for ruby
 export PATH=$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH
-
-# The minimal, blazing-fast, and infinitely customizable prompt
-# eval "$(starship init zsh)"
-
-# RANDOM COLOR SCRIPT
-# https://aur.archlinux.org/packages/shell-color-scripts/
-# colorscript random
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 DIR="$HOME/.config"
 rofi_command="rofi -theme $DIR/rofi/themes/screenshot.rasi"

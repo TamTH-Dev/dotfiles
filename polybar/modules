@@ -108,8 +108,8 @@ label-unfocused-background = ${colors.BGL}
 ;   %output%
 ; Default: %icon%  %name%
 label-visible = %icon%
-label-visible-foreground = ${colors.BGL}
-label-visible-background = ${colors.GREEN}
+label-visible-foreground = ${colors.RED}
+label-visible-background = ${colors.BGL}
 
 ; Available tokens:
 ;   %name%
@@ -118,8 +118,8 @@ label-visible-background = ${colors.GREEN}
 ;   %output%
 ; Default: %icon%  %name%
 label-urgent = %icon%
-label-urgent-foreground = ${colors.BGL}
-label-urgent-background = ${colors.RED}
+label-urgent-foreground = ${colors.RED}
+label-urgent-background = ${colors.BGL}
 
 ; Paddings
 label-focused-padding = 1

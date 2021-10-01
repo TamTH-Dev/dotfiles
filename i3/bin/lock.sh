@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Require i3lock-color
+
 NIGHT='#1a1b26'
 RED='#f7768e'
 ORANGE='#ff9e64'

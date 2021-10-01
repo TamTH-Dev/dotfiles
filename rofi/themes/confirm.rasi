@@ -3,7 +3,7 @@
 * {
   background-color: @background;
   text-color: @foreground;
-	font:	"JetBrains Mono 10";
+	font:	"JetBrains Mono Medium 10";
 }
 
 window {

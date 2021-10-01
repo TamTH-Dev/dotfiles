@@ -1,5 +1,6 @@
 configuration {
   location: 0;
+  font: "Iosevka Nerd Font 10";
   fixed-num-lines: true;
   show-icons: false;
   sidebar-mode: true;
@@ -7,18 +8,17 @@ configuration {
   window-format: "[{w}] ··· {c} ···   {t}";
   click-to-exit: true;
   combi-hide-mode-prefix: false;
-  display-window: "";
   display-windowcd: "";
   display-run: "";
-  display-ssh: "";
   display-drun: "";
+  display-ssh: "";
+  display-window: "";
   display-combi: "";
 }
 
 @import "colors.rasi"
 
 * {
-  font: "JetBrains Mono 10";
   background-color: @background;
 }
 
@@ -36,14 +36,13 @@ prompt {
   border-radius: 100%;
   background-color: @highlight;
   text-color: @background;
-  padding: 6px 14px 6px 10px;
+  padding: 6px 10px 6px 10px;
 }
 
 textbox-prompt-colon {
-  expand: false;
-  str: "";
-  padding: 0;
-  text-color: inherit;
+	expand: false;
+	str: "";
+  background-color: inherit;
 }
 
 entry {
@@ -57,6 +56,7 @@ entry {
   border: 0;
   border-color: @selected;
   border-radius: 0;
+  font: "JetBrains Mono Medium 10";
 }
 
 case-indicator {
@@ -94,6 +94,7 @@ listview {
 element-text, element-icon {
   background-color: inherit;
   text-color: inherit;
+  font: "JetBrains Mono Medium 10";
 }
 
 element {

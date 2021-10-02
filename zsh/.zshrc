@@ -146,6 +146,7 @@ alias vi="nvim"
 alias zshconfig="vi ~/.zshrc"
 alias la="ls -la"
 alias music="ncmpcpp"
+alias calendar="khal interactive"
 alias luamake=/home/madlife/lua-language-server/3rd/luamake/luamake
 
 # System path env

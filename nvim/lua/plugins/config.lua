@@ -258,8 +258,8 @@ function M.cmp()
       },
       preselect = types.cmp.PreselectMode.Item,
       documentation = {
-        border = { '', '', '', ' ', '', '', '', ' ' },
-        winhighlight = 'NormalFloat:CmpDocumentation,FloatBorder:CmpDocumentationBorder',
+        border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+        winhighlight = 'Normal:MyNormal,NormalNC:MyNormalNC',
         maxwidth = math.floor((WIDE_HEIGHT * 2) * (opt.columns / (WIDE_HEIGHT * 2 * 16 / 9))),
         maxheight = math.floor(WIDE_HEIGHT * (WIDE_HEIGHT / opt.lines)),
       },

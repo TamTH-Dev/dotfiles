@@ -44,7 +44,7 @@
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
     command_execution_time    # previous command duration
-    time                      # current time
+    # time                      # current time
     # =========================[ Line #2 ]=========================
     newline                   # \n
   )

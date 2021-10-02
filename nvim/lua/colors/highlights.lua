@@ -35,6 +35,9 @@ local bg = function(group, color)
    cmd('hi '..group..' guibg='.. color)
 end
 
+-- General
+fg('FloatBorder', colors.blue)
+
 -- Telescope
 fg('TelescopeBorder', colors.blue)
 fg('TelescopePromptPrefix', colors.magenta)

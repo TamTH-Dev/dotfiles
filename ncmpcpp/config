@@ -77,13 +77,13 @@ visualizer_in_stereo = yes
 ##
 visualizer_type = ellipse
 #
-visualizer_look =  
+visualizer_look = 
 #
-#visualizer_color = blue, cyan, green, yellow, magenta, red
+# visualizer_color = blue, cyan, green, yellow, magenta, red
 #
 ## Alternative subset of 256 colors for terminals that support it.
 ##
-visualizer_color = 117, 208, 216, 210, 114, 176, 251, 117, 117, 117
+visualizer_color = blue, cyan, green, yellow, magenta, red
 #
 ##### system encoding #####
 ##

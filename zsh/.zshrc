@@ -147,21 +147,13 @@ alias zshconfig="vi ~/.zshrc"
 alias la="ls -la"
 alias music="ncmpcpp"
 alias calendar="khal interactive"
-alias luamake=/home/madlife/lua-language-server/3rd/luamake/luamake
 
 # System path env
 export PATH=$HOME/.local/bin:$HOME/.config/bin:/usr/local/bin:/usr/bin:/usr/sbin:/usr/local/sbin:/bin:$PATH
 
 # Configure fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh                                     export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --bind=shift-tab:up,tab:down --no-multi --cycle'
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --bind=shift-tab:up,tab:down --no-multi --cycle'
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules,.git,build,dist,.cache,cache,.idea}"'
-
-# Path env for perl
-PATH="/home/madlife/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/madlife/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/madlife/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/madlife/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/madlife/perl5"; export PERL_MM_OPT;
 
 # Path env for nvm
 export NVM_DIR="$HOME/.nvm"

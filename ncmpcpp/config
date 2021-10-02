@@ -41,28 +41,23 @@ mpd_music_dir = ~/Music
 ## visualization or 44100:16:2 for stereo visualization. Example configuration
 ## (it has to be put into mpd.conf):
 ##
-## audio_output {
-##        type            "fifo"
-##        name            "Visualizer feed"
-##        path            "/tmp/mpd.fifo"
-##        format          "44100:16:2"
-## }
-##
-#
-#visualizer_fifo_path = /tmp/mpd.fifo
-#
-##
+audio_output {
+  type            "fifo"
+  name            "Visualizer feed"
+  path            "/tmp/mpd.fifo"
+  format          "44100:16:2"
+}
 ## Note: Below parameter is needed for ncmpcpp to determine which output
 ## provides data for visualizer and thus allow syncing between visualization and
 ## sound as currently there are some problems with it.
 ##
 #
-#visualizer_output_name = Visualizer feed
+visualizer_output_name = Visualizer feed
 #
 ##
 ## If you set format to 44100:16:2, make it 'yes'.
 ##
-#visualizer_in_stereo = yes
+visualizer_in_stereo = yes
 #
 ##
 ## Note: Below parameter defines how often ncmpcpp has to "synchronize"
@@ -82,13 +77,13 @@ mpd_music_dir = ~/Music
 ##
 visualizer_type = ellipse
 #
-# visualizer_look = 
+visualizer_look =  
 #
 #visualizer_color = blue, cyan, green, yellow, magenta, red
 #
 ## Alternative subset of 256 colors for terminals that support it.
 ##
-visualizer_color = 110, 203, 215, 179, 107, 176, 246, 110, 110, 110
+visualizer_color = 117, 208, 216, 210, 114, 176, 251, 117, 117, 117
 #
 ##### system encoding #####
 ##
@@ -200,17 +195,17 @@ current_item_inactive_column_prefix = $(yellow)$r
 #
 current_item_inactive_column_suffix = $/r$(end)
 #
-# now_playing_prefix = 
+now_playing_prefix = " "
 #
 # now_playing_suffix = 
 #
-#browser_playlist_prefix = "$2playlist$9 "
+# browser_playlist_prefix = 
 #
-# selected_item_prefix = 
+selected_item_prefix = " "
 #
-#selected_item_suffix = $9
+# selected_item_suffix = 
 #
-#modified_item_prefix = $3> $9
+# modified_item_prefix = 
 #
 ##
 ## Note: attributes are not supported for the following variables.
@@ -299,7 +294,7 @@ song_columns_list_format = (20)[]{a} (6f)[blue]{NE} (50)[white]{t|f:Title} (20)[
 #
 #playlist_editor_display_mode = classic
 #
-#discard_colors_if_item_is_selected = yes
+discard_colors_if_item_is_selected = yes
 #
 #show_duplicate_tags = yes
 #
@@ -345,9 +340,9 @@ header_visibility = yes
 #
 statusbar_visibility = yes
 #
-#titles_visibility = yes
+titles_visibility = yes
 #
-#header_text_scrolling = yes
+header_text_scrolling = yes
 #
 #cyclic_scrolling = no
 #
@@ -409,19 +404,19 @@ startup_slave_screen = "visualizer"
 #
 locked_screen_width_part = 50
 #
-#ask_for_locked_screen_width_part = yes
+ask_for_locked_screen_width_part = yes
 #
-#jump_to_now_playing_song_at_start = yes
+jump_to_now_playing_song_at_start = yes
 #
-#ask_before_clearing_playlists = yes
+ask_before_clearing_playlists = yes
 #
-#clock_display_seconds = no
+clock_display_seconds = yes
 #
-display_volume_level = no
+display_volume_level = yes
 #
-#display_bitrate = no
+display_bitrate = yes
 #
-#display_remaining_time = no
+display_remaining_time = no
 #
 ## Available values: none, basic, extended, perl.
 ##
@@ -508,37 +503,37 @@ external_editor = nvim
 ## are used there is a possibility that you'll be able to use only colors with
 ## transparent background.
 #
-colors_enabled = yes
+# colors_enabled = yes
 #
-empty_tag_color = yellow
+empty_tag_color = magenta
 #
-header_window_color = white
+header_window_color = red
 #
 volume_color = magenta
 #
-state_line_color = yellow
+# state_line_color = blue
 #
-state_flags_color = red:b
+state_flags_color = magenta:b
 #
 main_window_color = blue
 #
-color1 = yellow
+# color1 = blue
 #
-color2 = yellow
+# color2 = blue
 #
-#progressbar_color = black:b
+# progressbar_color = black:b
 #
 progressbar_elapsed_color = blue:b
 #
-statusbar_color = red
+# statusbar_color = blue
 #
 statusbar_time_color = magenta:b
 #
 player_state_color = yellow:b
 #
-alternative_ui_separator_color = blue:b
+# alternative_ui_separator_color = blue:b
 #
-window_border_color = blue
+# window_border_color = blue
 #
-active_window_border = blue
+# active_window_border = blue
 #

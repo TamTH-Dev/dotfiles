@@ -231,33 +231,6 @@ function M.nvimtree()
   end
 end
 
-function M.saga()
-  return function()
-    local map = vim.api.nvim_set_keymap
-    local opts = { noremap = true, silent = true }
-
-    -- show hover doc
-    map('n', '<leader>gk', ':Lspsaga hover_doc<cr>', opts)
-    -- scroll action
-    map('n', '<C-j>', '<cmd>lua require(\'lspsaga.action\').smart_scroll_with_saga(1)<cr>', opts)
-    map('n', '<C-k>', '<cmd>lua require(\'lspsaga.action\').smart_scroll_with_saga(-1)<cr>', opts)
-    -- code action
-    map('n', '<leader>ga', ':Lspsaga code_action<cr>', opts)
-    map('v', '<leader>ga', ':<C-U>Lspsaga range_code_action<cr>', opts)
-    -- show signature help
-    map('n', '<leader>gs', ':Lspsaga signature_help<cr>', opts)
-    -- show diagnostic
-    map('n', '<leader>gl', ':Lspsaga show_line_diagnostics<cr>', opts)
-    -- rename
-    map('n', '<leader>gr', ':Lspsaga rename<cr>', opts)
-    -- jump diagnostic
-    map('n', '<leader>gn', ':Lspsaga diagnostic_jump_next<cr>', opts)
-    map('n', '<leader>gp', ':Lspsaga diagnostic_jump_prev<cr>', opts)
-    -- lsp provider to find the cursor word definition and reference
-    map('n', '<leader>gf', ':Lspsaga lsp_finder<cr>', opts)
-  end
-end
-
 function M.telescope()
   return function()
     local map = vim.api.nvim_set_keymap

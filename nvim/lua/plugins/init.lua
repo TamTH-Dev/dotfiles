@@ -203,16 +203,6 @@ packer.startup(function()
     'kabouzeid/nvim-lspinstall',
     config = config.lsp(),
   }
-  -- use {
-  --   'ray-x/lsp_signature.nvim',
-  --   after = 'nvim-lspconfig',
-  -- }
-  use {
-    'glepnir/lspsaga.nvim',
-    after = 'nvim-lspinstall',
-    setup = setup.saga(),
-    config = config.saga(),
-  }
 
   -- Completion plugins
   use {

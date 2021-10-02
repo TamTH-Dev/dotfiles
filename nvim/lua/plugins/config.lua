@@ -943,7 +943,7 @@ function M.icons()
         },
         py = {
            icon = '',
-           color = colors.orange,
+           color = colors.yellow,
            name = 'py',
         },
         toml = {
@@ -996,22 +996,25 @@ function M.lsp()
     local api = vim.api
     local cmd = vim.cmd
     local lsp = vim.lsp
+    local handlers = lsp.handlers
 
     local on_attach = function(client, bufnr)
-      --  require 'lsp_signature'.on_attach({
-      --   bind = true, -- This is mandatory, otherwise border config won't get registered.
-      --   handler_opts = {
-      --     border = 'single',
-      --     use_lspsaga = true,
-      --     hint_prefix = '🦊',
-      --   }
-      -- }, bufnr)
       local buf_set_keymap = function(...) api.nvim_buf_set_keymap(bufnr, ...) end
       local buf_set_option = function(...) api.nvim_buf_set_option(bufnr, ...) end
       local opts = { noremap = true, silent = true } -- Mappings
+
       -- Enable completion triggered by <c-x><c-o>
       buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
       buf_set_keymap('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
+      buf_set_keymap('n', '<leader>gk', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+      buf_set_keymap('n', '<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
+      buf_set_keymap('n', '<leader>gr', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+      buf_set_keymap('n', '<leader>gn', '<cmd>lua vim.lsp.diagnostic.goto_next({ popup_opts = { border = \'rounded\' } })<cr>', opts)
+      buf_set_keymap('n', '<leader>gp', '<cmd>lua vim.lsp.diagnostic.goto_prev({ popup_opts = { border = \'rounded\' } })<cr>', opts)
+      buf_set_keymap('n', '<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+      buf_set_keymap('n', '<leader>gf', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
+      buf_set_keymap('n', '<leader>gl', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = \'rounded\' })<cr>', opts)
+
       -- Set autocommands conditional on server_capabilities
       if client.resolved_capabilities.document_highlight then
         api.nvim_exec([[
@@ -1027,6 +1030,13 @@ function M.lsp()
     local make_config = function()
       local capabilities = lsp.protocol.make_client_capabilities()
       capabilities.textDocument.completion.completionItem.snippetSupport = true
+      capabilities.textDocument.completion.completionItem.resolveSupport = {
+        properties = {
+          'documentation',
+          'detail',
+          'additionalTextEdits',
+        },
+      }
       return {
         -- Enable snippet support
         capabilities = capabilities,
@@ -1067,8 +1077,8 @@ function M.lsp()
     -- Invoke lspinstall
     setup_servers()
 
-    -- Config lsp diagnostics
-    lsp.handlers['textDocument/publishDiagnostics'] = lsp.with(
+    -- Config diagnostics
+    handlers['textDocument/publishDiagnostics'] = lsp.with(
       lsp.diagnostic.on_publish_diagnostics,
       {
         signs = true,
@@ -1080,6 +1090,17 @@ function M.lsp()
         severity_sort = false,
       }
     )
+
+    -- Change diagnostics' sign
+    vim.fn.sign_define('LspDiagnosticsSignError', { text = "", texthl = 'LspDiagnosticsDefaultError' })
+    vim.fn.sign_define('LspDiagnosticsSignWarning', { text = "", texthl = 'LspDiagnosticsDefaultWarning' })
+    vim.fn.sign_define('LspDiagnosticsSignInformation', { text = "", texthl = 'LspDiagnosticsDefaultInformation' })
+    vim.fn.sign_define('LspDiagnosticsSignHint', { text = "", texthl = 'LspDiagnosticsDefaultHint' })
+
+    -- Change popup styles
+    local pop_opts = { border = 'rounded', max_width = 80 }
+    handlers['textDocument/hover'] = lsp.with(handlers.hover, pop_opts)
+    handlers['textDocument/signatureHelp'] = lsp.with(handlers.signature_help, pop_opts)
 
     -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
     lspinstall.post_install_hook = function ()
@@ -1178,51 +1199,6 @@ function M.nvimtree()
   end
 end
 
-function M.saga()
-  return function()
-    local is_saga_loaded, saga = pcall(require, 'lspsaga')
-    if not is_saga_loaded then return end
-
-    saga.init_lsp_saga {
-      use_saga_diagnostic_sign = true,
-      error_sign = ' ',
-      warn_sign = ' ',
-      hint_sign = ' ',
-      infor_sign = ' ',
-      dianostic_header_icon = ' ',
-      code_action_icon = ' ',
-      code_action_prompt = {
-        enable = true,
-        sign = true,
-        sign_priority = 20,
-        virtual_text = true
-      },
-      finder_definition_icon = ' ',
-      finder_reference_icon = ' ',
-      max_preview_lines = 10, -- preview lines of lsp_finder and definition preview
-      finder_action_keys = {
-        open = '<cr>',
-        vsplit = '<C-v>',
-        split = '<C-x>',
-        quit = 'q',
-        scroll_down = '<C-j>',
-        scroll_up = '<C-k>'
-      },
-      code_action_keys = {
-        quit = 'q',
-        exec = '<cr>'
-      },
-      rename_action_keys = {
-        quit = 'q',
-        exec = '<cr>'
-      },
-      definition_preview_icon = ' ',
-      border_style = 'single', -- 'single' 'double' 'round' 'plus'
-      rename_prompt_prefix = '➤'
-    }
-  end
-end
-
 function M.session()
   return function()
     local is_session_loaded, session = pcall(require, 'auto-session')
@@ -1299,8 +1275,7 @@ function M.telescope()
         generic_sorter =  sorters.get_generic_fuzzy_sorter,
         winblend = 0,
         border = {},
-        borderchars = {'─', '│', '─', '│', '┌', '┐', '┘', '└'},
-        -- borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+        borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
         disable_devicons = false,
         color_devicons = true,
         use_less = true,

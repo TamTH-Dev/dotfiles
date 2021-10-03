@@ -176,6 +176,18 @@ function M.multiple_cursors()
   end
 end
 
+function M.neoformat()
+  return function ()
+    local global = vim.g
+    local map = vim.api.nvim_set_keymap
+    local opts = { noremap = true, silent = true }
+    -- Enable formatters for python
+    global.neoformat_enabled_python = { 'yapf', 'autopep8', 'black' }
+
+    map('n', '<leader>f', '<cmd>Neoformat<cr>', opts)
+  end
+end
+
 function M.nvimtree()
   return function()
     local map = vim.api.nvim_set_keymap
@@ -184,7 +196,7 @@ function M.nvimtree()
 
     map('n', '<C-n>', ':NvimTreeToggle<cr>', opts)
     map('n', '<leader>r', ':NvimTreeRefresh<cr>', opts)
-    map('n', '<leader>f', ':NvimTreeFindFile<cr>', opts)
+    -- map('n', '<leader>f', ':NvimTreeFindFile<cr>', opts)
     -- Don't auto open tree on specific filetypes
     global.nvim_tree_auto_ignore_ft = { 'startify', 'dashboard', 'alpha' }
     -- List of filenames that gets highlighted with NvimTreeSpecialFile

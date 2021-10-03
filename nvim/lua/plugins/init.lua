@@ -64,16 +64,6 @@ packer.startup(function()
     'goolord/alpha-nvim',
     config = config.alpha(),
   }
-  -- use {
-  --   'glepnir/dashboard-nvim',
-  --   setup = setup.dashboard(),
-  -- }
-
-  -- Session management
-  -- use {
-  --   'rmagatti/auto-session',
-  --   config = config.session(),
-  -- }
 
   -- Parser
   use {
@@ -170,29 +160,16 @@ packer.startup(function()
     'nvim-telescope/telescope.nvim',
     requires = {
       { 'nvim-lua/plenary.nvim' },
-      -- {
-      --   'nvim-telescope/telescope-fzf-native.nvim',
-      --   run = 'make',
-      -- },
     },
     setup = setup.telescope(),
     config = config.telescope(),
   }
-  -- use { 'junegunn/fzf', run = 'fzf#install()' }
-  -- use {
-  --   'junegunn/fzf.vim',
-  --   config = config.fzf()
-  -- }
 
   -- Formatter
   use {
     'sbdchd/neoformat',
     cmd = 'Neoformat',
-    config = function()
-      local global = vim.g
-      -- Enable formatters for python
-      global.neoformat_enabled_python = { 'yapf', 'autopep8', 'black' }
-    end,
+    setup = setup.neoformat(),
   }
 
   -- LSP supporter
@@ -222,26 +199,6 @@ packer.startup(function()
     },
     config = config.cmp(),
   }
-
-  -- use {
-  --   'ms-jpq/coq_nvim',
-  --   after = { 'coq.artifacts' },
-  --   branch = 'coq',
-  --   setup = function()
-  --     vim.g.coq_settings = { auto_start = false }
-  --   end,
-  --   config = function()
-  --     vim.g.coq_settings = { ['display.icons.mode'] = 'short', ['display.pum.kind_context'] = { '','' }, ['display.pum.source_context'] = { '' ,'' } }
-  --     if vim.o.ft ~= 'lua' and vim.o.ft ~= 'sql' and vim.o.ft ~= 'vim' then
-  --       vim.cmd('COQnow')
-  --     end
-  --   end
-  -- } -- main one
-  -- use {
-  --   'ms-jpq/coq.artifacts',
-  --   branch= 'artifacts',
-  --   event = 'InsertEnter',
-  -- } -- 9000+ Snippets
 
   -- Autopairs supporter
   use {

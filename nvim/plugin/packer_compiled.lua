@@ -171,7 +171,6 @@ _G.packer_plugins = {
   },
   neoformat = {
     commands = { "Neoformat" },
-    config = { "\27LJ\1\2R\0\0\2\0\4\0\0054\0\0\0007\0\1\0003\1\3\0:\1\2\0G\0\1\0\1\4\0\0\tyapf\rautopep8\nblack\29neoformat_enabled_python\6g\bvim\0" },
     loaded = false,
     needs_bufread = false,
     path = "/home/madlife/.local/share/nvim/site/pack/packer/opt/neoformat"
@@ -301,33 +300,37 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Setup for: telescope.nvim
-time([[Setup for telescope.nvim]], true)
-try_loadstring("\27LJ\1\2�\2\0\0\a\0\15\0#4\0\0\0007\0\1\0007\0\2\0003\1\3\0\16\2\0\0%\3\4\0%\4\5\0%\5\6\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\a\0%\5\b\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\t\0%\5\n\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\v\0%\5\f\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\r\0%\5\14\0\16\6\1\0>\2\5\1G\0\1\0-:Telescope lsp_workspace_diagnostics<cr>\n<C-w>,:Telescope lsp_document_diagnostics<cr>\n<C-e>\27:Telescope buffers<cr>\n<C-b>\29:Telescope live_grep<cr>\n<C-f>\30:Telescope find_files<cr>\n<C-p>\6n\1\0\2\fnoremap\2\vsilent\2\20nvim_set_keymap\bapi\bvim\0", "setup", "telescope.nvim")
-time([[Setup for telescope.nvim]], false)
-time([[packadd for telescope.nvim]], true)
-vim.cmd [[packadd telescope.nvim]]
-time([[packadd for telescope.nvim]], false)
+-- Setup for: emmet-vim
+time([[Setup for emmet-vim]], true)
+try_loadstring("\27LJ\1\2=\0\0\2\0\4\0\0054\0\0\0007\0\1\0%\1\3\0:\1\2\0G\0\1\0\n<C-y>\26user_emmet_leader_key\6g\bvim\0", "setup", "emmet-vim")
+time([[Setup for emmet-vim]], false)
+-- Setup for: neoformat
+time([[Setup for neoformat]], true)
+try_loadstring("\27LJ\1\2�\1\0\0\b\0\n\0\0154\0\0\0007\0\1\0004\1\0\0007\1\2\0017\1\3\0013\2\4\0003\3\6\0:\3\5\0\16\3\1\0%\4\a\0%\5\b\0%\6\t\0\16\a\2\0>\3\5\1G\0\1\0\23<cmd>Neoformat<cr>\14<leader>f\6n\1\4\0\0\tyapf\rautopep8\nblack\29neoformat_enabled_python\1\0\2\vsilent\2\fnoremap\2\20nvim_set_keymap\bapi\6g\bvim\0", "setup", "neoformat")
+time([[Setup for neoformat]], false)
 -- Setup for: vim-multiple-cursors
 time([[Setup for vim-multiple-cursors]], true)
 try_loadstring("\27LJ\1\2�\2\0\0\2\0\14\0\0174\0\0\0007\0\1\0'\1\0\0:\1\2\0%\1\4\0:\1\3\0%\1\6\0:\1\5\0%\1\4\0:\1\a\0%\1\t\0:\1\b\0%\1\v\0:\1\n\0%\1\r\0:\1\f\0G\0\1\0\n<Esc>\26multi_cursor_quit_key\n<C-x>\26multi_cursor_skip_key\n<C-p>\26multi_cursor_prev_key\26multi_cursor_next_key\n<A-s>%multi_cursor_select_all_word_key\n<C-s> multi_cursor_start_word_key%multi_cursor_use_default_mapping\6g\bvim\0", "setup", "vim-multiple-cursors")
 time([[Setup for vim-multiple-cursors]], false)
 -- Setup for: nvim-tree.lua
 time([[Setup for nvim-tree.lua]], true)
-try_loadstring("\27LJ\1\2�\6\0\0\b\0\28\0+4\0\0\0007\0\1\0007\0\2\0004\1\0\0007\1\3\0013\2\4\0\16\3\0\0%\4\5\0%\5\6\0%\6\a\0\16\a\2\0>\3\5\1\16\3\0\0%\4\5\0%\5\b\0%\6\t\0\16\a\2\0>\3\5\1\16\3\0\0%\4\5\0%\5\n\0%\6\v\0\16\a\2\0>\3\5\0013\3\r\0:\3\f\0013\3\15\0:\3\14\1'\3\1\0:\3\16\1%\3\18\0:\3\17\1'\3\0\0:\3\19\0013\3\21\0003\4\22\0:\4\23\0033\4\24\0:\4\25\0033\4\26\0:\4\27\3:\3\20\1G\0\1\0\blsp\1\0\4\thint\b\tinfo\b\nerror\b\fwarning\b\vfolder\1\0\b\topen\b\15empty_open\b\fdefault\b\15arrow_open\b\nempty\b\fsymlink\b\17arrow_closed\b\17symlink_open\b\bgit\1\0\a\runstaged\a±\fdeleted\b\14untracked\b\frenamed\b\runmerged\b\fignored\b\vstaged\b\1\0\2\fdefault\b\fsymlink\b\20nvim_tree_icons\30nvim_tree_lsp_diagnostics\a:~#nvim_tree_root_folder_modifier\25nvim_tree_auto_close\1\0\3\rMakefile\3\1\rMAKEFILE\3\1\14README.md\3\1\27vim_tree_special_files\1\4\0\0\rstartify\14dashboard\nalpha\29nvim_tree_auto_ignore_ft\26:NvimTreeFindFile<cr>\14<leader>f\25:NvimTreeRefresh<cr>\14<leader>r\24:NvimTreeToggle<cr>\n<C-n>\6n\1\0\2\fnoremap\2\vsilent\2\6g\20nvim_set_keymap\bapi\bvim\0", "setup", "nvim-tree.lua")
+try_loadstring("\27LJ\1\2�\5\0\0\b\0\26\0%4\0\0\0007\0\1\0007\0\2\0004\1\0\0007\1\3\0013\2\4\0\16\3\0\0%\4\5\0%\5\6\0%\6\a\0\16\a\2\0>\3\5\1\16\3\0\0%\4\5\0%\5\b\0%\6\t\0\16\a\2\0>\3\5\0013\3\v\0:\3\n\0013\3\r\0:\3\f\1'\3\1\0:\3\14\1%\3\16\0:\3\15\1'\3\0\0:\3\17\0013\3\19\0003\4\20\0:\4\21\0033\4\22\0:\4\23\0033\4\24\0:\4\25\3:\3\18\1G\0\1\0\blsp\1\0\4\fwarning\b\tinfo\b\thint\b\nerror\b\vfolder\1\0\b\topen\b\15empty_open\b\fdefault\b\15arrow_open\b\nempty\b\fsymlink\b\17arrow_closed\b\17symlink_open\b\bgit\1\0\a\runstaged\a±\fdeleted\b\14untracked\b\fignored\b\runmerged\b\frenamed\b\vstaged\b\1\0\2\fdefault\b\fsymlink\b\20nvim_tree_icons\30nvim_tree_lsp_diagnostics\a:~#nvim_tree_root_folder_modifier\25nvim_tree_auto_close\1\0\3\rMAKEFILE\3\1\rMakefile\3\1\14README.md\3\1\27vim_tree_special_files\1\4\0\0\rstartify\14dashboard\nalpha\29nvim_tree_auto_ignore_ft\25:NvimTreeRefresh<cr>\14<leader>r\24:NvimTreeToggle<cr>\n<C-n>\6n\1\0\2\vsilent\2\fnoremap\2\6g\20nvim_set_keymap\bapi\bvim\0", "setup", "nvim-tree.lua")
 time([[Setup for nvim-tree.lua]], false)
 -- Setup for: bufferline.nvim
 time([[Setup for bufferline.nvim]], true)
-try_loadstring("\27LJ\1\2�\a\0\0\a\0!\0Y4\0\0\0007\0\1\0007\0\2\0003\1\3\0\16\2\0\0%\3\4\0%\4\5\0%\5\6\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\a\0%\5\b\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\t\0%\5\n\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\v\0%\5\f\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\r\0%\5\14\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\15\0%\5\16\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\17\0%\5\18\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\19\0%\5\20\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\21\0%\5\22\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\23\0%\5\24\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\25\0%\5\26\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\27\0%\5\28\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\29\0%\5\30\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\31\0%\5 \0\16\6\1\0>\2\5\1G\0\1\0!:BufferLineGoToBuffer 10<cr>\15<leader>10 :BufferLineGoToBuffer 9<cr>\14<leader>9 :BufferLineGoToBuffer 8<cr>\14<leader>8 :BufferLineGoToBuffer 7<cr>\14<leader>7 :BufferLineGoToBuffer 6<cr>\14<leader>6 :BufferLineGoToBuffer 5<cr>\14<leader>5 :BufferLineGoToBuffer 4<cr>\14<leader>4 :BufferLineGoToBuffer 3<cr>\14<leader>3 :BufferLineGoToBuffer 2<cr>\14<leader>2 :BufferLineGoToBuffer 1<cr>\14<leader>1\28:BufferLineMovePrev<cr>\14<leader><\29 :BufferLineMoveNext<cr>\14<leader>>\29:BufferLineCyclePrev<cr>\20<leader><S-Tab>\29:BufferLineCycleNext<cr>\18<leader><Tab>\6n\1\0\2\fnoremap\2\vsilent\2\20nvim_set_keymap\bapi\bvim\0", "setup", "bufferline.nvim")
+try_loadstring("\27LJ\1\2�\a\0\0\a\0!\0Y4\0\0\0007\0\1\0007\0\2\0003\1\3\0\16\2\0\0%\3\4\0%\4\5\0%\5\6\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\a\0%\5\b\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\t\0%\5\n\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\v\0%\5\f\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\r\0%\5\14\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\15\0%\5\16\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\17\0%\5\18\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\19\0%\5\20\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\21\0%\5\22\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\23\0%\5\24\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\25\0%\5\26\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\27\0%\5\28\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\29\0%\5\30\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\31\0%\5 \0\16\6\1\0>\2\5\1G\0\1\0!:BufferLineGoToBuffer 10<cr>\15<leader>10 :BufferLineGoToBuffer 9<cr>\14<leader>9 :BufferLineGoToBuffer 8<cr>\14<leader>8 :BufferLineGoToBuffer 7<cr>\14<leader>7 :BufferLineGoToBuffer 6<cr>\14<leader>6 :BufferLineGoToBuffer 5<cr>\14<leader>5 :BufferLineGoToBuffer 4<cr>\14<leader>4 :BufferLineGoToBuffer 3<cr>\14<leader>3 :BufferLineGoToBuffer 2<cr>\14<leader>2 :BufferLineGoToBuffer 1<cr>\14<leader>1\28:BufferLineMovePrev<cr>\14<leader><\29 :BufferLineMoveNext<cr>\14<leader>>\29:BufferLineCyclePrev<cr>\20<leader><S-Tab>\29:BufferLineCycleNext<cr>\18<leader><Tab>\6n\1\0\2\vsilent\2\fnoremap\2\20nvim_set_keymap\bapi\bvim\0", "setup", "bufferline.nvim")
 time([[Setup for bufferline.nvim]], false)
 -- Setup for: indent-blankline.nvim
 time([[Setup for indent-blankline.nvim]], true)
 try_loadstring("\27LJ\1\2�\6\0\0\2\0\17\0\0234\0\0\0007\0\1\0003\1\3\0:\1\2\0003\1\5\0:\1\4\0003\1\a\0:\1\6\0)\1\1\0:\1\b\0)\1\1\0:\1\t\0003\1\v\0:\1\n\0003\1\r\0:\1\f\0)\1\2\0:\1\14\0)\1\2\0:\1\15\0)\1\2\0:\1\16\0G\0\1\0\29indent_blankline_enabled*indent_blankline_show_current_context$indent_blankline_use_treesitter\1\23\0\0\nclass\vreturn\rfunction\vmethod\b^if\aif\v^while\16jsx_element\t^for\bfor\f^object\v^table\nblock\14arguments\17if_statement\16else_clause\16jsx_element\29jsx_self_closing_element\18try_statement\17catch_clause\21import_statement\19operation_type&indent_blankline_context_patterns\1\2\0\0\14README.md%indent_blankline_bufname_exclude-indent_blankline_show_first_indent_level4indent_blankline_show_trailing_blankline_indent\1\n\0\0\b\b┊\b┆\a¦\6|\a¦\b┆\b┊\b\31indent_blankline_char_list\1\a\0\0\thelp\rstartify\14dashboard\vpacker\nalpha\rNvimTree&indent_blankline_filetype_exclude\1\a\0\0\thelp\rstartify\14dashboard\vpacker\nalpha\rNvimTree%indent_blankline_buftype_exclude\6g\bvim\0", "setup", "indent-blankline.nvim")
 time([[Setup for indent-blankline.nvim]], false)
--- Setup for: emmet-vim
-time([[Setup for emmet-vim]], true)
-try_loadstring("\27LJ\1\2=\0\0\2\0\4\0\0054\0\0\0007\0\1\0%\1\3\0:\1\2\0G\0\1\0\n<C-y>\26user_emmet_leader_key\6g\bvim\0", "setup", "emmet-vim")
-time([[Setup for emmet-vim]], false)
+-- Setup for: telescope.nvim
+time([[Setup for telescope.nvim]], true)
+try_loadstring("\27LJ\1\2�\2\0\0\a\0\15\0#4\0\0\0007\0\1\0007\0\2\0003\1\3\0\16\2\0\0%\3\4\0%\4\5\0%\5\6\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\a\0%\5\b\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\t\0%\5\n\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\v\0%\5\f\0\16\6\1\0>\2\5\1\16\2\0\0%\3\4\0%\4\r\0%\5\14\0\16\6\1\0>\2\5\1G\0\1\0-:Telescope lsp_workspace_diagnostics<cr>\n<C-w>,:Telescope lsp_document_diagnostics<cr>\n<C-e>\27:Telescope buffers<cr>\n<C-b>\29:Telescope live_grep<cr>\n<C-f>\30:Telescope find_files<cr>\n<C-p>\6n\1\0\2\vsilent\2\fnoremap\2\20nvim_set_keymap\bapi\bvim\0", "setup", "telescope.nvim")
+time([[Setup for telescope.nvim]], false)
+time([[packadd for telescope.nvim]], true)
+vim.cmd [[packadd telescope.nvim]]
+time([[packadd for telescope.nvim]], false)
 -- Setup for: vim-closetag
 time([[Setup for vim-closetag]], true)
 try_loadstring("\27LJ\1\2�\1\0\0\2\0\a\0\t4\0\0\0007\0\1\0%\1\3\0:\1\2\0%\1\5\0:\1\4\0'\1\1\0:\1\6\0G\0\1\0%closetag_emptyTags_caseSensitive\31*.xhtml,*.jsx,*.tsx,*.vuex\29closetag_xhtml_filenames+*.html,*.xhtml,*.phtml,*.js,*.ts,*.vue\23closetag_filenames\6g\bvim\0", "setup", "vim-closetag")

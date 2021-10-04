@@ -12,6 +12,7 @@ M.ui = {
 -- User custom options, can add more options. See ":help options" for more options
 -- Note: Be careful when adding options, it will overwrite default options and may lead to some unexpected problems
 M.options = {
+  -- autoindent = true,
   belloff = 'all',
   clipboard = 'unnamedplus',
   completeopt = 'menu,menuone,noselect,noinsert',

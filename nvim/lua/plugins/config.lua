@@ -1286,16 +1286,7 @@ function M.telescope()
         qflist_previewer = previewers.vim_buffer_qflist.new,
         buffer_previewer_maker = previewers.buffer_previewer_maker
       },
-      -- extensions = {
-      --   fzf = {
-      --     fuzzy = true, -- false will only do exact matching
-      --     override_generic_sorter = true, -- override the generic sorter
-      --     override_file_sorter = true, -- override the file sorter
-      --     case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
-      --   },
-      -- }
     }
-    -- telescope.load_extension('fzf')
   end
 end
 
@@ -1307,7 +1298,8 @@ function M.treesitter()
     treesitter_configs.setup {
       highlight = {
         enable = true,
-        disable = {}
+        disable = {},
+        additional_vim_regex_highlighting = true,
       },
       indent = {
         enable = false,

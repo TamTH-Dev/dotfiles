@@ -78,6 +78,12 @@ packer.startup(function()
     opt = true,
   }
 
+  -- Indentation helper for jsx
+  use {
+    'maxmellon/vim-jsx-pretty',
+    ft = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+  }
+
   -- Color
   use {
     'norcalli/nvim-colorizer.lua',

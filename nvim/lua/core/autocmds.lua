@@ -1,7 +1,7 @@
 local cmd = vim.cmd
 
 -- Open nvim with a dir
--- vim.cmd [[ autocmd BufEnter * if &buftype != 'terminal' | lcd %:p:h | endif ]]
+-- .cmd([[ autocmd BufEnter * if &buftype != 'terminal' | lcd %:p:h | endif ]])
 
 -- auto close file explorer when quiting incase a single buffer is left
 -- cmd([[ autocmd BufEnter * if (winnr('$') == 1 && &filetype == 'nvimtree') | q | endif ]])
@@ -10,8 +10,11 @@ local cmd = vim.cmd
 local set_spaces = function(file_type, space)
 	if not file_type then return end
   if not space then space = 4 end
-  cmd(table.concat({'autocmd Filetype ', file_type, ' setlocal tabstop=', space, ' shiftwidth=', space, ' softtabstop=', space}))
+  cmd(table.concat({ 'autocmd Filetype ', file_type, ' setlocal tabstop=', space, ' shiftwidth=', space, ' softtabstop=', space }))
 end
+
+-- Disable inserting comment on new line automatically
+cmd([[au BufEnter * set fo-=c fo-=r fo-=o]])
 
 set_spaces('python')
 set_spaces('c')

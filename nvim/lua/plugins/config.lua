@@ -126,11 +126,11 @@ function M.autopairs()
   return function()
     local is_autopairs_loaded, autopairs = pcall(require, 'nvim-autopairs')
     local is_autopairs_completion_loaded, autopairs_completion = pcall(require, 'nvim-autopairs.completion.cmp')
-    if not (is_autopairs_loaded or is_autopairs_completion_loaded) then
-      return
-    end
+    if not (is_autopairs_loaded or is_autopairs_completion_loaded) then return end
 
-    autopairs.setup()
+    autopairs.setup({
+      disable_filetype = { 'TelescopePrompt' },
+    })
     autopairs_completion.setup {
       map_complete = true, -- insert () func completion
       map_cr = true, --  map <CR> on insert mode

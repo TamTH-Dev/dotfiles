@@ -4,7 +4,6 @@ function M.barbar()
   return function()
     local map = vim.api.nvim_set_keymap
     local opts = { noremap = true, silent = true }
-
     -- Move to previous/next
     map('n', '<leader><S-Tab>', ':BufferPrevious<cr>', opts)
     map('n', '<leader><Tab>', ':BufferNext<cr>', opts)

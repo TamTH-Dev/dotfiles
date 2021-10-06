@@ -48,6 +48,12 @@ packer.startup(function()
     setup = setup.bufferline(),
     config = config.bufferline(),
   }
+  -- use {
+  --   'romgrk/barbar.nvim',
+  --   after = 'nvim-web-devicons',
+  --   requires = 'kyazdani42/nvim-web-devicons',
+  --   setup = setup.barbar(),
+  -- }
 
   -- File explorer
   use {

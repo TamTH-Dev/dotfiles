@@ -5,55 +5,20 @@ add_newline = false
 [package]
 disabled = true
 
-[aws]
-format = 'on [$symbol($profile )(\($region\) )]($style)'
-style = "bold blue"
-symbol = "🅰 "
-
-[aws.region_aliases]
-ap-southeast-2 = "au"
-us-east-1 = "va"
-
-[battery]
-full_symbol = "🔋 "
-charging_symbol = "⚡️ "
-discharging_symbol = "💀 "
-
-[[battery.display]]  # "bold yellow" style and 💦 symbol when capacity is between 10% and 30%
-threshold = 30
-style = 'bold yellow'
-discharging_symbol = '💦'
-
+# Shows a character beside where the text is entered
 [character]                            
-success_symbol = '[➜](bold green)'
-error_symbol = '[✗](bold red) '
+success_symbol = '[➜](#bb9af7)'
+vicmd_symbol = '[](#bb9af7)'
+error_symbol = '[➜](#f7768e)'
 
+# Shows the path to current directory
 [directory]
-truncation_length = 8
-home_symbol = '🏢'
+truncation_length = 32
+read_only = ''
+format = '[$path](#2ac3de) [$read_only](#f7768e) '
 
-[git_commit]
-commit_hash_length = 4
-tag_symbol = '🔖'
-
+# Shows the active branch of the repo in current directory
 [git_branch]
 symbol = ''
 truncation_length = 32
-truncation_symbol = ''
-format = 'on [$symbol $branch](bold blue) '
-
-[git_state]
-format = '[\($state( $progress_current of $progress_total)\)]($style) '
-cherry_pick = '[🍒 PICKING](bold red)'
-
-[git_status]
-conflicted = '🏳'
-ahead = '🏎💨'
-behind = '😰'
-diverged = '😵'
-untracked = '🤷'
-stashed = '📦'
-modified = '📝'
-staged = '[++\($count\)](bold green)'
-renamed = '👅'
-deleted = '🗑'
+format = 'on [$symbol $branch](#7dcfff) '

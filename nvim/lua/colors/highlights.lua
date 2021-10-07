@@ -19,6 +19,7 @@ local colors = {
   blue = '#2ac3de',
   cyan = '#7dcfff',
   lightBlue = '#73daca',
+  gray = '#565f89'
 }
 
 -- Define fg color
@@ -41,11 +42,11 @@ fg('FloatBorder', colors.blue)
 -- Telescope
 fg('TelescopeBorder', colors.blue)
 fg('TelescopePromptPrefix', colors.magenta)
-fg('TelescopeNormal', colors.fg)
-fg('TelescopeSelection', colors.blue)
-fg('TelescopeSelectionCaret', colors.blue)
-fg('TelescopeMultiSelection', colors.fg)
-fg('TelescopeMatching', colors.orange)
+fg('TelescopeNormal', colors.gray)
+fg('TelescopeSelection', colors.fg)
+fg('TelescopeSelectionCaret', colors.orange)
+fg('TelescopeMultiSelection', colors.gray)
+fg('TelescopeMatching', colors.blue)
 
 -- LSP
 fg('LspDiagnosticsDefaultError', colors.red)

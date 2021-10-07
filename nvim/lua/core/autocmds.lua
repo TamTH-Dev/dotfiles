@@ -13,6 +13,9 @@ local set_spaces = function(file_type, space)
   cmd(table.concat({ 'autocmd Filetype ', file_type, ' setlocal tabstop=', space, ' shiftwidth=', space, ' softtabstop=', space }))
 end
 
+-- Open image buffers
+-- cmd([[autocmd BufEnter *.png,*.jpeg,*.jpg,*gif exec "! feh " | :bw]])
+
 -- Disable inserting comment on new line automatically
 cmd([[au BufEnter * set fo-=c fo-=r fo-=o]])
 

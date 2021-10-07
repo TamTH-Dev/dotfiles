@@ -14,8 +14,8 @@ error_symbol = '[➜](#f7768e)'
 # Shows the path to current directory
 [directory]
 truncation_length = 32
-read_only = ''
-format = '[$path](#2ac3de) [$read_only](#f7768e) '
+read_only = ''
+format = '[$path](#2ac3de)[$read_only](#f7768e) '
 
 # Shows the active branch of the repo in current directory
 [git_branch]

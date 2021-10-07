@@ -70,7 +70,7 @@ function M.alpha()
     local buttons = {
       type = 'group',
       val = {
-        set_button('p', '  Find File', ':Telescope find_files<cr>'),
+        set_button('p', '  Find File', ':Telescope find_files hidden=true<cr>'),
         set_button('f', '  Find Word', ':Telescope live_grep<cr>'),
         set_button('r', '  Recent Files', ':Telescope oldfiles<cr>'),
         set_button('s', '  Settings', ':e $HOME/.config/nvim/lua/default_config.lua<cr>'),

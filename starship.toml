@@ -7,9 +7,9 @@ disabled = true
 
 # Shows a character beside where the text is entered
 [character]                            
-success_symbol = '[➜](#bb9af7)'
-vicmd_symbol = '[](#bb9af7)'
-error_symbol = '[➜](#f7768e)'
+success_symbol = '[❯](#bb9af7)'
+vicmd_symbol = '[](#bb9af7)'
+error_symbol = '[❯](#f7768e)'
 
 # Shows the path to current directory
 [directory]

@@ -44,6 +44,11 @@ set LANG "en_US.UTF-8"
 # Preferred editor for local and remote sessions
 set EDITOR "nvim"
 
+# Set default keybindings mode
+function fish_user_key_bindings
+  fish_vi_key_bindings
+end
+
 # System path env
 set PATH $HOME/.local/bin $HOME/.config/bin /usr/local/bin /usr/bin /usr/sbin /usr/local/sbin /bin $PATH
 

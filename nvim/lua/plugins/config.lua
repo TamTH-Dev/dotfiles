@@ -991,12 +991,14 @@ function M.lsp()
     local lsp = vim.lsp
     local handlers = lsp.handlers
 
+    lsp.set_log_level('debug')
+
     local on_attach = function(client, bufnr)
       local buf_set_keymap = function(...) api.nvim_buf_set_keymap(bufnr, ...) end
       local buf_set_option = function(...) api.nvim_buf_set_option(bufnr, ...) end
       local opts = { noremap = true, silent = true } -- Mappings
 
-      -- Enable completion triggered by <c-x><c-o>
+      -- Enable completion triggered
       buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
       buf_set_keymap('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
       buf_set_keymap('n', '<leader>gk', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)

@@ -203,7 +203,7 @@ packer.startup(function()
     after = 'LuaSnip',
     requires = {
       { 'saadparwaiz1/cmp_luasnip', after = { 'nvim-cmp', 'LuaSnip' }, opt = true },
-      -- { "rafamadriz/friendly-snippets", after = { 'nvim-cmp', 'LuaSnip' } },
+      -- { "rafamadriz/friendly-snippets", after = { 'nvim-cmp', 'LuaSnip' }, opt = true },
       { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-calc', after = 'nvim-cmp', opt = true },

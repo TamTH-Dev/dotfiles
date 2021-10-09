@@ -194,7 +194,6 @@ function M.cmp()
     if not (is_cmp_loaded or is_lua_snip_loaded or is_cmp_compare_loaded or is_cmp_types_loaded) then return end
 
     local api = vim.api
-    local fn = vim.fn
     local opt = vim.o
 
     local WIDE_HEIGHT = 40
@@ -228,13 +227,9 @@ function M.cmp()
       Variable = '',
     }
 
-    -- local check_back_space = function()
-    --   local col = fn.col "." - 1
-    --   return col == 0 or fn.getline("."):sub(col, col):match "%s"
-    -- end
-
-    local replace_termcodes = function(str)
-      return api.nvim_replace_termcodes(str, true, true, true)
+    local has_words_before = function()
+      local line, col = unpack(api.nvim_win_get_cursor(0))
+      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
     end
 
     cmp.setup {
@@ -280,32 +275,33 @@ function M.cmp()
         }
       },
       mapping = {
+        ['<Down>'] = cmp.mapping.scroll_docs(-4),
+        ['<Up>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
-        ['<cr>'] = cmp.mapping.confirm {
+        ['<C-e>'] = cmp.mapping.close(),
+        ['<CR>'] = cmp.mapping.confirm {
           behavior = cmp.ConfirmBehavior.Replace,
           select = true,
         },
         ['<Tab>'] = cmp.mapping(function(fallback)
-          if vim.fn.pumvisible() == 1 then
-            fn.feedkeys(replace_termcodes('<C-n>'), 'n')
+          if cmp.visible() then
+            cmp.select_next_item()
           elseif luasnip.expand_or_jumpable() then
-            fn.feedkeys(replace_termcodes('<Plug>luasnip-expand-or-jump'), '')
-          elseif cmp.visible() then
-              cmp.select_next_item()
+            luasnip.expand_or_jump()
+          elseif has_words_before() then
+            cmp.complete()
           else
-              fallback()
+            fallback()
           end
         end, {
           'i',
           's',
         }),
         ['<S-Tab>'] = cmp.mapping(function(fallback)
-          if vim.fn.pumvisible() == 1 then
-            fn.feedkeys(replace_termcodes('<C-p>'), 'n')
-          elseif luasnip.jumpable(-1) then
-            fn.feedkeys(replace_termcodes('<Plug>luasnip-jump-prev'), '')
-          elseif cmp.visible() then
+          if cmp.visible() then
             cmp.select_prev_item()
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
           else
             fallback()
           end
@@ -319,11 +315,8 @@ function M.cmp()
           vim_item.kind = icons[vim_item.kind]
           vim_item.menu = ({
             nvim_lsp = '(LSP)',
-            emoji = '(Emoji)',
             path = '(Path)',
             calc = '(Calc)',
-            cmp_tabnine = '(Tabnine)',
-            vsnip = '(Snippet)',
             luasnip = '(Snippet)',
             buffer = '(Buffer)',
           })[entry.source.name]
@@ -1014,7 +1007,6 @@ function M.lsp()
       buf_set_keymap('n', '<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
       buf_set_keymap('n', '<leader>gf', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
       buf_set_keymap('n', '<leader>gl', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = \'rounded\' })<cr>', opts)
-      -- buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
 
       -- Set autocommands conditional on server_capabilities
       if client.resolved_capabilities.document_highlight then

@@ -196,13 +196,14 @@ packer.startup(function()
   -- Completion plugins
   use {
     'L3MON4D3/LuaSnip',
-    event = 'InsertEnter',
+    event = 'BufEnter',
   }
   use {
     'hrsh7th/nvim-cmp',
     after = 'LuaSnip',
     requires = {
       { 'saadparwaiz1/cmp_luasnip', after = { 'nvim-cmp', 'LuaSnip' }, opt = true },
+      -- { "rafamadriz/friendly-snippets", after = { 'nvim-cmp', 'LuaSnip' } },
       { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-calc', after = 'nvim-cmp', opt = true },

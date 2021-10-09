@@ -182,7 +182,6 @@ function M.neoformat()
     local opts = { noremap = true, silent = true }
     -- Enable formatters for python
     global.neoformat_enabled_python = { 'yapf', 'autopep8', 'black' }
-
     map('n', '<leader>f', '<cmd>Neoformat<cr>', opts)
   end
 end

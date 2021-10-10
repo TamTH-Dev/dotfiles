@@ -1147,15 +1147,15 @@ function M.nvimtree()
       -- will not open on setup if the filetype is in this list
       ignore_ft_on_setup  = {},
       -- closes neovim automatically when the tree is the last **WINDOW** in the view
-      auto_close          = true,
+      nvim_tree_auto_close          = true,
+      -- disable diagnostic in nvim tree
+      nvim_tree_lsp_diagnostics = false,
       -- opens the tree when changing/opening a new tab if the tree wasn't previously opened
       open_on_tab         = false,
       -- hijack the cursor in the tree to put it at the start of the filename
       hijack_cursor       = false,
       -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually)
       update_cwd          = false,
-      -- show lsp diagnostics in the signcolumn
-      lsp_diagnostics     = false,
       -- update the focused file on `BufEnter`, un-collapses the folders recursively until it finds the file
       update_focused_file = {
         -- enables the feature

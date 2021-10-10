@@ -203,11 +203,8 @@ function M.nvimtree()
       Makefile = 1,
       MAKEFILE = 1
     }
-    -- Closes the tree when it's the last window
-    global.nvim_tree_auto_close = 1
+    -- Root format
     global.nvim_tree_root_folder_modifier = ':~'
-    -- Show lsp diagnostics in the signcolumn
-    global.nvim_tree_lsp_diagnostics = 0
     -- Custom icons
     global.nvim_tree_icons = {
       default= '',

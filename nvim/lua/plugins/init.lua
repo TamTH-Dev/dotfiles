@@ -176,6 +176,11 @@ packer.startup(function()
     setup = setup.telescope(),
     config = config.telescope(),
   }
+  use {
+    'ahmedkhalf/project.nvim',
+    after = 'telescope.nvim',
+    config = config.project(),
+  }
 
   -- Formatter
   use {

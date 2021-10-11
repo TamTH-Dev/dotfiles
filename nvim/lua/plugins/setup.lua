@@ -194,7 +194,7 @@ function M.nvimtree()
 
     map('n', '<C-n>', ':NvimTreeToggle<cr>', opts)
     map('n', '<leader>r', ':NvimTreeRefresh<cr>', opts)
-    -- map('n', '<leader>f', ':NvimTreeFindFile<cr>', opts)
+    map('n', '<leader>f', ':NvimTreeFindFile<cr>', opts)
     -- Don't auto open tree on specific filetypes
     global.nvim_tree_auto_ignore_ft = { 'startify', 'dashboard', 'alpha' }
     -- List of filenames that gets highlighted with NvimTreeSpecialFile

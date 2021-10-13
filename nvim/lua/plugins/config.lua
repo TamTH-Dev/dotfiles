@@ -125,17 +125,39 @@ end
 function M.autopairs()
   return function()
     local is_autopairs_loaded, autopairs = pcall(require, 'nvim-autopairs')
-    local is_autopairs_completion_loaded, autopairs_completion = pcall(require, 'nvim-autopairs.completion.cmp')
-    if not (is_autopairs_loaded or is_autopairs_completion_loaded) then return end
+    if not (is_autopairs_loaded) then return end
+
+    local map = vim.api.nvim_set_keymap
+    local opts = { expr = true, noremap = true }
 
     autopairs.setup({
+      map_bs = false,
       disable_filetype = { 'TelescopePrompt' },
     })
-    autopairs_completion.setup {
-      map_complete = true, -- insert () func completion
-      map_cr = true, --  map <CR> on insert mode
-      auto_select = true -- automatically select the first item
-    }
+
+    _G.MUtils = {}
+
+    MUtils.CR = function()
+      if vim.fn.pumvisible() ~= 0 then
+        if vim.fn.complete_info({ 'selected' }).selected ~= -1 then
+          return autopairs.esc('<c-y>')
+        else
+          return autopairs.esc('<c-e>') .. autopairs.autopairs_cr()
+        end
+      else
+        return autopairs.autopairs_cr()
+      end
+    end
+    map('i', '<cr>', 'v:lua.MUtils.CR()', opts)
+
+    MUtils.BS = function()
+      if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({ 'mode' }).mode == 'eval' then
+        return autopairs.esc('<c-e>') .. autopairs.autopairs_bs()
+      else
+        return autopairs.autopairs_bs()
+      end
+    end
+    map('i', '<bs>', 'v:lua.MUtils.BS()', opts)
   end
 end
 
@@ -340,9 +362,9 @@ function M.cmp()
             buffer = '(Buffer)',
           })[entry.source.name]
           vim_item.dup = ({
+            nvim_lsp = 1,
             buffer = 1,
             path = 1,
-            nvim_lsp = 0,
           })[entry.source.name] or 0
           return vim_item
         end,
@@ -1003,7 +1025,8 @@ function M.lsp()
     local is_lspinstall_loaded, lspinstall = pcall(require, 'lspinstall')
     local is_lspconfig_loaded, lspconfig = pcall(require, 'lspconfig')
     local is_languages_loaded, languages = pcall(require, 'plugins/languages')
-    if not (is_lspinstall_loaded or is_lspconfig_loaded or is_languages_loaded) then return end
+    local is_coq_loaded, coq = pcall(require, 'coq')
+    if not (is_lspinstall_loaded or is_lspconfig_loaded or is_languages_loaded or is_coq_loaded) then return end
 
     local api = vim.api
     local cmd = vim.cmd
@@ -1084,8 +1107,8 @@ function M.lsp()
             config.filetypes = language.filetypes
           end
         end
-        -- Apply config
-        lspconfig[server].setup(config)
+        -- Apply config and wrap it with coq
+        lspconfig[server].setup(coq.lsp_ensure_capabilities(config))
       end
     end
     -- Invoke lspinstall

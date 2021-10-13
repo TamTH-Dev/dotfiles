@@ -192,41 +192,50 @@ packer.startup(function()
   -- LSP supporter
   use {
     'neovim/nvim-lspconfig',
+    requires = {
+      {
+        'ms-jpq/coq_nvim',
+        branch = 'coq', setup = setup.coq()
+      },
+      {
+        'ms-jpq/coq.artifacts',
+        branch = 'artifacts'
+      },
+    },
   }
   use {
     'kabouzeid/nvim-lspinstall',
     config = config.lsp(),
   }
 
-  -- Completion plugins
-  use {
-    'L3MON4D3/LuaSnip',
-    event = 'BufEnter'
-  }
-  use {
-    'hrsh7th/nvim-cmp',
-    after = 'LuaSnip',
-    requires = {
-      -- Luasnip
-      { 'saadparwaiz1/cmp_luasnip', after = { 'nvim-cmp', 'LuaSnip' }, opt = true },
-      -- Ultisnips
-      -- { 'SirVer/ultisnips', after = 'nvim-cmp', opt = true },
-      -- { 'honza/vim-snippets' after = { 'nvim-cmp', 'ultisnips' }, opt = true },
-      -- { 'quangnguyen30192/cmp-nvim-ultisnips', after = 'nvim-cmp', opt = true },
-      { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp', opt = true },
-      { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', opt = true },
-      { 'hrsh7th/cmp-calc', after = 'nvim-cmp', opt = true },
-      { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', opt = true },
-      { 'hrsh7th/cmp-path', after = 'nvim-cmp', opt = true }
-    },
-    config = config.cmp(),
-  }
-
-  -- Autopairs supporter
+--   -- Autopairs supporter
   use {
     'windwp/nvim-autopairs',
-    after = 'nvim-cmp',
-    opt = true,
+    after = 'coq_nvim',
     config = config.autopairs(),
   }
+
+  -- Completion plugins
+  -- use {
+  --   'L3MON4D3/LuaSnip',
+  --   event = 'BufEnter'
+  -- }
+--   use {
+--     'hrsh7th/nvim-cmp',
+--     after = 'LuaSnip',
+--     requires = {
+--       -- Luasnip
+--       { 'saadparwaiz1/cmp_luasnip', after = { 'nvim-cmp', 'LuaSnip' }, opt = true },
+--       -- Ultisnips
+--       -- { 'SirVer/ultisnips', after = 'nvim-cmp', opt = true },
+--       -- { 'honza/vim-snippets' after = { 'nvim-cmp', 'ultisnips' }, opt = true },
+--       -- { 'quangnguyen30192/cmp-nvim-ultisnips', after = 'nvim-cmp', opt = true },
+--       { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp', opt = true },
+--       { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', opt = true },
+--       { 'hrsh7th/cmp-calc', after = 'nvim-cmp', opt = true },
+--       { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', opt = true },
+--       { 'hrsh7th/cmp-path', after = 'nvim-cmp', opt = true }
+--     },
+--     config = config.cmp(),
+--   }
 end)

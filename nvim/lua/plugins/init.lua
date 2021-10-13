@@ -1,8 +1,8 @@
 local is_packer_init_loaded, packer = pcall(require, 'plugins.packerInit')
 if not is_packer_init_loaded then return end
 
-local use = packer.use
 packer.startup(function()
+  local use = packer.use
   -- Import plugins config and setup
   local config = require 'plugins.config'
   local setup = require 'plugins.setup'
@@ -200,15 +200,17 @@ packer.startup(function()
 
   -- Completion plugins
   use {
-    'L3MON4D3/LuaSnip',
-    event = 'BufEnter',
+    'SirVer/ultisnips',
+    requires = 'honza/vim-snippets',
+    setup = function()
+      vim.g.UltiSnipsRemoveSelectModeMappings = 0
+    end,
   }
   use {
     'hrsh7th/nvim-cmp',
-    after = 'LuaSnip',
+    event = 'BufEnter',
     requires = {
-      { 'saadparwaiz1/cmp_luasnip', after = { 'nvim-cmp', 'LuaSnip' }, opt = true },
-      -- { "rafamadriz/friendly-snippets", after = { 'nvim-cmp', 'LuaSnip' }, opt = true },
+      { 'quangnguyen30192/cmp-nvim-ultisnips', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-calc', after = 'nvim-cmp', opt = true },
@@ -225,7 +227,4 @@ packer.startup(function()
     opt = true,
     config = config.autopairs(),
   }
-
-  -- Measure startup time
-  use { 'dstein64/vim-startuptime' }
 end)

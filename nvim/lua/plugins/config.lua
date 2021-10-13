@@ -190,7 +190,8 @@ function M.cmp()
     local is_cmp_loaded, cmp = pcall(require, 'cmp')
     local is_cmp_compare_loaded, compare = pcall(require, 'cmp.config.compare')
     local is_cmp_types_loaded, types = pcall(require, 'cmp.types')
-    if not (is_cmp_loaded or is_cmp_compare_loaded or is_cmp_types_loaded) then return end
+    local is_luasnip_loaded, luasnip = pcall(require, 'luasnip')
+    if not (is_cmp_loaded or is_cmp_compare_loaded or is_luasnip_loaded or is_cmp_types_loaded) then return end
 
     local api = vim.api
     local opt = vim.o
@@ -231,9 +232,9 @@ function M.cmp()
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
     end
 
-    local press = function(key)
-      vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), "n", true)
-    end
+--     local press = function(key)
+--       vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), "n", true)
+--     end
 
     cmp.setup {
       completion = {
@@ -249,7 +250,14 @@ function M.cmp()
       },
       snippet = {
         expand = function(args)
-          vim.fn['UltiSnips#Anon'](args.body)
+          -- For `luasnip`
+          luasnip.lsp_expand(args.body)
+
+          -- For `vsnip` user
+          -- vim.fn["vsnip#anonymous"](args.body)
+
+          -- For `ultisnips`
+          -- vim.fn["UltiSnips#Anon"](args.body)
         end,
       },
       preselect = types.cmp.PreselectMode.Item,
@@ -287,10 +295,14 @@ function M.cmp()
           select = true,
         },
         ['<Tab>'] = cmp.mapping(function(fallback)
-          if vim.fn['UltiSnips#CanJumpForwards']() == 1 then
-            press('<ESC>:call UltiSnips#JumpForwards()<CR>')
-          elseif cmp.visible() then
+          if cmp.visible() then
             cmp.select_next_item()
+          -- For luasnip
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          -- For ultisnips
+          -- elseif vim.fn['UltiSnips#CanJumpForwards']() == 1 then
+          --   press('<ESC>:call UltiSnips#JumpForwards()<CR>')
           elseif has_words_before() then
             cmp.complete()
           else
@@ -301,10 +313,14 @@ function M.cmp()
           's',
         }),
         ['<S-Tab>'] = cmp.mapping(function(fallback)
-          if vim.fn['UltiSnips#CanJumpBackwards']() == 1 then
-            press('<ESC>:call UltiSnips#JumpBackwards()<CR>')
-          elseif cmp.visible() then
+          if cmp.visible() then
             cmp.select_prev_item()
+          -- For luasnip
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          -- For ultisnips
+          -- elseif vim.fn['UltiSnips#CanJumpBackwards']() == 1 then
+          --   press('<ESC>:call UltiSnips#JumpBackwards()<CR>')
           else
             fallback()
           end
@@ -320,7 +336,7 @@ function M.cmp()
             nvim_lsp = '(LSP)',
             path = '(Path)',
             calc = '(Calc)',
-            ultisnips = '(Snippet)',
+            luasnip = '(Snippet)',
             buffer = '(Buffer)',
           })[entry.source.name]
           vim_item.dup = ({
@@ -340,7 +356,7 @@ function M.cmp()
         { name = 'calc' },
         { name = 'nvim_lsp' },
         { name = 'nvim_lua' },
-        { name = 'ultisnips' },
+        { name = 'luasnip' },
         { name = 'treesitter' },
       }
     }

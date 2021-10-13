@@ -200,17 +200,19 @@ packer.startup(function()
 
   -- Completion plugins
   use {
-    'SirVer/ultisnips',
-    requires = 'honza/vim-snippets',
-    setup = function()
-      vim.g.UltiSnipsRemoveSelectModeMappings = 0
-    end,
+    'L3MON4D3/LuaSnip',
+    event = 'BufEnter'
   }
   use {
     'hrsh7th/nvim-cmp',
-    event = 'BufEnter',
+    after = 'LuaSnip',
     requires = {
-      { 'quangnguyen30192/cmp-nvim-ultisnips', after = 'nvim-cmp', opt = true },
+      -- Luasnip
+      { 'saadparwaiz1/cmp_luasnip', after = { 'nvim-cmp', 'LuaSnip' }, opt = true },
+      -- Ultisnips
+      -- { 'SirVer/ultisnips', after = 'nvim-cmp', opt = true },
+      -- { 'honza/vim-snippets' after = { 'nvim-cmp', 'ultisnips' }, opt = true },
+      -- { 'quangnguyen30192/cmp-nvim-ultisnips', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-calc', after = 'nvim-cmp', opt = true },

@@ -208,11 +208,17 @@ packer.startup(function()
     config = config.lsp(),
   }
 
---   -- Autopairs supporter
+  -- Autopairs supporter
   use {
     'windwp/nvim-autopairs',
     after = 'coq_nvim',
     config = config.autopairs(),
+  }
+
+  -- Show system key bindings
+  use {
+    "folke/which-key.nvim",
+    config = config.which_key(),
   }
 
   -- Completion plugins
@@ -220,22 +226,22 @@ packer.startup(function()
   --   'L3MON4D3/LuaSnip',
   --   event = 'BufEnter'
   -- }
---   use {
---     'hrsh7th/nvim-cmp',
---     after = 'LuaSnip',
---     requires = {
---       -- Luasnip
---       { 'saadparwaiz1/cmp_luasnip', after = { 'nvim-cmp', 'LuaSnip' }, opt = true },
---       -- Ultisnips
---       -- { 'SirVer/ultisnips', after = 'nvim-cmp', opt = true },
---       -- { 'honza/vim-snippets' after = { 'nvim-cmp', 'ultisnips' }, opt = true },
---       -- { 'quangnguyen30192/cmp-nvim-ultisnips', after = 'nvim-cmp', opt = true },
---       { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp', opt = true },
---       { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', opt = true },
---       { 'hrsh7th/cmp-calc', after = 'nvim-cmp', opt = true },
---       { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', opt = true },
---       { 'hrsh7th/cmp-path', after = 'nvim-cmp', opt = true }
---     },
---     config = config.cmp(),
---   }
+  -- use {
+  --   'hrsh7th/nvim-cmp',
+  --   after = 'LuaSnip',
+  --   requires = {
+  --     -- Luasnip
+  --     { 'saadparwaiz1/cmp_luasnip', after = { 'nvim-cmp', 'LuaSnip' }, opt = true },
+  --     -- Ultisnips
+  --     -- { 'SirVer/ultisnips', after = 'nvim-cmp', opt = true },
+  --     -- { 'honza/vim-snippets' after = { 'nvim-cmp', 'ultisnips' }, opt = true },
+  --     -- { 'quangnguyen30192/cmp-nvim-ultisnips', after = 'nvim-cmp', opt = true },
+  --     { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp', opt = true },
+  --     { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', opt = true },
+  --     { 'hrsh7th/cmp-calc', after = 'nvim-cmp', opt = true },
+  --     { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', opt = true },
+  --     { 'hrsh7th/cmp-path', after = 'nvim-cmp', opt = true }
+  --   },
+  --   config = config.cmp(),
+  -- }
 end)

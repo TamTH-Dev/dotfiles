@@ -133,40 +133,40 @@ function M.autopairs()
     })
 
     -- For cmp
-    -- require("nvim-autopairs.completion.cmp").setup({
-    --   map_cr = true, --  map <CR> on insert mode
-    --   map_complete = true, -- it will auto insert `(` (map_char) after select function or method item
-    --   auto_select = true, -- automatically select the first item
-    --   insert = false, -- use insert confirm behavior instead of replace
-    -- })
+    require("nvim-autopairs.completion.cmp").setup({
+      map_cr = true, --  map <CR> on insert mode
+      map_complete = true, -- it will auto insert `(` (map_char) after select function or method item
+      auto_select = true, -- automatically select the first item
+      insert = false, -- use insert confirm behavior instead of replace
+    })
 
     -- For coq
-    local map = vim.api.nvim_set_keymap
-    local opts = { expr = true, noremap = true }
+--     local map = vim.api.nvim_set_keymap
+--     local opts = { expr = true, noremap = true }
 
-    _G.MUtils = {}
+--     _G.MUtils = {}
 
-    MUtils.CR = function()
-      if vim.fn.pumvisible() ~= 0 then
-        if vim.fn.complete_info({ 'selected' }).selected ~= -1 then
-          return autopairs.esc('<c-y>')
-        else
-          return autopairs.esc('<c-e>') .. autopairs.autopairs_cr()
-        end
-      else
-        return autopairs.autopairs_cr()
-      end
-    end
-    map('i', '<cr>', 'v:lua.MUtils.CR()', opts)
+--     MUtils.CR = function()
+--       if vim.fn.pumvisible() ~= 0 then
+--         if vim.fn.complete_info({ 'selected' }).selected ~= -1 then
+--           return autopairs.esc('<c-y>')
+--         else
+--           return autopairs.esc('<c-e>') .. autopairs.autopairs_cr()
+--         end
+--       else
+--         return autopairs.autopairs_cr()
+--       end
+--     end
+--     map('i', '<cr>', 'v:lua.MUtils.CR()', opts)
 
-    MUtils.BS = function()
-      if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({ 'mode' }).mode == 'eval' then
-        return autopairs.esc('<c-e>') .. autopairs.autopairs_bs()
-      else
-        return autopairs.autopairs_bs()
-      end
-    end
-    map('i', '<bs>', 'v:lua.MUtils.BS()', opts)
+--     MUtils.BS = function()
+--       if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({ 'mode' }).mode == 'eval' then
+--         return autopairs.esc('<c-e>') .. autopairs.autopairs_bs()
+--       else
+--         return autopairs.autopairs_bs()
+--       end
+--     end
+--     map('i', '<bs>', 'v:lua.MUtils.BS()', opts)
   end
 end
 
@@ -212,6 +212,27 @@ function M.bufferline()
         sort_by = 'id',
       }
     }
+  end
+end
+
+function M.chadtree()
+  return function()
+    local api = vim.api
+    local map = api.nvim_set_keymap
+    local opts = { noremap = true, silent = true }
+
+    local chadtree_settings = {
+      theme = {
+        text_colour_set = 'nord'
+      },
+      view = {
+        width = 35,
+      },
+    }
+    api.nvim_set_var("chadtree_settings", chadtree_settings)
+
+    -- Toggle CHADTree
+    map('n', '<C-n>', ':CHADopen<CR>', opts)
   end
 end
 
@@ -1033,8 +1054,8 @@ function M.lsp()
     local is_lspinstall_loaded, lspinstall = pcall(require, 'lspinstall')
     local is_lspconfig_loaded, lspconfig = pcall(require, 'lspconfig')
     local is_languages_loaded, languages = pcall(require, 'plugins/languages')
-    local is_coq_loaded, coq = pcall(require, 'coq')
-    if not (is_lspinstall_loaded or is_lspconfig_loaded or is_languages_loaded or is_coq_loaded) then return end
+    -- local is_coq_loaded, coq = pcall(require, 'coq')
+    if not (is_lspinstall_loaded or is_lspconfig_loaded or is_languages_loaded) then return end
 
     local api = vim.api
     local cmd = vim.cmd
@@ -1116,7 +1137,8 @@ function M.lsp()
           end
         end
         -- Apply config and wrap it with coq
-        lspconfig[server].setup(coq.lsp_ensure_capabilities(config))
+        -- lspconfig[server].setup(coq.lsp_ensure_capabilities(config))
+        lspconfig[server].setup(config)
       end
     end
     -- Invoke lspinstall
@@ -1227,7 +1249,7 @@ function M.nvimtree()
 
       view = {
         -- width of the window, can be either a number (columns) or a string in `%`
-        width = 30,
+        width = 35,
         -- side of the tree, can be one of 'left' | 'right' | 'top' | 'bottom'
         side = 'left',
         -- if true the tree will resize itself after opening a file
@@ -1413,29 +1435,29 @@ function M.which_key()
     local is_which_key_loaded, which_key = pcall(require, 'which-key')
     if not is_which_key_loaded then return end
     local setup = {
-      plugins = {
-        marks = true, -- shows a list of your marks on ' and `
-        registers = true, -- shows your registers on ' in NORMAL or <C-r> in INSERT mode
-        -- the presets plugin, adds help for a bunch of default keybindings in Neovim
-        -- No actual key bindings are created
-        presets = {
-          operators = false, -- adds help for operators like d, y, ...
-          motions = true, -- adds help for motions
-          text_objects = true, -- help for text objects triggered after entering an operator
-          windows = true, -- default bindings on <c-w>
-          nav = true, -- misc bindings to work with windows
-          z = true, -- bindings for folds, spelling and others prefixed with z
-          g = true, -- bindings for prefixed with g
-        },
-        spelling = { enabled = true, suggestions = 20 }, -- use which-key for spelling hints
-      },
+      -- plugins = {
+      --   marks = true, -- shows a list of your marks on ' and `
+      --   registers = true, -- shows your registers on ' in NORMAL or <C-r> in INSERT mode
+      --   -- the presets plugin, adds help for a bunch of default keybindings in Neovim
+      --   -- No actual key bindings are created
+      --   presets = {
+      --     operators = false, -- adds help for operators like d, y, ...
+      --     motions = true, -- adds help for motions
+      --     text_objects = true, -- help for text objects triggered after entering an operator
+      --     windows = true, -- default bindings on <c-w>
+      --     nav = true, -- misc bindings to work with windows
+      --     z = true, -- bindings for folds, spelling and others prefixed with z
+      --     g = true, -- bindings for prefixed with g
+      --   },
+      --   spelling = { enabled = true, suggestions = 20 }, -- use which-key for spelling hints
+      -- },
       icons = {
         breadcrumb = '»', -- symbol used in the command line area that shows your active key combo
         separator = '➜', -- symbol used between a key and it's label
         group = '+', -- symbol prepended to a group
       },
       window = {
-        border = 'single', -- none, single, double, shadow
+        border = 'rounded', -- none, single, double, shadow
         position = 'bottom', -- bottom, top
         margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
         padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
@@ -1450,12 +1472,12 @@ function M.which_key()
     }
     which_key.setup(setup)
     local opts = {
-      mode = 'n', -- NORMAL mode
       prefix = '<leader>',
-      buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-      silent = true, -- use `silent` when creating keymaps
-      noremap = true, -- use `noremap` when creating keymaps
-      nowait = true, -- use `nowait` when creating keymaps
+      -- mode = 'n', -- NORMAL mode
+      -- buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+      -- silent = true, -- use `silent` when creating keymaps
+      -- noremap = true, -- use `noremap` when creating keymaps
+      -- nowait = true, -- use `nowait` when creating keymaps
     }
     local mappings = {
       ['w'] = { '<cmd>w!<CR>', 'Save' },

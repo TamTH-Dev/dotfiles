@@ -64,6 +64,11 @@ packer.startup(function()
     setup = setup.nvimtree(),
     config = config.nvimtree(),
   }
+  -- use {
+  --   'ms-jpq/chadtree',
+  --   after = 'nvim-web-devicons',
+  --   config = config.chadtree(),
+  -- }
 
   -- Fancy start screen
   use {
@@ -192,16 +197,16 @@ packer.startup(function()
   -- LSP supporter
   use {
     'neovim/nvim-lspconfig',
-    requires = {
-      {
-        'ms-jpq/coq_nvim',
-        branch = 'coq', setup = setup.coq()
-      },
-      {
-        'ms-jpq/coq.artifacts',
-        branch = 'artifacts'
-      },
-    },
+    -- requires = {
+    --   {
+    --     'ms-jpq/coq_nvim',
+    --     branch = 'coq', setup = setup.coq()
+    --   },
+    --   {
+    --     'ms-jpq/coq.artifacts',
+    --     branch = 'artifacts'
+    --   },
+    -- },
   }
   use {
     'kabouzeid/nvim-lspinstall',
@@ -211,37 +216,37 @@ packer.startup(function()
   -- Autopairs supporter
   use {
     'windwp/nvim-autopairs',
-    after = 'coq_nvim',
+    after = 'nvim-cmp',
     config = config.autopairs(),
   }
 
   -- Show system key bindings
-  use {
-    "folke/which-key.nvim",
-    config = config.which_key(),
-  }
+  -- use {
+  --   'folke/which-key.nvim',
+  --   config = config.which_key(),
+  -- }
 
   -- Completion plugins
-  -- use {
-  --   'L3MON4D3/LuaSnip',
-  --   event = 'BufEnter'
-  -- }
-  -- use {
-  --   'hrsh7th/nvim-cmp',
-  --   after = 'LuaSnip',
-  --   requires = {
-  --     -- Luasnip
-  --     { 'saadparwaiz1/cmp_luasnip', after = { 'nvim-cmp', 'LuaSnip' }, opt = true },
-  --     -- Ultisnips
-  --     -- { 'SirVer/ultisnips', after = 'nvim-cmp', opt = true },
-  --     -- { 'honza/vim-snippets' after = { 'nvim-cmp', 'ultisnips' }, opt = true },
-  --     -- { 'quangnguyen30192/cmp-nvim-ultisnips', after = 'nvim-cmp', opt = true },
-  --     { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp', opt = true },
-  --     { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', opt = true },
-  --     { 'hrsh7th/cmp-calc', after = 'nvim-cmp', opt = true },
-  --     { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', opt = true },
-  --     { 'hrsh7th/cmp-path', after = 'nvim-cmp', opt = true }
-  --   },
-  --   config = config.cmp(),
-  -- }
+  use {
+    'L3MON4D3/LuaSnip',
+    event = 'BufEnter'
+  }
+  use {
+    'hrsh7th/nvim-cmp',
+    after = 'LuaSnip',
+    requires = {
+      -- Luasnip
+      { 'saadparwaiz1/cmp_luasnip', after = { 'nvim-cmp', 'LuaSnip' }, opt = true },
+      -- Ultisnips
+      -- { 'SirVer/ultisnips', after = 'nvim-cmp', opt = true },
+      -- { 'honza/vim-snippets' after = { 'nvim-cmp', 'ultisnips' }, opt = true },
+      -- { 'quangnguyen30192/cmp-nvim-ultisnips', after = 'nvim-cmp', opt = true },
+      { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp', opt = true },
+      { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', opt = true },
+      { 'hrsh7th/cmp-calc', after = 'nvim-cmp', opt = true },
+      { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', opt = true },
+      { 'hrsh7th/cmp-path', after = 'nvim-cmp', opt = true }
+    },
+    config = config.cmp(),
+  }
 end)

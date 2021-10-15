@@ -1,6 +1,6 @@
 local M = {}
 
-M.bash = {
+M.bashls = {
   cmd_env = {
     GLOB_PATTERN = '*@(.sh|.inc|.bash|.command)'
   },
@@ -11,7 +11,7 @@ M.bash = {
   end
 }
 
-M.cpp = {
+M.clangd = {
   filetypes = { 'c', 'cpp' },
   root_dir = function(fname)
     local util = require 'lspconfig/util'
@@ -24,7 +24,7 @@ M.cpp = {
   end,
 }
 
-M.css = {
+M.cssls = {
   filetypes = { 'css', 'scss', 'less' },
   root_dir = function(fname)
     local util = require 'lspconfig/util'
@@ -58,7 +58,7 @@ M.html = {
     filetypes = { 'html', 'markdown' },
 }
 
-M.java = {
+M.jdtls = {
   filetypes = { 'java' },
   root_dir = function(fname)
     local util = require 'lspconfig/util'
@@ -73,7 +73,7 @@ M.java = {
   end,
 }
 
-M.json = {
+M.jsonls = {
   cmd = { "vscode-json-language-server", "--stdio" },
   init_options = {
     provideFormatter = true
@@ -90,7 +90,7 @@ M.json = {
   end,
 }
 
-M.lua = {
+M.sumneko_lua = {
   settings = {
     Lua = {
       runtime = {
@@ -120,7 +120,7 @@ M.lua = {
   }
 }
 
-M.python = {
+M.pyright = {
   filetypes = { 'python' },
   root_dir = function(fname)
     local util = require 'lspconfig/util'
@@ -145,7 +145,7 @@ M.python = {
   }
 }
 
-M.typescript = {
+M.tsserver = {
   root_dir = function(fname)
     local util = require 'lspconfig/util'
     local root_files = {
@@ -176,7 +176,7 @@ M.typescript = {
   }
 }
 
-M.yaml = {
+M.yamlls = {
   root_dir = function(fname)
     local util = require 'lspconfig/util'
     local root_files = {

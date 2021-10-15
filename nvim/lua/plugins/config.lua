@@ -242,7 +242,7 @@ function M.cmp()
     local is_cmp_compare_loaded, compare = pcall(require, 'cmp.config.compare')
     local is_cmp_types_loaded, types = pcall(require, 'cmp.types')
     local is_luasnip_loaded, luasnip = pcall(require, 'luasnip')
-    if not (is_cmp_loaded or is_cmp_compare_loaded or is_luasnip_loaded or is_cmp_types_loaded) then return end
+    if not (is_cmp_loaded or is_cmp_compare_loaded or is_cmp_types_loaded or is_luasnip_loaded) then return end
 
     local api = vim.api
     local opt = vim.o
@@ -283,10 +283,6 @@ function M.cmp()
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
     end
 
---     local press = function(key)
---       vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), "n", true)
---     end
-
     cmp.setup {
       completion = {
         autocomplete = {
@@ -306,9 +302,6 @@ function M.cmp()
 
           -- For `vsnip` user
           -- vim.fn["vsnip#anonymous"](args.body)
-
-          -- For `ultisnips`
-          -- vim.fn["UltiSnips#Anon"](args.body)
         end,
       },
       preselect = types.cmp.PreselectMode.Item,
@@ -351,9 +344,6 @@ function M.cmp()
           -- For luasnip
           elseif luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
-          -- For ultisnips
-          -- elseif vim.fn['UltiSnips#CanJumpForwards']() == 1 then
-          --   press('<ESC>:call UltiSnips#JumpForwards()<CR>')
           elseif has_words_before() then
             cmp.complete()
           else
@@ -369,9 +359,6 @@ function M.cmp()
           -- For luasnip
           elseif luasnip.jumpable(-1) then
             luasnip.jump(-1)
-          -- For ultisnips
-          -- elseif vim.fn['UltiSnips#CanJumpBackwards']() == 1 then
-          --   press('<ESC>:call UltiSnips#JumpBackwards()<CR>')
           else
             fallback()
           end
@@ -385,9 +372,11 @@ function M.cmp()
           vim_item.kind = icons[vim_item.kind]
           vim_item.menu = ({
             nvim_lsp = '(LSP)',
+            luasnip = '(Snippet)',
+            vsnip = '(Snippet)',
+            cmp_tabnine = "(Tabnine)",
             path = '(Path)',
             calc = '(Calc)',
-            luasnip = '(Snippet)',
             buffer = '(Buffer)',
           })[entry.source.name]
           vim_item.dup = ({
@@ -402,15 +391,31 @@ function M.cmp()
         ghost_text = false,
       },
       sources = {
-        { name = 'path' },
-        { name = 'buffer' },
-        { name = 'calc' },
         { name = 'nvim_lsp' },
         { name = 'nvim_lua' },
         { name = 'luasnip' },
+        { name = 'vsnip' },
+        { name = 'path' },
+        { name = 'buffer' },
+        { name = "cmp_tabnine" },
+        { name = 'calc' },
         { name = 'treesitter' },
       }
     }
+  end
+end
+
+function M.cmp_tabnine()
+  return function()
+    local is_tabnine_loaded, tabnine = pcall(require, 'cmp_tabnine.config')
+    if not is_tabnine_loaded then return end
+    tabnine:setup({
+      max_lines = 1000,
+      max_num_results = 20,
+      sort = true,
+      run_on_every_keystroke = true,
+      snippet_placeholder = '..',
+    })
   end
 end
 
@@ -1051,18 +1056,48 @@ end
 
 function M.lsp()
   return function()
-    local is_lspinstall_loaded, lspinstall = pcall(require, 'lspinstall')
-    local is_lspconfig_loaded, lspconfig = pcall(require, 'lspconfig')
+    local is_lsp_installer_loaded, lsp_installer = pcall(require, 'nvim-lsp-installer')
     local is_languages_loaded, languages = pcall(require, 'plugins/languages')
-    -- local is_coq_loaded, coq = pcall(require, 'coq')
-    if not (is_lspinstall_loaded or is_lspconfig_loaded or is_languages_loaded) then return end
+    local is_cmp_nvim_lsp_loaded, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+    if not (is_lsp_installer_loaded or is_languages_loaded or is_cmp_nvim_lsp_loaded) then return end
 
     local api = vim.api
     local cmd = vim.cmd
     local lsp = vim.lsp
-    local handlers = lsp.handlers
 
-    lsp.set_log_level('debug')
+    local customize = function()
+      local handlers = lsp.handlers
+      local fn = vim.fn
+
+      -- Popups
+      local pop_opts = { border = 'rounded', max_width = 80 }
+      handlers['textDocument/hover'] = lsp.with(handlers.hover, pop_opts)
+      handlers['textDocument/signatureHelp'] = lsp.with(handlers.signature_help, pop_opts)
+
+      -- Diagnostics
+      handlers['textDocument/publishDiagnostics'] = lsp.with(
+        lsp.diagnostic.on_publish_diagnostics,
+        {
+          signs = true,
+          virtual_text = {
+            prefix = '🐳',
+            spacing = 0,
+          },
+          underline = true,
+          severity_sort = false,
+        }
+      )
+
+      -- Symbols in the sign column (gutter)
+      local signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
+      for type, icon in pairs(signs) do
+        local hl = 'LspDiagnosticsSign' .. type
+        fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+      end
+    end
+
+    -- Invoke customization
+    customize()
 
     local on_attach = function(client, bufnr)
       local buf_set_keymap = function(...) api.nvim_buf_set_keymap(bufnr, ...) end
@@ -1092,8 +1127,8 @@ function M.lsp()
         ]], false)
       end
     end
-    -- Config that activates keymaps and enables snippet support
-    local make_config = function()
+
+    local set_capabilities = function()
       local capabilities = lsp.protocol.make_client_capabilities()
       capabilities.textDocument.completion.completionItem.snippetSupport = true
       capabilities.textDocument.completion.completionItem.resolveSupport = {
@@ -1103,77 +1138,59 @@ function M.lsp()
           'additionalTextEdits',
         },
       }
-      return {
-        -- Enable snippet support
-        capabilities = capabilities,
+      capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+      return capabilities
+    end
+
+    lsp_installer.settings {
+      ui = {
+        icons = {
+          -- The list icon to use for installed servers.
+          server_installed = '✓',
+          -- The list icon to use for servers that are pending installation.
+          server_pending = '➜',
+          -- The list icon to use for servers that are not installed.
+          server_uninstalled = '✗'
+        },
+        keymaps = {
+          -- Keymap to expand a server in the UI
+          toggle_server_expand = '<CR>',
+          -- Keymap to install a server
+          install_server = 'i',
+          -- Keymap to reinstall/update a server
+          update_server = 'u',
+          -- Keymap to uninstall a server
+          uninstall_server = 'X',
+        },
+      }
+    }
+
+    lsp_installer.on_server_ready(function(server)
+      local opts = {
         -- Map buffer local keybindings when the language server attaches
         on_attach = on_attach,
+        -- Enable snippet support
+        capabilities = set_capabilities(),
       }
-    end
-    -- Config lspinstall
-    local function setup_servers()
-      lspinstall.setup()
-      -- Get all installed servers
-      local servers = lspinstall.installed_servers()
-      -- Add manually installed servers
-      -- table.insert(servers, "clangd")
-
-      for _, server in pairs(servers) do
-        local config = make_config()
-        -- Language specific config
-        local language = languages[server]
-        if language then
-          if language.init_options then
-            config.init_options = language.init_options
-          end
-          if language.settings then
-            config.settings = language.settings
-          end
-          if language.root_dir then
-            config.root_dir = language.root_dir
-          end
-          if language.filetypes then
-            config.filetypes = language.filetypes
-          end
+      local language = languages[server.name]
+      if language then
+        if language.init_options then
+          opts.init_options = language.init_options
         end
-        -- Apply config and wrap it with coq
-        -- lspconfig[server].setup(coq.lsp_ensure_capabilities(config))
-        lspconfig[server].setup(config)
+        if language.settings then
+          opts.settings = language.settings
+        end
+        if language.root_dir then
+          opts.root_dir = language.root_dir
+        end
+        if language.filetypes then
+          opts.filetypes = language.filetypes
+        end
       end
-    end
-    -- Invoke lspinstall
-    setup_servers()
-
-    -- Config diagnostics
-    handlers['textDocument/publishDiagnostics'] = lsp.with(
-      lsp.diagnostic.on_publish_diagnostics,
-      {
-        signs = true,
-        virtual_text = {
-          prefix = '🦊',
-          spacing = 0,
-        },
-        underline = true,
-        severity_sort = false,
-      }
-    )
-
-    -- Change diagnostics' sign
-    vim.fn.sign_define('LspDiagnosticsSignError', { text = "", texthl = 'LspDiagnosticsDefaultError' })
-    vim.fn.sign_define('LspDiagnosticsSignWarning', { text = "", texthl = 'LspDiagnosticsDefaultWarning' })
-    vim.fn.sign_define('LspDiagnosticsSignInformation', { text = "", texthl = 'LspDiagnosticsDefaultInformation' })
-    vim.fn.sign_define('LspDiagnosticsSignHint', { text = "", texthl = 'LspDiagnosticsDefaultHint' })
-
-    -- Change popup styles
-    local pop_opts = { border = 'rounded', max_width = 80 }
-    handlers['textDocument/hover'] = lsp.with(handlers.hover, pop_opts)
-    handlers['textDocument/signatureHelp'] = lsp.with(handlers.signature_help, pop_opts)
-
-    -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-    lspinstall.post_install_hook = function ()
-      setup_servers() -- reload installed servers
-      cmd('bufdo e') -- this triggers the FileType autocmd that starts the server
-    end
+      -- Apply options
+      server:setup(opts)
+      cmd [[ do User LspAttachBuffers ]]
+    end)
   end
 end
 

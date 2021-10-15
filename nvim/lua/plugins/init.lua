@@ -64,11 +64,6 @@ packer.startup(function()
     setup = setup.nvimtree(),
     config = config.nvimtree(),
   }
-  -- use {
-  --   'ms-jpq/chadtree',
-  --   after = 'nvim-web-devicons',
-  --   config = config.chadtree(),
-  -- }
 
   -- Fancy start screen
   use {
@@ -197,19 +192,9 @@ packer.startup(function()
   -- LSP supporter
   use {
     'neovim/nvim-lspconfig',
-    -- requires = {
-    --   {
-    --     'ms-jpq/coq_nvim',
-    --     branch = 'coq', setup = setup.coq()
-    --   },
-    --   {
-    --     'ms-jpq/coq.artifacts',
-    --     branch = 'artifacts'
-    --   },
-    -- },
   }
   use {
-    'kabouzeid/nvim-lspinstall',
+    'williamboman/nvim-lsp-installer',
     config = config.lsp(),
   }
 
@@ -220,33 +205,45 @@ packer.startup(function()
     config = config.autopairs(),
   }
 
-  -- Show system key bindings
-  -- use {
-  --   'folke/which-key.nvim',
-  --   config = config.which_key(),
-  -- }
-
   -- Completion plugins
   use {
     'L3MON4D3/LuaSnip',
-    event = 'BufEnter'
+    event = 'BufEnter',
   }
   use {
     'hrsh7th/nvim-cmp',
     after = 'LuaSnip',
     requires = {
-      -- Luasnip
       { 'saadparwaiz1/cmp_luasnip', after = { 'nvim-cmp', 'LuaSnip' }, opt = true },
-      -- Ultisnips
-      -- { 'SirVer/ultisnips', after = 'nvim-cmp', opt = true },
-      -- { 'honza/vim-snippets' after = { 'nvim-cmp', 'ultisnips' }, opt = true },
-      -- { 'quangnguyen30192/cmp-nvim-ultisnips', after = 'nvim-cmp', opt = true },
+      { "rafamadriz/friendly-snippets", after = { 'nvim-cmp', 'LuaSnip' }, opt = true },
       { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', opt = true },
-      { 'hrsh7th/cmp-calc', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', opt = true },
-      { 'hrsh7th/cmp-path', after = 'nvim-cmp', opt = true }
+      { 'hrsh7th/cmp-path', after = 'nvim-cmp', opt = true },
+      { 'hrsh7th/cmp-calc', after = 'nvim-cmp', opt = true },
+      -- {
+      --   'tzachar/cmp-tabnine',
+      --   run='./install.sh',
+      --   after = 'nvim-cmp',
+      --   opt = true,
+      --   config = config.cmp_tabnine(),
+      -- },
     },
     config = config.cmp(),
   }
+
+  -- use {
+  --   'ms-jpq/coq_nvim',
+  --   branch = 'coq',
+  --   setup = setup.coq(),
+  --   requires = {
+  --     { 'ms-jpq/coq.artifacts', branch = 'artifacts' }
+  --   },
+  -- }
+
+  -- Show system key bindings
+  -- use {
+  --   'folke/which-key.nvim',
+  --   config = config.which_key(),
+  -- }
 end)

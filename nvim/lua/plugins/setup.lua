@@ -5,29 +5,29 @@ function M.barbar()
     local map = vim.api.nvim_set_keymap
     local opts = { noremap = true, silent = true }
     -- Move to previous/next
-    map('n', '<leader><S-Tab>', ':BufferPrevious<cr>', opts)
-    map('n', '<leader><Tab>', ':BufferNext<cr>', opts)
+    map('n', '<leader><S-Tab>', ':BufferPrevious<CR>', opts)
+    map('n', '<leader><Tab>', ':BufferNext<CR>', opts)
     -- Re-order to previous/next
-    map('n', '<leader><', ':BufferMovePrevious<cr>', opts)
-    map('n', '<leader>>', ' :BufferMoveNext<cr>', opts)
+    map('n', '<leader><', ':BufferMovePrevious<CR>', opts)
+    map('n', '<leader>>', ' :BufferMoveNext<CR>', opts)
     -- Goto buffer in position...
-    map('n', '<leader>1', ':BufferGoto 1<cr>', opts)
-    map('n', '<leader>2', ':BufferGoto 2<cr>', opts)
-    map('n', '<leader>3', ':BufferGoto 3<cr>', opts)
-    map('n', '<leader>4', ':BufferGoto 4<cr>', opts)
-    map('n', '<leader>5', ':BufferGoto 5<cr>', opts)
-    map('n', '<leader>6', ':BufferGoto 6<cr>', opts)
-    map('n', '<leader>7', ':BufferGoto 7<cr>', opts)
-    map('n', '<leader>8', ':BufferGoto 8<cr>', opts)
-    map('n', '<leader>9', ':BufferGoto 9<cr>', opts)
-    map('n', '<leader>10', ':BufferGoto 10<cr>', opts)
-    map('n', '<leader>0', ':BufferLast<cr>', opts)
+    map('n', '<leader>1', ':BufferGoto 1<CR>', opts)
+    map('n', '<leader>2', ':BufferGoto 2<CR>', opts)
+    map('n', '<leader>3', ':BufferGoto 3<CR>', opts)
+    map('n', '<leader>4', ':BufferGoto 4<CR>', opts)
+    map('n', '<leader>5', ':BufferGoto 5<CR>', opts)
+    map('n', '<leader>6', ':BufferGoto 6<CR>', opts)
+    map('n', '<leader>7', ':BufferGoto 7<CR>', opts)
+    map('n', '<leader>8', ':BufferGoto 8<CR>', opts)
+    map('n', '<leader>9', ':BufferGoto 9<CR>', opts)
+    map('n', '<leader>10', ':BufferGoto 10<CR>', opts)
+    map('n', '<leader>0', ':BufferLast<CR>', opts)
     -- Close all buffer but accept the current one
-    map('n', '<leader>cb', ':BufferCloseAllButCurrent<cr>', opts)
+    map('n', '<leader>cb', ':BufferCloseAllButCurrent<CR>', opts)
     -- Sort buffer
-    map('n', '<leader>bb', ':BufferOrderByBufferNumber<cr>', opts)
-    map('n', '<leader>bd', ':BufferOrderByDirectory<cr>', opts)
-    map('n', '<leader>bl', ':BufferOrderByLanguage<cr>', opts)
+    map('n', '<leader>bb', ':BufferOrderByBufferNumber<CR>', opts)
+    map('n', '<leader>bd', ':BufferOrderByDirectory<CR>', opts)
+    map('n', '<leader>bl', ':BufferOrderByLanguage<CR>', opts)
   end
 end
 
@@ -37,22 +37,22 @@ function M.bufferline()
     local opts = { noremap = true, silent = true }
 
     -- Move to previous/next
-    map('n', '<leader><Tab>', ':BufferLineCycleNext<cr>', opts)
-    map('n', '<leader><S-Tab>', ':BufferLineCyclePrev<cr>', opts)
+    map('n', '<leader><Tab>', ':BufferLineCycleNext<CR>', opts)
+    map('n', '<leader><S-Tab>', ':BufferLineCyclePrev<CR>', opts)
     -- Re-order to previous/next
-    map('n', '<leader>>', ' :BufferLineMoveNext<cr>', opts)
-    map('n', '<leader><', ':BufferLineMovePrev<cr>', opts)
+    map('n', '<leader>>', ' :BufferLineMoveNext<CR>', opts)
+    map('n', '<leader><', ':BufferLineMovePrev<CR>', opts)
     -- Goto buffer in position...
-    map('n', '<leader>1', ':BufferLineGoToBuffer 1<cr>', opts)
-    map('n', '<leader>2', ':BufferLineGoToBuffer 2<cr>', opts)
-    map('n', '<leader>3', ':BufferLineGoToBuffer 3<cr>', opts)
-    map('n', '<leader>4', ':BufferLineGoToBuffer 4<cr>', opts)
-    map('n', '<leader>5', ':BufferLineGoToBuffer 5<cr>', opts)
-    map('n', '<leader>6', ':BufferLineGoToBuffer 6<cr>', opts)
-    map('n', '<leader>7', ':BufferLineGoToBuffer 7<cr>', opts)
-    map('n', '<leader>8', ':BufferLineGoToBuffer 8<cr>', opts)
-    map('n', '<leader>9', ':BufferLineGoToBuffer 9<cr>', opts)
-    map('n', '<leader>10', ':BufferLineGoToBuffer 10<cr>', opts)
+    map('n', '<leader>1', ':BufferLineGoToBuffer 1<CR>', opts)
+    map('n', '<leader>2', ':BufferLineGoToBuffer 2<CR>', opts)
+    map('n', '<leader>3', ':BufferLineGoToBuffer 3<CR>', opts)
+    map('n', '<leader>4', ':BufferLineGoToBuffer 4<CR>', opts)
+    map('n', '<leader>5', ':BufferLineGoToBuffer 5<CR>', opts)
+    map('n', '<leader>6', ':BufferLineGoToBuffer 6<CR>', opts)
+    map('n', '<leader>7', ':BufferLineGoToBuffer 7<CR>', opts)
+    map('n', '<leader>8', ':BufferLineGoToBuffer 8<CR>', opts)
+    map('n', '<leader>9', ':BufferLineGoToBuffer 9<CR>', opts)
+    map('n', '<leader>10', ':BufferLineGoToBuffer 10<CR>', opts)
   end
 end
 
@@ -221,7 +221,7 @@ function M.neoformat()
     local opts = { noremap = true, silent = true }
     -- Enable formatters for python
     global.neoformat_enabled_python = { 'yapf', 'autopep8', 'black' }
-    map('n', '<leader>f', '<cmd>Neoformat<cr>', opts)
+    map('n', '<leader>f', '<cmd>Neoformat<CR>', opts)
   end
 end
 
@@ -231,9 +231,9 @@ function M.nvimtree()
     local global = vim.g
     local opts = { noremap = true, silent = true }
 
-    map('n', '<C-n>', ':NvimTreeToggle<cr>', opts)
-    map('n', '<leader>r', ':NvimTreeRefresh<cr>', opts)
-    map('n', '<leader>nf', ':NvimTreeFindFile<cr>', opts)
+    map('n', '<C-n>', ':NvimTreeToggle<CR>', opts)
+    map('n', '<leader>r', ':NvimTreeRefresh<CR>', opts)
+    map('n', '<leader>nf', ':NvimTreeFindFile<CR>', opts)
     -- Don't auto open tree on specific filetypes
     global.nvim_tree_auto_ignore_ft = { 'startify', 'dashboard', 'alpha' }
     -- List of filenames that gets highlighted with NvimTreeSpecialFile
@@ -282,11 +282,11 @@ function M.telescope()
     local map = vim.api.nvim_set_keymap
     local opts = { noremap = true, silent = true }
 
-    map('n', '<C-p>', ':Telescope find_files hidden=true<cr>', opts)
-    map('n', '<C-f>', ':Telescope live_grep<cr>', opts)
-    map('n', '<C-b>', ':Telescope buffers<cr>', opts)
-    map('n', '<C-e>', ':Telescope lsp_document_diagnostics<cr>', opts)
-    map('n', '<C-w>', ':Telescope lsp_workspace_diagnostics<cr>', opts)
+    map('n', '<C-p>', ':Telescope find_files hidden=true<CR>', opts)
+    map('n', '<C-f>', ':Telescope live_grep<CR>', opts)
+    map('n', '<C-b>', ':Telescope buffers<CR>', opts)
+    map('n', '<C-e>', ':Telescope lsp_document_diagnostics<CR>', opts)
+    map('n', '<C-w>', ':Telescope lsp_workspace_diagnostics<CR>', opts)
   end
 end
 

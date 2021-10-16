@@ -70,11 +70,11 @@ function M.alpha()
     local buttons = {
       type = 'group',
       val = {
-        set_button('r', '  Recent Projects', ':Telescope projects<cr>'),
-        set_button('p', '  Find File', ':Telescope find_files hidden=true<cr>'),
-        set_button('f', '  Find Word', ':Telescope live_grep<cr>'),
-        set_button('s', '  Settings', ':e $HOME/.config/nvim/lua/default_config.lua<cr>'),
-        set_button('q', '  Quit', ':qa<cr>'),
+        set_button('r', '  Recent Projects', ':Telescope projects<CR>'),
+        set_button('p', '  Find File', ':Telescope find_files hidden=true<CR>'),
+        set_button('f', '  Find Word', ':Telescope live_grep<CR>'),
+        set_button('s', '  Settings', ':e $HOME/.config/nvim/lua/default_config.lua<CR>'),
+        set_button('q', '  Quit', ':qa<CR>'),
       },
       opts = {
         position = 'center',
@@ -157,7 +157,7 @@ function M.autopairs()
 --         return autopairs.autopairs_cr()
 --       end
 --     end
---     map('i', '<cr>', 'v:lua.MUtils.CR()', opts)
+--     map('i', '<CR>', 'v:lua.MUtils.CR()', opts)
 
 --     MUtils.BS = function()
 --       if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({ 'mode' }).mode == 'eval' then
@@ -341,7 +341,6 @@ function M.cmp()
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
-          -- For luasnip
           elseif luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
           elseif has_words_before() then
@@ -356,7 +355,6 @@ function M.cmp()
         ['<S-Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
-          -- For luasnip
           elseif luasnip.jumpable(-1) then
             luasnip.jump(-1)
           else
@@ -478,9 +476,9 @@ function M.fzf()
     global.fzf_nvim_statusline = 0
 
     -- Open search popup
-    map('n', '<C-p>', ':Files<cr>', opts)
-    map('n', '<C-f>', ':Rg<cr>', opts)
-    map('n', '<C-b>', ':Buffers<cr>', opts)
+    map('n', '<C-p>', ':Files<CR>', opts)
+    map('n', '<C-f>', ':Rg<CR>', opts)
+    map('n', '<C-b>', ':Buffers<CR>', opts)
 
     global.fzf_colors = {
       fg      = { 'fg', 'BufferLineBufferSelected' },
@@ -950,7 +948,7 @@ function M.icons()
            name = 'Dockerfile',
         },
         html = {
-           icon = '',
+           icon = '',
            color = colors.orange,
            name = 'html',
         },
@@ -1106,15 +1104,15 @@ function M.lsp()
 
       -- Enable completion triggered
       buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-      buf_set_keymap('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-      buf_set_keymap('n', '<leader>gk', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-      buf_set_keymap('n', '<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-      buf_set_keymap('n', '<leader>gr', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-      buf_set_keymap('n', '<leader>gn', '<cmd>lua vim.lsp.diagnostic.goto_next({ popup_opts = { border = \'rounded\' } })<cr>', opts)
-      buf_set_keymap('n', '<leader>gp', '<cmd>lua vim.lsp.diagnostic.goto_prev({ popup_opts = { border = \'rounded\' } })<cr>', opts)
-      buf_set_keymap('n', '<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
-      buf_set_keymap('n', '<leader>gf', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
-      buf_set_keymap('n', '<leader>gl', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = \'rounded\' })<cr>', opts)
+      buf_set_keymap('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+      buf_set_keymap('n', '<leader>gk', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+      buf_set_keymap('n', '<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+      buf_set_keymap('n', '<leader>gr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+      buf_set_keymap('n', '<leader>gn', '<cmd>lua vim.lsp.diagnostic.goto_next({ popup_opts = { border = \'rounded\' } })<CR>', opts)
+      buf_set_keymap('n', '<leader>gp', '<cmd>lua vim.lsp.diagnostic.goto_prev({ popup_opts = { border = \'rounded\' } })<CR>', opts)
+      buf_set_keymap('n', '<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+      buf_set_keymap('n', '<leader>gf', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+      buf_set_keymap('n', '<leader>gl', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = \'rounded\' })<CR>', opts)
 
       -- Set autocommands conditional on server_capabilities
       if client.resolved_capabilities.document_highlight then
@@ -1439,7 +1437,7 @@ function M.treesitter()
           focus_language = 'f',
           unfocus_language = 'F',
           update = 'R',
-          goto_node = '<cr>',
+          goto_node = '<CR>',
           show_help = '?',
         },
       }

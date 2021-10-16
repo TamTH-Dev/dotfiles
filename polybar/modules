@@ -644,3 +644,13 @@ content-foreground = ${colors.RED}
 content-padding = 0
 
 click-left = ~/.config/rofi/bin/powermenu
+
+[module/updater]
+type = custom/script
+exec = ~/.config/i3/bin/pacman_updater.sh
+
+format = <label>
+format-prefix = " "
+format-prefix-foreground = ${colors.PURPLE}
+format-foreground = ${colors.foreground}
+label = %output%

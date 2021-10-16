@@ -11,6 +11,9 @@ done
 # Set wallpapper
 feh --bg-scale ~/Pictures/wallpapers/tokyonight.jpg
 
+# Launch nm-applet
+nm-applet --no-agent
+
 # Lauch polybar
 ~/.config/i3/bin/bar.sh
 

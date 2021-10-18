@@ -189,13 +189,20 @@ packer.startup(function()
     setup = setup.neoformat(),
   }
 
-  -- LSP supporter
+  -- Built-in LSP Configuration Supporter
   use {
     'neovim/nvim-lspconfig',
   }
+  -- LSP Installer
   use {
     'williamboman/nvim-lsp-installer',
+    setup = setup.lsp(),
     config = config.lsp(),
+  }
+  -- LSP customizer
+  use {
+    'RishabhRD/popfix',
+    'RishabhRD/nvim-lsputils',
   }
 
   -- Autopairs supporter

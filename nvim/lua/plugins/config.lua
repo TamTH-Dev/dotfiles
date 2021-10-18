@@ -84,7 +84,7 @@ function M.alpha()
 
     local footer = {
       type = 'text',
-      val = 'A clever person solves a problem.\n    A wise person AVOIDS it.',
+      val = 'A clever person solves a problem. A wise person avoids it.',
       opts = {
         position = 'center',
         hl = 'LspDiagnosticsDefaultWarning',
@@ -1092,6 +1092,44 @@ function M.lsp()
         local hl = 'LspDiagnosticsSign' .. type
         fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
       end
+
+      -- Apply styling from lsputils
+      if vim.fn.has('nvim-0.5.1') == 1 then
+        vim.lsp.handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler
+        -- vim.lsp.handlers['textDocument/references'] = require'lsputil.locations'.references_handler
+        vim.lsp.handlers['textDocument/definition'] = require'lsputil.locations'.definition_handler
+        vim.lsp.handlers['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
+        vim.lsp.handlers['textDocument/typeDefinition'] = require'lsputil.locations'.typeDefinition_handler
+        vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
+        vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
+        vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
+      else
+        local bufnr = vim.api.nvim_buf_get_number(0)
+        vim.lsp.handlers['textDocument/codeAction'] = function(_, _, actions)
+          require('lsputil.codeAction').code_action_handler(nil, actions, nil, nil, nil)
+        end
+        vim.lsp.handlers['textDocument/references'] = function(_, _, result)
+          require('lsputil.locations').references_handler(nil, result, { bufnr = bufnr }, nil)
+        end
+        vim.lsp.handlers['textDocument/definition'] = function(_, method, result)
+          require('lsputil.locations').definition_handler(nil, result, { bufnr = bufnr, method = method }, nil)
+        end
+        vim.lsp.handlers['textDocument/declaration'] = function(_, method, result)
+          require('lsputil.locations').declaration_handler(nil, result, { bufnr = bufnr, method = method }, nil)
+        end
+        vim.lsp.handlers['textDocument/typeDefinition'] = function(_, method, result)
+          require('lsputil.locations').typeDefinition_handler(nil, result, { bufnr = bufnr, method = method }, nil)
+        end
+        vim.lsp.handlers['textDocument/implementation'] = function(_, method, result)
+          require('lsputil.locations').implementation_handler(nil, result, { bufnr = bufnr, method = method }, nil)
+        end
+        vim.lsp.handlers['textDocument/documentSymbol'] = function(_, _, result, _, bufn)
+          require('lsputil.symbols').document_handler(nil, result, { bufnr = bufn }, nil)
+        end
+        vim.lsp.handlers['textDocument/symbol'] = function(_, _, result, _, bufn)
+          require('lsputil.symbols').workspace_handler(nil, result, { bufnr = bufn }, nil)
+        end
+      end
     end
 
     -- Invoke customization
@@ -1313,6 +1351,51 @@ function M.project()
       datapath = vim.fn.stdpath('data'),
     }
     require('telescope').load_extension('projects')
+  end
+end
+
+function M.saga()
+  return function()
+    local is_saga_loaded, saga = pcall(require, 'lspsaga')
+    if not is_saga_loaded then return end
+
+    saga.init_lsp_saga {
+      use_saga_diagnostic_sign = true,
+      error_sign = ' ',
+      warn_sign = ' ',
+      hint_sign = ' ',
+      infor_sign = ' ',
+      dianostic_header_icon = ' ',
+      code_action_icon = ' ',
+      code_action_prompt = {
+        enable = true,
+        sign = true,
+        sign_priority = 20,
+        virtual_text = true
+      },
+      finder_definition_icon = ' ',
+      finder_reference_icon = ' ',
+      max_preview_lines = 10, -- preview lines of lsp_finder and definition preview
+      finder_action_keys = {
+        open = '<cr>',
+        vsplit = '<C-v>',
+        split = '<C-x>',
+        quit = 'q',
+        scroll_down = '<C-j>',
+        scroll_up = '<C-k>'
+      },
+      code_action_keys = {
+        quit = 'q',
+        exec = '<cr>'
+      },
+      rename_action_keys = {
+        quit = 'q',
+        exec = '<cr>'
+      },
+      definition_preview_icon = ' ',
+      border_style = 'single', -- 'single' 'double' 'round' 'plus'
+      rename_prompt_prefix = '➤'
+    }
   end
 end
 

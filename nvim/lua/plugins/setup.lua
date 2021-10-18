@@ -201,6 +201,64 @@ function M.indent_blankline()
   end
 end
 
+function M.lsp()
+  return function()
+    local global = vim.g
+    local border_chars = {
+      TOP_LEFT = '╭',
+      TOP_RIGHT = '╮',
+      MID_HORIZONTAL = '─',
+      MID_VERTICAL = '│',
+      BOTTOM_LEFT = '╰',
+      BOTTOM_RIGHT = '╯',
+    }
+    global.lsp_utils_codeaction_opts = {
+      list = {
+        border = true,
+        border_chars = border_chars,
+        highlight = 'Normal',
+        selection_highlight = 'Visual',
+        matching_highlight = 'Identifier',
+      },
+    }
+    global.lsp_utils_location_opts = {
+      height = 24,
+      mode = 'editor',
+      list = {
+        border = true,
+        border_chars = border_chars,
+        highlight = 'Normal',
+        selection_highlight = 'Visual',
+        matching_highlight = 'Identifier',
+      },
+      preview = {
+        type = nil,
+        border = true,
+        highlight = 'Special',
+        preview_highlight = 'Special',
+        border_chars = border_chars
+      },
+    }
+    global.lsp_utils_symbols_opts = {
+      height = 24,
+      mode = 'editor',
+      list = {
+        border = true,
+        border_chars = border_chars,
+        highlight = 'Normal',
+        selection_highlight = 'Visual',
+        matching_highlight = 'Identifier',
+      },
+      preview = {
+        border = true,
+        highlight = 'Special',
+        preview_highlight = 'Special',
+        border_chars = border_chars
+      },
+    }
+  end
+end
+
 function M.multiple_cursors()
   return function()
     local global = vim.g
@@ -274,6 +332,33 @@ function M.nvimtree()
         hint= '',
       }
     }
+  end
+end
+
+function M.saga()
+  return function()
+    local map = vim.api.nvim_set_keymap
+    local opts = { noremap = true, silent = true }
+
+    -- show hover doc
+    map('n', '<leader>gk', '<cmd>lua require(\'lspsaga.hover\').render_hover_doc()<CR>', opts)
+    -- scroll action
+    map('n', '<C-j>', '<cmd>lua require(\'lspsaga.action\').smart_scroll_with_saga(1)<CR>', opts)
+    map('n', '<C-k>', '<cmd>lua require(\'lspsaga.action\').smart_scroll_with_saga(-1)<CR>', opts)
+    -- code action
+    map('n', '<leader>ga', '<cmd>lua require(\'lspsaga.codeaction\').code_action()<CR>', opts)
+    map('v', '<leader>ga', ':<C-U>Lspsaga range_code_action<CR>', opts)
+    -- show signature help
+    map('n', '<leader>gs', ':Lspsaga signature_help<CR>', opts)
+    -- show diagnostic
+    map('n', '<leader>gl', ':Lspsaga show_line_diagnostics<CR>', opts)
+    -- rename
+    map('n', '<leader>gr', ':Lspsaga rename<CR>', opts)
+    -- jump diagnostic
+    map('n', '<leader>gn', ':Lspsaga diagnostic_jump_next<CR>', opts)
+    map('n', '<leader>gp', ':Lspsaga diagnostic_jump_prev<CR>', opts)
+    -- lsp provider to find the cursor word definition and reference
+    map('n', '<leader>gf', ':Lspsaga lsp_finder<CR>', opts)
   end
 end
 

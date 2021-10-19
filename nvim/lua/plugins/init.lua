@@ -196,14 +196,16 @@ packer.startup(function()
   -- LSP Installer
   use {
     'williamboman/nvim-lsp-installer',
-    setup = setup.lsp(),
     config = config.lsp(),
   }
-  -- LSP customizer
+  -- LSP UI Supporter
   use {
-    'RishabhRD/popfix',
-    'RishabhRD/nvim-lsputils',
+    'tami5/lspsaga.nvim',
+    branch = 'nvim51',
+    setup = setup.saga(),
+    config = config.saga(),
   }
+
 
   -- Autopairs supporter
   use {

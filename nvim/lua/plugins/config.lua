@@ -1077,10 +1077,11 @@ function M.lsp()
         lsp.diagnostic.on_publish_diagnostics,
         {
           signs = true,
-          virtual_text = {
-            prefix = '🐳',
-            spacing = 0,
-          },
+          virtual_text = false,
+          -- virtual_text = {
+          --   prefix = '🐳',
+          --   spacing = 0,
+          -- },
           underline = true,
           severity_sort = false,
         }
@@ -1091,44 +1092,6 @@ function M.lsp()
       for type, icon in pairs(signs) do
         local hl = 'LspDiagnosticsSign' .. type
         fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-      end
-
-      -- Apply styling from lsputils
-      if vim.fn.has('nvim-0.5.1') == 1 then
-        vim.lsp.handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler
-        -- vim.lsp.handlers['textDocument/references'] = require'lsputil.locations'.references_handler
-        vim.lsp.handlers['textDocument/definition'] = require'lsputil.locations'.definition_handler
-        vim.lsp.handlers['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
-        vim.lsp.handlers['textDocument/typeDefinition'] = require'lsputil.locations'.typeDefinition_handler
-        vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
-        vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
-        vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
-      else
-        local bufnr = vim.api.nvim_buf_get_number(0)
-        vim.lsp.handlers['textDocument/codeAction'] = function(_, _, actions)
-          require('lsputil.codeAction').code_action_handler(nil, actions, nil, nil, nil)
-        end
-        vim.lsp.handlers['textDocument/references'] = function(_, _, result)
-          require('lsputil.locations').references_handler(nil, result, { bufnr = bufnr }, nil)
-        end
-        vim.lsp.handlers['textDocument/definition'] = function(_, method, result)
-          require('lsputil.locations').definition_handler(nil, result, { bufnr = bufnr, method = method }, nil)
-        end
-        vim.lsp.handlers['textDocument/declaration'] = function(_, method, result)
-          require('lsputil.locations').declaration_handler(nil, result, { bufnr = bufnr, method = method }, nil)
-        end
-        vim.lsp.handlers['textDocument/typeDefinition'] = function(_, method, result)
-          require('lsputil.locations').typeDefinition_handler(nil, result, { bufnr = bufnr, method = method }, nil)
-        end
-        vim.lsp.handlers['textDocument/implementation'] = function(_, method, result)
-          require('lsputil.locations').implementation_handler(nil, result, { bufnr = bufnr, method = method }, nil)
-        end
-        vim.lsp.handlers['textDocument/documentSymbol'] = function(_, _, result, _, bufn)
-          require('lsputil.symbols').document_handler(nil, result, { bufnr = bufn }, nil)
-        end
-        vim.lsp.handlers['textDocument/symbol'] = function(_, _, result, _, bufn)
-          require('lsputil.symbols').workspace_handler(nil, result, { bufnr = bufn }, nil)
-        end
       end
     end
 
@@ -1143,14 +1106,14 @@ function M.lsp()
       -- Enable completion triggered
       buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
       buf_set_keymap('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-      buf_set_keymap('n', '<leader>gk', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-      buf_set_keymap('n', '<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-      buf_set_keymap('n', '<leader>gr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-      buf_set_keymap('n', '<leader>gn', '<cmd>lua vim.lsp.diagnostic.goto_next({ popup_opts = { border = \'rounded\' } })<CR>', opts)
-      buf_set_keymap('n', '<leader>gp', '<cmd>lua vim.lsp.diagnostic.goto_prev({ popup_opts = { border = \'rounded\' } })<CR>', opts)
-      buf_set_keymap('n', '<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-      buf_set_keymap('n', '<leader>gf', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-      buf_set_keymap('n', '<leader>gl', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = \'rounded\' })<CR>', opts)
+      -- buf_set_keymap('n', '<leader>gk', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+      -- buf_set_keymap('n', '<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+      -- buf_set_keymap('n', '<leader>gr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+      -- buf_set_keymap('n', '<leader>gn', '<cmd>lua vim.lsp.diagnostic.goto_next({ popup_opts = { border = \'rounded\' } })<CR>', opts)
+      -- buf_set_keymap('n', '<leader>gp', '<cmd>lua vim.lsp.diagnostic.goto_prev({ popup_opts = { border = \'rounded\' } })<CR>', opts)
+      -- buf_set_keymap('n', '<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+      -- buf_set_keymap('n', '<leader>gf', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+      -- buf_set_keymap('n', '<leader>gl', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = \'rounded\' })<CR>', opts)
 
       -- Set autocommands conditional on server_capabilities
       if client.resolved_capabilities.document_highlight then
@@ -1393,7 +1356,7 @@ function M.saga()
         exec = '<cr>'
       },
       definition_preview_icon = ' ',
-      border_style = 'single', -- 'single' 'double' 'round' 'plus'
+      border_style = 'round', -- 'single' 'double' 'round' 'plus'
       rename_prompt_prefix = '➤'
     }
   end

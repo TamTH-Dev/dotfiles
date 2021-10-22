@@ -241,11 +241,12 @@ function M.cmp()
     local is_cmp_loaded, cmp = pcall(require, 'cmp')
     local is_cmp_compare_loaded, compare = pcall(require, 'cmp.config.compare')
     local is_cmp_types_loaded, types = pcall(require, 'cmp.types')
-    local is_luasnip_loaded, luasnip = pcall(require, 'luasnip')
-    if not (is_cmp_loaded or is_cmp_compare_loaded or is_cmp_types_loaded or is_luasnip_loaded) then return end
+    local is_snippy_loaded, snippy = pcall(require, 'snippy')
+    if not (is_cmp_loaded or is_cmp_compare_loaded or is_cmp_types_loaded or is_snippy_loaded) then return end
 
     local api = vim.api
     local opt = vim.o
+    local fn = vim.fn
 
     local WIDE_HEIGHT = 40
 
@@ -280,7 +281,11 @@ function M.cmp()
 
     local has_words_before = function()
       local line, col = unpack(api.nvim_win_get_cursor(0))
-      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+      return col ~= 0 and api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+    end
+
+    local feedkey = function(key, mode)
+      api.nvim_feedkeys(api.nvim_replace_termcodes(key, true, true, true), mode, true)
     end
 
     cmp.setup {
@@ -297,11 +302,7 @@ function M.cmp()
       },
       snippet = {
         expand = function(args)
-          -- For `luasnip`
-          luasnip.lsp_expand(args.body)
-
-          -- For `vsnip` user
-          -- vim.fn["vsnip#anonymous"](args.body)
+          snippy.expand_snippet(args.body)
         end,
       },
       preselect = types.cmp.PreselectMode.Item,
@@ -341,8 +342,8 @@ function M.cmp()
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
+          elseif fn['snippy#can_expand_or_advance']() then
+            feedkey('<Plug>(snippy-expand-or-next)', '')
           elseif has_words_before() then
             cmp.complete()
           else
@@ -355,8 +356,8 @@ function M.cmp()
         ['<S-Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
+          elseif fn['snippy#can_jump'](-1) then
+            feedkey('<Plug>(snippy-previous)', '')
           else
             fallback()
           end
@@ -370,12 +371,12 @@ function M.cmp()
           vim_item.kind = icons[vim_item.kind]
           vim_item.menu = ({
             nvim_lsp = '(LSP)',
-            luasnip = '(Snippet)',
-            vsnip = '(Snippet)',
-            cmp_tabnine = "(Tabnine)",
+            snippy = '(Snippet)',
+            cmp_tabnine = '(Tabnine)',
             path = '(Path)',
             calc = '(Calc)',
             buffer = '(Buffer)',
+            treesitter = '(Treesitter)',
           })[entry.source.name]
           vim_item.dup = ({
             nvim_lsp = 1,
@@ -391,13 +392,13 @@ function M.cmp()
       sources = {
         { name = 'nvim_lsp' },
         { name = 'nvim_lua' },
-        { name = 'luasnip' },
-        { name = 'vsnip' },
+        { name = 'snippy' },
         { name = 'path' },
         { name = 'buffer' },
-        { name = "cmp_tabnine" },
+        { name = 'cmp_tabnine' },
         { name = 'calc' },
         { name = 'treesitter' },
+        { name = 'emoji' },
       }
     }
   end
@@ -633,6 +634,7 @@ function M.galaxyline()
             [''] = 'VISUAL',
             v = 'VISUAL',
             R = 'REPLACE',
+            s = 'SNIPPET',
           }
           local icons = {
             n = ' ',
@@ -641,7 +643,8 @@ function M.galaxyline()
             V = '﬏ ',
             [''] = '﬏ ',
             v = '﬏ ',
-            R = ' ',
+            R = ' ',
+            s = ' ',
           }
           cmd('hi GalaxyViMode guifg='..get_mode_color())
           local alias_mode = alias[fn.mode()]
@@ -650,7 +653,7 @@ function M.galaxyline()
             alias_mode = fn.mode()
           end
           if not icon then
-            icon = ''
+            icon = ' '
           end
           return icon..alias_mode
         end,
@@ -1056,8 +1059,7 @@ function M.lsp()
   return function()
     local is_lsp_installer_loaded, lsp_installer = pcall(require, 'nvim-lsp-installer')
     local is_languages_loaded, languages = pcall(require, 'plugins/languages')
-    local is_cmp_nvim_lsp_loaded, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-    if not (is_lsp_installer_loaded or is_languages_loaded or is_cmp_nvim_lsp_loaded) then return end
+    if not (is_lsp_installer_loaded or is_languages_loaded) then return end
 
     local api = vim.api
     local cmd = vim.cmd
@@ -1137,7 +1139,7 @@ function M.lsp()
           'additionalTextEdits',
         },
       }
-      capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+      capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
       return capabilities
     end
 

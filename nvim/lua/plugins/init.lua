@@ -206,7 +206,6 @@ packer.startup(function()
     config = config.saga(),
   }
 
-
   -- Autopairs supporter
   use {
     'windwp/nvim-autopairs',
@@ -214,22 +213,27 @@ packer.startup(function()
     config = config.autopairs(),
   }
 
-  -- Completion plugins
+  -- Completion supporters
   use {
-    'L3MON4D3/LuaSnip',
+    'honza/vim-snippets',
+  }
+  use {
+    'dcampos/nvim-snippy',
     event = 'BufEnter',
   }
   use {
     'hrsh7th/nvim-cmp',
-    after = 'LuaSnip',
+    after = 'nvim-snippy',
     requires = {
-      { 'saadparwaiz1/cmp_luasnip', after = { 'nvim-cmp', 'LuaSnip' }, opt = true },
-      { "rafamadriz/friendly-snippets", after = { 'nvim-cmp', 'LuaSnip' }, opt = true },
+      { 'dcampos/cmp-snippy', after = { 'nvim-cmp', 'nvim-snippy' }, opt = true },
+      { 'rafamadriz/friendly-snippets', after = { 'nvim-cmp', 'nvim-snippy' }, opt = true },
       { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-path', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-calc', after = 'nvim-cmp', opt = true },
+      { 'hrsh7th/cmp-emoji', after = 'nvim-cmp', opt = true },
+      { 'ray-x/cmp-treesitter', after = 'nvim-cmp', opt = true },
       -- {
       --   'tzachar/cmp-tabnine',
       --   run='./install.sh',
@@ -248,11 +252,5 @@ packer.startup(function()
   --   requires = {
   --     { 'ms-jpq/coq.artifacts', branch = 'artifacts' }
   --   },
-  -- }
-
-  -- Show system key bindings
-  -- use {
-  --   'folke/which-key.nvim',
-  --   config = config.which_key(),
   -- }
 end)

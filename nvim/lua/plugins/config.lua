@@ -791,9 +791,9 @@ function M.galaxyline()
       Separator = {
         condition = function() return hide_in_width() and is_buffer_number_valid() end,
         provider = function()
-          return '| '
+          return ' '
         end,
-        highlight = { colors.white, colors.bg },
+        highlight = { colors.gray, colors.bg },
         separator = ' ',
         separator_highlight = { colors.bg, colors.bg },
       },
@@ -812,9 +812,9 @@ function M.galaxyline()
       Separator = {
         condition = hide_in_width,
         provider = function()
-          return '| '
+          return ' '
         end,
-        highlight = { colors.white, colors.bg },
+        highlight = { colors.gray, colors.bg },
         separator = ' ',
         separator_highlight = { colors.bg, colors.bg },
       },
@@ -828,8 +828,6 @@ function M.galaxyline()
         end,
         icon = ' ',
         highlight = { colors.blue, colors.bg },
-        -- separator = ' | ',
-        -- separator_highlight = { colors.fg, colors.bg }
       }
     }
 
@@ -838,8 +836,8 @@ function M.galaxyline()
         provider = 'LineColumn',
         icon = ' ',
         highlight = { colors.magenta, colors.bg },
-        separator = ' | ',
-        separator_highlight = { colors.fg, colors.bg }
+        separator = '  ',
+        separator_highlight = { colors.gray, colors.bg }
       },
     }
 
@@ -849,8 +847,8 @@ function M.galaxyline()
         provider = 'LinePercent',
         icon = '',
         highlight = { colors.red, colors.bg },
-        separator = ' | ',
-        separator_highlight = { colors.fg, colors.bg }
+        separator = '  ',
+        separator_highlight = { colors.gray, colors.bg }
       }
     }
 
@@ -1436,6 +1434,7 @@ function M.telescope()
           'build/.*',
           'dist/.*',
           '.git/.*',
+          '.next/*'
         },
         generic_sorter =  sorters.get_generic_fuzzy_sorter,
         winblend = 0,

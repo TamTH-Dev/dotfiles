@@ -19,7 +19,7 @@ local colors = {
   blue = '#2ac3de',
   cyan = '#7dcfff',
   lightBlue = '#73daca',
-  gray = '#565f89'
+  gray = '#414868'
 }
 
 -- Define fg color

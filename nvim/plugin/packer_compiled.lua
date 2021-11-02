@@ -195,7 +195,7 @@ _G.packer_plugins = {
     path = "/home/madlife/.local/share/nvim/site/pack/packer/opt/neoscroll.nvim"
   },
   ["nvim-autopairs"] = {
-    config = { '\27LJ\1\2ò\1\0\0\5\0\t\0\0194\0\0\0004\1\1\0%\2\2\0>\0\3\3\14\0\0\0T\2\1€G\0\1\0007\2\3\0013\3\4\0003\4\5\0:\4\6\3>\2\2\0014\2\1\0%\3\a\0>\2\2\0027\2\3\0023\3\b\0>\2\2\1G\0\1\0\1\0\4\17map_complete\2\16auto_select\2\vinsert\1\vmap_cr\2"nvim-autopairs.completion.cmp\21disable_filetype\1\2\0\0\20TelescopePrompt\1\0\1\vmap_bs\1\nsetup\19nvim-autopairs\frequire\npcall\0' },
+    config = { '\27LJ\1\2\3\0\0\v\0\16\0 4\0\0\0004\1\1\0%\2\2\0>\0\3\0034\2\0\0004\3\1\0%\4\3\0>\2\3\3\14\0\0\0T\4\3€\14\0\2\0T\4\1€G\0\1\0007\4\4\0013\5\5\0003\6\6\0:\6\a\5>\4\2\0014\4\1\0%\5\b\0>\4\2\0027\5\t\3\16\6\5\0007\5\n\5%\a\v\0007\b\f\0043\t\14\0003\n\r\0:\n\15\t>\b\2\0=\5\2\1G\0\1\0\rmap_char\1\0\0\1\0\1\btex\5\20on_confirm_done\17confirm_done\aon\nevent"nvim-autopairs.completion.cmp\21disable_filetype\1\2\0\0\20TelescopePrompt\1\0\5\22enable_afterquote\2\vmap_bs\2\30enable_check_bracket_line\2\22ignored_next_char\v[%w%.]\21enable_moveright\2\nsetup\bcmp\19nvim-autopairs\frequire\npcall\0' },
     load_after = {
       ["nvim-cmp"] = true
     },

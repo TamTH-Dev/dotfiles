@@ -124,49 +124,23 @@ end
 
 function M.autopairs()
   return function()
-    local is_autopairs_loaded, autopairs = pcall(require, 'nvim-autopairs')
-    if not (is_autopairs_loaded) then return end
+    local autopairs_loaded, autopairs = pcall(require, 'nvim-autopairs')
+    local cmp_loaded, cmp = pcall(require, 'cmp')
+
+    if not (autopairs_loaded or cmp_loaded) then return end
 
     autopairs.setup({
-      map_bs = false,
+      map_bs = true,  -- map the <BS> key
+      enable_moveright = true,
+      enable_afterquote = true,  -- add bracket pairs after quote
+      enable_check_bracket_line = true,  --- check bracket in same line
       disable_filetype = { 'TelescopePrompt' },
+      ignored_next_char = "[%w%.]" -- will ignore alphanumeric and `.` symbol
     })
 
-    -- For cmp
-    require("nvim-autopairs.completion.cmp").setup({
-      map_cr = true, --  map <CR> on insert mode
-      map_complete = true, -- it will auto insert `(` (map_char) after select function or method item
-      auto_select = true, -- automatically select the first item
-      insert = false, -- use insert confirm behavior instead of replace
-    })
-
-    -- For coq
---     local map = vim.api.nvim_set_keymap
---     local opts = { expr = true, noremap = true }
-
---     _G.MUtils = {}
-
---     MUtils.CR = function()
---       if vim.fn.pumvisible() ~= 0 then
---         if vim.fn.complete_info({ 'selected' }).selected ~= -1 then
---           return autopairs.esc('<c-y>')
---         else
---           return autopairs.esc('<c-e>') .. autopairs.autopairs_cr()
---         end
---       else
---         return autopairs.autopairs_cr()
---       end
---     end
---     map('i', '<CR>', 'v:lua.MUtils.CR()', opts)
-
---     MUtils.BS = function()
---       if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({ 'mode' }).mode == 'eval' then
---         return autopairs.esc('<c-e>') .. autopairs.autopairs_bs()
---       else
---         return autopairs.autopairs_bs()
---       end
---     end
---     map('i', '<bs>', 'v:lua.MUtils.BS()', opts)
+    -- Intergate with cmp
+    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+    cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
   end
 end
 
@@ -1434,7 +1408,7 @@ function M.telescope()
           'build/.*',
           'dist/.*',
           '.git/.*',
-          '.next/*'
+          '.next/*',
         },
         generic_sorter =  sorters.get_generic_fuzzy_sorter,
         winblend = 0,

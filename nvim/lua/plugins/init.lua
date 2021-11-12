@@ -169,18 +169,27 @@ packer.startup(function()
 
   -- Fuzzy search
   use {
-    'nvim-telescope/telescope.nvim',
-    requires = {
-      { 'nvim-lua/plenary.nvim' },
-    },
-    setup = setup.telescope(),
-    config = config.telescope(),
+    'junegunn/fzf',
+    dir = '~/.fzf',
+    run = './install --all',
   }
-  use {
-    'ahmedkhalf/project.nvim',
-    after = 'telescope.nvim',
-    config = config.project(),
+	use {
+    'junegunn/fzf.vim',
+    config = config.fzf(),
   }
+  -- use {
+  --   'nvim-telescope/telescope.nvim',
+  --   requires = {
+  --     { 'nvim-lua/plenary.nvim' },
+  --   },
+  --   setup = setup.telescope(),
+  --   config = config.telescope(),
+  -- }
+  -- use {
+  --   'ahmedkhalf/project.nvim',
+  --   after = 'telescope.nvim',
+  --   config = config.project(),
+  -- }
 
   -- Formatter
   use {

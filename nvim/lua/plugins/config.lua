@@ -70,9 +70,9 @@ function M.alpha()
     local buttons = {
       type = 'group',
       val = {
-        set_button('r', '  Recent Projects', ':Telescope projects<CR>'),
-        set_button('p', '  Find File', ':Telescope find_files hidden=true<CR>'),
-        set_button('f', '  Find Word', ':Telescope live_grep<CR>'),
+        -- set_button('r', '  Recent Projects', ':Telescope projects<CR>'),
+        set_button('p', '  Find File', ':Files<CR>'),
+        set_button('f', '  Find Word', ':Rg<CR>'),
         set_button('s', '  Settings', ':e $HOME/.config/nvim/lua/default_config.lua<CR>'),
         set_button('q', '  Quit', ':qa<CR>'),
       },
@@ -102,11 +102,11 @@ function M.alpha()
       layout = {
         { type = 'padding', val = 2 },
         section.header,
-        { type = 'padding', val = 1 },
+        { type = 'padding', val = 2 },
         section.plugins_total_stats,
         { type = 'padding', val = 2 },
         section.buttons,
-        { type = 'padding', val = 1 },
+        { type = 'padding', val = 2 },
         section.footer,
       },
       opts = {
@@ -132,10 +132,10 @@ function M.autopairs()
     autopairs.setup({
       map_bs = true,  -- map the <BS> key
       enable_moveright = true,
-      enable_afterquote = true,  -- add bracket pairs after quote
-      enable_check_bracket_line = true,  --- check bracket in same line
+      -- enable_afterquote = true,  -- add bracket pairs after quote
+      -- enable_check_bracket_line = true,  --- check bracket in same line
       disable_filetype = { 'TelescopePrompt' },
-      ignored_next_char = "[%w%.]" -- will ignore alphanumeric and `.` symbol
+      -- ignored_next_char = "[%w%.]" -- will ignore alphanumeric and `.` symbol
     })
 
     -- Intergate with cmp
@@ -459,7 +459,7 @@ function M.fzf()
       fg      = { 'fg', 'BufferLineBufferSelected' },
       bg      = { 'bg', 'BufferLineDiagnosticVisible' },
       hl      = { 'fg', 'BufferLineWarningSelected' },
-      ['fg+'] = { 'fg', 'NvimTreeRootFolder' },
+      ['fg+'] = { 'fg', 'Special' },
       ['bg+'] = { 'bg', 'BufferLineDiagnosticVisible' },
       ['hl+'] = { 'fg', 'BufferLineWarningSelected' },
       info    = { 'fg', 'BufferLineInfoSelected' },
@@ -1080,6 +1080,8 @@ function M.lsp()
       -- Enable completion triggered
       buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
       buf_set_keymap('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+      buf_set_keymap('n', '<C-e>', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+      buf_set_keymap('n', '<C-w>', '<cmd>lua vim.lsp.diagnostic.set_loclist({ workspace = true })<CR>', opts)
       -- buf_set_keymap('n', '<leader>gk', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
       -- buf_set_keymap('n', '<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
       -- buf_set_keymap('n', '<leader>gr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)

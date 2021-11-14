@@ -208,12 +208,12 @@ packer.startup(function()
     config = config.lsp(),
   }
   -- LSP UI Supporter
-  use {
-    'tami5/lspsaga.nvim',
-    branch = 'nvim51',
-    setup = setup.saga(),
-    config = config.saga(),
-  }
+  -- use {
+  --   'tami5/lspsaga.nvim',
+  --   branch = 'nvim51',
+  --   setup = setup.saga(),
+  --   config = config.saga(),
+  -- }
 
   -- Autopairs supporter
   use {

@@ -140,9 +140,10 @@ packer.startup(function()
 
   -- Commenter
   use {
-    'terrortylor/nvim-comment',
-    event = 'BufEnter',
-    config = config.comment(),
+    'numToStr/Comment.nvim',
+    config = function()
+        require('Comment').setup()
+    end
   }
 
   -- Auto close (X)HTML tags

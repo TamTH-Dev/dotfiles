@@ -406,7 +406,6 @@ function M.colorizer()
        hsl_fn = false, -- CSS hsl() and hsla() functions
        css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
        css_fn = false, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-
        -- Available modes: foreground, background
        mode = 'background', -- Set the display mode.
     })
@@ -415,22 +414,19 @@ end
 
 function M.comment()
   return function()
-    local is_comment_loaded, nvim_comment = pcall(require, 'nvim_comment')
+    local is_comment_loaded, comment = pcall(require, 'Comment')
     if not is_comment_loaded then return end
-
-    nvim_comment.setup({
-      -- Linters prefer comment and line to have a space in between markers
-      marker_padding = true,
-      -- should comment out empty or whitespace only lines
-      comment_empty = false,
-      -- Should key mappings be created
-      create_mappings = true,
-      -- Normal mode mapping left hand side
-      line_mapping = '<leader>cl',
-      -- Visual/Operator mapping left hand side
-      operator_mapping = '<leader>c',
-      -- Hook function to call before commenting takes place
-      hook = nil
+    comment.setup({
+      padding = true,
+      sticky = true,
+      toggler = {
+        line = 'gcc',
+        block = 'gbc',
+      },
+      opleader = {
+        line = 'gc',
+        block = 'gb',
+      },
     })
   end
 end

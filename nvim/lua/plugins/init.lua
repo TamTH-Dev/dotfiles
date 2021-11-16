@@ -236,7 +236,7 @@ packer.startup(function()
     after = 'nvim-snippy',
     requires = {
       -- { 'dcampos/cmp-snippy', after = { 'nvim-cmp', 'nvim-snippy' }, opt = true },
-      -- { 'rafamadriz/friendly-snippets', after = { 'nvim-cmp', 'nvim-snippy' }, opt = true },
+      { 'rafamadriz/friendly-snippets', after = { 'nvim-cmp', 'nvim-snippy' }, opt = true },
       { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', opt = true },

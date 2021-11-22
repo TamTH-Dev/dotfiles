@@ -244,13 +244,6 @@ packer.startup(function()
       { 'hrsh7th/cmp-calc', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-emoji', after = 'nvim-cmp', opt = true },
       { 'ray-x/cmp-treesitter', after = 'nvim-cmp', opt = true },
-      -- {
-      --   'tzachar/cmp-tabnine',
-      --   run='./install.sh',
-      --   after = 'nvim-cmp',
-      --   opt = true,
-      --   config = config.cmp_tabnine(),
-      -- },
     },
     config = config.cmp(),
   }

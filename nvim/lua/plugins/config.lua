@@ -1037,21 +1037,16 @@ function M.lsp()
       local handlers = lsp.handlers
       local fn = vim.fn
 
-      -- Popups
-      local pop_opts = { border = 'rounded', max_width = 80 }
-      handlers['textDocument/hover'] = lsp.with(handlers.hover, pop_opts)
-      handlers['textDocument/signatureHelp'] = lsp.with(handlers.signature_help, pop_opts)
-
       -- Diagnostics
       handlers['textDocument/publishDiagnostics'] = lsp.with(
         lsp.diagnostic.on_publish_diagnostics,
         {
           signs = true,
           virtual_text = false,
-          -- virtual_text = {
-          --   prefix = '🐳',
-          --   spacing = 0,
-          -- },
+          virtual_text = {
+            prefix = '🧨',
+            spacing = 0,
+          },
           underline = true,
           severity_sort = false,
         }
@@ -1063,6 +1058,33 @@ function M.lsp()
         local hl = 'DiagnosticSign' .. type
         fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
       end
+
+      local border = {
+        {"╭", "FloatBorder"},
+
+        {"─", "FloatBorder"},
+
+        {"╮", "FloatBorder"},
+
+        {"│", "FloatBorder"},
+
+        {"╯", "FloatBorder"},
+
+        {"─", "FloatBorder"},
+
+        {"╰", "FloatBorder"},
+
+        {"│", "FloatBorder"},
+      }
+
+      -- Popup customization globally
+      local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+      function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+        opts = opts or {}
+        opts.border = opts.border or border
+        return orig_util_open_floating_preview(contents, syntax, opts, ...)
+      end
+
     end
 
     -- Invoke customization
@@ -1081,11 +1103,11 @@ function M.lsp()
       buf_set_keymap('n', '<leader>gk', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
       buf_set_keymap('n', '<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
       buf_set_keymap('n', '<leader>gr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-      buf_set_keymap('n', '<leader>gn', '<cmd>lua vim.lsp.diagnostic.goto_next({ popup_opts = { border = \'rounded\', max_width = 80 } })<CR>', opts)
-      buf_set_keymap('n', '<leader>gp', '<cmd>lua vim.lsp.diagnostic.goto_prev({ popup_opts = { border = \'rounded\', max_width = 80 } })<CR>', opts)
+      buf_set_keymap('n', '<leader>gn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+      buf_set_keymap('n', '<leader>gp', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
       buf_set_keymap('n', '<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
       buf_set_keymap('n', '<leader>gf', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-      buf_set_keymap('n', '<leader>gl', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = \'rounded\', max_width = 80 })<CR>', opts)
+      buf_set_keymap('n', '<leader>gl', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
 
       -- Set autocommands conditional on server_capabilities
       if client.resolved_capabilities.document_highlight then

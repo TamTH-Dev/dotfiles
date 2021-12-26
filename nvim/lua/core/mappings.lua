@@ -35,13 +35,4 @@ map('n', 'j', 'gj', opts)
 map('n', 'k', 'gk', opts)
 
 -- Close all buffer except this one
-vim.api.nvim_exec([[
-  function! CloseAllBuffersButCurrent()
-    let curr = bufnr("%")
-    let last = bufnr("$")
-
-    if curr > 1    | silent! execute "1,".(curr-1)."bd"     | endif
-    if curr < last | silent! execute (curr+1).",".last."bd" | endif
-  endfunction
-]], false)
-map('n', '<leader>cb', ':call CloseAllBuffersButCurrent()<CR>', opts)
+map('n', '<leader>cb', ':%bdelete|edit #|normal `"<CR>', opts)

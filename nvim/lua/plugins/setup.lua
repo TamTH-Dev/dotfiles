@@ -3,6 +3,7 @@ local M = {}
 function M.barbar()
   return function()
     local map = vim.api.nvim_set_keymap
+    local global = vim.g
     local opts = { noremap = true, silent = true }
     -- Move to previous/next
     map('n', '<leader><S-Tab>', ':BufferPrevious<CR>', opts)
@@ -28,6 +29,14 @@ function M.barbar()
     map('n', '<leader>bb', ':BufferOrderByBufferNumber<CR>', opts)
     map('n', '<leader>bd', ':BufferOrderByDirectory<CR>', opts)
     map('n', '<leader>bl', ':BufferOrderByLanguage<CR>', opts)
+
+    global.bufferline = {
+      closable = false,
+      exclude_name = {
+        'fzf',
+        'alpha'
+      },
+    }
   end
 end
 

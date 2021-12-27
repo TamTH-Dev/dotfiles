@@ -42,17 +42,17 @@ packer.startup(function()
 
   -- Buffer management bar
   use {
-    'akinsho/bufferline.nvim',
+    'romgrk/barbar.nvim',
     after = 'nvim-web-devicons',
     requires = 'kyazdani42/nvim-web-devicons',
-    setup = setup.bufferline(),
-    config = config.bufferline(),
+    setup = setup.barbar(),
   }
   -- use {
-  --   'romgrk/barbar.nvim',
+  --   'akinsho/bufferline.nvim',
   --   after = 'nvim-web-devicons',
   --   requires = 'kyazdani42/nvim-web-devicons',
-  --   setup = setup.barbar(),
+  --   setup = setup.bufferline(),
+  --   config = config.bufferline(),
   -- }
 
   -- File explorer

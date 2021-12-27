@@ -9,6 +9,7 @@ local cmd = vim.cmd
 -- Declare colors manually
 local colors = {
   bg = '#1a1b26',
+  stormBg = '#24283b',
   fg = '#c0caf5',
   red = '#f7768e',
   orange = '#ff9e64',
@@ -19,7 +20,7 @@ local colors = {
   blue = '#2ac3de',
   cyan = '#7dcfff',
   lightBlue = '#73daca',
-  gray = '#414868'
+  gray = '#414868',
 }
 
 -- Define fg color
@@ -70,18 +71,21 @@ bg('DiagnosticVirtualTextHint', 'default')
 fg('IndentBlanklineContextChar', colors.orange)
 
 -- Barbar
--- fg('BufferCurrentSign', colors.red)
--- fg('BufferCurrentMod', colors.blue)
--- fg('BufferVisible', colors.fg)
--- bg('BufferVisible', colors.bg)
--- fg('BufferVisibleIndex', colors.fg)
--- bg('BufferVisibleIndex', colors.bg)
--- fg('BufferVisibleMod', colors.fg)
--- bg('BufferVisibleMod', colors.bg)
--- fg('BufferVisibleSign', colors.magenta)
--- bg('BufferVisibleSign', colors.bg)
--- fg('BufferVisibleTarget', colors.fg)
--- bg('BufferVisibleTarget', colors.bg)
+bg('BufferCurrent', colors.stormBg)
+fg('BufferCurrentSign', colors.red)
+bg('BufferCurrentSign', colors.stormBg)
+fg('BufferCurrentMod', colors.blue)
+bg('BufferCurrentMod', colors.stormBg)
+fg('BufferVisible', colors.fg)
+bg('BufferVisible', colors.bg)
+fg('BufferVisibleIndex', colors.fg)
+bg('BufferVisibleIndex', colors.bg)
+fg('BufferVisibleMod', colors.fg)
+bg('BufferVisibleMod', colors.bg)
+fg('BufferVisibleSign', colors.magenta)
+bg('BufferVisibleSign', colors.bg)
+fg('BufferVisibleTarget', colors.fg)
+bg('BufferVisibleTarget', colors.bg)
 
 -- NvimTree
 fg('NvimTreeFolderIcon', colors.blue)

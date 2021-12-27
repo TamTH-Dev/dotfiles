@@ -452,19 +452,19 @@ function M.fzf()
     map('n', '<C-b>', ':Buffers<CR>', opts)
 
     global.fzf_colors = {
-      fg      = { 'fg', 'BufferLineBufferSelected' },
-      bg      = { 'bg', 'BufferLineDiagnosticVisible' },
-      hl      = { 'fg', 'BufferLineWarningSelected' },
+      fg      = { 'fg', 'NonText' },
+      bg      = { 'bg', 'EndOfBuffer' },
+      hl      = { 'fg', 'DiagnosticSignError' },
       ['fg+'] = { 'fg', 'Special' },
-      ['bg+'] = { 'bg', 'BufferLineDiagnosticVisible' },
-      ['hl+'] = { 'fg', 'BufferLineWarningSelected' },
-      info    = { 'fg', 'BufferLineInfoSelected' },
+      ['bg+'] = { 'bg', 'EndOfBuffer' },
+      ['hl+'] = { 'fg', 'DiagnosticSignError' },
+      info    = { 'fg', 'Directory' },
       border  = { 'fg', 'NvimTreeRootFolder' },
-      prompt  = { 'fg', 'BufferLinePickVisible' },
+      prompt  = { 'fg', 'Statement' },
       pointer = { 'fg', 'NvimTreeRootFolder' },
       marker  = { 'fg', 'NvimTreeRootFolder' },
       spinner = { 'fg', 'NvimTreeRootFolder' },
-      header  = { 'fg', 'BufferLineInfoSelected' }
+      header  = { 'fg', 'TSVariableBuiltin' }
     }
 
     -- Actions for fzf

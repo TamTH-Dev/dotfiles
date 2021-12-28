@@ -70,7 +70,10 @@ function M.alpha()
     local buttons = {
       type = 'group',
       val = {
-        -- set_button('r', '  Recent Projects', ':Telescope projects<CR>'),
+        -- set_button('p', '  Find File', ':Telescope find_files hidden=true<CR>'),
+        -- set_button('f', '  Find Word', ':Telescope live_grep<CR>'),
+        -- set_button('s', '  Settings', ':e $HOME/.config/nvim/lua/default_config.lua<CR>'),
+        -- set_button('q', '  Quit', ':qa<CR>'),
         set_button('p', '  Find File', ':Files<CR>'),
         set_button('f', '  Find Word', ':Rg<CR>'),
         set_button('s', '  Settings', ':e $HOME/.config/nvim/lua/default_config.lua<CR>'),
@@ -1097,9 +1100,9 @@ function M.lsp()
 
       -- Enable completion triggered
       buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-      buf_set_keymap('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
       buf_set_keymap('n', '<C-e>', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
       buf_set_keymap('n', '<C-w>', '<cmd>lua vim.lsp.diagnostic.set_loclist({ workspace = true })<CR>', opts)
+      buf_set_keymap('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
       buf_set_keymap('n', '<leader>gk', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
       buf_set_keymap('n', '<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
       buf_set_keymap('n', '<leader>gr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
@@ -1445,6 +1448,8 @@ function M.telescope()
         buffer_previewer_maker = previewers.buffer_previewer_maker
       },
     }
+
+    telescope.load_extension('fzf')
   end
 end
 

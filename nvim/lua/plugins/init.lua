@@ -182,14 +182,10 @@ packer.startup(function()
   --   'nvim-telescope/telescope.nvim',
   --   requires = {
   --     { 'nvim-lua/plenary.nvim' },
+  --     { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   --   },
   --   setup = setup.telescope(),
   --   config = config.telescope(),
-  -- }
-  -- use {
-  --   'ahmedkhalf/project.nvim',
-  --   after = 'telescope.nvim',
-  --   config = config.project(),
   -- }
 
   -- Formatter

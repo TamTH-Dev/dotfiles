@@ -241,7 +241,7 @@ _G.packer_plugins = {
     url = "https://github.com/windwp/nvim-autopairs"
   },
   ["nvim-cmp"] = {
-    after = { "cmp-nvim-lsp", "nvim-autopairs", "cmp-nvim-lua", "cmp-buffer", "cmp-path", "cmp-treesitter", "cmp-emoji", "friendly-snippets", "cmp-calc" },
+    after = { "cmp-nvim-lsp", "nvim-autopairs", "cmp-nvim-lua", "cmp-buffer", "friendly-snippets", "cmp-path", "cmp-treesitter", "cmp-emoji", "cmp-calc" },
     config = { "\27LJ\1\2¬\1\0\0\a\1\6\2\0314\0\0\0+\1\0\0007\1\1\1'\2\0\0>\1\2\0=\0\0\3\b\1\0\0T\2\19Ä+\2\0\0007\2\2\2'\3\0\0\21\4\1\0\16\5\0\0)\6\2\0>\2\5\0028\2\1\2\16\3\2\0007\2\3\2\16\4\1\0\16\5\1\0>\2\4\2\16\3\2\0007\2\4\2%\4\5\0>\2\3\2\n\2\0\0T\2\2Ä)\2\1\0T\3\1Ä)\2\2\0H\2\2\0\b¿\a%s\nmatch\bsub\23nvim_buf_get_lines\24nvim_win_get_cursor\vunpack\0\2b\0\2\b\1\2\0\r+\2\0\0007\2\0\2+\3\0\0007\3\1\3\16\4\0\0)\5\2\0)\6\2\0)\a\2\0>\3\5\2\16\4\1\0)\5\2\0>\2\4\1G\0\1\0\b¿\27nvim_replace_termcodes\18nvim_feedkeys\v\0\1\1\0\0\0\1H\0\2\0001\0\1\3\1\2\0\5+\1\0\0007\1\0\0017\2\1\0>\1\2\1G\0\1\0\a¿\tbody\19expand_snippet\v\0\1\1\0\0\0\1H\0\2\0Â\1\0\1\4\4\6\0\30+\1\0\0007\1\0\1>\1\1\2\15\0\1\0T\2\4Ä+\1\0\0007\1\1\1>\1\1\1T\1\20Ä+\1\1\0007\1\2\1>\1\1\2\15\0\1\0T\2\5Ä+\1\2\0%\2\3\0%\3\4\0>\1\3\1T\1\nÄ+\1\3\0>\1\1\2\15\0\1\0T\2\4Ä+\1\0\0007\1\5\1>\1\1\1T\1\2Ä\16\1\0\0>\1\1\1G\0\1\0\1¿\n¿\14¿\r¿\rcomplete\5\"<Plug>(snippy-expand-or-next)!snippy#can_expand_or_advance\21select_next_item\fvisible´\1\0\1\4\3\5\0\23+\1\0\0007\1\0\1>\1\1\2\15\0\1\0T\2\4Ä+\1\0\0007\1\1\1>\1\1\1T\1\rÄ+\1\1\0007\1\2\1'\2ˇˇ>\1\2\2\15\0\1\0T\2\5Ä+\1\2\0%\2\3\0%\3\4\0>\1\3\1T\1\2Ä\16\1\0\0>\1\1\1G\0\1\0\1¿\n¿\14¿\5\28<Plug>(snippy-previous)\20snippy#can_jump\21select_prev_item\fvisibleÇ\2\0\2\4\1\a\0\18+\2\0\0007\3\0\0016\2\3\2:\2\0\0013\2\2\0007\3\3\0007\3\4\0036\2\3\2:\2\1\0013\2\6\0007\3\3\0007\3\4\0036\2\3\2\14\0\2\0T\3\1Ä'\2\0\0:\2\5\1H\1\2\0\f¿\1\0\3\vbuffer\3\1\rnvim_lsp\3\1\tpath\3\1\bdup\tname\vsource\1\0\a\16cmp_tabnine\14(Tabnine)\vsnippy\14(Snippet)\rnvim_lsp\n(LSP)\vbuffer\r(Buffer)\tcalc\v(Calc)\15treesitter\17(Treesitter)\tpath\v(Path)\tmenu\tkindØ\15\1\0\22\0\\\3´\0014\0\0\0004\1\1\0%\2\2\0>\0\3\0034\2\0\0004\3\1\0%\4\3\0>\2\3\0034\4\0\0004\5\1\0%\6\4\0>\4\3\0034\6\0\0004\a\1\0%\b\5\0>\6\3\3\14\0\0\0T\b\aÄ\14\0\2\0T\b\5Ä\14\0\4\0T\b\3Ä\14\0\6\0T\b\1Ä0\0ëÄ4\b\6\0007\b\a\b4\t\6\0007\t\b\t4\n\6\0007\n\t\n'\v(\0003\f\n\0001\r\v\0001\14\f\0007\15\r\0013\16\20\0003\17\16\0002\18\3\0007\19\2\0057\19\14\0197\19\15\19;\19\1\18:\18\17\0171\18\18\0:\18\19\17:\17\21\0163\17\23\0001\18\22\0:\18\24\17:\17\25\0167\17\2\0057\17\26\0177\17\27\17:\17\28\0163\17\30\0003\18\29\0:\18\31\0174\18 \0007\18!\18\22\19\0\v7\20\"\t\22\21\0\v\22\21\1\21\23\21\2\21!\20\21\20 \19\20\19>\18\2\2:\18#\0174\18 \0007\18!\0187\19$\t!\19\19\v \19\19\v>\18\2\2:\18%\17:\17&\0163\17)\0007\18\2\0057\18'\0187\18(\18:\18*\0171\18+\0:\18,\17:\17-\0163\17.\0002\18\b\0007\19/\3;\19\1\0187\0190\3;\19\2\0187\0191\3;\19\3\0187\0192\3;\19\4\0187\0193\3;\19\5\0187\0194\3;\19\6\0187\0195\3;\19\a\18:\0186\17:\0177\0163\17:\0007\0188\0017\0189\18'\19¸ˇ>\18\2\2:\18;\0177\0188\0017\0189\18'\19\4\0>\18\2\2:\18<\0177\0188\0017\18=\18>\18\1\2:\18>\0177\0188\0017\18?\18>\18\1\2:\18@\0177\0188\0017\18A\0183\19C\0007\20'\0017\20B\20:\20D\19>\18\2\2:\18E\0177\0188\0011\19F\0003\20G\0>\18\3\2:\18H\0177\0188\0011\19I\0003\20J\0>\18\3\2:\18K\17:\0178\0163\17M\0001\18L\0:\18N\17:\17O\0163\17P\0:\17Q\0162\17\n\0003\18R\0;\18\1\0173\18S\0;\18\2\0173\18T\0;\18\3\0173\18U\0;\18\4\0173\18V\0;\18\5\0173\18W\0;\18\6\0173\18X\0;\18\a\0173\18Y\0;\18\b\0173\18Z\0;\18\t\17:\17[\16>\15\2\0010\0\0ÄG\0\1\0G\0\1\0\fsources\1\0\1\tname\nemoji\1\0\1\tname\15treesitter\1\0\1\tname\tcalc\1\0\1\tname\16cmp_tabnine\1\0\1\tname\vbuffer\1\0\1\tname\tpath\1\0\1\tname\vsnippy\1\0\1\tname\rnvim_lua\1\0\1\tname\rnvim_lsp\17experimental\1\0\1\15ghost_text\1\15formatting\vformat\1\0\0\0\f<S-Tab>\1\3\0\0\6i\6s\0\n<Tab>\1\3\0\0\6i\6s\0\t<CR>\rbehavior\1\0\1\vselect\2\fReplace\fconfirm\n<C-e>\nclose\14<C-Space>\rcomplete\t<Up>\v<Down>\1\0\0\16scroll_docs\fmapping\fsorting\16comparators\norder\vlength\14sort_text\tkind\nscore\nexact\voffset\1\0\1\20priority_weight\3\2\17confirmation\26get_commit_characters\0\21default_behavior\1\0\0\vInsert\20ConfirmBehavior\18documentation\14maxheight\nlines\rmaxwidth\fcolumns\nfloor\tmath\vborder\1\0\1\17winhighlight(Normal:MyNormal,NormalNC:MyNormalNC\1\t\0\0\b‚ï≠\b‚îÄ\b‚ïÆ\b‚îÇ\b‚ïØ\b‚îÄ\b‚ï∞\b‚îÇ\14preselect\tItem\18PreselectMode\fsnippet\vexpand\1\0\0\0\15completion\1\0\0\27get_trigger_characters\0\17autocomplete\1\0\3\19keyword_length\3\1\20keyword_pattern/\\%(-\\?\\d\\+\\%(\\.\\d\\+\\)\\?\\|\\h\\w*\\%(-\\w*\\)*\\)\16completeopt\26menu,menuone,noinsert\16TextChanged\17TriggerEvent\nsetup\0\0\1\0\25\tText\bÔùæ\vMethod\bÔö¶\rOperator\bÔöî\14Interface\bÔûí\nColor\bÓà´\vModule\bÔô®\nEvent\bÔÉß\rFunction\bÔûî\rProperty\bÓò§\15EnumMember\bÔÖù\rConstant\bÓúá\18TypeParameter\bÔûÉ\vStruct\bÔÉä\rVariable\bÓúñ\fSnippet\bÔÉÑ\vFolder\bÔùä\nClass\bÔ†ñ\nField\bÓúñ\fKeyword\tÔ†ä \tFile\bÔúò\nValue\bÔ¢ü\16Constructor\bÔê•\tEnum\bÔ©ó\tUnit\bÔ•¨\14Reference\bÔúú\afn\6o\bapi\bvim\vsnippy\14cmp.types\23cmp.config.compare\bcmp\frequire\npcall\4 \18\0" },
     load_after = {
       ["nvim-snippy"] = true
@@ -287,12 +287,13 @@ _G.packer_plugins = {
     url = "https://github.com/kyazdani42/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
-    after = { "playground" },
+    config = { "\27LJ\1\2Ñ\4\0\0\6\0\14\0\0254\0\0\0004\1\1\0%\2\2\0>\0\3\3\14\0\0\0T\2\1ÄG\0\1\0007\2\3\0013\3\6\0003\4\4\0002\5\0\0:\5\5\4:\4\a\0033\4\b\0002\5\0\0:\5\5\4:\4\t\0033\4\n\0002\5\0\0:\5\5\0043\5\v\0:\5\f\4:\4\r\3>\2\2\1G\0\1\0\15playground\16keybindings\1\0\n\21toggle_hl_groups\6i\vupdate\6R\30toggle_injected_languages\6t\28toggle_language_display\6I\14goto_node\t<CR>\19focus_language\6f\14show_help\6?\27toggle_anonymous_nodes\6a\21unfocus_language\6F\24toggle_query_editor\6o\1\0\3\15updatetime\3\25\20persist_queries\1\venable\2\vindent\1\0\1\venable\1\14highlight\1\0\1\21ensure_installed\ball\fdisable\1\0\2&additional_vim_regex_highlighting\2\venable\2\nsetup\28nvim-treesitter.configs\frequire\npcall\0" },
     loaded = true,
-    only_config = true
+    path = "/home/madlife/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
   ["nvim-web-devicons"] = {
-    after = { "galaxyline.nvim", "nvim-tree.lua", "barbar.nvim" },
+    after = { "galaxyline.nvim", "barbar.nvim", "nvim-tree.lua" },
     config = { "\27LJ\1\2Å\n\0\0\n\0D\0|4\0\0\0004\1\1\0%\2\2\0>\0\3\0034\2\0\0004\3\1\0%\4\3\0>\2\3\3\14\0\2\0T\4\3Ä\14\0\0\0T\4\1ÄG\0\1\0007\4\4\0017\5\5\0033\6B\0003\a\t\0003\b\6\0007\t\a\4:\t\b\b:\b\n\a3\b\v\0007\t\a\4:\t\b\b:\b\f\a3\b\r\0007\t\a\4:\t\b\b:\b\14\a3\b\15\0007\t\a\4:\t\b\b:\b\16\a3\b\17\0007\t\18\4:\t\b\b:\b\19\a3\b\20\0007\t\a\4:\t\b\b:\b\21\a3\b\22\0007\t\23\4:\t\b\b:\b\24\a3\b\25\0007\t\18\4:\t\b\b:\b\26\a3\b\27\0007\t\28\4:\t\b\b:\b\29\a3\b\30\0007\t\28\4:\t\b\b:\b\31\a3\b \0007\t\23\4:\t\b\b:\b!\a3\b\"\0007\t\23\4:\t\b\b:\b#\a3\b$\0007\t\18\4:\t\b\b:\b%\a3\b&\0007\t\a\4:\t\b\b:\b'\a3\b(\0007\t\a\4:\t\b\b:\b)\a3\b*\0007\t\a\4:\t\b\b:\b+\a3\b,\0007\t\a\4:\t\b\b:\b-\a3\b.\0007\t\28\4:\t\b\b:\b/\a3\b0\0007\t1\4:\t\b\b:\b2\a3\b3\0007\t\a\4:\t\b\b:\b4\a3\b5\0007\t\a\4:\t\b\b:\b6\a3\b7\0007\t\18\4:\t\b\b:\b8\a3\b9\0007\t\23\4:\t\b\b:\b:\a3\b;\0007\t<\4:\t\b\b:\b=\a3\b>\0007\t\23\4:\t\b\b:\b?\a3\b@\0007\t\23\4:\t\b\b:\bA\a:\aC\6>\5\2\1G\0\1\0\roverride\1\0\0\bzip\1\0\2\tname\bzip\ticon\bÔáÜ\axz\1\0\2\tname\axz\ticon\bÔáÜ\bvue\ngreen\1\0\2\tname\bvue\ticon\bÔµÇ\brpm\1\0\2\tname\brpm\ticon\bÔåñ\arb\1\0\2\tname\arb\ticon\bÓòÖ\ats\1\0\2\tname\ats\ticon\bÓò®\ttoml\1\0\2\tname\ttoml\ticon\bÔÄì\apy\vyellow\1\0\2\tname\apy\ticon\bÓòÜ\bpng\1\0\2\tname\bpng\ticon\bÔùé\bout\1\0\2\tname\bout\ticon\bÓòí\bmp4\1\0\2\tname\bmp4\ticon\bÔÖÑ\bmp3\1\0\2\tname\bmp3\ticon\bÔ¢Ö\blua\1\0\2\tname\blua\ticon\bÓò†\tlock\1\0\2\tname\tlock\ticon\bÔ†Ω\akt\1\0\2\tname\akt\ticon\tÛ±àô\ajs\1\0\2\tname\ajs\ticon\bÓòå\bjpg\1\0\2\tname\bjpg\ticon\bÔùé\tjpeg\fmagenta\1\0\2\tname\tjpeg\ticon\bÔùé\tjava\1\0\2\tname\tjava\ticon\bÓâñ\thtml\vorange\1\0\2\tname\thtml\ticon\bÓòé\15Dockerfile\1\0\2\tname\15Dockerfile\ticon\bÔåà\bdeb\bred\1\0\2\tname\bdeb\ticon\bÔåÜ\bcss\1\0\2\tname\bcss\ticon\bÓùä\bcpp\1\0\2\tname\bcpp\ticon\bÓòù\acc\1\0\2\tname\acc\ticon\bÓòù\6c\1\0\0\ncolor\tblue\1\0\2\tname\6c\ticon\bÓòû\nsetup\vcolors\22nvim-web-devicons\22colors.highlights\frequire\npcall\0" },
     load_after = {},
     loaded = true,
@@ -306,15 +307,6 @@ _G.packer_plugins = {
     only_cond = false,
     path = "/home/madlife/.local/share/nvim/site/pack/packer/opt/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
-  },
-  playground = {
-    commands = { "TSPlaygroundToggle" },
-    load_after = {},
-    loaded = false,
-    needs_bufread = true,
-    only_cond = false,
-    path = "/home/madlife/.local/share/nvim/site/pack/packer/opt/playground",
-    url = "https://github.com/nvim-treesitter/playground"
   },
   ["plenary.nvim"] = {
     loaded = true,
@@ -379,10 +371,10 @@ time([[Defining packer_plugins]], false)
 time([[Setup for neoformat]], true)
 try_loadstring("\27LJ\1\2¡\1\0\0\b\0\n\0\0154\0\0\0007\0\1\0004\1\0\0007\1\2\0017\1\3\0013\2\4\0003\3\6\0:\3\5\0\16\3\1\0%\4\a\0%\5\b\0%\6\t\0\16\a\2\0>\3\5\1G\0\1\0\23<cmd>Neoformat<CR>\14<leader>f\6n\1\4\0\0\tyapf\rautopep8\nblack\29neoformat_enabled_python\1\0\2\fnoremap\2\vsilent\2\20nvim_set_keymap\bapi\6g\bvim\0", "setup", "neoformat")
 time([[Setup for neoformat]], false)
--- Setup for: vim-multiple-cursors
-time([[Setup for vim-multiple-cursors]], true)
-try_loadstring("\27LJ\1\2•\2\0\0\2\0\14\0\0174\0\0\0007\0\1\0'\1\0\0:\1\2\0%\1\4\0:\1\3\0%\1\6\0:\1\5\0%\1\4\0:\1\a\0%\1\t\0:\1\b\0%\1\v\0:\1\n\0%\1\r\0:\1\f\0G\0\1\0\n<Esc>\26multi_cursor_quit_key\n<C-x>\26multi_cursor_skip_key\n<C-p>\26multi_cursor_prev_key\26multi_cursor_next_key\n<A-s>%multi_cursor_select_all_word_key\n<C-s> multi_cursor_start_word_key%multi_cursor_use_default_mapping\6g\bvim\0", "setup", "vim-multiple-cursors")
-time([[Setup for vim-multiple-cursors]], false)
+-- Setup for: emmet-vim
+time([[Setup for emmet-vim]], true)
+try_loadstring("\27LJ\1\2=\0\0\2\0\4\0\0054\0\0\0007\0\1\0%\1\3\0:\1\2\0G\0\1\0\n<C-y>\26user_emmet_leader_key\6g\bvim\0", "setup", "emmet-vim")
+time([[Setup for emmet-vim]], false)
 -- Setup for: nvim-tree.lua
 time([[Setup for nvim-tree.lua]], true)
 try_loadstring("\27LJ\1\2Ì\5\0\0\b\0\26\0'4\0\0\0007\0\1\0007\0\2\0004\1\0\0007\1\3\0013\2\4\0\16\3\0\0%\4\5\0%\5\6\0%\6\a\0\16\a\2\0>\3\5\1\16\3\0\0%\4\5\0%\5\b\0%\6\t\0\16\a\2\0>\3\5\1\16\3\0\0%\4\5\0%\5\n\0%\6\v\0\16\a\2\0>\3\5\0013\3\r\0:\3\f\0013\3\15\0:\3\14\1%\3\17\0:\3\16\0013\3\19\0003\4\20\0:\4\21\0033\4\22\0:\4\23\0033\4\24\0:\4\25\3:\3\18\1G\0\1\0\blsp\1\0\4\thint\bÔÅö\tinfo\bÔÉ´\nerror\bÔÜà\fwarning\bÔÅ±\vfolder\1\0\b\topen\bÓóæ\15empty_open\bÔÑï\fdefault\bÓóø\15arrow_open\bÔëº\nempty\bÔÑî\fsymlink\bÔíÇ\17arrow_closed\bÔë†\17symlink_open\bÓóæ\bgit\1\0\a\runstaged\a¬±\fdeleted\bÔëò\14untracked\bÔúà\frenamed\bÔëö\runmerged\bÓúß\fignored\bÔë¥\vstaged\bÔÅß\1\0\2\fdefault\bÓòí\fsymlink\bÔíÅ\20nvim_tree_icons\a:~#nvim_tree_root_folder_modifier\1\0\3\rMakefile\3\1\rMAKEFILE\3\1\14README.md\3\1\27vim_tree_special_files\1\4\0\0\rstartify\14dashboard\nalpha\29nvim_tree_auto_ignore_ft\26:NvimTreeFindFile<CR>\15<leader>nf\25:NvimTreeRefresh<CR>\14<leader>r\24:NvimTreeToggle<CR>\n<C-n>\6n\1\0\2\fnoremap\2\vsilent\2\6g\20nvim_set_keymap\bapi\bvim\0", "setup", "nvim-tree.lua")
@@ -399,10 +391,10 @@ time([[Setup for indent-blankline.nvim]], false)
 time([[Setup for vim-closetag]], true)
 try_loadstring("\27LJ\1\2 \2\0\0\2\0\v\0\r4\0\0\0007\0\1\0%\1\3\0:\1\2\0%\1\5\0:\1\4\0%\1\a\0:\1\6\0%\1\t\0:\1\b\0'\1\1\0:\1\n\0G\0\1\0%closetag_emptyTags_caseSensitive\23xhtml,jsx,tsx,vuex\29closetag_xhtml_filetypes,html,xhtml,phtml,js,ts,vue,jsx,tsx,vuex\23closetag_filetypes\31*.xhtml,*.jsx,*.tsx,*.vuex\29closetag_xhtml_filenames>*.html,*.xhtml,*.phtml,*.js,*.ts,*.vue,*.jsx,*.tsx,*.vuex\23closetag_filenames\6g\bvim\0", "setup", "vim-closetag")
 time([[Setup for vim-closetag]], false)
--- Setup for: emmet-vim
-time([[Setup for emmet-vim]], true)
-try_loadstring("\27LJ\1\2=\0\0\2\0\4\0\0054\0\0\0007\0\1\0%\1\3\0:\1\2\0G\0\1\0\n<C-y>\26user_emmet_leader_key\6g\bvim\0", "setup", "emmet-vim")
-time([[Setup for emmet-vim]], false)
+-- Setup for: vim-multiple-cursors
+time([[Setup for vim-multiple-cursors]], true)
+try_loadstring("\27LJ\1\2•\2\0\0\2\0\14\0\0174\0\0\0007\0\1\0'\1\0\0:\1\2\0%\1\4\0:\1\3\0%\1\6\0:\1\5\0%\1\4\0:\1\a\0%\1\t\0:\1\b\0%\1\v\0:\1\n\0%\1\r\0:\1\f\0G\0\1\0\n<Esc>\26multi_cursor_quit_key\n<C-x>\26multi_cursor_skip_key\n<C-p>\26multi_cursor_prev_key\26multi_cursor_next_key\n<A-s>%multi_cursor_select_all_word_key\n<C-s> multi_cursor_start_word_key%multi_cursor_use_default_mapping\6g\bvim\0", "setup", "vim-multiple-cursors")
+time([[Setup for vim-multiple-cursors]], false)
 -- Config for: nvim-treesitter
 time([[Config for nvim-treesitter]], true)
 try_loadstring("\27LJ\1\2Ñ\4\0\0\6\0\14\0\0254\0\0\0004\1\1\0%\2\2\0>\0\3\3\14\0\0\0T\2\1ÄG\0\1\0007\2\3\0013\3\6\0003\4\4\0002\5\0\0:\5\5\4:\4\a\0033\4\b\0002\5\0\0:\5\5\4:\4\t\0033\4\n\0002\5\0\0:\5\5\0043\5\v\0:\5\f\4:\4\r\3>\2\2\1G\0\1\0\15playground\16keybindings\1\0\n\21toggle_hl_groups\6i\vupdate\6R\30toggle_injected_languages\6t\28toggle_language_display\6I\14goto_node\t<CR>\19focus_language\6f\14show_help\6?\27toggle_anonymous_nodes\6a\21unfocus_language\6F\24toggle_query_editor\6o\1\0\3\15updatetime\3\25\20persist_queries\1\venable\2\vindent\1\0\1\venable\1\14highlight\1\0\1\21ensure_installed\ball\fdisable\1\0\2&additional_vim_regex_highlighting\2\venable\2\nsetup\28nvim-treesitter.configs\frequire\npcall\0", "config", "nvim-treesitter")
@@ -454,7 +446,6 @@ pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file NvimTreeOpen lua r
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Neoformat lua require("packer.load")({'neoformat'}, { cmd = "Neoformat", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Gvdiffsplit lua require("packer.load")({'vim-fugitive'}, { cmd = "Gvdiffsplit", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Gdiffsplit lua require("packer.load")({'vim-fugitive'}, { cmd = "Gdiffsplit", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file TSPlaygroundToggle lua require("packer.load")({'playground'}, { cmd = "TSPlaygroundToggle", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Git lua require("packer.load")({'vim-fugitive'}, { cmd = "Git", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Gw lua require("packer.load")({'vim-fugitive'}, { cmd = "Gw", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file NvimTreeToggle lua require("packer.load")({'nvim-tree.lua'}, { cmd = "NvimTreeToggle", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
@@ -464,19 +455,19 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType javascript ++once lua require("packer.load")({'vim-jsx-pretty', 'emmet-vim', 'vim-closetag'}, { ft = "javascript" }, _G.packer_plugins)]]
-vim.cmd [[au FileType typescript ++once lua require("packer.load")({'vim-jsx-pretty', 'emmet-vim', 'vim-closetag'}, { ft = "typescript" }, _G.packer_plugins)]]
-vim.cmd [[au FileType vue ++once lua require("packer.load")({'emmet-vim', 'vim-closetag'}, { ft = "vue" }, _G.packer_plugins)]]
-vim.cmd [[au FileType typescriptreact ++once lua require("packer.load")({'vim-jsx-pretty', 'emmet-vim', 'vim-closetag'}, { ft = "typescriptreact" }, _G.packer_plugins)]]
-vim.cmd [[au FileType css ++once lua require("packer.load")({'emmet-vim'}, { ft = "css" }, _G.packer_plugins)]]
-vim.cmd [[au FileType javascriptreact ++once lua require("packer.load")({'vim-jsx-pretty', 'emmet-vim', 'vim-closetag'}, { ft = "javascriptreact" }, _G.packer_plugins)]]
 vim.cmd [[au FileType html ++once lua require("packer.load")({'emmet-vim', 'vim-closetag'}, { ft = "html" }, _G.packer_plugins)]]
+vim.cmd [[au FileType css ++once lua require("packer.load")({'emmet-vim'}, { ft = "css" }, _G.packer_plugins)]]
+vim.cmd [[au FileType typescript ++once lua require("packer.load")({'emmet-vim', 'vim-jsx-pretty', 'vim-closetag'}, { ft = "typescript" }, _G.packer_plugins)]]
+vim.cmd [[au FileType typescriptreact ++once lua require("packer.load")({'emmet-vim', 'vim-jsx-pretty', 'vim-closetag'}, { ft = "typescriptreact" }, _G.packer_plugins)]]
+vim.cmd [[au FileType vue ++once lua require("packer.load")({'emmet-vim', 'vim-closetag'}, { ft = "vue" }, _G.packer_plugins)]]
+vim.cmd [[au FileType javascriptreact ++once lua require("packer.load")({'emmet-vim', 'vim-jsx-pretty', 'vim-closetag'}, { ft = "javascriptreact" }, _G.packer_plugins)]]
+vim.cmd [[au FileType javascript ++once lua require("packer.load")({'emmet-vim', 'vim-jsx-pretty', 'vim-closetag'}, { ft = "javascript" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'emmet-vim', 'vim-closetag', 'vim-surround'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
 vim.cmd [[au VimEnter * ++once lua require("packer.load")({'packer.nvim'}, { event = "VimEnter *" }, _G.packer_plugins)]]
-vim.cmd [[au BufEnter * ++once lua require("packer.load")({'indent-blankline.nvim', 'vim-multiple-cursors', 'gitsigns.nvim', 'neoscroll.nvim', 'nvim-snippy'}, { event = "BufEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'emmet-vim', 'vim-surround', 'vim-closetag'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au BufEnter * ++once lua require("packer.load")({'indent-blankline.nvim', 'gitsigns.nvim', 'vim-multiple-cursors', 'nvim-snippy', 'neoscroll.nvim'}, { event = "BufEnter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 if should_profile then save_profiles() end

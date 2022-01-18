@@ -139,11 +139,10 @@ packer.startup(function()
   }
 
   -- Commenter
+  use { 'JoosepAlviste/nvim-ts-context-commentstring' }
   use {
     'numToStr/Comment.nvim',
-    config = function()
-        require('Comment').setup()
-    end
+    config = config.comment(),
   }
 
   -- Auto close (X)HTML tags

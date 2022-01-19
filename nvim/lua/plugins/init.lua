@@ -16,7 +16,6 @@ packer.startup(function()
   -- Speed up loading Lua modules
   use {
     'lewis6991/impatient.nvim',
-    rocks = 'mpack'
   }
 
   -- Colorscheme

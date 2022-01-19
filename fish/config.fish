@@ -54,12 +54,7 @@ set PATH $HOME/.local/bin $HOME/.config/bin /usr/local/bin /usr/bin /usr/sbin /u
 
 # Nvm path env
 set NVM_DIR "$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  
-set PATH $HOME/.nvm/versions/node/v14.18.0/bin $PATH
-
-# Path env for ruby
-set PATH $HOME/.local/share/gem/ruby/3.0.0/bin $PATH
+set PATH $HOME/.nvm/versions/node/v16.13.1/bin $PATH
 
 # Configure fzf
 set -gx FZF_DEFAULT_OPTS '
@@ -80,18 +75,27 @@ alias music="ncmpcpp"
 # Calendar controller 
 alias calendar="khal interactive"
 # Changing "ls" to "exa"
-alias ls='exa -a --color=always --group-directories-first'  # my preferred listing
-alias la='exa -al --color=always --group-directories-first' # all files and dirs
-alias ll='exa -l --color=always --group-directories-first'  # long format
+alias ls='exa --color=always --group-directories-first'  # my preferred listing
+alias la='exa -alh --color=always --group-directories-first' # all files and dirs
 alias lt='exa -aT --color=always --group-directories-first' # tree listing
 # Colorize grep output (good for log files)
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
+# Java compile
+alias java_compile='find -name "*.java" > source.txt && javac @source.txt && rm source.txt'
+alias java_clear='rm (find -name "*.class")'
+
+# Warp cloudflare connection
+alias warp_connect='warp-cli connect'
+alias warp_disconnect='warp-cli disconnect'
+
+# OpenVPN connection
+alias openvpn_connect='sudo openvpn --config ~/Utils/client.ovpn --auth-user-pass --auth-retry interact'
 
 # Random color script
 # Install from the Arch User Repository: shell-color-scripts
-colorscript random
+# colorscript random
 
 # Launch starship
 starship init fish | source

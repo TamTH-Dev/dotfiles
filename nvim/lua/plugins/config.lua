@@ -1061,10 +1061,10 @@ function M.lsp()
         {
           signs = true,
           virtual_text = false,
-          virtual_text = {
-            prefix = '🧨',
-            spacing = 0,
-          },
+          -- virtual_text = {
+          --   prefix = '🧨',
+          --   spacing = 0,
+          -- },
           underline = true,
           severity_sort = false,
         }

@@ -32,11 +32,17 @@ packer.startup(function()
   }
 
   -- Status line
+  -- use {
+  --   'glepnir/galaxyline.nvim',
+  --   after = 'nvim-web-devicons',
+  --   requires = 'kyazdani42/nvim-web-devicons',
+  --   config = config.galaxyline(),
+  -- }
   use {
-    'glepnir/galaxyline.nvim',
+    'nvim-lualine/lualine.nvim',
     after = 'nvim-web-devicons',
     requires = 'kyazdani42/nvim-web-devicons',
-    config = config.galaxyline(),
+    config = config.lualine(),
   }
 
   -- Buffer management bar

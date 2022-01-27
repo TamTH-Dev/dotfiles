@@ -1205,6 +1205,242 @@ function M.lsp()
   end
 end
 
+function M.lualine()
+  return function()
+    local is_colors_loaded, highlights = pcall(require, 'colors.highlights')
+    local is_lualine_loaded, lualine = pcall(require, 'lualine')
+    if not (is_lualine_loaded or is_colors_loaded) then return end
+
+    -- Color
+    local colors = highlights.colors
+
+    local fn = vim.fn
+    local bo = vim.bo
+    local cmd = vim.cmd
+
+    local conditions = {
+      buffer_not_empty = function()
+        return fn.empty(fn.expand('%:t')) ~= 1
+      end,
+      hide_in_width = function()
+        return fn.winwidth(0) > 80
+      end,
+      check_git_workspace = function()
+        local filepath = fn.expand('%:p:h')
+        local gitdir = fn.finddir('.git', filepath .. ';')
+        return gitdir and #gitdir > 0 and #gitdir < #filepath
+      end,
+    }
+
+    -- Config
+    local config = {
+      options = {
+        component_separators = '',
+        section_separators = '',
+        theme = {
+          normal = { c = { fg = colors.fg, bg = colors.bg } },
+          inactive = { c = { fg = colors.fg, bg = colors.bg } },
+        },
+      },
+      sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_y = {},
+        lualine_z = {},
+        lualine_c = {},
+        lualine_x = {},
+      },
+      inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_y = {},
+        lualine_z = {},
+        lualine_c = {},
+        lualine_x = {},
+      },
+    }
+
+    local get_mode_color = function()
+      local mode_colors = {
+        n = colors.blue,
+        i = colors.green,
+        c = colors.orange,
+        V = colors.magenta,
+        [''] = colors.magenta,
+        v = colors.magenta,
+        R = colors.red,
+      }
+      local color = mode_colors[fn.mode()]
+      if color == nil then
+        color = colors.red
+      end
+      return color
+    end
+
+
+    local function ins_left(component)
+      table.insert(config.sections.lualine_c, component)
+    end
+
+    local function ins_right(component)
+      table.insert(config.sections.lualine_x, component)
+    end
+
+    ins_left({
+      function()
+        return '▊'
+      end,
+      color = { fg = colors.blue },
+      padding = { left = 0, right = 1 },
+    })
+
+    ins_left({
+      function()
+        local alias = {
+          n = 'NORMAL',
+          i = 'INSERT',
+          c = 'COMMAND',
+          V = 'VISUAL',
+          [''] = 'VISUAL',
+          v = 'VISUAL',
+          R = 'REPLACE',
+          s = 'SNIPPET',
+        }
+        local icons = {
+          n = ' ',
+          i = ' ',
+          c = 'גּ ',
+          V = '﬏ ',
+          [''] = '﬏ ',
+          v = '﬏ ',
+          R = ' ',
+          s = ' ',
+        }
+        cmd('hi! LualineMode guifg='..get_mode_color()..' guibg='..colors.bg)
+        local alias_mode = alias[fn.mode()]
+        local icon = icons[fn.mode()]
+        if not alias_mode then
+          alias_mode = fn.mode()
+        end
+        if not icon then
+          icon = ' '
+        end
+        return icon..alias_mode
+      end,
+      color = 'LualineMode',
+      padding = { left = 0, right = 1 },
+    })
+
+    -- ins_left({
+    --   'filesize',
+    --   cond = conditions.buffer_not_empty,
+    -- })
+
+    ins_left({
+      'filename',
+      cond = conditions.buffer_not_empty,
+      color = { fg = colors.magenta, gui = 'bold' },
+    })
+
+    ins_left({
+      'branch',
+      icon = '',
+      color = { fg = colors.violet, gui = 'bold' },
+    })
+
+    ins_left({
+      'diff',
+      symbols = { added = ' ', modified = '柳', removed = ' ' },
+      diff_color = {
+        added = { fg = colors.green },
+        modified = { fg = colors.orange },
+        removed = { fg = colors.red },
+      },
+      cond = conditions.hide_in_width,
+    })
+
+    ins_left({
+      function()
+        return '%='
+      end,
+    })
+
+    -- ins_left({
+    --   -- Lsp server name .
+    --   function()
+    --     local msg = 'No Active Lsp'
+    --     local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+    --     local clients = vim.lsp.get_active_clients()
+    --     if next(clients) == nil then
+    --       return msg
+    --     end
+    --     for _, client in ipairs(clients) do
+    --       local filetypes = client.config.filetypes
+    --       if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+    --         return client.name
+    --       end
+    --     end
+    --     return msg
+    --   end,
+    --   icon = '  LSP:',
+    --   color = { fg = '#ffffff', gui = 'bold' },
+    -- })
+
+    ins_right({
+      'location',
+      padding = { left = 1, right = 1 },
+    })
+
+    ins_right({
+      'diagnostics',
+      sources = { 'nvim_diagnostic' },
+      symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+      diagnostics_color = {
+        color_error = { fg = colors.red },
+        color_warn = { fg = colors.yellow },
+        color_info = { fg = colors.cyan },
+        color_hint = { fg = colors.blue },
+      },
+      padding = { left = 1, right = 1 },
+    })
+
+    ins_right({
+      'filetype',
+      padding = { left = 1, right = 1 },
+    })
+
+    ins_right({
+      'o:encoding',
+      fmt = string.upper,
+      cond = conditions.hide_in_width,
+      color = { fg = colors.green, gui = 'bold' },
+      padding = { left = 1, right = 1 },
+    })
+
+    -- ins_right({
+    --   'fileformat',
+    --   fmt = string.upper,
+    --   icons_enabled = true,
+    --   color = { fg = colors.green, gui = 'bold' },
+    --   padding = { left = 1, right = 1 },
+    -- })
+
+    -- ins_right({ 'progress',
+    --   padding = { left = 1, right = 1 },
+    -- })
+
+    ins_right({
+      function()
+        return '▊'
+      end,
+      color = { fg = colors.blue },
+      padding = { right = 0 },
+    })
+
+    lualine.setup(config)
+  end
+end
+
 function M.neoscroll()
   return function()
     local is_neoscroll_loaded, neoscroll = pcall(require, 'neoscroll')

@@ -90,6 +90,14 @@ bg('BufferVisibleTarget', colors.bg)
 -- NvimTree
 fg('NvimTreeFolderIcon', colors.blue)
 
+-- Fzf
+fg('fzf1', colors.red)
+bg('fzf1', colors.bg)
+fg('fzf2', colors.red)
+bg('fzf2', colors.bg)
+fg('fzf3', colors.red)
+bg('fzf3', colors.bg)
+
 -- Export colors to use somewhere else
 M.colors = colors
 return M

@@ -19,8 +19,12 @@ packer.startup(function()
   }
 
   -- Colorscheme
+  -- use {
+  --   'folke/tokyonight.nvim',
+  --   config = function() require 'colors'.init() end,
+  -- }
   use {
-    'folke/tokyonight.nvim',
+    'ellisonleao/gruvbox.nvim',
     config = function() require 'colors'.init() end,
   }
 

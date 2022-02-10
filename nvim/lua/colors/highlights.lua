@@ -7,20 +7,35 @@ local cmd = vim.cmd
 -- local colors = require('colors').get()
 
 -- Declare colors manually
+-- local colors = {
+--   bg = '#1a1b26',
+--   stormBg = '#24283b',
+--   fg = '#c0caf5',
+--   red = '#f7768e',
+--   orange = '#ff9e64',
+--   brown = '#e0af68',
+--   yellow = '#f1fa8c',
+--   green = '#9ece6a',
+--   magenta = '#bb9af7',
+--   blue = '#2ac3de',
+--   cyan = '#7dcfff',
+--   lightBlue = '#73daca',
+--   gray = '#414868',
+-- }
 local colors = {
-  bg = '#1a1b26',
-  stormBg = '#24283b',
-  fg = '#c0caf5',
-  red = '#f7768e',
-  orange = '#ff9e64',
-  brown = '#e0af68',
-  yellow = '#f1fa8c',
-  green = '#9ece6a',
-  magenta = '#bb9af7',
-  blue = '#2ac3de',
-  cyan = '#7dcfff',
-  lightBlue = '#73daca',
-  gray = '#414868',
+  bg = '#1d2021',
+  stormBg = '#282828',
+  fg = '#fbf1c7',
+  red = '#fb4934',
+  orange = '#fe8019',
+  brown = '#d79921',
+  yellow = '#fabd2f',
+  green = '#8ec07c',
+  magenta = '#d3869b',
+  blue = '#458588',
+  cyan = '#076678',
+  lightBlue = '#8ec07c',
+  gray = '#928374',
 }
 
 -- Define fg color

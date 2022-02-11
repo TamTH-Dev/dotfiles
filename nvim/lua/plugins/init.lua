@@ -31,7 +31,7 @@ packer.startup(function()
   -- Icons suppliers for Madvim
   use {
     'kyazdani42/nvim-web-devicons',
-    after = 'tokyonight.nvim',
+    after = 'gruvbox.nvim',
     config = config.icons(),
   }
 

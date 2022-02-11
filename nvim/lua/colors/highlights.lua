@@ -54,6 +54,7 @@ end
 
 -- General
 fg('FloatBorder', colors.blue)
+bg('NormalFloat', colors.stormBg)
 
 -- Telescope
 fg('TelescopeBorder', colors.blue)

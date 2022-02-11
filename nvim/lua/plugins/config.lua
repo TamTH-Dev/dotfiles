@@ -25,7 +25,7 @@ function M.alpha()
       },
       opts = {
         position = 'center',
-        hl = 'Special'
+        hl = 'DiagnosticHint'
       }
     }
 
@@ -37,7 +37,7 @@ function M.alpha()
       val = 'Madvim has loaded '..plugins_total..' plugins ',
       opts = {
         position = 'center',
-        hl = 'LspSagaCodeActionContent',
+        hl = 'DiagnosticVirtualTextInfo',
       }
     }
 
@@ -51,7 +51,7 @@ function M.alpha()
         width = 24,
         align_shortcut = 'right',
         hl_shortcut = 'Special',
-        hl = 'LspSagaSignatureHelpBorder',
+        hl = 'Normal',
       }
       if keybind then
         opts.keymap = { 'n', sc_, keybind, { noremap = true, silent = true } }
@@ -90,7 +90,7 @@ function M.alpha()
       val = 'A clever person solves a problem. A wise person avoids it.',
       opts = {
         position = 'center',
-        hl = 'LspDiagnosticsDefaultWarning',
+        hl = 'DiagnosticWarn',
       }
     }
 
@@ -885,7 +885,7 @@ function M.gitsigns()
         topdelete = { hl = 'DiffDelete', text = '‾', numhl = 'GitSignsDeleteNr' },
       },
       status_formatter = nil, -- Use default
-      watch_index = { interval = 1000, follow_files = true },
+      -- watch_gitdir = { interval = 1000, follow_files = true },
       sign_priority = 6,
       debug_mode = false,
       current_line_blame = false,
@@ -1121,11 +1121,11 @@ function M.lsp()
       buf_set_keymap('n', '<leader>gk', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
       buf_set_keymap('n', '<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
       buf_set_keymap('n', '<leader>gr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-      buf_set_keymap('n', '<leader>gn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-      buf_set_keymap('n', '<leader>gp', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+      buf_set_keymap('n', '<leader>gn', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+      buf_set_keymap('n', '<leader>gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
       buf_set_keymap('n', '<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
       buf_set_keymap('n', '<leader>gf', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-      buf_set_keymap('n', '<leader>gl', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+      buf_set_keymap('n', '<leader>gl', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 
       -- Set autocommands conditional on server_capabilities
       if client.resolved_capabilities.document_highlight then

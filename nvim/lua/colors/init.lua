@@ -17,6 +17,7 @@ function M.init()
     global.tokyonight_dark_sidebar = ui.dark_sidebar
     global.tokyonight_dark_float = ui.dark_float
   end
+
   -- Set colorscheme
   cmd('colorscheme '..theme)
 

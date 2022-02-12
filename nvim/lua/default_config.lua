@@ -3,8 +3,8 @@ local M = {}
 M.ui, M.options, M.mappings = {}, {}, {}
 
 M.ui = {
-  -- theme = 'tokyonight', -- Default colorscheme
   theme = 'gruvbox', -- Default colorscheme
+  -- theme = 'tokyonight', -- Default colorscheme
   -- style = 'storm', -- Available: night, storm, day
   dark_sidebar = false, -- Only available for tokyonight theme
   dark_float = false, -- Only available for tokyonight theme

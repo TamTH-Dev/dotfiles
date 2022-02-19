@@ -1,13 +1,13 @@
 # TokyoNight Color Palette
-set -l foreground fbf1c7
-set -l selection a89984
-set -l comment 928374
-set -l red fb4934
-set -l orange fe8019
-set -l yellow fabd2f
-set -l green 8ec07c
-set -l blue 458588
-set -l magenta d3869b
+set -l foreground c0caf5
+set -l selection 303757
+set -l comment 565f89
+set -l red f7768e
+set -l orange ff9e64
+set -l yellow f1fa8c
+set -l green 9ece6a
+set -l blue 2ac3de
+set -l magenta bb9af7
 
 # Syntax Highlighting Colors
 set -g fish_color_normal $foreground
@@ -58,10 +58,10 @@ set PATH $HOME/.nvm/versions/node/v14.18.2/bin $PATH
 
 # Configure fzf
 set -gx FZF_DEFAULT_OPTS '
-      --color=bg+:#282828,bg:#282828
-      --color=hl+:#458588,hl:#458588
-      --color=fg+:#fbf1c7,fg:#928374
-      --color=info:#8ec07c,prompt:#8ec07c,spinner:#8ec07c,pointer:#fb4934,marker:#458588
+      --color=bg+:#24283b,bg:#24283b
+      --color=hl+:#2ac3de,hl:#2ac3de
+      --color=fg+:#c0caf5,fg:#565f89
+      --color=info:#9ece6a,prompt:#9ece6a,spinner:#9ece6a,pointer:#f7768e,marker:#2ac3de
       --layout=reverse --bind=shift-tab:up,tab:down --no-multi --cycle'
 set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden -g "!{node_modules,.git,build,dist,.cache,cache,.idea}"'
 

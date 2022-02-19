@@ -25,7 +25,7 @@ function M.alpha()
       },
       opts = {
         position = 'center',
-        hl = 'DiagnosticHint'
+        hl = 'Special'
       }
     }
 
@@ -37,7 +37,7 @@ function M.alpha()
       val = 'Madvim has loaded '..plugins_total..' plugins ',
       opts = {
         position = 'center',
-        hl = 'DiagnosticVirtualTextInfo',
+        hl = 'LspSagaCodeActionContent',
       }
     }
 
@@ -51,7 +51,7 @@ function M.alpha()
         width = 24,
         align_shortcut = 'right',
         hl_shortcut = 'Special',
-        hl = 'Normal',
+        hl = 'LspSagaSignatureHelpBorder',
       }
       if keybind then
         opts.keymap = { 'n', sc_, keybind, { noremap = true, silent = true } }
@@ -90,7 +90,7 @@ function M.alpha()
       val = 'A clever person solves a problem. A wise person avoids it.',
       opts = {
         position = 'center',
-        hl = 'DiagnosticWarn',
+        hl = 'LspDiagnosticsDefaultWarning',
       }
     }
 
@@ -1345,7 +1345,7 @@ function M.lualine()
     ins_left({
       'branch',
       icon = '',
-      color = { fg = colors.violet, gui = 'bold' },
+      color = { fg = colors.yellow, gui = 'bold' },
     })
 
     ins_left({
@@ -1388,6 +1388,7 @@ function M.lualine()
 
     ins_right({
       'location',
+      color = { fg = colors.cyan, gui = 'bold' },
       padding = { left = 1, right = 1 },
     })
 

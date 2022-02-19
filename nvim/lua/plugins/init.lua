@@ -19,19 +19,15 @@ packer.startup(function()
   }
 
   -- Colorscheme
-  -- use {
-  --   'folke/tokyonight.nvim',
-  --   config = function() require 'colors'.init() end,
-  -- }
   use {
-    'ellisonleao/gruvbox.nvim',
+    'folke/tokyonight.nvim',
     config = function() require 'colors'.init() end,
   }
 
   -- Icons suppliers for Madvim
   use {
     'kyazdani42/nvim-web-devicons',
-    after = 'gruvbox.nvim',
+    after = 'tokyonight.nvim',
     config = config.icons(),
   }
 

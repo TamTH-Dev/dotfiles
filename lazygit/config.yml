@@ -15,6 +15,14 @@ gui:
       - blue
     optionsTextColor:
       - blue
+    selectedLineBgColor:
+      - reverse
+    selectedRangeBgColor:
+      - reverse
+    cherryPickedCommitBgColor:
+      - reverse
+    cherryPickedCommitFgColor:
+      - reverse
   commitLength:
     show: true
   mouseEvents: true

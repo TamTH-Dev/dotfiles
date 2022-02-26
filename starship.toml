@@ -1,5 +1,11 @@
 # Inserts blank line between shell prompts.
-add_newline = false
+add_newline = true
+
+# Timeout for starship to scan files (in milliseconds)
+scan_timeout = 50
+
+# Timeout for commands executed by starship (in milliseconds)
+command_timeout = 1000
 
 # Disable the package module, hiding it from the prompt completely
 [package]

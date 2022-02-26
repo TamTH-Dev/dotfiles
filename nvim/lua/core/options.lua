@@ -7,7 +7,6 @@ options.belloff = 'all'
 options.clipboard = 'unnamedplus'
 options.cmdheight = 1
 options.completeopt = { 'menuone', 'noselect' }
--- options.conceallevel = 0
 options.cursorline = false
 options.expandtab = true
 options.fileencoding = 'utf-8'
@@ -44,11 +43,14 @@ options.undofile = false
 options.wrap = false
 options.writebackup = false
 
+
 -- User options
 local user_options = require 'core.utils'.load_config().options
+
 for key, value in pairs(user_options) do
   options[key] = value
 end
+
 
 -- Disable some builtin vim plugins
 local disabled_built_ins = {

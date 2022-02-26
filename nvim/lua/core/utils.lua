@@ -16,6 +16,7 @@ M.load_config = function(reload)
 
   -- Don't enclose in pcall, it better break when default config is faulty
   _G.DEFAULT_CONFIG = require(default_config)
+
   return _G.DEFAULT_CONFIG
 end
 

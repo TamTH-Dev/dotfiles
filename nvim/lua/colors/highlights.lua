@@ -8,8 +8,10 @@ local cmd = vim.cmd
 
 -- Declare colors manually
 local colors = {
-  bg = '#1a1b26',
-  stormBg = '#24283b',
+  -- bg = '#1a1b26',
+  bg = '#24283b',
+  -- stormBg = '#24283b',
+  stormBg = '#1a1b26',
   fg = '#c0caf5',
   red = '#f7768e',
   orange = '#ff9e64',

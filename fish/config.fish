@@ -58,7 +58,7 @@ set PATH $HOME/.nvm/versions/node/v14.18.2/bin $PATH
 
 # Configure fzf
 set -gx FZF_DEFAULT_OPTS '
-      --color=bg+:#24283b,bg:#24283b
+      --color=bg+:#1a1b26,bg:#1a1b26
       --color=hl+:#2ac3de,hl:#2ac3de
       --color=fg+:#c0caf5,fg:#565f89
       --color=info:#9ece6a,prompt:#9ece6a,spinner:#9ece6a,pointer:#f7768e,marker:#2ac3de

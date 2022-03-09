@@ -82,12 +82,12 @@ packer.startup(function()
     run = ':TSUpdate',
     config = config.treesitter(),
   }
-  use {
-    'nvim-treesitter/playground',
-    cmd = 'TSPlaygroundToggle',
-    after = 'nvim-treesitter',
-    opt = true,
-  }
+  -- use {
+  --   'nvim-treesitter/playground',
+  --   cmd = 'TSPlaygroundToggle',
+  --   after = 'nvim-treesitter',
+  --   opt = true,
+  -- }
 
   -- Indentation helper for jsx
   use {

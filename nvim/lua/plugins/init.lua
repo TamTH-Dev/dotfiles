@@ -13,15 +13,21 @@ packer.startup(function()
     event = 'VimEnter',
   }
 
-  -- Speed up loading Lua modules
+  -- Boost startup time
   use {
     'lewis6991/impatient.nvim',
+  }
+  use {
+    'nathom/filetype.nvim',
+    config = config.filetype(),
   }
 
   -- Colorscheme
   use {
     'folke/tokyonight.nvim',
-    config = function() require 'colors'.init() end,
+    config = function()
+      require('colors').init()
+    end,
   }
 
   -- Icons suppliers for Madvim
@@ -41,31 +47,27 @@ packer.startup(function()
   use {
     'nvim-lualine/lualine.nvim',
     after = 'nvim-web-devicons',
-    requires = 'kyazdani42/nvim-web-devicons',
     config = config.lualine(),
   }
 
   -- Buffer management bar
-  use {
-    'romgrk/barbar.nvim',
-    after = 'nvim-web-devicons',
-    requires = 'kyazdani42/nvim-web-devicons',
-    setup = setup.barbar(),
-  }
   -- use {
-  --   'akinsho/bufferline.nvim',
+  --   'romgrk/barbar.nvim',
   --   after = 'nvim-web-devicons',
-  --   requires = 'kyazdani42/nvim-web-devicons',
-  --   setup = setup.bufferline(),
-  --   config = config.bufferline(),
+  --   setup = setup.barbar(),
   -- }
+  use {
+    'akinsho/bufferline.nvim',
+    after = 'nvim-web-devicons',
+    setup = setup.bufferline(),
+    config = config.bufferline(),
+  }
 
   -- File explorer
   use {
     'kyazdani42/nvim-tree.lua',
     after = 'nvim-web-devicons',
     cmd = { 'NvimTreeToggle', 'NvimTreeOpen' },
-    requires = 'kyazdani42/nvim-web-devicons',
     setup = setup.nvimtree(),
     config = config.nvimtree(),
   }
@@ -81,13 +83,25 @@ packer.startup(function()
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
     config = config.treesitter(),
+    requires = {
+      {
+        -- Parenthesis highlighting
+        'p00f/nvim-ts-rainbow',
+        after = 'nvim-treesitter',
+      },
+      {
+        -- Autoclose tags
+        'windwp/nvim-ts-autotag',
+        after = 'nvim-treesitter',
+      },
+    },
   }
-  -- use {
-  --   'nvim-treesitter/playground',
-  --   cmd = 'TSPlaygroundToggle',
-  --   after = 'nvim-treesitter',
-  --   opt = true,
-  -- }
+  use {
+    'nvim-treesitter/playground',
+    cmd = 'TSPlaygroundToggle',
+    after = 'nvim-treesitter',
+    opt = true,
+  }
 
   -- Indentation helper for jsx
   use {
@@ -101,6 +115,7 @@ packer.startup(function()
     config = config.colorizer(),
   }
 
+  -- Indentation guides
   use {
     'lukas-reineke/indent-blankline.nvim',
     event = 'BufEnter',
@@ -136,26 +151,11 @@ packer.startup(function()
     config = config.neoscroll(),
   }
 
-  -- Multiple cursors
-  use {
-    'terryma/vim-multiple-cursors',
-    event = 'BufEnter',
-    setup = setup.multiple_cursors(),
-  }
-
   -- Commenter
   use { 'JoosepAlviste/nvim-ts-context-commentstring' }
   use {
     'numToStr/Comment.nvim',
     config = config.comment(),
-  }
-
-  -- Auto close (X)HTML tags
-  use {
-    'alvan/vim-closetag',
-    event = 'InsertEnter',
-    ft = { 'html', 'javascript', 'javascriptreact', 'vue', 'typescript', 'typescriptreact' },
-    setup = setup.close_tag()
   }
 
   -- Surround parentheses, brackets, quotes, XML tags, and more
@@ -192,13 +192,6 @@ packer.startup(function()
   --   config = config.telescope(),
   -- }
 
-  -- Formatter
-  use {
-    'sbdchd/neoformat',
-    cmd = 'Neoformat',
-    setup = setup.neoformat(),
-  }
-
   -- Built-in LSP Configuration Supporter
   use {
     'neovim/nvim-lspconfig',
@@ -208,6 +201,7 @@ packer.startup(function()
     'williamboman/nvim-lsp-installer',
     config = config.lsp(),
   }
+
   -- LSP UI Supporter
   -- use {
   --   'tami5/lspsaga.nvim',
@@ -215,6 +209,13 @@ packer.startup(function()
   --   setup = setup.saga(),
   --   config = config.saga(),
   -- }
+
+  -- Formatter
+  use {
+    'sbdchd/neoformat',
+    cmd = 'Neoformat',
+    setup = setup.neoformat(),
+  }
 
   -- Autopairs supporter
   use {
@@ -224,19 +225,13 @@ packer.startup(function()
   }
 
   -- Completion supporters
-  use {
-    'honza/vim-snippets',
-  }
-  use {
-    'dcampos/nvim-snippy',
-    event = 'BufEnter',
-  }
+  use { 'L3MON4D3/LuaSnip' }
   use {
     'hrsh7th/nvim-cmp',
-    after = 'nvim-snippy',
+    event = 'BufEnter',
     requires = {
-      -- { 'dcampos/cmp-snippy', after = { 'nvim-cmp', 'nvim-snippy' }, opt = true },
-      { 'rafamadriz/friendly-snippets', after = { 'nvim-cmp', 'nvim-snippy' }, opt = true },
+      { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp', opt = true },
+      -- { 'rafamadriz/friendly-snippets', after = { 'nvim-cmp', 'cmp_luasnip' }, opt = true },
       { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', opt = true },
@@ -256,4 +251,8 @@ packer.startup(function()
   --     { 'ms-jpq/coq.artifacts', branch = 'artifacts' }
   --   },
   -- }
+  
+  use {
+    'tweekmonster/startuptime.vim',
+  }
 end)

@@ -94,12 +94,21 @@ bg('BufferVisibleTarget', colors.bg)
 fg('NvimTreeFolderIcon', colors.blue)
 
 -- Fzf
-fg('fzf1', colors.red)
+fg('fzf1', colors.orange)
 bg('fzf1', colors.bg)
-fg('fzf2', colors.red)
+fg('fzf2', colors.orange)
 bg('fzf2', colors.bg)
-fg('fzf3', colors.red)
+fg('fzf3', colors.orange)
 bg('fzf3', colors.bg)
+
+-- Rainbow Treesitter
+fg('rainbowcol1', colors.red)
+fg('rainbowcol2', colors.orange)
+fg('rainbowcol3', colors.yellow)
+fg('rainbowcol4', colors.green)
+fg('rainbowcol5', colors.magenta)
+fg('rainbowcol6', colors.blue)
+fg('rainbowcol7', colors.cyan)
 
 -- Export colors to use somewhere else
 M.colors = colors

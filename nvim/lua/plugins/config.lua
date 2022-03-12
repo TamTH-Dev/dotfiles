@@ -218,8 +218,8 @@ function M.cmp()
     local is_cmp_loaded, cmp = pcall(require, 'cmp')
     local is_cmp_compare_loaded, compare = pcall(require, 'cmp.config.compare')
     local is_cmp_types_loaded, types = pcall(require, 'cmp.types')
-    local is_snippy_loaded, snippy = pcall(require, 'snippy')
-    if not (is_cmp_loaded or is_cmp_compare_loaded or is_cmp_types_loaded or is_snippy_loaded) then return end
+    local is_luasnip_loaded, luasnip = pcall(require, 'luasnip')
+    if not (is_cmp_loaded or is_cmp_compare_loaded or is_cmp_types_loaded or is_luasnip_loaded) then return end
 
     local api = vim.api
     local opt = vim.o
@@ -279,7 +279,7 @@ function M.cmp()
       },
       snippet = {
         expand = function(args)
-          snippy.expand_snippet(args.body)
+          luasnip.lsp_expand(args.body)
         end,
       },
       preselect = types.cmp.PreselectMode.Item,
@@ -319,8 +319,8 @@ function M.cmp()
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
-          elseif fn['snippy#can_expand_or_advance']() then
-            feedkey('<Plug>(snippy-expand-or-next)', '')
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
           elseif has_words_before() then
             cmp.complete()
           else
@@ -333,8 +333,8 @@ function M.cmp()
         ['<S-Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
-          elseif fn['snippy#can_jump'](-1) then
-            feedkey('<Plug>(snippy-previous)', '')
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
           else
             fallback()
           end
@@ -348,7 +348,7 @@ function M.cmp()
           vim_item.kind = icons[vim_item.kind]
           vim_item.menu = ({
             nvim_lsp = '(LSP)',
-            snippy = '(Snippet)',
+            luasnip = '(Snippet)',
             cmp_tabnine = '(Tabnine)',
             path = '(Path)',
             calc = '(Calc)',
@@ -369,7 +369,7 @@ function M.cmp()
       sources = {
         { name = 'nvim_lsp' },
         { name = 'nvim_lua' },
-        { name = 'snippy' },
+        { name = 'luasnip' },
         { name = 'path' },
         { name = 'buffer' },
         { name = 'cmp_tabnine' },
@@ -446,6 +446,20 @@ function M.comment()
         }
       end,
     })
+  end
+end
+
+function M.cursorHold()
+  return function()
+    local global = vim.g
+    global.cursorhold_updatetime = 100
+  end
+end
+
+function M.filetype()
+  return function()
+    local global = vim.g
+    global.did_load_filetypes = 1
   end
 end
 
@@ -1117,6 +1131,7 @@ function M.lsp()
       buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
       buf_set_keymap('n', '<C-e>', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
       buf_set_keymap('n', '<C-w>', '<cmd>lua vim.lsp.diagnostic.set_loclist({ workspace = true })<CR>', opts)
+      -- buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>', opts)
       buf_set_keymap('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
       buf_set_keymap('n', '<leader>gk', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
       buf_set_keymap('n', '<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
@@ -1215,7 +1230,6 @@ function M.lualine()
     local colors = highlights.colors
 
     local fn = vim.fn
-    local bo = vim.bo
     local cmd = vim.cmd
 
     local conditions = {
@@ -1329,6 +1343,7 @@ function M.lualine()
       end,
       color = 'LualineMode',
       padding = { left = 0, right = 1 },
+      cond = conditions.hide_in_width,
     })
 
     -- ins_left({
@@ -1338,14 +1353,15 @@ function M.lualine()
 
     ins_left({
       'filename',
-      cond = conditions.buffer_not_empty,
-      color = { fg = colors.magenta, gui = 'bold' },
+      color = { fg = colors.fg, gui = 'bold' },
+      cond = conditions.buffer_not_empty and conditions.hide_in_width,
     })
 
     ins_left({
       'branch',
       icon = '',
-      color = { fg = colors.yellow, gui = 'bold' },
+      color = { fg = colors.magenta, gui = 'bold' },
+      cond = conditions.hide_in_width,
     })
 
     ins_left({
@@ -1363,6 +1379,7 @@ function M.lualine()
       function()
         return '%='
       end,
+      cond = conditions.hide_in_width,
     })
 
     -- ins_left({
@@ -1397,12 +1414,13 @@ function M.lualine()
       sources = { 'nvim_diagnostic' },
       symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
       diagnostics_color = {
-        color_error = { fg = colors.red },
-        color_warn = { fg = colors.yellow },
-        color_info = { fg = colors.cyan },
-        color_hint = { fg = colors.blue },
+        error = { fg = colors.red },
+        warn = { fg = colors.yellow },
+        info = { fg = colors.cyan },
+        hint = { fg = colors.blue },
       },
       padding = { left = 1, right = 1 },
+      cond = conditions.hide_in_width,
     })
 
     ins_right({
@@ -1413,9 +1431,9 @@ function M.lualine()
     ins_right({
       'o:encoding',
       fmt = string.upper,
-      cond = conditions.hide_in_width,
       color = { fg = colors.green, gui = 'bold' },
       padding = { left = 1, right = 1 },
+      cond = conditions.hide_in_width,
     })
 
     -- ins_right({
@@ -1473,7 +1491,9 @@ end
 function M.nvimtree()
   return function()
     local is_nvimtree_loaded, nvimtree = pcall(require, 'nvim-tree')
+
     if not is_nvimtree_loaded then return end
+
     nvimtree.setup {
       -- disables netrw completely
       disable_netrw       = true,
@@ -1517,6 +1537,8 @@ function M.nvimtree()
         width = 35,
         -- side of the tree, can be one of 'left' | 'right' | 'top' | 'bottom'
         side = 'left',
+        -- hide root dir
+        hide_root_folder = true,
         -- if true the tree will resize itself after opening a file
         auto_resize = false,
         mappings = {
@@ -1528,6 +1550,21 @@ function M.nvimtree()
         }
       }
     }
+  end
+end
+
+function M.nullls()
+  return function()
+    local is_nullls_loaded, nullls = pcall(require, 'null-ls')
+    if not is_nullls_loaded then return end
+
+    nullls.setup({
+      sources = {
+        nullls.builtins.formatting.stylua,
+        nullls.builtins.diagnostics.eslint,
+        nullls.builtins.completion.spell,
+      },
+    })
   end
 end
 
@@ -1742,6 +1779,17 @@ function M.treesitter()
           goto_node = '<CR>',
           show_help = '?',
         },
+      },
+      autotag = {
+        enable = true,
+      },
+      rainbow = {
+        enable = true,
+        -- disable = { "jsx", "cpp" }, -- List of disabled languages
+        extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+        max_file_lines = nil, -- Do not enable for files with more than n lines, int
+        -- colors = {}, -- Table of hex strings
+        -- termcolors = {} -- Table of colour name strings
       }
     }
   end

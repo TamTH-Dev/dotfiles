@@ -65,18 +65,6 @@ function M.bufferline()
   end
 end
 
-function M.close_tag()
-  return function()
-    local global = vim.g
-    global.closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.ts,*.vue,*.jsx,*.tsx,*.vuex'
-    global.closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx,*.vuex'
-    global.closetag_filetypes = 'html,xhtml,phtml,js,ts,vue,jsx,tsx,vuex'
-    global.closetag_xhtml_filetypes = 'xhtml,jsx,tsx,vuex'
-    -- Make the list of non-closing tags case-sensitive (e.g. `<Link>` will be>
-    global.closetag_emptyTags_caseSensitive = 1
-  end
-end
-
 function M.coq()
   return function()
     local global = vim.g
@@ -210,19 +198,6 @@ function M.indent_blankline()
   end
 end
 
-function M.multiple_cursors()
-  return function()
-    local global = vim.g
-    global.multi_cursor_use_default_mapping = 0
-    global.multi_cursor_start_word_key = '<C-s>'
-    global.multi_cursor_select_all_word_key = '<A-s>'
-    global.multi_cursor_next_key = '<C-s>'
-    global.multi_cursor_prev_key = '<C-p>'
-    global.multi_cursor_skip_key = '<C-x>'
-    global.multi_cursor_quit_key = '<Esc>'
-  end
-end
-
 function M.neoformat()
   return function ()
     local global = vim.g
@@ -251,6 +226,10 @@ function M.nvimtree()
       Makefile = 1,
       MAKEFILE = 1
     }
+    -- Show indent markers when folders are open
+    global.nvim_tree_indent_markers = 1
+    -- Enable folder and file icon highlight for opened files/directories
+    global.nvim_tree_highlight_opened_files = 0
     -- Root format
     global.nvim_tree_root_folder_modifier = ':~'
     -- Custom icons

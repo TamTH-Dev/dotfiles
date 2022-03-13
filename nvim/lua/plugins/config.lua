@@ -77,7 +77,7 @@ function M.alpha()
         set_button('p', '  Find File', ':Files<CR>'),
         set_button('f', '  Find Word', ':Rg<CR>'),
         set_button('s', '  Settings', ':e $HOME/.config/nvim/lua/default_config.lua<CR>'),
-        set_button('q', '  Quit', ':qa<CR>'),
+        set_button('<Esc>', '  Quit', ':qa<CR>'),
       },
       opts = {
         position = 'center',

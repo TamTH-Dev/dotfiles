@@ -243,15 +243,11 @@ packer.startup(function()
     config = config.cmp(),
   }
 
-  -- use {
-  --   'ms-jpq/coq_nvim',
-  --   branch = 'coq',
-  --   setup = setup.coq(),
-  --   requires = {
-  --     { 'ms-jpq/coq.artifacts', branch = 'artifacts' }
-  --   },
-  -- }
-  
+  use {
+    'ojroques/nvim-bufdel',
+    setup = setup.bufdel(),
+  }
+
   use {
     'tweekmonster/startuptime.vim',
   }

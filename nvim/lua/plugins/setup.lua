@@ -40,6 +40,16 @@ function M.barbar()
   end
 end
 
+function M.bufdel()
+  return function()
+    local map = vim.api.nvim_set_keymap
+    local opts = { noremap = true, silent = true }
+
+    -- Move to previous/next
+    map('n', '<leader>q', ':BufDel<CR>', opts)
+  end
+end
+
 function M.bufferline()
   return function()
     local map = vim.api.nvim_set_keymap
@@ -62,45 +72,6 @@ function M.bufferline()
     map('n', '<leader>8', ':BufferLineGoToBuffer 8<CR>', opts)
     map('n', '<leader>9', ':BufferLineGoToBuffer 9<CR>', opts)
     map('n', '<leader>10', ':BufferLineGoToBuffer 10<CR>', opts)
-  end
-end
-
-function M.coq()
-  return function()
-    local global = vim.g
-    local map = vim.api.nvim_set_keymap
-    -- Autostart COQ
-    global.coq_settings = {
-      ['auto_start'] = 'shut-up',
-      display = {
-        ghost_text = {
-          enabled = false,
-        },
-        preview = {
-          border = 'rounded',
-          positions = {
-            north = 3,
-            south = 2,
-            west = 4,
-            east = 1,
-          },
-        },
-        pum = {
-          fast_close = true,
-        }
-      },
-      keymap = {
-        recommended = false,
-        jump_to_mark = '<C-o>',
-      },
-    }
-    local opts = { silent = true, expr = true, noremap = true }
-    map('i', '<Esc>', [[pumvisible() ? "<C-e><Esc>" : "<Esc>"]], opts)
-    map('i', '<C-c>', [[pumvisible() ? "<C-e><C-c>" : "<C-c>"]], opts)
-    map('i', '<BS>', [[pumvisible() ? "\<C-e><BS>"  : "\<BS>"]], opts)
-    map('i', '<CR>', [[pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"]], opts)
-    map('i', '<Tab>', [[pumvisible() ? "<C-n>" : "<Tab>"]], opts)
-    map('i', '<S-Tab>', [[pumvisible() ? "<C-p>" : "<Bs>"]], opts)
   end
 end
 

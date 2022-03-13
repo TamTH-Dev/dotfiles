@@ -33,6 +33,3 @@ map('n', mappings.open_new_buffer, ':tabnew<CR>', opts)
 -- Move vertically by visual line
 map('n', 'j', 'gj', opts)
 map('n', 'k', 'gk', opts)
-
--- Close all buffer except this one
-map('n', '<leader>cb', ':%bdelete|edit #|normal `"<CR>', opts)

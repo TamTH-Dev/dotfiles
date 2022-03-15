@@ -248,7 +248,7 @@ packer.startup(function()
     setup = setup.bufdel(),
   }
 
-  -- use {
-  --   'tweekmonster/startuptime.vim',
-  -- }
+  use {
+    'tweekmonster/startuptime.vim',
+  }
 end)

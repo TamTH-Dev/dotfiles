@@ -244,11 +244,11 @@ packer.startup(function()
   }
 
   use {
-    'ojroques/nvim-bufdel',
-    setup = setup.bufdel(),
+    'kazhala/close-buffers.nvim',
+    setup = setup.close_buffers(),
   }
 
-  -- use {
-  --   'tweekmonster/startuptime.vim',
-  -- }
+  use {
+    'tweekmonster/startuptime.vim',
+  }
 end)

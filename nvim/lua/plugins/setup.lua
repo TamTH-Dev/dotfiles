@@ -40,16 +40,6 @@ function M.barbar()
   end
 end
 
-function M.bufdel()
-  return function()
-    local map = vim.api.nvim_set_keymap
-    local opts = { noremap = true, silent = true }
-
-    -- Move to previous/next
-    map('n', '<leader>q', ':BufDel<CR>', opts)
-  end
-end
-
 function M.bufferline()
   return function()
     local map = vim.api.nvim_set_keymap
@@ -72,6 +62,15 @@ function M.bufferline()
     map('n', '<leader>8', ':BufferLineGoToBuffer 8<CR>', opts)
     map('n', '<leader>9', ':BufferLineGoToBuffer 9<CR>', opts)
     map('n', '<leader>10', ':BufferLineGoToBuffer 10<CR>', opts)
+  end
+end
+
+function M.close_buffers()
+  return function()
+    local map = vim.api.nvim_set_keymap
+    local opts = { noremap = true, silent = true }
+
+    map('n', '<leader>cb', '<cmd>BWipeout other<CR>', opts)
   end
 end
 

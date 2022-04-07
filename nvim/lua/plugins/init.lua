@@ -51,17 +51,17 @@ packer.startup(function()
   }
 
   -- Buffer management bar
-  -- use {
-  --   'romgrk/barbar.nvim',
-  --   after = 'nvim-web-devicons',
-  --   setup = setup.barbar(),
-  -- }
   use {
-    'akinsho/bufferline.nvim',
+    'romgrk/barbar.nvim',
     after = 'nvim-web-devicons',
-    setup = setup.bufferline(),
-    config = config.bufferline(),
+    setup = setup.barbar(),
   }
+  -- use {
+  --   'akinsho/bufferline.nvim',
+  --   after = 'nvim-web-devicons',
+  --   setup = setup.bufferline(),
+  --   config = config.bufferline(),
+  -- }
 
   -- File explorer
   use {
@@ -248,7 +248,7 @@ packer.startup(function()
     setup = setup.close_buffers(),
   }
 
-  -- use {
-  --   'tweekmonster/startuptime.vim',
-  -- }
+  use {
+    'tweekmonster/startuptime.vim',
+  }
 end)

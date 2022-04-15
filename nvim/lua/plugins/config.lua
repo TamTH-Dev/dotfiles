@@ -266,29 +266,31 @@ function M.cmp()
     end
 
     cmp.setup {
-      completion = {
-        autocomplete = {
-          types.cmp.TriggerEvent.TextChanged,
-        },
-        completeopt = 'menu,menuone,noinsert',
-        keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
-        keyword_length = 1,
-        get_trigger_characters = function(trigger_characters)
-          return trigger_characters
-        end
-      },
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
         end,
       },
       preselect = types.cmp.PreselectMode.Item,
-      documentation = {
-        border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-        winhighlight = 'Normal:MyNormal,NormalNC:MyNormalNC',
-        maxwidth = math.floor((WIDE_HEIGHT * 2) * (opt.columns / (WIDE_HEIGHT * 2 * 16 / 9))),
-        maxheight = math.floor(WIDE_HEIGHT * (WIDE_HEIGHT / opt.lines)),
-      },
+      window = {
+        documentation = {
+          border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+          winhighlight = 'Normal:MyNormal,NormalNC:MyNormalNC',
+          maxwidth = math.floor((WIDE_HEIGHT * 2) * (opt.columns / (WIDE_HEIGHT * 2 * 16 / 9))),
+          maxheight = math.floor(WIDE_HEIGHT * (WIDE_HEIGHT / opt.lines)),
+        },
+        completion = {
+          autocomplete = {
+            types.cmp.TriggerEvent.TextChanged,
+          },
+          completeopt = 'menu,menuone,noinsert',
+          keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
+          keyword_length = 1,
+          get_trigger_characters = function(trigger_characters)
+            return trigger_characters
+          end
+        },
+      }, 
       confirmation = {
         default_behavior = types.cmp.ConfirmBehavior.Insert,
         get_commit_characters = function(commit_characters)

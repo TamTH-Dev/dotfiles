@@ -1515,6 +1515,16 @@ function M.nvimtree()
       hijack_cursor       = false,
       -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually)
       update_cwd          = false,
+      renderer = {
+        indent_markers = {
+          enable = false,
+          icons = {
+            corner = "└ ",
+            edge = "│ ",
+            none = "  ",
+          },
+        },
+      },
       -- update the focused file on `BufEnter`, un-collapses the folders recursively until it finds the file
       update_focused_file = {
         -- enables the feature

@@ -196,8 +196,6 @@ function M.nvimtree()
       Makefile = 1,
       MAKEFILE = 1
     }
-    -- Show indent markers when folders are open
-    global.nvim_tree_indent_markers = 1
     -- Enable folder and file icon highlight for opened files/directories
     global.nvim_tree_highlight_opened_files = 0
     -- Root format

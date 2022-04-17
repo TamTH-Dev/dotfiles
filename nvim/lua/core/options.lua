@@ -40,7 +40,7 @@ options.termguicolors = true
 options.timeoutlen = 500
 options.updatetime = 250
 options.undofile = false
-options.wrap = false
+options.wrap = true
 options.writebackup = false
 
 

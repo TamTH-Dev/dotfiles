@@ -1,13 +1,13 @@
 # TokyoNight Color Palette
-set -l foreground c0caf5
-set -l selection 303757
-set -l comment 565f89
-set -l red f7768e
-set -l orange ff9e64
-set -l yellow f1fa8c
-set -l green 9ece6a
-set -l blue 2ac3de
-set -l magenta bb9af7
+set -l foreground D8DEE9
+set -l selection EBCB8B
+set -l comment 4C566A
+set -l red BF616A
+set -l orange D08770
+set -l yellow EBCB8B
+set -l green A3BE8C
+set -l blue 81A1C1
+set -l magenta B48EAD
 
 # Syntax Highlighting Colors
 set -g fish_color_normal $foreground
@@ -29,7 +29,7 @@ set -g fish_color_autosuggestion $comment
 set -g fish_pager_color_progress $comment
 set -g fish_pager_color_prefix $blue
 set -g fish_pager_color_completion $foreground
-set -g fish_pager_color_description $comment
+set -g fish_pager_color_description $green
 
 if status is-interactive
   # Commands to run in interactive sessions can go here
@@ -54,7 +54,7 @@ set PATH $HOME/.local/bin $HOME/.config/bin /usr/local/bin /usr/bin /usr/sbin /u
 
 # Nvm path env
 set NVM_DIR "$HOME/.nvm"
-set PATH $HOME/.nvm/versions/node/v14.18.2/bin $PATH
+set PATH $HOME/.nvm/versions/node/v16.14.2/bin $PATH
 
 # Configure fzf
 set -gx FZF_DEFAULT_OPTS '

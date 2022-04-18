@@ -1,5 +1,5 @@
 # Inserts blank line between shell prompts.
-add_newline = true
+add_newline = false
 
 # Timeout for starship to scan files (in milliseconds)
 scan_timeout = 50
@@ -13,22 +13,22 @@ disabled = true
 
 # Shows a character beside where the text is entered
 [character]                            
-success_symbol = '[➜](#bb9af7)'
-vicmd_symbol = '[](#bb9af7)'
-error_symbol = '[➜](#f7768e)'
+success_symbol = '[➜](#B48EAD)'
+vicmd_symbol = '[](#B48EAD)'
+error_symbol = '[➜](#BF616A)'
 
 # Shows the path to current directory
 [directory]
 truncation_length = 32
 read_only = ''
-format = '🍒 [$path](#bb9af7)[$read_only](#f7768e) '
+format = '🍒 [$path](#B48EAD)[$read_only](#BF616A) '
 
 # Shows the active branch of the repo in current directory
 [git_branch]
 symbol = '🌱'
 truncation_length = 32
-format = 'on [$symbol $branch](#7dcfff) '
+format = 'on [$symbol $branch](#88C0D0) '
 
 [username]
-format = '🔥 [$user](#2ac3de) in '
+format = '🔥 [$user](#81A1C1) in '
 show_always = true

@@ -25,7 +25,7 @@ function M.alpha()
       },
       opts = {
         position = 'center',
-        hl = 'Special'
+        hl = 'TSCharacter'
       }
     }
 
@@ -481,12 +481,12 @@ function M.fzf()
     map('n', '<C-b>', ':Buffers<CR>', opts)
 
     global.fzf_colors = {
-      fg      = { 'fg', 'NonText' },
+      fg      = { 'fg', 'LineNr' },
       bg      = { 'bg', 'EndOfBuffer' },
-      hl      = { 'fg', 'DiagnosticSignError' },
+      hl      = { 'fg', 'DiagnosticVirtualTextInfo' },
       ['fg+'] = { 'fg', 'Special' },
       ['bg+'] = { 'bg', 'EndOfBuffer' },
-      ['hl+'] = { 'fg', 'DiagnosticSignError' },
+      ['hl+'] = { 'fg', 'DiagnosticVirtualTextInfo' },
       info    = { 'fg', 'Directory' },
       border  = { 'fg', 'NvimTreeRootFolder' },
       prompt  = { 'fg', 'Statement' },

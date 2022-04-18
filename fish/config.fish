@@ -58,10 +58,10 @@ set PATH $HOME/.nvm/versions/node/v16.14.2/bin $PATH
 
 # Configure fzf
 set -gx FZF_DEFAULT_OPTS '
-      --color=bg+:#1a1b26,bg:#1a1b26
-      --color=hl+:#2ac3de,hl:#2ac3de
-      --color=fg+:#c0caf5,fg:#565f89
-      --color=info:#9ece6a,prompt:#9ece6a,spinner:#9ece6a,pointer:#f7768e,marker:#2ac3de
+      --color=bg+:#2e3440,bg:#2e3440
+      --color=hl+:#81a1c1,hl:#81a1c1
+      --color=fg+:#d8dee9,fg:#4c566a
+      --color=info:#a3be8c,prompt:#a3be8c,spinner:#a3be8c,pointer:#d08770,marker:#81a1c1
       --layout=reverse --bind=shift-tab:up,tab:down --no-multi --cycle'
 set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden -g "!{node_modules,.git,build,dist,.cache,cache,.idea}"'
 

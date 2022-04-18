@@ -23,8 +23,14 @@ packer.startup(function()
   }
 
   -- Colorscheme
+  -- use {
+  --   'folke/tokyonight.nvim',
+  --   config = function()
+  --     require('colors').init()
+  --   end,
+  -- }
   use {
-    'folke/tokyonight.nvim',
+    'shaunsingh/nord.nvim',
     config = function()
       require('colors').init()
     end,
@@ -33,7 +39,7 @@ packer.startup(function()
   -- Icons suppliers for Madvim
   use {
     'kyazdani42/nvim-web-devicons',
-    after = 'tokyonight.nvim',
+    after = 'nord.nvim',
     config = config.icons(),
   }
 
@@ -153,10 +159,10 @@ packer.startup(function()
 
   -- Commenter
   use { 'JoosepAlviste/nvim-ts-context-commentstring' }
-  use {
-    'numToStr/Comment.nvim',
-    config = config.comment(),
-  }
+  -- use {
+    -- 'numToStr/Comment.nvim',
+    -- config = config.comment(),
+  -- }
 
   -- Surround parentheses, brackets, quotes, XML tags, and more
   use {

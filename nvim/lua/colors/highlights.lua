@@ -7,23 +7,39 @@ local cmd = vim.cmd
 -- local colors = require('colors').get()
 
 -- Declare colors manually
+--local colors = {
+--  -- bg = '#1a1b26',
+--  bg = '#24283b',
+--  -- secondaryBg = '#24283b',
+--  secondaryBg = '#1a1b26',
+--  fg = '#c0caf5',
+--  red = '#f7768e',
+--  orange = '#ff9e64',
+--  brown = '#e0af68',
+--  yellow = '#f1fa8c',
+--  green = '#9ece6a',
+--  magenta = '#bb9af7',
+--  blue = '#2ac3de',
+--  cyan = '#7dcfff',
+--  lightBlue = '#73daca',
+--  gray = '#414868',
+--}
 local colors = {
-  -- bg = '#1a1b26',
-  bg = '#24283b',
-  -- stormBg = '#24283b',
-  stormBg = '#1a1b26',
-  fg = '#c0caf5',
-  red = '#f7768e',
-  orange = '#ff9e64',
-  brown = '#e0af68',
-  yellow = '#f1fa8c',
-  green = '#9ece6a',
-  magenta = '#bb9af7',
-  blue = '#2ac3de',
-  cyan = '#7dcfff',
-  lightBlue = '#73daca',
-  gray = '#414868',
+  bg = '#2E3440',
+  secondaryBg = '#3B4252',
+  fg = '#D8DEE9',
+  red = '#BF616A',
+  orange = '#D08770',
+  brown = '',
+  yellow = '#EBCB8B',
+  green = '#A3BE8C',
+  magenta = '#B48EAD',
+  blue = '#8FBCBB',
+  cyan = '#88C0D0',
+  lightBlue = '#81A1C1',
+  gray = '#434C5E',
 }
+
 
 -- Define fg color
 -- @param group Group
@@ -41,7 +57,7 @@ end
 
 -- General
 fg('FloatBorder', colors.blue)
-bg('NormalFloat', colors.stormBg)
+bg('NormalFloat', colors.bg)
 
 -- Telescope
 fg('TelescopeBorder', colors.blue)
@@ -74,11 +90,11 @@ bg('DiagnosticVirtualTextHint', 'default')
 fg('IndentBlanklineContextChar', colors.orange)
 
 -- Barbar
-bg('BufferCurrent', colors.stormBg)
-fg('BufferCurrentSign', colors.red)
-bg('BufferCurrentSign', colors.stormBg)
+bg('BufferCurrent', colors.secondaryBg)
+fg('BufferCurrentSign', colors.magenta)
+bg('BufferCurrentSign', colors.secondaryBg)
 fg('BufferCurrentMod', colors.blue)
-bg('BufferCurrentMod', colors.stormBg)
+bg('BufferCurrentMod', colors.secondaryBg)
 fg('BufferVisible', colors.fg)
 bg('BufferVisible', colors.bg)
 fg('BufferVisibleIndex', colors.fg)

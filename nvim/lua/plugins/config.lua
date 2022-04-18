@@ -223,7 +223,6 @@ function M.cmp()
 
     local api = vim.api
     local opt = vim.o
-    local fn = vim.fn
 
     local WIDE_HEIGHT = 40
 
@@ -261,10 +260,6 @@ function M.cmp()
       return col ~= 0 and api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
     end
 
-    local feedkey = function(key, mode)
-      api.nvim_feedkeys(api.nvim_replace_termcodes(key, true, true, true), mode, true)
-    end
-
     cmp.setup {
       snippet = {
         expand = function(args)
@@ -290,7 +285,7 @@ function M.cmp()
             return trigger_characters
           end
         },
-      }, 
+      },
       confirmation = {
         default_behavior = types.cmp.ConfirmBehavior.Insert,
         get_commit_characters = function(commit_characters)
@@ -621,9 +616,9 @@ function M.galaxyline()
           cmd('hi GalaxyEmptyBar guifg='..get_mode_color())
           return '▊'
         end,
-        highlight = { colors.red, colors.bg },
+        highlight = { colors.red, colors.secondaryBg },
         separator = ' ',
-        separator_highlight = { colors.bg, colors.bg },
+        separator_highlight = { colors.secondaryBg, colors.secondaryBg },
       },
     }
 
@@ -661,9 +656,9 @@ function M.galaxyline()
           end
           return icon..alias_mode
         end,
-        highlight = { colors.bg, colors.bg },
+        highlight = { colors.secondaryBg, colors.secondaryBg },
         separator = '  ',
-        separator_highlight = { colors.bg, colors.bg }
+        separator_highlight = { colors.secondaryBg, colors.secondaryBg }
       }
     }
 
@@ -671,7 +666,7 @@ function M.galaxyline()
       FileIcon = {
         condition = buffer_not_empty,
         provider = 'FileIcon',
-        highlight = { file_icon_color, colors.bg }
+        highlight = { file_icon_color, colors.secondaryBg }
       }
     }
 
@@ -679,9 +674,9 @@ function M.galaxyline()
       FileName = {
         condition = buffer_not_empty,
         provider = 'FileName',
-        highlight = { colors.fg, colors.bg },
+        highlight = { colors.fg, colors.secondaryBg },
         separator = ' ',
-        separator_highlight = { colors.bg, colors.bg }
+        separator_highlight = { colors.secondaryBg, colors.secondaryBg }
       }
     }
 
@@ -689,9 +684,9 @@ function M.galaxyline()
       GitIcon = {
         condition = is_git_workspace_showed,
         provider = function() return '' end,
-        highlight = { colors.orange, colors.bg },
+        highlight = { colors.orange, colors.secondaryBg },
         separator = ' ',
-        separator_highlight = { colors.bg, colors.bg }
+        separator_highlight = { colors.secondaryBg, colors.secondaryBg }
       }
     }
 
@@ -708,9 +703,9 @@ function M.galaxyline()
           end
           return branch_name
         end,
-        highlight = { colors.fg,colors.bg },
+        highlight = { colors.fg, colors.secondaryBg },
         separator = ' ',
-        separator_highlight = { colors.bg, colors.bg }
+        separator_highlight = { colors.secondaryBg, colors.secondaryBg }
       }
     }
 
@@ -719,7 +714,7 @@ function M.galaxyline()
         condition = is_git_workspace_showed,
         provider = function() return get_diff({ status = 0 }) end,
         icon = '  ',
-        highlight = { colors.green, colors.bg }
+        highlight = { colors.green, colors.secondaryBg }
       }
     }
 
@@ -728,7 +723,7 @@ function M.galaxyline()
         condition = is_git_workspace_showed,
         provider = function() return get_diff({ status = 1 }) end,
         icon = '  ',
-        highlight = { colors.orange, colors.bg }
+        highlight = { colors.orange, colors.secondaryBg }
       }
     }
 
@@ -737,7 +732,7 @@ function M.galaxyline()
         condition = is_git_workspace_showed,
         provider = function() return get_diff({ status = 2 }) end,
         icon = '  ',
-        highlight = { colors.red,colors.bg }
+        highlight = { colors.red,colors.secondaryBg }
       }
     }
 
@@ -745,7 +740,7 @@ function M.galaxyline()
       Space = {
         condition = is_git_workspace_showed,
         provider = function() return ' ' end,
-        highlight = { colors.bg, colors.bg },
+        highlight = { colors.secondaryBg, colors.secondaryBg },
       }
     }
 
@@ -753,7 +748,7 @@ function M.galaxyline()
       DiagnosticError = {
         provider = 'DiagnosticError',
         icon = ' ',
-        highlight = { colors.red, colors.bg },
+        highlight = { colors.red, colors.secondaryBg },
       }
     }
 
@@ -761,7 +756,7 @@ function M.galaxyline()
       DiagnosticWarn = {
         provider = 'DiagnosticWarn',
         icon = ' ',
-        highlight = { colors.orange, colors.bg }
+        highlight = { colors.orange, colors.secondaryBg }
       }
     }
 
@@ -769,7 +764,7 @@ function M.galaxyline()
       DiagnosticInfo = {
         provider = 'DiagnosticInfo',
         icon = ' ',
-        highlight = { colors.magenta, colors.bg }
+        highlight = { colors.magenta, colors.secondaryBg }
       }
     }
 
@@ -777,7 +772,7 @@ function M.galaxyline()
       DiagnosticHint = {
         provider = 'DiagnosticHint',
         icon = ' ',
-        highlight = { colors.blue, colors.bg }
+        highlight = { colors.blue, colors.secondaryBg }
       }
     }
 
@@ -787,7 +782,7 @@ function M.galaxyline()
         condition = hide_in_width,
         provider = 'BufferNumber',
         icon = '﬘ ',
-        highlight = { colors.green, colors.bg }
+        highlight = { colors.green, colors.secondaryBg }
       }
     }
 
@@ -797,9 +792,9 @@ function M.galaxyline()
         provider = function()
           return ' '
         end,
-        highlight = { colors.gray, colors.bg },
+        highlight = { colors.gray, colors.secondaryBg },
         separator = ' ',
-        separator_highlight = { colors.bg, colors.bg },
+        separator_highlight = { colors.secondaryBg, colors.secondaryBg },
       },
     }
 
@@ -808,7 +803,7 @@ function M.galaxyline()
         condition = hide_in_width,
         provider = 'GetLspClient',
         icon = ' ',
-        highlight = { colors.orange, colors.bg },
+        highlight = { colors.orange, colors.secondaryBg },
       }
     }
 
@@ -818,9 +813,9 @@ function M.galaxyline()
         provider = function()
           return ' '
         end,
-        highlight = { colors.gray, colors.bg },
+        highlight = { colors.gray, colors.secondaryBg },
         separator = ' ',
-        separator_highlight = { colors.bg, colors.bg },
+        separator_highlight = { colors.secondaryBg, colors.secondaryBg },
       },
     }
 
@@ -831,7 +826,7 @@ function M.galaxyline()
           return bo.filetype
         end,
         icon = ' ',
-        highlight = { colors.blue, colors.bg },
+        highlight = { colors.blue, colors.secondaryBg },
       }
     }
 
@@ -839,9 +834,9 @@ function M.galaxyline()
       LineInfo = {
         provider = 'LineColumn',
         icon = ' ',
-        highlight = { colors.magenta, colors.bg },
+        highlight = { colors.magenta, colors.secondaryBg },
         separator = '  ',
-        separator_highlight = { colors.gray, colors.bg }
+        separator_highlight = { colors.gray, colors.secondaryBg }
       },
     }
 
@@ -850,9 +845,9 @@ function M.galaxyline()
         condition = hide_in_width,
         provider = 'LinePercent',
         icon = '',
-        highlight = { colors.red, colors.bg },
+        highlight = { colors.red, colors.secondaryBg },
         separator = '  ',
-        separator_highlight = { colors.gray, colors.bg }
+        separator_highlight = { colors.gray, colors.secondaryBg }
       }
     }
 
@@ -862,7 +857,7 @@ function M.galaxyline()
         provider = function()
           return ScrollBar()..' '
         end,
-        highlight = { colors.red, colors.bg }
+        highlight = { colors.red, colors.secondaryBg }
       }
     }
 
@@ -871,7 +866,7 @@ function M.galaxyline()
       BufferType = {
         condition = is_file_type_valid,
         provider = 'FileTypeName',
-        highlight = { colors.fg, colors.bg }
+        highlight = { colors.fg, colors.secondaryBg }
       }
     }
 
@@ -879,7 +874,7 @@ function M.galaxyline()
       BufferIcon = {
         condition = is_file_type_valid,
         provider= 'BufferIcon',
-        highlight = { colors.fg, colors.bg }
+        highlight = { colors.fg, colors.secondaryBg }
       }
     }
   end
@@ -1254,8 +1249,8 @@ function M.lualine()
         component_separators = '',
         section_separators = '',
         theme = {
-          normal = { c = { fg = colors.fg, bg = colors.bg } },
-          inactive = { c = { fg = colors.fg, bg = colors.bg } },
+          normal = { c = { fg = colors.fg, bg = colors.secondaryBg } },
+          inactive = { c = { fg = colors.fg, bg = colors.secondaryBg } },
         },
       },
       sections = {
@@ -1287,12 +1282,13 @@ function M.lualine()
         R = colors.red,
       }
       local color = mode_colors[fn.mode()]
+
       if color == nil then
         color = colors.red
       end
+
       return color
     end
-
 
     local function ins_left(component)
       table.insert(config.sections.lualine_c, component)
@@ -1332,7 +1328,7 @@ function M.lualine()
           R = ' ',
           s = ' ',
         }
-        cmd('hi! LualineMode guifg='..get_mode_color()..' guibg='..colors.bg)
+        cmd('hi! LualineMode guifg='..get_mode_color()..' guibg='..colors.secondaryBg)
         local alias_mode = alias[fn.mode()]
         local icon = icons[fn.mode()]
         if not alias_mode then

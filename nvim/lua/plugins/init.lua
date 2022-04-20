@@ -159,10 +159,9 @@ packer.startup(function()
 
   -- Commenter
   use { 'JoosepAlviste/nvim-ts-context-commentstring' }
-  -- use {
-    -- 'numToStr/Comment.nvim',
-    -- config = config.comment(),
-  -- }
+  use {
+    'tpope/vim-commentary',
+  }
 
   -- Surround parentheses, brackets, quotes, XML tags, and more
   use {

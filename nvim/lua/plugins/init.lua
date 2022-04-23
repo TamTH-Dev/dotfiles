@@ -248,12 +248,13 @@ packer.startup(function()
     config = config.cmp(),
   }
 
+  -- Delete all buffers except one
   use {
     'kazhala/close-buffers.nvim',
     setup = setup.close_buffers(),
   }
 
-  use {
-    'tweekmonster/startuptime.vim',
-  }
+  -- use {
+  --   'tweekmonster/startuptime.vim',
+  -- }
 end)

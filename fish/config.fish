@@ -1,13 +1,13 @@
 # TokyoNight Color Palette
-set -l foreground D8DEE9
-set -l selection EBCB8B
-set -l comment 4C566A
-set -l red BF616A
-set -l orange D08770
-set -l yellow EBCB8B
-set -l green A3BE8C
-set -l blue 81A1C1
-set -l magenta B48EAD
+set -l foreground f7f1ff
+set -l selection f92672
+set -l comment 403e41
+set -l red fc618d
+set -l orange fd9353
+set -l yellow fce566
+set -l green 7bd88f
+set -l blue 5ad4e6
+set -l magenta 948ae3
 
 # Syntax Highlighting Colors
 set -g fish_color_normal $foreground
@@ -32,7 +32,7 @@ set -g fish_pager_color_completion $foreground
 set -g fish_pager_color_description $green
 
 if status is-interactive
-  # Commands to run in interactive sessions can go here
+    # Commands to run in interactive sessions can go here
 end
 
 # Disable fish greeting
@@ -42,11 +42,11 @@ set fish_greeting
 set LANG "en_US.UTF-8"
 
 # Preferred editor for local and remote sessions
-set EDITOR "nvim"
+set EDITOR nvim
 
 # Set default keybindings mode
 function fish_user_key_bindings
-  fish_vi_key_bindings
+    fish_vi_key_bindings
 end
 
 # System path env
@@ -58,10 +58,10 @@ set PATH $HOME/.nvm/versions/node/v16.14.2/bin $PATH
 
 # Configure fzf
 set -gx FZF_DEFAULT_OPTS '
-      --color=bg+:#2e3440,bg:#2e3440
-      --color=hl+:#81a1c1,hl:#81a1c1
-      --color=fg+:#d8dee9,fg:#4c566a
-      --color=info:#a3be8c,prompt:#a3be8c,spinner:#a3be8c,pointer:#d08770,marker:#81a1c1
+      --color=bg+:#222222,bg:#222222
+      --color=hl+:#5ad4e6,hl:#5ad4e6
+      --color=fg+:#f7f1ff,fg:#8b888f
+      --color=info:#7bd88f,prompt:#7bd88f,spinner:#7bd88f,pointer:#fc618d,marker:#948ae3
       --layout=reverse --bind=shift-tab:up,tab:down --no-multi --cycle'
 set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden -g "!{node_modules,.git,build,dist,.cache,cache,.idea}"'
 
@@ -77,7 +77,7 @@ alias music="ncmpcpp"
 # Calendar controller 
 alias calendar="khal interactive"
 # Changing "ls" to "exa"
-alias ls='exa --color=always --group-directories-first'  # my preferred listing
+alias ls='exa --color=always --group-directories-first' # my preferred listing
 alias la='exa -alh --color=always --group-directories-first' # all files and dirs
 alias lt='exa -aT --color=always --group-directories-first' # tree listing
 # Colorize grep output (good for log files)

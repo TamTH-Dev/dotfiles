@@ -27,7 +27,7 @@ format = '🍒 [$path](#7bd88f)[$read_only](#fc618d) '
 [git_branch]
 symbol = '🌱'
 truncation_length = 32
-format = 'on [$symbol $branch](#5ad4e6) '
+format = 'on [$symbol $branch](#948ae3) '
 
 [username]
 format = '🔥 [$user](#5ad4e6) in '

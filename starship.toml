@@ -5,7 +5,7 @@ add_newline = false
 scan_timeout = 50
 
 # Timeout for commands executed by starship (in milliseconds)
-command_timeout = 1000
+command_timeout = 2000
 
 # Disable the package module, hiding it from the prompt completely
 [package]
@@ -13,22 +13,22 @@ disabled = true
 
 # Shows a character beside where the text is entered
 [character]                            
-success_symbol = '[➜](#B48EAD)'
-vicmd_symbol = '[](#B48EAD)'
-error_symbol = '[➜](#BF616A)'
+success_symbol = '[➜](#7bd88f)'
+vicmd_symbol = '[](#7bd88f)'
+error_symbol = '[➜](#fc618d)'
 
 # Shows the path to current directory
 [directory]
 truncation_length = 32
 read_only = ''
-format = '🍒 [$path](#B48EAD)[$read_only](#BF616A) '
+format = '🍒 [$path](#7bd88f)[$read_only](#fc618d) '
 
 # Shows the active branch of the repo in current directory
 [git_branch]
 symbol = '🌱'
 truncation_length = 32
-format = 'on [$symbol $branch](#88C0D0) '
+format = 'on [$symbol $branch](#5ad4e6) '
 
 [username]
-format = '🔥 [$user](#81A1C1) in '
+format = '🔥 [$user](#5ad4e6) in '
 show_always = true

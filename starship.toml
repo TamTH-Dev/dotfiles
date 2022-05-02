@@ -21,7 +21,7 @@ error_symbol = '[➜](#BF616A)'
 [directory]
 truncation_length = 32
 read_only = ''
-format = '🍒 [$path](#B48EAD)[$read_only](#BF616A) '
+format = '💫 [$path](#B48EAD)[$read_only](#BF616A) '
 
 # Shows the active branch of the repo in current directory
 [git_branch]
@@ -30,5 +30,5 @@ truncation_length = 32
 format = 'on [$symbol $branch](#88C0D0) '
 
 [username]
-format = '🔥 [$user](#81A1C1) in '
+format = '🦄✨ [$user](#81A1C1) in '
 show_always = true

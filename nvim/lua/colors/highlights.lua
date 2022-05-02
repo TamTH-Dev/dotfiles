@@ -72,22 +72,8 @@ bg('DiagnosticVirtualTextHint', 'default')
 -- Indent_blankline
 fg('IndentBlanklineContextChar', colors.orange)
 
--- Barbar
-bg('BufferCurrent', colors.extraBg)
-fg('BufferCurrentSign', colors.magenta)
-bg('BufferCurrentSign', colors.extraBg)
-fg('BufferCurrentMod', colors.blue)
-bg('BufferCurrentMod', colors.extraBg)
-fg('BufferVisible', colors.fg)
-bg('BufferVisible', colors.bg)
-fg('BufferVisibleIndex', colors.fg)
-bg('BufferVisibleIndex', colors.bg)
-fg('BufferVisibleMod', colors.fg)
-bg('BufferVisibleMod', colors.bg)
-fg('BufferVisibleSign', colors.magenta)
-bg('BufferVisibleSign', colors.bg)
-fg('BufferVisibleTarget', colors.fg)
-bg('BufferVisibleTarget', colors.bg)
+-- Bufferline
+fg('BufferLineIndicatorSelected', colors.red)
 
 -- NvimTree
 fg('NvimTreeFolderIcon', colors.blue)

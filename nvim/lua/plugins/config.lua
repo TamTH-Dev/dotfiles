@@ -192,27 +192,6 @@ function M.bufferline()
   end
 end
 
-function M.chadtree()
-  return function()
-    local api = vim.api
-    local map = api.nvim_set_keymap
-    local opts = { noremap = true, silent = true }
-
-    local chadtree_settings = {
-      theme = {
-        text_colour_set = 'nord'
-      },
-      view = {
-        width = 35,
-      },
-    }
-    api.nvim_set_var("chadtree_settings", chadtree_settings)
-
-    -- Toggle CHADTree
-    map('n', '<C-n>', ':CHADopen<CR>', opts)
-  end
-end
-
 function M.cmp()
   return function()
     local is_cmp_loaded, cmp = pcall(require, 'cmp')
@@ -887,20 +866,21 @@ function M.gitsigns()
 
     gitsigns.setup {
       numhl = false,
+      linehl = false,
+      word_diff = false,
       signcolumn = true,
       signs = {
-        add = { hl = 'DiffAdd', text = '', numhl = 'DiffAdd' },
-        change = { hl = 'DiffChange', text = '', numhl = 'DiffText' },
-        changedelete = { hl = 'DiffChange', text = '', numhl = 'DiffChange' },
-        delete = { hl = 'DiffDelete', text = '', numhl = 'DiffDelete' },
-        topdelete = { hl = 'DiffDelete', text = '', numhl = 'DiffDelete' },
+        add = { hl = 'DiffAdd', text = '' },
+        change = { hl = 'DiffChange', text = '' },
+        delete = { hl = 'DiffDelete', text = '' },
+        topdelete = { hl = 'DiffDelete', text = '' },
+        changedelete = { hl = 'DiffChange', text = '' },
       },
       status_formatter = nil, -- Use default
       sign_priority = 6,
       debug_mode = false,
       current_line_blame = false,
       update_debounce = 100,
-      word_diff = false,
     }
   end
 end
@@ -1071,10 +1051,6 @@ function M.lsp()
         {
           signs = true,
           virtual_text = false,
-          -- virtual_text = {
-          --   prefix = '🧨',
-          --   spacing = 0,
-          -- },
           underline = true,
           severity_sort = false,
         }
@@ -1084,7 +1060,7 @@ function M.lsp()
       local signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
       for type, icon in pairs(signs) do
         local hl = 'DiagnosticSign' .. type
-        fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+        fn.sign_define(hl, { text = icon, texthl = hl })
       end
 
       local border = {
@@ -1495,15 +1471,21 @@ function M.nvimtree()
       -- disables netrw completely
       disable_netrw       = true,
       -- hijack netrw window on startup
-      hijack_netrw        = true,
+      hijack_netrw        = false,
       -- open the tree when running this setup function
       open_on_setup       = false,
       -- will not open on setup if the filetype is in this list
       ignore_ft_on_setup  = {},
       -- disable diagnostic in nvim tree
       diagnostics = {
-        enable = false,
-        show_on_dirs = false,
+        enable = true,
+        show_on_dirs = true,
+        icons = {
+          hint = '',
+          info = '',
+          warning = '',
+          error = '',
+        },
       },
       -- opens the tree when changing/opening a new tab if the tree wasn't previously opened
       open_on_tab         = false,
@@ -1515,9 +1497,9 @@ function M.nvimtree()
         indent_markers = {
           enable = true,
           icons = {
-            corner = "└ ",
-            edge = "│ ",
-            none = "  ",
+            corner = '└ ',
+            edge = '│ ',
+            none = '  ',
           },
         },
       },
@@ -1541,6 +1523,7 @@ function M.nvimtree()
       },
 
       view = {
+        preserve_window_proportions = true,
         -- width of the window, can be either a number (columns) or a string in `%`
         width = 35,
         -- side of the tree, can be one of 'left' | 'right' | 'top' | 'bottom'

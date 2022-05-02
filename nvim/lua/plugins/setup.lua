@@ -197,7 +197,7 @@ function M.nvimtree()
       MAKEFILE = 1
     }
     -- Enable folder and file icon highlight for opened files/directories
-    global.nvim_tree_highlight_opened_files = 0
+    global.nvim_tree_highlight_opened_files = 1
     -- Root format
     global.nvim_tree_root_folder_modifier = ':~'
     -- Custom icons

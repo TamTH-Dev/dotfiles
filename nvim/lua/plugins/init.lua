@@ -38,12 +38,6 @@ packer.startup(function()
   }
 
   -- Status line
-  -- use {
-  --   'glepnir/galaxyline.nvim',
-  --   after = 'nvim-web-devicons',
-  --   requires = 'kyazdani42/nvim-web-devicons',
-  --   config = config.galaxyline(),
-  -- }
   use {
     'nvim-lualine/lualine.nvim',
     after = 'nvim-web-devicons',
@@ -52,16 +46,11 @@ packer.startup(function()
 
   -- Buffer management bar
   use {
-    'romgrk/barbar.nvim',
+    'akinsho/bufferline.nvim',
     after = 'nvim-web-devicons',
-    setup = setup.barbar(),
+    setup = setup.bufferline(),
+    config = config.bufferline(),
   }
-  -- use {
-  --   'akinsho/bufferline.nvim',
-  --   after = 'nvim-web-devicons',
-  --   setup = setup.bufferline(),
-  --   config = config.bufferline(),
-  -- }
 
   -- File explorer
   use {
@@ -201,14 +190,6 @@ packer.startup(function()
     config = config.lsp(),
   }
 
-  -- LSP UI Supporter
-  -- use {
-  --   'tami5/lspsaga.nvim',
-  --   branch = 'nvim51',
-  --   setup = setup.saga(),
-  --   config = config.saga(),
-  -- }
-
   -- Formatter
   use {
     'sbdchd/neoformat',
@@ -230,7 +211,7 @@ packer.startup(function()
     event = 'BufEnter',
     requires = {
       { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp', opt = true },
-      -- { 'rafamadriz/friendly-snippets', after = { 'nvim-cmp', 'cmp_luasnip' }, opt = true },
+      { 'rafamadriz/friendly-snippets', after = { 'nvim-cmp', 'cmp_luasnip' }, opt = true },
       { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', opt = true },
       { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', opt = true },

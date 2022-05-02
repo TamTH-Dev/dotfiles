@@ -25,7 +25,7 @@ function M.alpha()
       },
       opts = {
         position = 'center',
-        hl = 'TSCharacter'
+        hl = 'Boolean'
       }
     }
 
@@ -34,10 +34,10 @@ function M.alpha()
     handler:close()
     local plugins_total_stats = {
       type = 'text',
-      val = 'Madvim has loaded '..plugins_total..' plugins ',
+      val = 'Neovim has loaded '..plugins_total..' plugins ',
       opts = {
         position = 'center',
-        hl = 'LspSagaCodeActionContent',
+        hl = 'Number',
       }
     }
 
@@ -50,8 +50,8 @@ function M.alpha()
         cursor = 5,
         width = 24,
         align_shortcut = 'right',
-        hl_shortcut = 'Special',
-        hl = 'LspSagaSignatureHelpBorder',
+        hl_shortcut = 'Debug',
+        hl = 'Function',
       }
       if keybind then
         opts.keymap = { 'n', sc_, keybind, { noremap = true, silent = true } }
@@ -90,7 +90,7 @@ function M.alpha()
       val = 'A clever person solves a problem. A wise person avoids it.',
       opts = {
         position = 'center',
-        hl = 'LspDiagnosticsDefaultWarning',
+        hl = 'String',
       }
     }
 
@@ -468,7 +468,7 @@ function M.fzf()
     local opts = { noremap = true, silent = true }
 
     -- Fzf layout
-    global.fzf_layout = { down = '~40%' }
+    global.fzf_layout = { down = '50%' }
 
     -- Disable preview window
     global.fzf_preview_window = { right = 'hidden' }
@@ -483,17 +483,17 @@ function M.fzf()
     global.fzf_colors = {
       fg      = { 'fg', 'LineNr' },
       bg      = { 'bg', 'EndOfBuffer' },
-      hl      = { 'fg', 'DiagnosticVirtualTextInfo' },
-      ['fg+'] = { 'fg', 'Special' },
+      hl      = { 'fg', 'Function' },
+      ['fg+'] = { 'fg', 'Normal' },
       ['bg+'] = { 'bg', 'EndOfBuffer' },
-      ['hl+'] = { 'fg', 'DiagnosticVirtualTextInfo' },
-      info    = { 'fg', 'Directory' },
-      border  = { 'fg', 'NvimTreeRootFolder' },
-      prompt  = { 'fg', 'Statement' },
-      pointer = { 'fg', 'NvimTreeRootFolder' },
-      marker  = { 'fg', 'NvimTreeRootFolder' },
-      spinner = { 'fg', 'NvimTreeRootFolder' },
-      header  = { 'fg', 'TSVariableBuiltin' }
+      ['hl+'] = { 'fg', 'Function' },
+      info    = { 'fg', 'Number' },
+      border  = { 'fg', 'EndOfBuffer' },
+      prompt  = { 'fg', 'Character' },
+      pointer = { 'fg', 'Function' },
+      marker  = { 'fg', 'Function' },
+      spinner = { 'fg', 'Function' },
+      header  = { 'fg', 'Statement' }
     }
 
     -- Actions for fzf
@@ -512,7 +512,7 @@ function M.fzf()
     -- Advanced ripgrep integration
     api.nvim_exec([[
       function! RipgrepFzf(query, fullscreen)
-        let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s -g "!{node_modules,.git,build,dist,.cache,cache,.idea}" || true'
+        let command_fmt = 'rg --column --no-heading --color=always --smart-case %s -g "!{node_modules,.git,build,dist,.cache,cache,.idea}" || true'
         let initial_command = printf(command_fmt, shellescape(a:query))
         let reload_command = printf(command_fmt, '{q}')
         let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
@@ -616,9 +616,9 @@ function M.galaxyline()
           cmd('hi GalaxyEmptyBar guifg='..get_mode_color())
           return '▊'
         end,
-        highlight = { colors.red, colors.secondaryBg },
+        highlight = { colors.red, colors.extraBg },
         separator = ' ',
-        separator_highlight = { colors.secondaryBg, colors.secondaryBg },
+        separator_highlight = { colors.extraBg, colors.extraBg },
       },
     }
 
@@ -656,9 +656,9 @@ function M.galaxyline()
           end
           return icon..alias_mode
         end,
-        highlight = { colors.secondaryBg, colors.secondaryBg },
+        highlight = { colors.extraBg, colors.extraBg },
         separator = '  ',
-        separator_highlight = { colors.secondaryBg, colors.secondaryBg }
+        separator_highlight = { colors.extraBg, colors.extraBg }
       }
     }
 
@@ -666,7 +666,7 @@ function M.galaxyline()
       FileIcon = {
         condition = buffer_not_empty,
         provider = 'FileIcon',
-        highlight = { file_icon_color, colors.secondaryBg }
+        highlight = { file_icon_color, colors.extraBg }
       }
     }
 
@@ -674,9 +674,9 @@ function M.galaxyline()
       FileName = {
         condition = buffer_not_empty,
         provider = 'FileName',
-        highlight = { colors.fg, colors.secondaryBg },
+        highlight = { colors.fg, colors.extraBg },
         separator = ' ',
-        separator_highlight = { colors.secondaryBg, colors.secondaryBg }
+        separator_highlight = { colors.extraBg, colors.extraBg }
       }
     }
 
@@ -684,9 +684,9 @@ function M.galaxyline()
       GitIcon = {
         condition = is_git_workspace_showed,
         provider = function() return '' end,
-        highlight = { colors.orange, colors.secondaryBg },
+        highlight = { colors.orange, colors.extraBg },
         separator = ' ',
-        separator_highlight = { colors.secondaryBg, colors.secondaryBg }
+        separator_highlight = { colors.extraBg, colors.extraBg }
       }
     }
 
@@ -703,9 +703,9 @@ function M.galaxyline()
           end
           return branch_name
         end,
-        highlight = { colors.fg, colors.secondaryBg },
+        highlight = { colors.fg, colors.extraBg },
         separator = ' ',
-        separator_highlight = { colors.secondaryBg, colors.secondaryBg }
+        separator_highlight = { colors.extraBg, colors.extraBg }
       }
     }
 
@@ -714,7 +714,7 @@ function M.galaxyline()
         condition = is_git_workspace_showed,
         provider = function() return get_diff({ status = 0 }) end,
         icon = '  ',
-        highlight = { colors.green, colors.secondaryBg }
+        highlight = { colors.green, colors.extraBg }
       }
     }
 
@@ -723,7 +723,7 @@ function M.galaxyline()
         condition = is_git_workspace_showed,
         provider = function() return get_diff({ status = 1 }) end,
         icon = '  ',
-        highlight = { colors.orange, colors.secondaryBg }
+        highlight = { colors.orange, colors.extraBg }
       }
     }
 
@@ -732,7 +732,7 @@ function M.galaxyline()
         condition = is_git_workspace_showed,
         provider = function() return get_diff({ status = 2 }) end,
         icon = '  ',
-        highlight = { colors.red,colors.secondaryBg }
+        highlight = { colors.red,colors.extraBg }
       }
     }
 
@@ -740,7 +740,7 @@ function M.galaxyline()
       Space = {
         condition = is_git_workspace_showed,
         provider = function() return ' ' end,
-        highlight = { colors.secondaryBg, colors.secondaryBg },
+        highlight = { colors.extraBg, colors.extraBg },
       }
     }
 
@@ -748,7 +748,7 @@ function M.galaxyline()
       DiagnosticError = {
         provider = 'DiagnosticError',
         icon = ' ',
-        highlight = { colors.red, colors.secondaryBg },
+        highlight = { colors.red, colors.extraBg },
       }
     }
 
@@ -756,7 +756,7 @@ function M.galaxyline()
       DiagnosticWarn = {
         provider = 'DiagnosticWarn',
         icon = ' ',
-        highlight = { colors.orange, colors.secondaryBg }
+        highlight = { colors.orange, colors.extraBg }
       }
     }
 
@@ -764,7 +764,7 @@ function M.galaxyline()
       DiagnosticInfo = {
         provider = 'DiagnosticInfo',
         icon = ' ',
-        highlight = { colors.magenta, colors.secondaryBg }
+        highlight = { colors.magenta, colors.extraBg }
       }
     }
 
@@ -772,7 +772,7 @@ function M.galaxyline()
       DiagnosticHint = {
         provider = 'DiagnosticHint',
         icon = ' ',
-        highlight = { colors.blue, colors.secondaryBg }
+        highlight = { colors.blue, colors.extraBg }
       }
     }
 
@@ -782,7 +782,7 @@ function M.galaxyline()
         condition = hide_in_width,
         provider = 'BufferNumber',
         icon = '﬘ ',
-        highlight = { colors.green, colors.secondaryBg }
+        highlight = { colors.green, colors.extraBg }
       }
     }
 
@@ -792,9 +792,9 @@ function M.galaxyline()
         provider = function()
           return ' '
         end,
-        highlight = { colors.gray, colors.secondaryBg },
+        highlight = { colors.gray, colors.extraBg },
         separator = ' ',
-        separator_highlight = { colors.secondaryBg, colors.secondaryBg },
+        separator_highlight = { colors.extraBg, colors.extraBg },
       },
     }
 
@@ -803,7 +803,7 @@ function M.galaxyline()
         condition = hide_in_width,
         provider = 'GetLspClient',
         icon = ' ',
-        highlight = { colors.orange, colors.secondaryBg },
+        highlight = { colors.orange, colors.extraBg },
       }
     }
 
@@ -813,9 +813,9 @@ function M.galaxyline()
         provider = function()
           return ' '
         end,
-        highlight = { colors.gray, colors.secondaryBg },
+        highlight = { colors.gray, colors.extraBg },
         separator = ' ',
-        separator_highlight = { colors.secondaryBg, colors.secondaryBg },
+        separator_highlight = { colors.extraBg, colors.extraBg },
       },
     }
 
@@ -826,7 +826,7 @@ function M.galaxyline()
           return bo.filetype
         end,
         icon = ' ',
-        highlight = { colors.blue, colors.secondaryBg },
+        highlight = { colors.blue, colors.extraBg },
       }
     }
 
@@ -834,9 +834,9 @@ function M.galaxyline()
       LineInfo = {
         provider = 'LineColumn',
         icon = ' ',
-        highlight = { colors.magenta, colors.secondaryBg },
+        highlight = { colors.magenta, colors.extraBg },
         separator = '  ',
-        separator_highlight = { colors.gray, colors.secondaryBg }
+        separator_highlight = { colors.gray, colors.extraBg }
       },
     }
 
@@ -845,9 +845,9 @@ function M.galaxyline()
         condition = hide_in_width,
         provider = 'LinePercent',
         icon = '',
-        highlight = { colors.red, colors.secondaryBg },
+        highlight = { colors.red, colors.extraBg },
         separator = '  ',
-        separator_highlight = { colors.gray, colors.secondaryBg }
+        separator_highlight = { colors.gray, colors.extraBg }
       }
     }
 
@@ -857,7 +857,7 @@ function M.galaxyline()
         provider = function()
           return ScrollBar()..' '
         end,
-        highlight = { colors.red, colors.secondaryBg }
+        highlight = { colors.red, colors.extraBg }
       }
     }
 
@@ -866,7 +866,7 @@ function M.galaxyline()
       BufferType = {
         condition = is_file_type_valid,
         provider = 'FileTypeName',
-        highlight = { colors.fg, colors.secondaryBg }
+        highlight = { colors.fg, colors.extraBg }
       }
     }
 
@@ -874,7 +874,7 @@ function M.galaxyline()
       BufferIcon = {
         condition = is_file_type_valid,
         provider= 'BufferIcon',
-        highlight = { colors.fg, colors.secondaryBg }
+        highlight = { colors.fg, colors.extraBg }
       }
     }
   end
@@ -887,16 +887,15 @@ function M.gitsigns()
 
     gitsigns.setup {
       numhl = false,
-      signcolumn = false,
+      signcolumn = true,
       signs = {
-        add = { hl = 'DiffAdd', text = '│', numhl = 'GitSignsAddNr' },
-        change = { hl = 'DiffChange', text = '│', numhl = 'GitSignsChangeNr' },
-        changedelete = { hl = 'DiffChange', text = '~', numhl = 'GitSignsChangeNr' },
-        delete = { hl = 'DiffDelete', text = '_', numhl = 'GitSignsDeleteNr' },
-        topdelete = { hl = 'DiffDelete', text = '‾', numhl = 'GitSignsDeleteNr' },
+        add = { hl = 'DiffAdd', text = '', numhl = 'DiffAdd' },
+        change = { hl = 'DiffChange', text = '', numhl = 'DiffText' },
+        changedelete = { hl = 'DiffChange', text = '', numhl = 'DiffChange' },
+        delete = { hl = 'DiffDelete', text = '', numhl = 'DiffDelete' },
+        topdelete = { hl = 'DiffDelete', text = '', numhl = 'DiffDelete' },
       },
       status_formatter = nil, -- Use default
-      -- watch_gitdir = { interval = 1000, follow_files = true },
       sign_priority = 6,
       debug_mode = false,
       current_line_blame = false,
@@ -1249,8 +1248,8 @@ function M.lualine()
         component_separators = '',
         section_separators = '',
         theme = {
-          normal = { c = { fg = colors.fg, bg = colors.secondaryBg } },
-          inactive = { c = { fg = colors.fg, bg = colors.secondaryBg } },
+          normal = { c = { fg = colors.fg, bg = colors.extraBg } },
+          inactive = { c = { fg = colors.fg, bg = colors.extraBg } },
         },
       },
       sections = {
@@ -1275,7 +1274,7 @@ function M.lualine()
       local mode_colors = {
         n = colors.blue,
         i = colors.green,
-        c = colors.orange,
+        c = colors.yellow,
         V = colors.magenta,
         [''] = colors.magenta,
         v = colors.magenta,
@@ -1328,7 +1327,7 @@ function M.lualine()
           R = ' ',
           s = ' ',
         }
-        cmd('hi! LualineMode guifg='..get_mode_color()..' guibg='..colors.secondaryBg)
+        cmd('hi! LualineMode guifg='..get_mode_color()..' guibg='..colors.extraBg)
         local alias_mode = alias[fn.mode()]
         local icon = icons[fn.mode()]
         if not alias_mode then
@@ -1403,7 +1402,7 @@ function M.lualine()
 
     ins_right({
       'location',
-      color = { fg = colors.cyan, gui = 'bold' },
+      color = { fg = colors.blue, gui = 'bold' },
       padding = { left = 1, right = 1 },
     })
 
@@ -1414,7 +1413,7 @@ function M.lualine()
       diagnostics_color = {
         error = { fg = colors.red },
         warn = { fg = colors.yellow },
-        info = { fg = colors.cyan },
+        info = { fg = colors.blue },
         hint = { fg = colors.blue },
       },
       padding = { left = 1, right = 1 },
@@ -1501,10 +1500,11 @@ function M.nvimtree()
       open_on_setup       = false,
       -- will not open on setup if the filetype is in this list
       ignore_ft_on_setup  = {},
-      -- closes neovim automatically when the tree is the last **WINDOW** in the view
-      nvim_tree_auto_close          = true,
       -- disable diagnostic in nvim tree
-      nvim_tree_lsp_diagnostics = false,
+      diagnostics = {
+        enable = false,
+        show_on_dirs = false,
+      },
       -- opens the tree when changing/opening a new tab if the tree wasn't previously opened
       open_on_tab         = false,
       -- hijack the cursor in the tree to put it at the start of the filename
@@ -1513,7 +1513,7 @@ function M.nvimtree()
       update_cwd          = false,
       renderer = {
         indent_markers = {
-          enable = false,
+          enable = true,
           icons = {
             corner = "└ ",
             edge = "│ ",
@@ -1547,8 +1547,6 @@ function M.nvimtree()
         side = 'left',
         -- hide root dir
         hide_root_folder = true,
-        -- if true the tree will resize itself after opening a file
-        auto_resize = false,
         mappings = {
           -- custom only false will merge the list with the default mappings
           -- if true, it will only use your list to set the mappings

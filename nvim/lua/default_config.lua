@@ -4,7 +4,6 @@ M.ui, M.options, M.mappings = {}, {}, {}
 
 M.ui = {
   theme = 'nord', -- Default colorscheme
-  -- style = 'night', -- Available: night, storm, day
   dark_sidebar = false, -- Only available for tokyonight theme
   dark_float = false, -- Only available for tokyonight theme
 }

@@ -13,22 +13,22 @@ disabled = true
 
 # Shows a character beside where the text is entered
 [character]                            
-success_symbol = '[➜](#7bd88f)'
-vicmd_symbol = '[](#7bd88f)'
-error_symbol = '[➜](#fc618d)'
+success_symbol = '[➜](#A3BE8C)'
+vicmd_symbol = '[](#A3BE8C)'
+error_symbol = '[➜](#BF616A)'
 
 # Shows the path to current directory
 [directory]
 truncation_length = 32
 read_only = ''
-format = '🍒 [$path](#7bd88f)[$read_only](#fc618d) '
+format = '🍒 [$path](#B48EAD)[$read_only](#BF616A) '
 
 # Shows the active branch of the repo in current directory
 [git_branch]
 symbol = '🌱'
 truncation_length = 32
-format = 'on [$symbol $branch](#948ae3) '
+format = 'on [$symbol $branch](#88C0D0) '
 
 [username]
-format = '🔥 [$user](#5ad4e6) in '
+format = '🔥 [$user](#81A1C1) in '
 show_always = true

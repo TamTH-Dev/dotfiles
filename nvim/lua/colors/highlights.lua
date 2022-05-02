@@ -7,39 +7,18 @@ local cmd = vim.cmd
 -- local colors = require('colors').get()
 
 -- Declare colors manually
---local colors = {
---  -- bg = '#1a1b26',
---  bg = '#24283b',
---  -- secondaryBg = '#24283b',
---  secondaryBg = '#1a1b26',
---  fg = '#c0caf5',
---  red = '#f7768e',
---  orange = '#ff9e64',
---  brown = '#e0af68',
---  yellow = '#f1fa8c',
---  green = '#9ece6a',
---  magenta = '#bb9af7',
---  blue = '#2ac3de',
---  cyan = '#7dcfff',
---  lightBlue = '#73daca',
---  gray = '#414868',
---}
 local colors = {
   bg = '#2E3440',
-  secondaryBg = '#3B4252',
+  extraBg = '#3B4252',
   fg = '#D8DEE9',
   red = '#BF616A',
   orange = '#D08770',
-  brown = '',
   yellow = '#EBCB8B',
   green = '#A3BE8C',
   magenta = '#B48EAD',
-  blue = '#8FBCBB',
-  cyan = '#88C0D0',
-  lightBlue = '#81A1C1',
+  blue = '#81A1C1',
   gray = '#434C5E',
 }
-
 
 -- Define fg color
 -- @param group Group
@@ -57,7 +36,11 @@ end
 
 -- General
 fg('FloatBorder', colors.blue)
+bg('FloatBorder', colors.bg)
 bg('NormalFloat', colors.bg)
+fg('VertSplit', colors.extraBg)
+fg('WinSeparator', colors.extraBg)
+bg('PmenuSel', '#4C566A')
 
 -- Telescope
 fg('TelescopeBorder', colors.blue)
@@ -90,11 +73,11 @@ bg('DiagnosticVirtualTextHint', 'default')
 fg('IndentBlanklineContextChar', colors.orange)
 
 -- Barbar
-bg('BufferCurrent', colors.secondaryBg)
+bg('BufferCurrent', colors.extraBg)
 fg('BufferCurrentSign', colors.magenta)
-bg('BufferCurrentSign', colors.secondaryBg)
+bg('BufferCurrentSign', colors.extraBg)
 fg('BufferCurrentMod', colors.blue)
-bg('BufferCurrentMod', colors.secondaryBg)
+bg('BufferCurrentMod', colors.extraBg)
 fg('BufferVisible', colors.fg)
 bg('BufferVisible', colors.bg)
 fg('BufferVisibleIndex', colors.fg)
@@ -110,12 +93,12 @@ bg('BufferVisibleTarget', colors.bg)
 fg('NvimTreeFolderIcon', colors.blue)
 
 -- Fzf
-fg('fzf1', colors.orange)
-bg('fzf1', colors.bg)
-fg('fzf2', colors.orange)
-bg('fzf2', colors.bg)
-fg('fzf3', colors.orange)
-bg('fzf3', colors.bg)
+fg('fzf1', colors.fg)
+bg('fzf1', colors.extraBg)
+fg('fzf2', colors.fg)
+bg('fzf2', colors.extraBg)
+fg('fzf3', colors.fg)
+bg('fzf3', colors.extraBg)
 
 -- Rainbow Treesitter
 fg('rainbowcol1', colors.red)
@@ -124,8 +107,29 @@ fg('rainbowcol3', colors.yellow)
 fg('rainbowcol4', colors.green)
 fg('rainbowcol5', colors.magenta)
 fg('rainbowcol6', colors.blue)
-fg('rainbowcol7', colors.cyan)
+fg('rainbowcol7', colors.fg)
+
+-- Cmp
+fg('CmpItemKindVariable', colors.blue)
+fg('CmpItemKindInterface', colors.magenta)
+fg('CmpItemKindText', colors.magenta)
+fg('CmpItemKindFunction', colors.magenta)
+fg('CmpItemKindMethod', colors.blue)
+fg('CmpItemKindKeyword', colors.blue)
+fg('CmpItemKindProperty', colors.blue)
+fg('CmpItemKindUnit', colors.blue)
+
+-- Gitsigns
+bg('DiffAdd', colors.green)
+fg('DiffAdd', colors.bg)
+bg('DiffChange', colors.magenta)
+fg('DiffChange', colors.bg)
+bg('DiffDelete', colors.red)
+fg('DiffDelete', colors.bg)
+bg('DiffText', colors.yellow)
+fg('DiffText', colors.bg)
 
 -- Export colors to use somewhere else
 M.colors = colors
+
 return M

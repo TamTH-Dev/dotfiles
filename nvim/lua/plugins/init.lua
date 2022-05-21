@@ -10,7 +10,7 @@ packer.startup(function()
   -- Packer can manage itself
   use {
     'wbthomason/packer.nvim',
-    event = 'VimEnter',
+    commit = '4dedd3b',
   }
 
   -- Boost startup time
@@ -33,21 +33,23 @@ packer.startup(function()
   -- Icons suppliers for Madvim
   use {
     'kyazdani42/nvim-web-devicons',
-    after = 'nord.nvim',
+    commit = 'bdd4342',
     config = config.icons(),
   }
 
   -- Status line
   use {
     'nvim-lualine/lualine.nvim',
-    after = 'nvim-web-devicons',
+    commit = '619eded',
     config = config.lualine(),
   }
 
   -- Buffer management bar
   use {
     'akinsho/bufferline.nvim',
-    after = 'nvim-web-devicons',
+    commit = 'ee1d51e',
+    branch = "main",
+    event = "BufWinEnter",
     setup = setup.bufferline(),
     config = config.bufferline(),
   }
@@ -55,8 +57,7 @@ packer.startup(function()
   -- File explorer
   use {
     'kyazdani42/nvim-tree.lua',
-    after = 'nvim-web-devicons',
-    cmd = { 'NvimTreeToggle', 'NvimTreeOpen' },
+    commit = '82ec79a',
     setup = setup.nvimtree(),
     config = config.nvimtree(),
   }
@@ -64,20 +65,16 @@ packer.startup(function()
   -- Fancy start screen
   use {
     'goolord/alpha-nvim',
+    commit = '4781fcf',
     config = config.alpha(),
   }
 
   -- Parser
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate',
+    commit = '10d57b3',
     config = config.treesitter(),
     requires = {
-      {
-        -- Parenthesis highlighting
-        'p00f/nvim-ts-rainbow',
-        after = 'nvim-treesitter',
-      },
       {
         -- Autoclose tags
         'windwp/nvim-ts-autotag',
@@ -85,22 +82,23 @@ packer.startup(function()
       },
     },
   }
-  use {
-    'nvim-treesitter/playground',
-    cmd = 'TSPlaygroundToggle',
-    after = 'nvim-treesitter',
-    opt = true,
-  }
 
   -- Indentation helper for jsx
   use {
     'maxmellon/vim-jsx-pretty',
-    ft = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+    commit = '6989f16',
+    ft = {
+      'javascript',
+      'javascriptreact',
+      'typescript',
+      'typescriptreact',
+    },
   }
 
   -- Color
   use {
     'norcalli/nvim-colorizer.lua',
+    commit = '36c610a',
     config = config.colorizer(),
   }
 
@@ -111,82 +109,99 @@ packer.startup(function()
     setup = setup.indent_blankline(),
   }
 
-  -- Symbols outline
-  use { 'simrat39/symbols-outline.nvim' }
+  -- Popup Supporters
+  use {
+    'nvim-lua/plenary.nvim',
+    commit = '9069d14',
+  }
+  use {
+    'nvim-lua/popup.nvim',
+    commit = 'b7404d3',
+  }
 
   -- Git wrapper
   use {
-    'tpope/vim-fugitive',
-    cmd = {
-      'Git',
-      'Gdiff',
-      'Gdiffsplit',
-      'Gvdiffsplit',
-      'Gwrite',
-      'Gw',
-    },
-  }
-  use {
     'lewis6991/gitsigns.nvim',
-    requires = 'nvim-lua/plenary.nvim',
-    event = 'BufEnter',
+    commit = 'aca84fd',
+    event = 'BufRead',
     config = config.gitsigns(),
   }
 
   -- Smooth scroll for neovim
   use {
     'karb94/neoscroll.nvim',
-    event = 'BufEnter',
+    event = 'BufRead',
     config = config.neoscroll(),
   }
 
   -- Commenter
-  use { 'JoosepAlviste/nvim-ts-context-commentstring' }
   use {
-    'tpope/vim-commentary',
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    commit = '8834375',
+    event = 'BufReadPost',
+  }
+  use {
+    'numToStr/Comment.nvim',
+    commit = '79b356d',
+    event = 'BufRead',
+    config = config.comment(),
   }
 
   -- Surround parentheses, brackets, quotes, XML tags, and more
   use {
     'tpope/vim-surround',
-    event = 'InsertEnter',
+    commit = 'bf3480d',
+    event = 'BufEnter',
   }
 
   -- Emmet
   use {
     'mattn/emmet-vim',
-    event = 'InsertEnter',
-    ft = { 'html', 'css', 'javascript', 'javascriptreact', 'vue', 'typescript', 'typescriptreact' },
+    commit = 'def5d57',
+    event = 'BufEnter',
+    ft = {
+      'html',
+      'css',
+      'javascript',
+      'javascriptreact',
+      'typescript',
+      'typescriptreact',
+      'vue',
+    },
     setup = setup.emmet(),
   }
 
   -- Fuzzy search
   use {
-    'junegunn/fzf',
-    dir = '~/.fzf',
-    run = './install --all',
+    'nvim-telescope/telescope.nvim',
+    commit = '795a63e',
+    config = config.telescope(),
   }
-	use {
-    'junegunn/fzf.vim',
-    config = config.fzf(),
+  use {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    commit = '281b07a',
+    run = 'make',
+    requires = { 'nvim-telescope/telescope.nvim' },
   }
   -- use {
-  --   'nvim-telescope/telescope.nvim',
-  --   requires = {
-  --     { 'nvim-lua/plenary.nvim' },
-  --     { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  --   },
-  --   setup = setup.telescope(),
-  --   config = config.telescope(),
+  --   'junegunn/fzf',
+  --   dir = '~/.fzf',
+  --   run = './install --all',
+  -- }
+	-- use {
+  --   'junegunn/fzf.vim',
+  --   config = config.fzf(),
   -- }
 
   -- Built-in LSP Configuration Supporter
   use {
     'neovim/nvim-lspconfig',
+    commit = 'ce8a4d8',
   }
   -- LSP Installer
   use {
     'williamboman/nvim-lsp-installer',
+    commit = 'f5569f6',
     config = config.lsp(),
   }
 
@@ -200,25 +215,56 @@ packer.startup(function()
   -- Autopairs supporter
   use {
     'windwp/nvim-autopairs',
+    commit = 'aea9131',
     after = 'nvim-cmp',
     config = config.autopairs(),
   }
 
   -- Completion supporters
-  use { 'L3MON4D3/LuaSnip' }
+  use {
+    'L3MON4D3/LuaSnip',
+    commit = 'cc00863',
+  }
   use {
     'hrsh7th/nvim-cmp',
+    commit = 'a226b6a',
     event = 'BufEnter',
     requires = {
-      { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp', opt = true },
-      { 'rafamadriz/friendly-snippets', after = { 'nvim-cmp', 'cmp_luasnip' }, opt = true },
-      { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp', opt = true },
-      { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', opt = true },
-      { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', opt = true },
-      { 'hrsh7th/cmp-path', after = 'nvim-cmp', opt = true },
-      { 'hrsh7th/cmp-calc', after = 'nvim-cmp', opt = true },
-      { 'hrsh7th/cmp-emoji', after = 'nvim-cmp', opt = true },
-      { 'ray-x/cmp-treesitter', after = 'nvim-cmp', opt = true },
+      {
+        'saadparwaiz1/cmp_luasnip',
+        commit = 'a9de941',
+        after = 'nvim-cmp',
+        opt = true,
+      },
+      {
+        'rafamadriz/friendly-snippets',
+        commit = '4ef45d0',
+        after = { 'nvim-cmp', 'cmp_luasnip' },
+        opt = true,
+      },
+      {
+        'hrsh7th/cmp-nvim-lsp',
+        commit = 'e6b5feb',
+        after = 'nvim-cmp',
+        opt = true,
+      },
+      {
+        'hrsh7th/cmp-nvim-lua',
+        after = 'nvim-cmp',
+        opt = true,
+      },
+      {
+        'hrsh7th/cmp-buffer',
+        commit = '12463cf',
+        after = 'nvim-cmp',
+        opt = true,
+      },
+      {
+        'hrsh7th/cmp-path',
+        commit = '466b6b8',
+        after = 'nvim-cmp',
+        opt = true,
+      },
     },
     config = config.cmp(),
   }
@@ -226,6 +272,7 @@ packer.startup(function()
   -- Delete all buffers except one
   use {
     'kazhala/close-buffers.nvim',
+    commit = '3acbcad',
     setup = setup.close_buffers(),
   }
 

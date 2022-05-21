@@ -70,14 +70,14 @@ function M.alpha()
     local buttons = {
       type = 'group',
       val = {
-        -- set_button('p', '  Find File', ':Telescope find_files hidden=true<CR>'),
-        -- set_button('f', '  Find Word', ':Telescope live_grep<CR>'),
-        -- set_button('s', '  Settings', ':e $HOME/.config/nvim/lua/default_config.lua<CR>'),
-        -- set_button('q', '  Quit', ':qa<CR>'),
-        set_button('p', '  Find File', ':Files<CR>'),
-        set_button('f', '  Find Word', ':Rg<CR>'),
+        set_button('p', '  Find File', ':Telescope find_files hidden=true<CR>'),
+        set_button('f', '  Find Word', ':Telescope live_grep<CR>'),
         set_button('s', '  Settings', ':e $HOME/.config/nvim/lua/default_config.lua<CR>'),
         set_button('q', '  Quit', ':qa<CR>'),
+        -- set_button('p', '  Find File', ':Files<CR>'),
+        -- set_button('f', '  Find Word', ':Rg<CR>'),
+        -- set_button('s', '  Settings', ':e $HOME/.config/nvim/lua/default_config.lua<CR>'),
+        -- set_button('q', '  Quit', ':qa<CR>'),
       },
       opts = {
         position = 'center',
@@ -195,18 +195,13 @@ end
 function M.cmp()
   return function()
     local is_cmp_loaded, cmp = pcall(require, 'cmp')
-    local is_cmp_compare_loaded, compare = pcall(require, 'cmp.config.compare')
-    local is_cmp_types_loaded, types = pcall(require, 'cmp.types')
     local is_luasnip_loaded, luasnip = pcall(require, 'luasnip')
-    if not (is_cmp_loaded or is_cmp_compare_loaded or is_cmp_types_loaded or is_luasnip_loaded) then return end
+    if not (is_cmp_loaded or is_luasnip_loaded) then return end
 
     local api = vim.api
-    local opt = vim.o
-
-    local WIDE_HEIGHT = 40
 
     -- Icon for custom item kinds
-    local icons = {
+    local format_icons = {
       Class = '',
       Color = '',
       Constant = '',
@@ -245,43 +240,9 @@ function M.cmp()
           luasnip.lsp_expand(args.body)
         end,
       },
-      preselect = types.cmp.PreselectMode.Item,
       window = {
-        documentation = {
-          border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-          winhighlight = 'Normal:MyNormal,NormalNC:MyNormalNC',
-          maxwidth = math.floor((WIDE_HEIGHT * 2) * (opt.columns / (WIDE_HEIGHT * 2 * 16 / 9))),
-          maxheight = math.floor(WIDE_HEIGHT * (WIDE_HEIGHT / opt.lines)),
-        },
-        completion = {
-          autocomplete = {
-            types.cmp.TriggerEvent.TextChanged,
-          },
-          completeopt = 'menu,menuone,noinsert',
-          keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
-          keyword_length = 1,
-          get_trigger_characters = function(trigger_characters)
-            return trigger_characters
-          end
-        },
-      },
-      confirmation = {
-        default_behavior = types.cmp.ConfirmBehavior.Insert,
-        get_commit_characters = function(commit_characters)
-          return commit_characters
-        end
-      },
-      sorting = {
-        priority_weight = 2,
-        comparators = {
-          compare.offset,
-          compare.exact,
-          compare.score,
-          compare.kind,
-          compare.sort_text,
-          compare.length,
-          compare.order,
-        }
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
       },
       mapping = {
         ['<Down>'] = cmp.mapping.scroll_docs(-4),
@@ -320,27 +281,65 @@ function M.cmp()
         }),
       },
       formatting = {
+        fields = { "kind", "abbr", "menu" },
+        max_width = 0,
+        kind_icons = {
+          Class = " ",
+          Color = " ",
+          Constant = "ﲀ ",
+          Constructor = " ",
+          Enum = "練",
+          EnumMember = " ",
+          Event = " ",
+          Field = " ",
+          File = "",
+          Folder = " ",
+          Function = " ",
+          Interface = "ﰮ ",
+          Keyword = " ",
+          Method = " ",
+          Module = " ",
+          Operator = "",
+          Property = " ",
+          Reference = " ",
+          Snippet = " ",
+          Struct = " ",
+          Text = " ",
+          TypeParameter = " ",
+          Unit = "塞",
+          Value = " ",
+          Variable = " ",
+        },
+        source_names = {
+          nvim_lsp = "(LSP)",
+          path = "(Path)",
+          luasnip = "(Snippet)",
+          buffer = "(Buffer)",
+        },
+        duplicates = {
+          nvim_lsp = 0,
+          luasnip = 1,
+          buffer = 1,
+          path = 1,
+        },
+        duplicates_default = 0,
         format = function(entry, vim_item)
-          vim_item.kind = icons[vim_item.kind]
+          vim_item.kind = format_icons[vim_item.kind]
           vim_item.menu = ({
             nvim_lsp = '(LSP)',
             luasnip = '(Snippet)',
-            cmp_tabnine = '(Tabnine)',
             path = '(Path)',
-            calc = '(Calc)',
             buffer = '(Buffer)',
-            treesitter = '(Treesitter)',
           })[entry.source.name]
           vim_item.dup = ({
-            nvim_lsp = 1,
+            nvim_lsp = 0,
+            luasnip = 1,
             buffer = 1,
             path = 1,
           })[entry.source.name] or 0
+
           return vim_item
         end,
-      },
-      experimental = {
-        ghost_text = false,
       },
       sources = {
         { name = 'nvim_lsp' },
@@ -348,26 +347,8 @@ function M.cmp()
         { name = 'luasnip' },
         { name = 'path' },
         { name = 'buffer' },
-        { name = 'cmp_tabnine' },
-        { name = 'calc' },
-        { name = 'treesitter' },
-        { name = 'emoji' },
       }
     }
-  end
-end
-
-function M.cmp_tabnine()
-  return function()
-    local is_tabnine_loaded, tabnine = pcall(require, 'cmp_tabnine.config')
-    if not is_tabnine_loaded then return end
-    tabnine:setup({
-      max_lines = 1000,
-      max_num_results = 20,
-      sort = true,
-      run_on_every_keystroke = true,
-      snippet_placeholder = '..',
-    })
   end
 end
 
@@ -422,13 +403,6 @@ function M.comment()
         }
       end,
     })
-  end
-end
-
-function M.cursorHold()
-  return function()
-    local global = vim.g
-    global.cursorhold_updatetime = 100
   end
 end
 
@@ -1064,21 +1038,14 @@ function M.lsp()
       end
 
       local border = {
-        {"╭", "FloatBorder"},
-
-        {"─", "FloatBorder"},
-
-        {"╮", "FloatBorder"},
-
-        {"│", "FloatBorder"},
-
-        {"╯", "FloatBorder"},
-
-        {"─", "FloatBorder"},
-
-        {"╰", "FloatBorder"},
-
-        {"│", "FloatBorder"},
+        {'╭', 'FloatBorder'},
+        {'─', 'FloatBorder'},
+        {'╮', 'FloatBorder'},
+        {'│', 'FloatBorder'},
+        {'╯', 'FloatBorder'},
+        {'─', 'FloatBorder'},
+        {'╰', 'FloatBorder'},
+        {'│', 'FloatBorder'},
       }
 
       -- Popup customization globally
@@ -1189,6 +1156,14 @@ function M.lsp()
       server:setup(opts)
       cmd [[ do User LspAttachBuffers ]]
     end)
+  end
+end
+
+function M.luadev()
+  return function()
+    local lua_dev_loaded, lua_dev = pcall(require, "lua-dev")
+    if not lua_dev_loaded then return end
+    lua_dev.setup({})
   end
 end
 
@@ -1667,24 +1642,6 @@ function M.telescope()
 
     telescope.setup {
       defaults = {
-        mappings = {
-          n = {
-            ['q'] = actions.close,
-            ['<leader>ga'] = actions.smart_send_to_qflist + actions.open_qflist,
-          },
-          i = {
-            ['<leader>ga'] = actions.smart_send_to_qflist + actions.open_qflist,
-          }
-        },
-        vimgrep_arguments = {
-          'rg',
-          '--color=never',
-          '--no-heading',
-          '--with-filename',
-          '--line-number',
-          '--column',
-          '--smart-case'
-        },
         prompt_prefix = '  ',
         selection_caret = '  ',
         entry_prefix = '  ',
@@ -1694,15 +1651,47 @@ function M.telescope()
         layout_strategy = 'horizontal',
         layout_config = {
           width = 0.75,
-          prompt_position = 'top',
+          preview_cutoff = 120,
           horizontal = {
+            preview_width = function(_, cols, _)
+              if cols < 120 then
+                return math.floor(cols * 0.5)
+              end
+              return math.floor(cols * 0.6)
+            end,
             mirror = false,
           },
-          vertical = {
-            mirror = false,
+          vertical = { mirror = false },
+        },
+        vimgrep_arguments = {
+          'rg',
+          '--color=never',
+          '--no-heading',
+          '--with-filename',
+          '--line-number',
+          '--column',
+          '--smart-case',
+          '--hidden',
+          '--glob=!.git/',
+        },
+        mappings = {
+          i = {
+            ['<Tab>'] = actions.move_selection_next,
+            ['<S-Tab>'] = actions.move_selection_previous,
+            ['<C-c>'] = actions.close,
+            ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+            ['<C-j>'] = actions.cycle_history_next,
+            ['<C-k>'] = actions.cycle_history_prev,
+            ['<CR>'] = actions.select_default,
+          },
+          n = {
+            ['<Tab>'] = actions.move_selection_next,
+            ['<S-Tab>'] = actions.move_selection_previous,
+            ['<C-c>'] = actions.close,
+            ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+            ['<CR>'] = actions.select_default,
           },
         },
-        file_sorter =  sorters.get_fzy_sorter,
         file_ignore_patterns = {
           'scratch/.*',
           'node_modules/.*',
@@ -1711,23 +1700,48 @@ function M.telescope()
           '.git/.*',
           '.next/*',
         },
-        generic_sorter =  sorters.get_generic_fuzzy_sorter,
+        path_display = { shorten = 5 },
         winblend = 0,
         border = {},
         borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-        disable_devicons = false,
         color_devicons = true,
-        use_less = true,
-        path_display = {},
+        disable_devicons = false,
         set_env = { ['COLORTERM'] = 'truecolor' },
         file_previewer = previewers.vim_buffer_cat.new,
         grep_previewer = previewers.vim_buffer_vimgrep.new,
         qflist_previewer = previewers.vim_buffer_qflist.new,
-        buffer_previewer_maker = previewers.buffer_previewer_maker
+        file_sorter = sorters.get_fuzzy_file,
+        generic_sorter = sorters.get_generic_fuzzy_sorter,
+      },
+      pickers = {
+        find_files = {
+          hidden = true,
+        },
+        live_grep = {
+          -- don't include the filename in the search results
+          only_sort_text = true,
+        },
+      },
+      extensions = {
+        fzf = {
+          fuzzy = true, -- false will only do exact matching
+          override_generic_sorter = true, -- override the generic sorter
+          override_file_sorter = true, -- override the file sorter
+          case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
+        },
       },
     }
 
     telescope.load_extension('fzf')
+
+    local map = vim.api.nvim_set_keymap
+    local opts = { noremap = true, silent = true }
+
+    map('n', '<C-p>', ':Telescope find_files hidden=true<CR>', opts)
+    map('n', '<C-f>', ':Telescope live_grep<CR>', opts)
+    map('n', '<C-b>', ':Telescope buffers<CR>', opts)
+    map('n', '<C-e>', ':Telescope lsp_document_diagnostics<CR>', opts)
+    map('n', '<C-w>', ':Telescope lsp_workspace_diagnostics<CR>', opts)
   end
 end
 
@@ -1774,7 +1788,7 @@ function M.treesitter()
       },
       rainbow = {
         enable = true,
-        -- disable = { "jsx", "cpp" }, -- List of disabled languages
+        -- disable = { 'jsx', 'cpp' }, -- List of disabled languages
         extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
         max_file_lines = nil, -- Do not enable for files with more than n lines, int
         -- colors = {}, -- Table of hex strings

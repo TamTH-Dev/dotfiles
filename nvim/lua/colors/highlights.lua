@@ -17,7 +17,8 @@ local colors = {
   green = '#A3BE8C',
   magenta = '#B48EAD',
   blue = '#81A1C1',
-  gray = '#434C5E',
+  gray = '#4C566A',
+  lightGray = '#616E88',
 }
 
 -- Define fg color
@@ -38,12 +39,17 @@ end
 fg('FloatBorder', colors.blue)
 bg('FloatBorder', colors.bg)
 bg('NormalFloat', colors.bg)
+fg('Normal', colors.lightGray)
 fg('VertSplit', colors.extraBg)
 fg('WinSeparator', colors.extraBg)
-bg('PmenuSel', '#4C566A')
+bg('PmenuSel', colors.gray)
+bg('PmenuThumb', colors.lightGray)
 
 -- Telescope
 fg('TelescopeBorder', colors.blue)
+fg('TelescopePreviewBorder', colors.blue)
+fg('TelescopePromptBorder', colors.blue)
+fg('TelescopeTitle', colors.yellow)
 fg('TelescopePromptPrefix', colors.magenta)
 fg('TelescopeNormal', colors.gray)
 fg('TelescopeSelection', colors.fg)
@@ -104,6 +110,8 @@ fg('CmpItemKindMethod', colors.blue)
 fg('CmpItemKindKeyword', colors.blue)
 fg('CmpItemKindProperty', colors.blue)
 fg('CmpItemKindUnit', colors.blue)
+fg('CmpItemAbbrMatchFuzzy', colors.blue)
+fg('CmpItemAbbrMatch', colors.blue)
 
 -- Gitsigns
 bg('DiffAdd', colors.green)

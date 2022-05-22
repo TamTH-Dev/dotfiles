@@ -29,7 +29,7 @@ packer.startup(function()
       require('colors').init()
     end,
   }
-
+  
   -- Icons suppliers for Madvim
   use {
     'kyazdani42/nvim-web-devicons',
@@ -95,13 +95,6 @@ packer.startup(function()
     },
   }
 
-  -- Color
-  use {
-    'norcalli/nvim-colorizer.lua',
-    commit = '36c610a',
-    config = config.colorizer(),
-  }
-
   -- Indentation guides
   use {
     'lukas-reineke/indent-blankline.nvim',
@@ -112,14 +105,14 @@ packer.startup(function()
   -- Popup Supporters
   use {
     'nvim-lua/plenary.nvim',
-    commit = '9069d14',
+    commit = '1da13ad',
   }
   use {
     'nvim-lua/popup.nvim',
     commit = 'b7404d3',
   }
 
-  -- Git wrapper
+  -- Git
   use {
     'lewis6991/gitsigns.nvim',
     commit = 'aca84fd',
@@ -174,7 +167,7 @@ packer.startup(function()
   -- Fuzzy search
   use {
     'nvim-telescope/telescope.nvim',
-    commit = '795a63e',
+    commit = 'b4c45e8',
     config = config.telescope(),
   }
   use {
@@ -183,15 +176,6 @@ packer.startup(function()
     run = 'make',
     requires = { 'nvim-telescope/telescope.nvim' },
   }
-  -- use {
-  --   'junegunn/fzf',
-  --   dir = '~/.fzf',
-  --   run = './install --all',
-  -- }
-	-- use {
-  --   'junegunn/fzf.vim',
-  --   config = config.fzf(),
-  -- }
 
   -- Built-in LSP Configuration Supporter
   use {

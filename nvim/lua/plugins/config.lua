@@ -3,6 +3,7 @@ local M = {}
 function M.alpha()
   return function()
     local is_alpha_loaded, alpha = pcall(require, 'alpha')
+
     if not is_alpha_loaded then return end
 
     local api = vim.api
@@ -29,18 +30,6 @@ function M.alpha()
       }
     }
 
-    local handler = io.popen('fd -d 1 . $HOME"/.local/share/nvim/site/pack/packer/start" | wc -l | tr -d "\n" ')
-    local plugins_total = handler:read('*a')
-    handler:close()
-    local plugins_total_stats = {
-      type = 'text',
-      val = 'Neovim has loaded '..plugins_total..' plugins ',
-      opts = {
-        position = 'center',
-        hl = 'Number',
-      }
-    }
-
     local function set_button(sc, text, keybind)
       local sc_ = sc:gsub('%s', ''):gsub('SPC', '<leader>')
       local opts = {
@@ -53,9 +42,11 @@ function M.alpha()
         hl_shortcut = 'Debug',
         hl = 'Function',
       }
+
       if keybind then
         opts.keymap = { 'n', sc_, keybind, { noremap = true, silent = true } }
       end
+
       return {
         type = 'button',
         val = text,
@@ -72,12 +63,9 @@ function M.alpha()
       val = {
         set_button('p', '  Find File', ':Telescope find_files hidden=true<CR>'),
         set_button('f', '  Find Word', ':Telescope live_grep<CR>'),
-        set_button('s', '  Settings', ':e $HOME/.config/nvim/lua/default_config.lua<CR>'),
-        set_button('q', '  Quit', ':qa<CR>'),
-        -- set_button('p', '  Find File', ':Files<CR>'),
-        -- set_button('f', '  Find Word', ':Rg<CR>'),
-        -- set_button('s', '  Settings', ':e $HOME/.config/nvim/lua/default_config.lua<CR>'),
-        -- set_button('q', '  Quit', ':qa<CR>'),
+        set_button('n', '  New File',  '<CMD>ene!<CR>'),
+        set_button('s', '  Settings',  ':e $HOME/.config/nvim/lua/default_config.lua<CR>'),
+        set_button('q', '  Quit',      ':qa<CR>'),
       },
       opts = {
         position = 'center',
@@ -96,17 +84,15 @@ function M.alpha()
 
     local section = {
       header = header,
-      plugins_total_stats = plugins_total_stats,
+      -- plugins_total_stats = plugins_total_stats,
       buttons = buttons,
       footer = footer,
     }
 
     local opts = {
       layout = {
-        { type = 'padding', val = 2 },
+        { type = 'padding', val = 3 },
         section.header,
-        { type = 'padding', val = 2 },
-        section.plugins_total_stats,
         { type = 'padding', val = 2 },
         section.buttons,
         { type = 'padding', val = 2 },
@@ -133,12 +119,34 @@ function M.autopairs()
     if not (autopairs_loaded or cmp_loaded) then return end
 
     autopairs.setup({
-      map_bs = true,  -- map the <BS> key
-      enable_moveright = true,
-      -- enable_afterquote = true,  -- add bracket pairs after quote
-      -- enable_check_bracket_line = true,  --- check bracket in same line
       disable_filetype = { 'TelescopePrompt' },
-      -- ignored_next_char = "[%w%.]" -- will ignore alphanumeric and `.` symbol
+      --@usage check bracket in same line
+        enable_check_bracket_line = false,
+      --@usage check treesitter
+      check_ts = true,
+      enable_moveright = true,
+      --@usage disable when recording or executing a macro
+      disable_in_macro = false,
+      --@usage add bracket pairs after quote
+      enable_afterquote = true,
+      --@usage map the <BS> key
+      map_bs = true,
+      --@usage map <c-w> to delete a pair if possible
+      map_c_w = false,
+      --@usage disable when insert after visual block mode
+      disable_in_visualblock = false,
+      --@usage change default fast_wrap
+      fast_wrap = {
+        map = "<M-e>",
+        chars = { "{", "[", "(", '"', "'" },
+        pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
+        offset = 0, -- Offset from pattern match
+        end_key = "$",
+        keys = "qwertyuiopzxcvbnmasdfghjkl",
+        check_comma = true,
+        highlight = "Search",
+        highlight_grey = "Comment",
+      },
     })
 
     -- Intergate with cmp
@@ -349,26 +357,6 @@ function M.cmp()
         { name = 'buffer' },
       }
     }
-  end
-end
-
-function M.colorizer()
-  return function()
-    local is_colorizer_loaded, colorizer = pcall(require, 'colorizer')
-    if not is_colorizer_loaded then return end
-
-    colorizer.setup({ '*' }, {
-       RGB = true, -- #RGB hex codes
-       RRGGBB = true, -- #RRGGBB hex codes
-       names = false, -- 'Name' codes like White
-       RRGGBBAA = false, -- #RRGGBBAA hex codes
-       rgb_fn = false, -- CSS rgb() and rgba() functions
-       hsl_fn = false, -- CSS hsl() and hsla() functions
-       css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-       css_fn = false, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-       -- Available modes: foreground, background
-       mode = 'background', -- Set the display mode.
-    })
   end
 end
 
@@ -1636,6 +1624,7 @@ function M.telescope()
     local is_telescope_actions_loaded, actions = pcall(require, 'telescope.actions')
     local is_telescope_sorters_loaded, sorters = pcall(require, 'telescope.sorters')
     local is_telescope_previewers_loaded, previewers = pcall(require, 'telescope.previewers')
+
     if not (is_telescope_loaded or is_telescope_actions_loaded or is_telescope_sorters_loaded or is_telescope_previewers_loaded) then
       return
     end
@@ -1650,14 +1639,14 @@ function M.telescope()
         sorting_strategy = 'ascending',
         layout_strategy = 'horizontal',
         layout_config = {
-          width = 0.75,
+          width = 0.8,
           preview_cutoff = 120,
           horizontal = {
             preview_width = function(_, cols, _)
               if cols < 120 then
-                return math.floor(cols * 0.5)
+                return math.floor(cols * 0.4)
               end
-              return math.floor(cols * 0.6)
+              return math.floor(cols * 0.5)
             end,
             mirror = false,
           },
@@ -1718,16 +1707,20 @@ function M.telescope()
           hidden = true,
         },
         live_grep = {
-          -- don't include the filename in the search results
+          --@usage don't include the filename in the search results
           only_sort_text = true,
         },
       },
       extensions = {
         fzf = {
-          fuzzy = true, -- false will only do exact matching
-          override_generic_sorter = true, -- override the generic sorter
-          override_file_sorter = true, -- override the file sorter
-          case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
+          --@usage false will only do exact matching
+          fuzzy = true,
+          --@usage override the generic sorter
+          override_generic_sorter = true,
+          --@usage override the file sorter
+          override_file_sorter = true,
+          --@usage or "ignore_case" or "respect_case"
+          case_mode = 'smart_case',
         },
       },
     }

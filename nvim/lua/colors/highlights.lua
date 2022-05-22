@@ -36,7 +36,7 @@ local bg = function(group, color)
 end
 
 -- General
-fg('FloatBorder', colors.blue)
+fg('FloatBorder', colors.lightGray)
 bg('FloatBorder', colors.bg)
 bg('NormalFloat', colors.bg)
 fg('Normal', colors.lightGray)
@@ -46,9 +46,10 @@ bg('PmenuSel', colors.gray)
 bg('PmenuThumb', colors.lightGray)
 
 -- Telescope
-fg('TelescopeBorder', colors.blue)
-fg('TelescopePreviewBorder', colors.blue)
-fg('TelescopePromptBorder', colors.blue)
+fg('TelescopeBorder', colors.lightGray)
+fg('TelescopeResultsBorder', colors.lightGray)
+fg('TelescopePromptBorder', colors.lightGray)
+fg('TelescopePreviewBorder', colors.lightGray)
 fg('TelescopeTitle', colors.yellow)
 fg('TelescopePromptPrefix', colors.magenta)
 fg('TelescopeNormal', colors.gray)

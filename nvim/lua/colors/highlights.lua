@@ -76,6 +76,7 @@ bg('DiagnosticVirtualTextError', 'default')
 bg('DiagnosticVirtualTextWarn', 'default')
 bg('DiagnosticVirtualTextInfo', 'default')
 bg('DiagnosticVirtualTextHint', 'default')
+bg('LspFloatWinNormal', colors.bg)
 
 -- Indent_blankline
 fg('IndentBlanklineContextChar', colors.orange)

@@ -650,63 +650,6 @@ function M.icons()
   end
 end
 
-function M.saga()
-  return function()
-    local is_saga_loaded, saga = pcall(require, 'lspsaga')
-
-    if not is_saga_loaded then return end
-
-    saga.setup {
-      debug = false,
-      use_saga_diagnostic_sign = true,
-      --@usage diagnostic sign
-      error_sign = '',
-      warn_sign = '',
-      hint_sign = '',
-      infor_sign = '',
-      diagnostic_header_icon = '   ',
-      --@usage code action title icon
-      code_action_icon = ' ',
-      code_action_prompt = {
-        enable = true,
-        sign = true,
-        sign_priority = 40,
-        virtual_text = true,
-      },
-      finder_definition_icon = '  ',
-      finder_reference_icon = '  ',
-      max_preview_lines = 10,
-      finder_action_keys = {
-        open = '<CR>',
-        vsplit = 'v',
-        split = 'x',
-        quit = 'q',
-        scroll_down = '<C-d>',
-        scroll_up = '<C-u>',
-      },
-      code_action_keys = {
-        quit = 'q',
-        exec = '<CR>',
-      },
-      rename_action_keys = {
-        quit = 'q',
-        exec = '<CR>',
-      },
-      definition_preview_icon = '  ',
-      border_style = 'round',
-      rename_prompt_prefix = '➤',
-      rename_output_qflist = {
-        enable = false,
-        auto_open_qflist = false,
-      },
-      server_filetype_map = {},
-      diagnostic_prefix_format = '%d. ',
-      diagnostic_message_format = '%m %c',
-      highlight_prefix = false,
-    }
-  end
-end
-
 function M.lsp()
   return function()
     local is_lsp_installer_loaded, lsp_installer = pcall(require, 'nvim-lsp-installer')
@@ -771,10 +714,17 @@ function M.lsp()
 
       --@usage enable completion triggered
       buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-      buf_set_keymap('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-      -- buf_set_keymap('n', '<leader>gf', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-      -- buf_set_keymap('n', '<C-e>', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-      -- buf_set_keymap('n', '<C-w>', '<cmd>lua vim.lsp.diagnostic.set_loclist({ workspace = true })<CR>', opts)
+      buf_set_keymap('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>',                             opts)
+      buf_set_keymap('n', '<leader>gf', '<cmd>lua vim.lsp.buf.references()<CR>',                             opts)
+      buf_set_keymap('n', '<leader>gk', '<cmd>lua vim.lsp.buf.hover()<CR>',                                  opts)
+      buf_set_keymap('n', '<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>',                         opts)
+      buf_set_keymap('n', '<leader>gr', '<cmd>lua vim.lsp.buf.rename()<CR>',                                 opts)
+      buf_set_keymap('n', '<leader>gn', '<cmd>lua vim.diagnostic.goto_next()<CR>',                           opts)
+      buf_set_keymap('n', '<leader>gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>',                           opts)
+      buf_set_keymap('n', '<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<CR>',                            opts)
+      buf_set_keymap('n', '<leader>gl', '<cmd>lua vim.diagnostic.open_float()<CR>',                          opts)
+      buf_set_keymap('n', '<C-e>',      '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>',                     opts)
+      buf_set_keymap('n', '<C-w>',      '<cmd>lua vim.lsp.diagnostic.set_loclist({ workspace = true })<CR>', opts)
 
       --@usage set autocommands conditional on server_capabilities
       if client.resolved_capabilities.document_highlight then
@@ -1205,6 +1155,63 @@ function M.nvimtree()
           list = {}
         }
       }
+    }
+  end
+end
+
+function M.saga()
+  return function()
+    local is_saga_loaded, saga = pcall(require, 'lspsaga')
+
+    if not is_saga_loaded then return end
+
+    saga.setup {
+      debug = false,
+      use_saga_diagnostic_sign = false,
+      --@usage diagnostic sign
+      error_sign = '',
+      warn_sign = '',
+      hint_sign = '',
+      infor_sign = '',
+      diagnostic_header_icon = ' ',
+      --@usage code action title icon
+      code_action_icon = ' ',
+      code_action_prompt = {
+        enable = true,
+        sign = true,
+        sign_priority = 40,
+        virtual_text = true,
+      },
+      finder_definition_icon = '  ',
+      finder_reference_icon = '  ',
+      max_preview_lines = 10,
+      finder_action_keys = {
+        open = '<CR>',
+        vsplit = 'v',
+        split = 'x',
+        quit = '<C-c>',
+        scroll_down = '<C-d>',
+        scroll_up = '<C-u>',
+      },
+      code_action_keys = {
+        quit = '<C-c>',
+        exec = '<CR>',
+      },
+      rename_action_keys = {
+        quit = '<C-c>',
+        exec = '<CR>',
+      },
+      definition_preview_icon = '  ',
+      border_style = 'round',
+      rename_prompt_prefix = '➤',
+      rename_output_qflist = {
+        enable = false,
+        auto_open_qflist = false,
+      },
+      server_filetype_map = {},
+      diagnostic_prefix_format = '%d. ',
+      diagnostic_message_format = '%m %c',
+      highlight_prefix = false,
     }
   end
 end

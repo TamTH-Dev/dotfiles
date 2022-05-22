@@ -189,11 +189,16 @@ packer.startup(function()
     config = config.lsp(),
   }
   -- LSP styles supporter
-  use {
-    'tami5/lspsaga.nvim',
-    config = config.saga(),
-    setup = setup.saga(),
-  }
+  -- use {
+  --   'tami5/lspsaga.nvim',
+  --   commit = '39b6fac',
+  --   after = {
+  --     'nvim-lspconfig',
+  --     'nvim-lsp-installer',
+  --   },
+  --   config = config.saga(),
+  --   setup = setup.saga(),
+  -- }
 
   -- Formatter
   use {

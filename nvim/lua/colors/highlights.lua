@@ -39,11 +39,12 @@ end
 fg('FloatBorder', colors.lightGray)
 bg('FloatBorder', colors.bg)
 bg('NormalFloat', colors.bg)
-fg('Normal', colors.lightGray)
 fg('VertSplit', colors.extraBg)
 fg('WinSeparator', colors.extraBg)
 bg('PmenuSel', colors.gray)
 bg('PmenuThumb', colors.lightGray)
+bg('PmenuSbar', colors.lightGray)
+fg('PMenuBorder', colors.lightGray)
 
 -- Telescope
 fg('TelescopeBorder', colors.lightGray)
@@ -52,10 +53,10 @@ fg('TelescopePromptBorder', colors.lightGray)
 fg('TelescopePreviewBorder', colors.lightGray)
 fg('TelescopeTitle', colors.yellow)
 fg('TelescopePromptPrefix', colors.magenta)
-fg('TelescopeNormal', colors.gray)
+fg('TelescopeNormal', colors.lightGray)
 fg('TelescopeSelection', colors.fg)
 fg('TelescopeSelectionCaret', colors.orange)
-fg('TelescopeMultiSelection', colors.gray)
+fg('TelescopeMultiSelection', colors.lightGray)
 fg('TelescopeMatching', colors.blue)
 
 -- LSP

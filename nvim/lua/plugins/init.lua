@@ -188,6 +188,12 @@ packer.startup(function()
     commit = 'f5569f6',
     config = config.lsp(),
   }
+  -- LSP styles supporter
+  use {
+    'tami5/lspsaga.nvim',
+    config = config.saga(),
+    setup = setup.saga(),
+  }
 
   -- Formatter
   use {

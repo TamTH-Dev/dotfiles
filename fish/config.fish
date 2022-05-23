@@ -56,6 +56,9 @@ set PATH $HOME/.local/bin $HOME/.config/bin /usr/local/bin /usr/bin /usr/sbin /u
 set NVM_DIR "$HOME/.nvm"
 set PATH $HOME/.nvm/versions/node/v16.14.2/bin $PATH
 
+# Cargo path env
+set PATH $HOME/.cargo/bin $PATH
+
 # Configure fzf
 set -gx FZF_DEFAULT_OPTS '
       --color=bg+:#2e3440,bg:#2e3440
@@ -88,9 +91,10 @@ alias fgrep='fgrep --color=auto'
 alias java_compile='find -name "*.java" > source.txt && javac @source.txt && rm source.txt'
 alias java_clear='rm (find -name "*.class")'
 
-# Warp cloudflare connection
-alias warp_connect='warp-cli connect'
-alias warp_disconnect='warp-cli disconnect'
+# Protonvpn
+alias proton_connect='sudo protonvpn connect'
+alias proton_disconnect='sudo protonvpn disconnect'
+
 
 # OpenVPN connection
 alias openvpn_connect='sudo openvpn --config ~/Utils/client.ovpn --auth-user-pass --auth-retry interact'

@@ -1287,7 +1287,7 @@ function M.telescope()
           '.git/.*',
           '.next/*',
         },
-        path_display = { shorten = 5 },
+        path_display = { shorten = 6 },
         winblend = 0,
         border = {},
         borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },

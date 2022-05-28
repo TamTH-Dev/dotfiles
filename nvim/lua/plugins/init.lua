@@ -1,4 +1,5 @@
 local is_packer_init_loaded, packer = pcall(require, 'plugins.packerInit')
+
 if not is_packer_init_loaded then return end
 
 packer.startup(function()
@@ -271,7 +272,7 @@ packer.startup(function()
     setup = setup.close_buffers(),
   }
 
-  -- use {
-  --   'tweekmonster/startuptime.vim',
-  -- }
+  use {
+    'tweekmonster/startuptime.vim',
+  }
 end)

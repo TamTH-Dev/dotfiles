@@ -170,4 +170,23 @@ function M.telescope()
   end
 end
 
+function M.flutter()
+  return function()
+    local opts = { noremap = true, silent = true }
+    local map = function(...) vim.api.nvim_set_keymap('n', ...) end
+
+    map('<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    map('<leader>gf', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+    map('<leader>gk', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    map('<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    map('<leader>gr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    map('<leader>gn', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+    map('<leader>gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+    map('<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    map('<leader>gl', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+    map('<C-e>', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+    map('<C-w>', '<cmd>lua vim.lsp.diagnostic.set_loclist({ workspace = true })<CR>', opts)
+  end
+end
+
 return M

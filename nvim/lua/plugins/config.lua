@@ -1397,4 +1397,36 @@ function M.treesitter()
   end
 end
 
+function M.flutter()
+  return function()
+    require('flutter-tools').setup{
+      ui = {
+        border = 'rounded',
+        notification_style = 'native',
+      },
+      decorations = {
+        statusline = {
+          app_version = false,
+          device = false,
+        }
+      },
+      lsp = {
+        color = {
+          enabled = true,
+          background = true,
+          foreground = true,
+          virtual_text = false, -- show the highlight using virtual text
+          virtual_text_str = "", -- the virtual text character to highlight
+        },
+        settings = {
+          showTodos = false,
+          completeFunctionCalls = true,
+          renameFilesWithClasses = "prompt",
+          enableSnippets = true,
+        }
+      },
+    }
+  end
+end
+
 return M

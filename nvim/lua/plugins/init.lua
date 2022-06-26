@@ -272,6 +272,13 @@ packer.startup(function()
     setup = setup.close_buffers(),
   }
 
+  -- Flutter tools
+  use {
+    'akinsho/flutter-tools.nvim',
+    setup = setup.flutter(),
+    config = config.flutter(),
+  }
+
   -- use {
   --   'tweekmonster/startuptime.vim',
   -- }

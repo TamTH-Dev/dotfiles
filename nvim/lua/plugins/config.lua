@@ -1237,14 +1237,11 @@ function M.telescope()
         sorting_strategy = 'ascending',
         layout_strategy = 'horizontal',
         layout_config = {
-          width = 0.8,
+          width = 0.5,
           preview_cutoff = 120,
           horizontal = {
             preview_width = function(_, cols, _)
-              if cols < 120 then
-                return math.floor(cols * 0.4)
-              end
-              return math.floor(cols * 0.5)
+              return math.floor(cols * 0.4)
             end,
             mirror = false,
           },
@@ -1303,10 +1300,12 @@ function M.telescope()
       pickers = {
         find_files = {
           hidden = true,
+          previewer = false,
         },
         live_grep = {
           --@usage don't include the filename in the search results
           only_sort_text = true,
+          previewer = false,
         },
       },
       extensions = {

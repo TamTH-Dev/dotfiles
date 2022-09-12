@@ -90,11 +90,11 @@ function M.alpha()
 
     local opts = {
       layout = {
-        { type = 'padding', val = 3 },
+        { type = 'padding', val = 8 },
         section.header,
-        { type = 'padding', val = 2 },
+        { type = 'padding', val = 4 },
         section.buttons,
-        { type = 'padding', val = 2 },
+        { type = 'padding', val = 4 },
         section.footer,
       },
       opts = {

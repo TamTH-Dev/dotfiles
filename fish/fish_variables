@@ -12,4 +12,4 @@ SETUVAR fish_color_user:brgreen
 SETUVAR fish_color_valid_path:\x2d\x2dunderline
 SETUVAR fish_key_bindings:fish_vi_key_bindings
 SETUVAR fish_pager_color_selected_background:\x2dr
-SETUVAR fish_user_paths:/home/madlife/\x2elocal/share/nvim/site/pack/packer/start/fzf/bin
+# SETUVAR fish_user_paths:/home/madlife/\x2elocal/share/nvim/site/pack/packer/start/fzf/bin

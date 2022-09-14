@@ -1,3 +1,6 @@
+# Invoke homebrew
+eval (/opt/homebrew/bin/brew shellenv)
+
 # TokyoNight Color Palette
 set -l foreground D8DEE9
 set -l selection EBCB8B
@@ -31,10 +34,6 @@ set -g fish_pager_color_prefix $blue
 set -g fish_pager_color_completion $foreground
 set -g fish_pager_color_description $green
 
-if status is-interactive
-    # Commands to run in interactive sessions can go here
-end
-
 # Disable fish greeting
 set fish_greeting
 
@@ -49,15 +48,15 @@ function fish_user_key_bindings
     fish_vi_key_bindings
 end
 
-# System path env
+# System
 set PATH $HOME/.local/bin $HOME/.config/bin /usr/local/bin /usr/bin /usr/sbin /usr/local/sbin /bin $PATH
 
-# Nvm path env
+# Nvm
 set NVM_DIR "$HOME/.nvm"
-set PATH $HOME/.nvm/versions/node/v16.14.2/bin $PATH
+set PATH $HOME/.nvm/versions/node/v16.17.0/bin $PATH
 
-# Cargo path env
-set PATH $HOME/.cargo/bin $PATH
+# Flutter
+set PATH $HOME/flutter/bin $PATH
 
 # Configure fzf
 set -gx FZF_DEFAULT_OPTS '
@@ -75,33 +74,14 @@ alias vi="nvim"
 alias lg="lazygit"
 # Fish configuration
 alias fishconfig="vi ~/.config/fish/config.fish"
-# Music controller
-alias music="ncmpcpp"
-# Calendar controller 
-alias calendar="khal interactive"
 # Changing "ls" to "exa"
-alias ls='exa --color=always --group-directories-first' # my preferred listing
-alias la='exa -alh --color=always --group-directories-first' # all files and dirs
-alias lt='exa -aT --color=always --group-directories-first' # tree listing
+alias ls='exa --color=always --group-directories-first'
+alias la='exa -alh --color=always --group-directories-first'
+alias lt='exa -aT --color=always --group-directories-first'
 # Colorize grep output (good for log files)
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
-# Java compile
-alias java_compile='find -name "*.java" > source.txt && javac @source.txt && rm source.txt'
-alias java_clear='rm (find -name "*.class")'
-
-# Protonvpn
-alias proton_connect='sudo protonvpn connect'
-alias proton_disconnect='sudo protonvpn disconnect'
-
-
-# OpenVPN connection
-alias openvpn_connect='sudo openvpn --config ~/Utils/client.ovpn --auth-user-pass --auth-retry interact'
-
-# Random color script
-# Install from the Arch User Repository: shell-color-scripts
-# colorscript random
 
 # Launch starship
 starship init fish | source

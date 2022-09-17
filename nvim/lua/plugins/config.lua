@@ -1356,6 +1356,7 @@ function M.treesitter()
         disable = {}
       },
       ensure_installed = 'all',
+      ignore_install = { 'phpdoc' },
       playground = {
         enable = true,
         disable = {},

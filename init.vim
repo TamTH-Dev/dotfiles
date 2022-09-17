@@ -1,5 +1,11 @@
+" Remap leader key
 let mapleader = ","
 
-map <leader><space> :noh<CR>
+" Save buffer
 map <leader>w :w<CR>
+
+" Quit buffer
 map <leader>q :q<CR>
+
+" Clear highlighting
+map <leader><space> :noh<CR>

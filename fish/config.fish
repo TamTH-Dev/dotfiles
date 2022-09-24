@@ -2,15 +2,15 @@
 eval (/opt/homebrew/bin/brew shellenv)
 
 # TokyoNight Color Palette
-set -l foreground D8DEE9
-set -l selection EBCB8B
-set -l comment 4C566A
-set -l red BF616A
-set -l orange D08770
-set -l yellow EBCB8B
-set -l green A3BE8C
-set -l blue 81A1C1
-set -l magenta B48EAD
+set -l foreground c0caf5
+set -l selection 303757
+set -l comment 565f89
+set -l red f7768e
+set -l orange ff9e64
+set -l yellow f1fa8c
+set -l green 9ece6a
+set -l blue 2ac3de
+set -l magenta bb9af7
 
 # Syntax Highlighting Colors
 set -g fish_color_normal $foreground

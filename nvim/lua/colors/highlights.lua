@@ -8,17 +8,18 @@ local cmd = vim.cmd
 
 -- Declare colors manually
 local colors = {
-  bg = '#2E3440',
-  extraBg = '#3B4252',
-  fg = '#D8DEE9',
-  red = '#BF616A',
-  orange = '#D08770',
-  yellow = '#EBCB8B',
-  green = '#A3BE8C',
-  magenta = '#B48EAD',
-  blue = '#81A1C1',
-  gray = '#4C566A',
-  lightGray = '#616E88',
+  bg = '#1a1b26',
+  extraBg = '#24283b',
+  fg = '#c0caf5',
+  red = '#f7768e',
+  orange = '#ff9e64',
+  brown = '#e0af68',
+  yellow = '#f1fa8c',
+  green = '#9ece6a',
+  magenta = '#bb9af7',
+  blue = '#2ac3de',
+  gray = '#414868',
+  lightGray = '#414868',
 }
 
 -- Define fg color

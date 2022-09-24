@@ -25,9 +25,9 @@ packer.startup(function()
 
   -- Colorscheme
   use {
-    'shaunsingh/nord.nvim',
+    'folke/tokyonight.nvim',
     config = function()
-      require('colors').init()
+      require 'colors'.init()
     end,
   }
   
@@ -279,7 +279,7 @@ packer.startup(function()
     config = config.flutter(),
   }
 
-  -- use {
-  --  'tweekmonster/startuptime.vim',
-  -- }
+  use {
+   'tweekmonster/startuptime.vim',
+  }
 end)

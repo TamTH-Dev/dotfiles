@@ -26,7 +26,7 @@ function M.alpha()
       },
       opts = {
         position = 'center',
-        hl = 'Boolean'
+        hl = 'Special'
       }
     }
 
@@ -40,7 +40,7 @@ function M.alpha()
         width = 24,
         align_shortcut = 'right',
         hl_shortcut = 'Debug',
-        hl = 'Function',
+        hl = 'DefinitionCount',
       }
 
       if keybind then

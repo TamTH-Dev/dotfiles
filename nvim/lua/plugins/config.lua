@@ -607,7 +607,7 @@ function M.icons()
         },
         py = {
            icon = '',
-           color = colors.yellow,
+           color = colors.orange,
            name = 'py',
         },
         toml = {
@@ -865,7 +865,7 @@ function M.lualine()
       local mode_colors = {
         n = colors.blue,
         i = colors.green,
-        c = colors.yellow,
+        c = colors.orange,
         V = colors.magenta,
         [''] = colors.magenta,
         v = colors.magenta,
@@ -1003,7 +1003,7 @@ function M.lualine()
       symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
       diagnostics_color = {
         error = { fg = colors.red },
-        warn = { fg = colors.yellow },
+        warn = { fg = colors.orange },
         info = { fg = colors.blue },
         hint = { fg = colors.blue },
       },

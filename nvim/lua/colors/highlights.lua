@@ -8,18 +8,17 @@ local cmd = vim.cmd
 
 -- Declare colors manually
 local colors = {
-  bg = '#1a1b26',
-  extraBg = '#24283b',
+  -- bg = '#1a1b26',
+  -- extraBg = '#24283b',
+  bg = '#24283b',
+  extraBg = '#1a1b26',
   fg = '#c0caf5',
   red = '#f7768e',
   orange = '#ff9e64',
-  brown = '#e0af68',
-  yellow = '#f1fa8c',
   green = '#9ece6a',
   magenta = '#bb9af7',
   blue = '#2ac3de',
   gray = '#414868',
-  lightGray = '#414868',
 }
 
 -- Define fg color
@@ -37,27 +36,27 @@ local bg = function(group, color)
 end
 
 -- General
-fg('FloatBorder', colors.lightGray)
+fg('FloatBorder', colors.gray)
 bg('FloatBorder', colors.bg)
 bg('NormalFloat', colors.bg)
 fg('VertSplit', colors.extraBg)
 fg('WinSeparator', colors.extraBg)
 bg('PmenuSel', colors.gray)
-bg('PmenuThumb', colors.lightGray)
-bg('PmenuSbar', colors.lightGray)
-fg('PMenuBorder', colors.lightGray)
+bg('PmenuThumb', colors.gray)
+bg('PmenuSbar', colors.gray)
+fg('PMenuBorder', colors.gray)
 
 -- Telescope
-fg('TelescopeBorder', colors.lightGray)
-fg('TelescopeResultsBorder', colors.lightGray)
-fg('TelescopePromptBorder', colors.lightGray)
-fg('TelescopePreviewBorder', colors.lightGray)
-fg('TelescopeTitle', colors.yellow)
+fg('TelescopeBorder', colors.gray)
+fg('TelescopeResultsBorder', colors.gray)
+fg('TelescopePromptBorder', colors.gray)
+fg('TelescopePreviewBorder', colors.gray)
+fg('TelescopeTitle', colors.orange)
 fg('TelescopePromptPrefix', colors.magenta)
-fg('TelescopeNormal', colors.lightGray)
+fg('TelescopeNormal', colors.gray)
 fg('TelescopeSelection', colors.fg)
 fg('TelescopeSelectionCaret', colors.orange)
-fg('TelescopeMultiSelection', colors.lightGray)
+fg('TelescopeMultiSelection', colors.gray)
 fg('TelescopeMatching', colors.blue)
 
 -- LSP
@@ -80,19 +79,19 @@ bg('DiagnosticVirtualTextHint', 'default')
 bg('LspFloatWinNormal', colors.bg)
 
 -- Saga
-fg('LspSagaRenameBorder', colors.lightGray)
-fg('LspSagaHoverBorder', colors.lightGray)
-fg('LspSagaSignatureHelpBorder', colors.lightGray )
-fg('LspSagaCodeActionBorder', colors.lightGray)
-fg('LspSagaDefPreviewBorder', colors.lightGray)
-fg('LspSagaDiagnosticBorder', colors.lightGray)
-fg('LspSagaLspFinderBorder', colors.lightGray)
-fg('ProviderTruncateLine', colors.lightGray)
-fg('LspSagaDiagnosticTruncateLine', colors.lightGray)
-fg('LspSagaShTruncateLine', colors.lightGray)
-fg('LspSagaDocTruncateLine', colors.lightGray)
-fg('LspSagaCodeActionTruncateLine', colors.lightGray)
-fg('DiagnosticTruncateLine', colors.lightGray)
+fg('LspSagaRenameBorder', colors.gray)
+fg('LspSagaHoverBorder', colors.gray)
+fg('LspSagaSignatureHelpBorder', colors.gray )
+fg('LspSagaCodeActionBorder', colors.gray)
+fg('LspSagaDefPreviewBorder', colors.gray)
+fg('LspSagaDiagnosticBorder', colors.gray)
+fg('LspSagaLspFinderBorder', colors.gray)
+fg('ProviderTruncateLine', colors.gray)
+fg('LspSagaDiagnosticTruncateLine', colors.gray)
+fg('LspSagaShTruncateLine', colors.gray)
+fg('LspSagaDocTruncateLine', colors.gray)
+fg('LspSagaCodeActionTruncateLine', colors.gray)
+fg('DiagnosticTruncateLine', colors.gray)
 fg('LspSagaCodeActionTitle', colors.blue)
 fg('LspSagaBorderTitle', colors.blue)
 fg('LspSagaDiagnosticHeader', colors.blue)
@@ -100,7 +99,7 @@ fg('LspDiagnosticsFloatingWarn', colors.blue)
 fg('LspSagaCodeActionContent', colors.fg)
 fg('LspDiagnosticsFloatingInfor', colors.fg)
 fg('LspSagaFinderSelection', colors.fg)
-fg('LspSagaAutoPreview', colors.lightGray)
+fg('LspSagaAutoPreview', colors.gray)
 
 -- Indent_blankline
 fg('IndentBlanklineContextChar', colors.orange)
@@ -122,7 +121,7 @@ bg('fzf3', colors.extraBg)
 -- Rainbow Treesitter
 fg('rainbowcol1', colors.red)
 fg('rainbowcol2', colors.orange)
-fg('rainbowcol3', colors.yellow)
+fg('rainbowcol3', colors.orange)
 fg('rainbowcol4', colors.green)
 fg('rainbowcol5', colors.magenta)
 fg('rainbowcol6', colors.blue)
@@ -147,7 +146,7 @@ bg('DiffChange', colors.magenta)
 fg('DiffChange', colors.bg)
 bg('DiffDelete', colors.red)
 fg('DiffDelete', colors.bg)
-bg('DiffText', colors.yellow)
+bg('DiffText', colors.orange)
 fg('DiffText', colors.bg)
 
 -- Export colors to use somewhere else

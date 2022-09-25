@@ -8,8 +8,6 @@ local cmd = vim.cmd
 
 -- Declare colors manually
 local colors = {
-  -- bg = '#1a1b26',
-  -- extraBg = '#24283b',
   bg = '#24283b',
   extraBg = '#1a1b26',
   fg = '#c0caf5',
@@ -54,6 +52,17 @@ fg('TelescopePreviewBorder', colors.gray)
 fg('TelescopeTitle', colors.orange)
 fg('TelescopePromptPrefix', colors.magenta)
 fg('TelescopeNormal', colors.gray)
+bg('TelescopeNormal', colors.bg)
+fg('TelescopeResultsNormal', colors.gray)
+bg('TelescopeResultsNormal', colors.bg)
+fg('TelescopePromptNormal', colors.fg)
+bg('TelescopePromptNormal', colors.bg)
+fg('TelescopePreviewNormal', colors.gray)
+bg('TelescopePreviewNormal', colors.bg)
+fg('TelescopePreviewMessage', colors.gray)
+bg('TelescopePreviewMessage', colors.bg)
+fg('TelescopePreviewMessageFillchar', colors.fg)
+bg('TelescopePreviewMessageFillchar', colors.bg)
 fg('TelescopeSelection', colors.fg)
 fg('TelescopeSelectionCaret', colors.orange)
 fg('TelescopeMultiSelection', colors.gray)
@@ -112,11 +121,8 @@ fg('NvimTreeFolderIcon', colors.blue)
 
 -- Fzf
 fg('fzf1', colors.fg)
-bg('fzf1', colors.extraBg)
 fg('fzf2', colors.fg)
-bg('fzf2', colors.extraBg)
 fg('fzf3', colors.fg)
-bg('fzf3', colors.extraBg)
 
 -- Rainbow Treesitter
 fg('rainbowcol1', colors.red)
@@ -140,14 +146,14 @@ fg('CmpItemAbbrMatchFuzzy', colors.blue)
 fg('CmpItemAbbrMatch', colors.blue)
 
 -- Gitsigns
-bg('DiffAdd', colors.green)
-fg('DiffAdd', colors.bg)
-bg('DiffChange', colors.magenta)
-fg('DiffChange', colors.bg)
-bg('DiffDelete', colors.red)
-fg('DiffDelete', colors.bg)
-bg('DiffText', colors.orange)
-fg('DiffText', colors.bg)
+bg('DiffAdd', colors.bg)
+fg('DiffAdd', colors.green)
+bg('DiffChange', colors.bg)
+fg('DiffChange', colors.magenta)
+bg('DiffDelete', colors.bg)
+fg('DiffDelete', colors.red)
+bg('DiffText', colors.bg)
+fg('DiffText', colors.orange)
 
 -- Export colors to use somewhere else
 M.colors = colors

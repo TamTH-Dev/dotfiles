@@ -44,6 +44,9 @@ nnoremap k gk
 " Close all buffers except the last one
 nnoremap <leader>cb :w <bar> %bd <bar> e# <bar> bd# <CR>
 
+" IDE actions
+nmap <leader>f <Action>(ReformatCode)
+
 " Common options
 set hlsearch
 set ignorecase

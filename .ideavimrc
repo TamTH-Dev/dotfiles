@@ -43,3 +43,14 @@ nnoremap k gk
 
 " Close all buffers except the last one
 nnoremap <leader>cb :w <bar> %bd <bar> e# <bar> bd# <CR>
+
+" Common options
+set hlsearch
+set ignorecase
+set smartcase
+set smartindent
+
+" Plugins
+set surround
+set nooldundo
+set commentary

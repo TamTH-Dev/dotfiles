@@ -49,8 +49,8 @@ packer.startup(function()
   use {
     'akinsho/bufferline.nvim',
     commit = 'ee1d51e',
-    branch = "main",
-    event = "BufWinEnter",
+    branch = 'main',
+    event = 'BufWinEnter',
     setup = setup.bufferline(),
     config = config.bufferline(),
   }
@@ -277,6 +277,12 @@ packer.startup(function()
     'akinsho/flutter-tools.nvim',
     setup = setup.flutter(),
     config = config.flutter(),
+  }
+  
+  -- Multi cursors
+  use {
+    'mg979/vim-visual-multi',
+    branch = 'master',
   }
 
   -- use {

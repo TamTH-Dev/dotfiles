@@ -280,12 +280,12 @@ packer.startup(function()
   }
   
   -- Multi cursors
-  use {
-    'mg979/vim-visual-multi',
-    branch = 'master',
-  }
-
   -- use {
-  --  'tweekmonster/startuptime.vim',
+  --   'mg979/vim-visual-multi',
+  --   branch = 'master',
   -- }
+
+  use {
+   'tweekmonster/startuptime.vim',
+  }
 end)

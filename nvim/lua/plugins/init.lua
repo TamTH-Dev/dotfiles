@@ -285,7 +285,7 @@ packer.startup(function()
   --   branch = 'master',
   -- }
 
-  use {
-   'tweekmonster/startuptime.vim',
-  }
+  -- use {
+  --  'tweekmonster/startuptime.vim',
+  -- }
 end)

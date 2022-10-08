@@ -27,3 +27,4 @@ set hlsearch
 set ignorecase
 set smartcase
 set smartindent
+set clipboard+=unnamedplus

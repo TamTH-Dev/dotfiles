@@ -31,6 +31,7 @@ set smartcase
 set smartindent
 set number
 set relativenumber
+set clipboard+=unnamedplus
 
 " Plugins
 set surround

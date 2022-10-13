@@ -279,13 +279,7 @@ packer.startup(function()
     config = config.flutter(),
   }
   
-  -- Multi cursors
-  -- use {
-  --   'mg979/vim-visual-multi',
-  --   branch = 'master',
-  -- }
-
-  -- use {
-  --  'tweekmonster/startuptime.vim',
-  -- }
+  use {
+   'tweekmonster/startuptime.vim',
+  }
 end)

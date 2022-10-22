@@ -39,8 +39,8 @@ function M.alpha()
         cursor = 5,
         width = 24,
         align_shortcut = 'right',
-        hl_shortcut = 'Debug',
-        hl = 'DefinitionCount',
+        hl_shortcut = 'Special',
+        hl = 'DiagnosticFloatingInfo',
       }
 
       if keybind then
@@ -61,7 +61,7 @@ function M.alpha()
     local buttons = {
       type = 'group',
       val = {
-        set_button('p', '  Find File', '<cmd>Telescope find_files hidden=true<CR>'),
+        set_button('p', '  Find File', '<cmd>Telescope find_files hidden=true<CR>'),
         set_button('f', '  Find Word', '<cmd>Telescope live_grep<CR>'),
         set_button('n', '  New File',  '<cmd>ene!<CR>'),
         set_button('s', '  Settings',  '<cmd>e $HOME/.config/nvim/lua/default_config.lua<CR>'),
@@ -69,7 +69,7 @@ function M.alpha()
       },
       opts = {
         position = 'center',
-        spacing = 1,
+        spacing = 2,
       }
     }
 
@@ -90,15 +90,12 @@ function M.alpha()
 
     local opts = {
       layout = {
-        { type = 'padding', val = 8 },
-        section.header,
-        { type = 'padding', val = 4 },
+        -- { type = 'padding', val = 8 },
+        -- section.header,
+        { type = 'padding', val = 16 },
         section.buttons,
-        { type = 'padding', val = 4 },
-        section.footer,
-      },
-      opts = {
-        margin = 5
+        -- { type = 'padding', val = 4 },
+        -- section.footer,
       },
     }
 
@@ -168,7 +165,10 @@ function M.bufferline()
         right_mouse_command = 'bdelete! %d',
         left_mouse_command = 'buffer %d',
         middle_mouse_command = nil,
-        indicator_icon = '▎',
+        indicator = {
+            icon = '▎',
+            style = 'icon',
+        },
         buffer_close_icon = '',
         modified_icon = '●',
         close_icon = '',
@@ -749,7 +749,7 @@ function M.lsp()
           'additionalTextEdits',
         },
       }
-      capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+      capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
       return capabilities
     end
@@ -1111,12 +1111,22 @@ function M.nvimtree()
       -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually)
       update_cwd          = false,
       renderer = {
+        add_trailing = false,
+        group_empty = false,
+        highlight_git = false,
+        full_name = false,
+        highlight_opened_files = "none",
+        root_folder_modifier = ":~",
+        indent_width = 2,
         indent_markers = {
-          enable = true,
+          enable = false,
+          inline_arrows = true,
           icons = {
-            corner = '└ ',
-            edge = '│ ',
-            none = '  ',
+            corner = "└",
+            edge = "│",
+            item = "│",
+            bottom = "─",
+            none = " ",
           },
         },
       },
@@ -1355,8 +1365,17 @@ function M.treesitter()
         enable = false,
         disable = {}
       },
-      ensure_installed = 'all',
+      ensure_installed = {
+        'scss', 'kotlin', 'lua', 'python', 'yaml',
+        'regex', 'make', 'sql', 'json', 'dart',
+        'haskell', 'tsx', 'jsonc', 'toml', 'query',
+        'fish', 'gitignore', 'rust', 'html', 'css',
+        'typescript', 'c', 'json5', 'diff', 'bash',
+        'cmake', 'vue', 'comment', 'jsdoc', 'go',
+        'javascript', 'dockerfile',
+      },
       ignore_install = { 'phpdoc' },
+      auto_install = true,
       playground = {
         enable = true,
         disable = {},

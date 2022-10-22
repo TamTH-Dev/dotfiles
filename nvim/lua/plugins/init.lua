@@ -11,7 +11,7 @@ packer.startup(function()
   -- Packer can manage itself
   use {
     'wbthomason/packer.nvim',
-    commit = '4dedd3b',
+    commit = '6afb674',
   }
 
   -- Boost startup time
@@ -34,21 +34,21 @@ packer.startup(function()
   -- Icons suppliers for Madvim
   use {
     'kyazdani42/nvim-web-devicons',
-    commit = 'bdd4342',
+    commit = '9061e2d',
     config = config.icons(),
   }
 
   -- Status line
   use {
     'nvim-lualine/lualine.nvim',
-    commit = '619eded',
+    commit = 'abb0312',
     config = config.lualine(),
   }
 
   -- Buffer management bar
   use {
     'akinsho/bufferline.nvim',
-    commit = 'ee1d51e',
+    commit = 'e70be62',
     branch = 'main',
     event = 'BufWinEnter',
     setup = setup.bufferline(),
@@ -58,7 +58,7 @@ packer.startup(function()
   -- File explorer
   use {
     'kyazdani42/nvim-tree.lua',
-    commit = '82ec79a',
+    commit = 'e94f517',
     setup = setup.nvimtree(),
     config = config.nvimtree(),
   }
@@ -66,14 +66,14 @@ packer.startup(function()
   -- Fancy start screen
   use {
     'goolord/alpha-nvim',
-    commit = '4781fcf',
+    commit = '0bb6fc0',
     config = config.alpha(),
   }
 
   -- Parser
   use {
     'nvim-treesitter/nvim-treesitter',
-    commit = '10d57b3',
+    commit = 'c4c358e',
     config = config.treesitter(),
     requires = {
       {
@@ -106,7 +106,7 @@ packer.startup(function()
   -- Popup Supporters
   use {
     'nvim-lua/plenary.nvim',
-    commit = '1da13ad',
+    commit = '4b7e520',
   }
   use {
     'nvim-lua/popup.nvim',
@@ -116,7 +116,7 @@ packer.startup(function()
   -- Git
   use {
     'lewis6991/gitsigns.nvim',
-    commit = 'aca84fd',
+    commit = '21ab05c',
     event = 'BufRead',
     config = config.gitsigns(),
   }
@@ -131,12 +131,12 @@ packer.startup(function()
   -- Commenter
   use {
     'JoosepAlviste/nvim-ts-context-commentstring',
-    commit = '8834375',
+    commit = '2941f00',
     event = 'BufReadPost',
   }
   use {
     'numToStr/Comment.nvim',
-    commit = '79b356d',
+    commit = 'ad7ffa8',
     event = 'BufRead',
     config = config.comment(),
   }
@@ -168,12 +168,12 @@ packer.startup(function()
   -- Fuzzy search
   use {
     'nvim-telescope/telescope.nvim',
-    commit = 'b4c45e8',
+    commit = 'f174a03',
     config = config.telescope(),
   }
   use {
     'nvim-telescope/telescope-fzf-native.nvim',
-    commit = '281b07a',
+    commit = '65c0ee3',
     run = 'make',
     requires = { 'nvim-telescope/telescope.nvim' },
   }
@@ -181,12 +181,12 @@ packer.startup(function()
   -- Built-in LSP Configuration Supporter
   use {
     'neovim/nvim-lspconfig',
-    commit = 'ce8a4d8',
+    commit = 'ee2e8c6',
   }
   -- LSP Installer
   use {
     'williamboman/nvim-lsp-installer',
-    commit = 'f5569f6',
+    commit = 'ae913cb',
     config = config.lsp(),
   }
   -- LSP styles supporter
@@ -211,7 +211,7 @@ packer.startup(function()
   -- Autopairs supporter
   use {
     'windwp/nvim-autopairs',
-    commit = 'aea9131',
+    commit = '4fc96c8',
     after = 'nvim-cmp',
     config = config.autopairs(),
   }
@@ -223,7 +223,7 @@ packer.startup(function()
   }
   use {
     'hrsh7th/nvim-cmp',
-    commit = 'a226b6a',
+    commit = 'cdb7766',
     event = 'BufEnter',
     requires = {
       {
@@ -234,30 +234,31 @@ packer.startup(function()
       },
       {
         'rafamadriz/friendly-snippets',
-        commit = '4ef45d0',
+        commit = 'b838c36',
         after = { 'nvim-cmp', 'cmp_luasnip' },
         opt = true,
       },
       {
         'hrsh7th/cmp-nvim-lsp',
-        commit = 'e6b5feb',
+        commit = '3cf38d9',
         after = 'nvim-cmp',
         opt = true,
       },
       {
         'hrsh7th/cmp-nvim-lua',
+        commit = 'd276254',
         after = 'nvim-cmp',
         opt = true,
       },
       {
         'hrsh7th/cmp-buffer',
-        commit = '12463cf',
+        commit = '3022dbc',
         after = 'nvim-cmp',
         opt = true,
       },
       {
         'hrsh7th/cmp-path',
-        commit = '466b6b8',
+        commit = '91ff86c',
         after = 'nvim-cmp',
         opt = true,
       },

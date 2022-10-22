@@ -102,40 +102,6 @@ function M.nvimtree()
       Makefile = 1,
       MAKEFILE = 1
     }
-    --@usage enable folder and file icon highlight for opened files/directories
-    glob.nvim_tree_highlight_opened_files = 1
-    --@usage root format
-    glob.nvim_tree_root_folder_modifier = ':~'
-    --@usage custom icons
-    glob.nvim_tree_icons = {
-      default= '',
-      symlink= '',
-      git= {
-        unstaged= '±',
-        staged= '',
-        unmerged= '',
-        renamed= '',
-        untracked= '',
-        deleted= '',
-        ignored= ''
-      },
-      folder= {
-        arrow_open= '',
-        arrow_closed= '',
-        default= '',
-        open= '',
-        empty= '',
-        empty_open= '',
-        symlink= '',
-        symlink_open= '',
-      },
-      lsp= {
-        error= '',
-        warning= '',
-        info= '',
-        hint= '',
-      }
-    }
   end
 end
 

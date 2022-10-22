@@ -17,6 +17,7 @@ local colors = {
   magenta = '#bb9af7',
   blue = '#2ac3de',
   gray = '#414868',
+  lightGray = '#303757',
 }
 
 -- Define fg color
@@ -43,6 +44,10 @@ bg('PmenuSel', colors.gray)
 bg('PmenuThumb', colors.gray)
 bg('PmenuSbar', colors.gray)
 fg('PMenuBorder', colors.gray)
+fg('Visual', colors.fg)
+bg('Visual', colors.lightGray)
+fg('Search', colors.bg)
+bg('Search', colors.red)
 
 -- Telescope
 fg('TelescopeBorder', colors.gray)
@@ -132,18 +137,6 @@ fg('rainbowcol4', colors.green)
 fg('rainbowcol5', colors.magenta)
 fg('rainbowcol6', colors.blue)
 fg('rainbowcol7', colors.fg)
-
--- Cmp
-fg('CmpItemKindVariable', colors.blue)
-fg('CmpItemKindInterface', colors.magenta)
-fg('CmpItemKindText', colors.magenta)
-fg('CmpItemKindFunction', colors.magenta)
-fg('CmpItemKindMethod', colors.blue)
-fg('CmpItemKindKeyword', colors.blue)
-fg('CmpItemKindProperty', colors.blue)
-fg('CmpItemKindUnit', colors.blue)
-fg('CmpItemAbbrMatchFuzzy', colors.blue)
-fg('CmpItemAbbrMatch', colors.blue)
 
 -- Gitsigns
 bg('DiffAdd', colors.bg)

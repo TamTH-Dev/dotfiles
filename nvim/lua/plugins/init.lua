@@ -280,7 +280,7 @@ packer.startup(function()
     config = config.flutter(),
   }
   
-  -- use {
-  --  'tweekmonster/startuptime.vim',
-  -- }
+  use {
+    'tweekmonster/startuptime.vim',
+  }
 end)

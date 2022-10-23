@@ -71,19 +71,6 @@ function M.indent_blankline()
   end
 end
 
-function M.neoformat()
-  return function ()
-    local glob = vim.g
-    local map = vim.api.nvim_set_keymap
-    local opts = { noremap = true, silent = true }
-
-    map('n', '<leader>f', '<cmd>Neoformat<CR>', opts)
-
-    --@usage enable formatters for python
-    glob.neoformat_enabled_python = { 'yapf', 'autopep8', 'black' }
-  end
-end
-
 function M.nvimtree()
   return function()
     local map = function(...) vim.api.nvim_set_keymap('n', ...) end

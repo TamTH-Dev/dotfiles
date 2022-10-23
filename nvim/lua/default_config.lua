@@ -36,6 +36,7 @@ M.mappings.common = {
   leader = ',', -- Leader key
   save_buffer = '<leader>w', -- Save buffer
   quit_buffer = '<leader>q', -- Quit buffer
+  format_buffer = '<leader>f', -- Quit buffer
   exit_modes = 'jj', -- Exit modes. Ex: insert, visual, command
   split_window_vertically = '<leader>g/', -- Vertical split
   split_window_horizontally = '<leader>g\\', -- Horizontal split
@@ -52,7 +53,7 @@ M.mappings.common = {
 -- Plugin mappings
 M.mappings.plugin = {
   -- comment = {
-    -- toggle = '<leader>cl', -- trigger comment on a single/selected lines/number prefix
+  -- toggle = '<leader>cl', -- trigger comment on a single/selected lines/number prefix
   -- },
 }
 

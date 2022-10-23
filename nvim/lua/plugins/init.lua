@@ -189,24 +189,6 @@ packer.startup(function()
     commit = 'ae913cb',
     config = config.lsp(),
   }
-  -- LSP styles supporter
-  -- use {
-  --   'tami5/lspsaga.nvim',
-  --   commit = '39b6fac',
-  --   after = {
-  --     'nvim-lspconfig',
-  --     'nvim-lsp-installer',
-  --   },
-  --   config = config.saga(),
-  --   setup = setup.saga(),
-  -- }
-
-  -- Formatter
-  use {
-    'sbdchd/neoformat',
-    cmd = 'Neoformat',
-    setup = setup.neoformat(),
-  }
 
   -- Autopairs supporter
   use {

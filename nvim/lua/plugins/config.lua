@@ -63,6 +63,7 @@ function M.alpha()
       val = {
         set_button('p', '  Find File', '<cmd>Telescope find_files hidden=true<CR>'),
         set_button('f', '  Find Word', '<cmd>Telescope live_grep<CR>'),
+        set_button('o', '  Project structure', '<cmd>NvimTreeToggle<CR>'),
         set_button('n', '  New File',  '<cmd>ene!<CR>'),
         set_button('s', '  Settings',  '<cmd>e $HOME/.config/nvim/lua/default_config.lua<CR>'),
         set_button('q', '  Quit',      '<cmd>qa<CR>'),
@@ -92,7 +93,7 @@ function M.alpha()
       layout = {
         -- { type = 'padding', val = 8 },
         -- section.header,
-        { type = 'padding', val = 16 },
+        { type = 'padding', val = 14 },
         section.buttons,
         -- { type = 'padding', val = 4 },
         -- section.footer,
@@ -723,8 +724,8 @@ function M.lsp()
       buf_set_keymap('n', '<leader>gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>',                           opts)
       buf_set_keymap('n', '<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<CR>',                            opts)
       buf_set_keymap('n', '<leader>gl', '<cmd>lua vim.diagnostic.open_float()<CR>',                          opts)
-      buf_set_keymap('n', '<C-e>',      '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>',                     opts)
-      buf_set_keymap('n', '<C-w>',      '<cmd>lua vim.lsp.diagnostic.set_loclist({ workspace = true })<CR>', opts)
+      buf_set_keymap('n', '<C-e>',      '<cmd>lua vim.diagnostic.setloclist()<CR>',                     opts)
+      buf_set_keymap('n', '<C-w>',      '<cmd>lua vim.diagnostic.setloclist({ workspace = true })<CR>', opts)
 
       --@usage set autocommands conditional on server_capabilities
       if client.resolved_capabilities.document_highlight then
@@ -1032,9 +1033,11 @@ function M.lualine()
     --   padding = { left = 1, right = 1 },
     -- })
 
-    -- ins_right({ 'progress',
-    --   padding = { left = 1, right = 1 },
-    -- })
+    ins_right({ 'progress',
+      padding = { left = 1, right = 1 },
+      color = { fg = colors.orange, gui = 'bold' },
+      cond = conditions.hide_in_width,
+    })
 
     ins_right({
       function()
@@ -1084,6 +1087,11 @@ function M.nvimtree()
 
     if not is_nvimtree_loaded then return end
 
+    local screen_width = vim.api.nvim_list_uis()[1].width
+    local screen_height = vim.api.nvim_list_uis()[1].height
+    local width = 100
+    local height = 32
+
     nvimtree.setup {
       -- disables netrw completely
       disable_netrw       = true,
@@ -1115,18 +1123,18 @@ function M.nvimtree()
         group_empty = false,
         highlight_git = false,
         full_name = false,
-        highlight_opened_files = "none",
-        root_folder_modifier = ":~",
+        highlight_opened_files = 'none',
+        root_folder_modifier = ':~',
         indent_width = 2,
         indent_markers = {
           enable = false,
           inline_arrows = true,
           icons = {
-            corner = "└",
-            edge = "│",
-            item = "│",
-            bottom = "─",
-            none = " ",
+            corner = '└',
+            edge = '│',
+            item = '│',
+            bottom = '─',
+            none = ' ',
           },
         },
       },
@@ -1154,16 +1162,28 @@ function M.nvimtree()
         -- width of the window, can be either a number (columns) or a string in `%`
         width = 35,
         -- side of the tree, can be one of 'left' | 'right' | 'top' | 'bottom'
-        side = 'left',
+        side = 'top',
         -- hide root dir
-        hide_root_folder = true,
+        hide_root_folder = false,
         mappings = {
           -- custom only false will merge the list with the default mappings
           -- if true, it will only use your list to set the mappings
           custom_only = false,
           -- list of mappings to set on the tree manually
           list = {}
-        }
+        },
+        float = {
+          enable = true,
+          quit_on_focus_loss = true,
+          open_win_config = {
+            relative = 'editor',
+            border = 'rounded',
+            width = width,
+            height = height,
+            row = (screen_height - height) * 0.5,
+            col = (screen_width - width) * 0.5,
+          },
+        },
       }
     }
   end

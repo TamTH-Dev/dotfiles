@@ -123,6 +123,7 @@ fg('BufferLineIndicatorSelected', colors.red)
 
 -- NvimTree
 fg('NvimTreeFolderIcon', colors.blue)
+bg('NvimTreeNormal', colors.bg)
 
 -- Fzf
 fg('fzf1', colors.fg)

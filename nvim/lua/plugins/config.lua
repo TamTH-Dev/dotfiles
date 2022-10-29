@@ -1059,6 +1059,37 @@ function M.neoscroll()
   end
 end
 
+function M.null_ls()
+  return function()
+    local null_ls_loaded, null_ls = pcall(require, 'null-ls')
+
+    if not null_ls_loaded then return end
+
+    null_ls.setup({
+      --@usage[[ formatting ]]
+      null_ls.builtins.formatting.stylua,
+      null_ls.builtins.formatting.prettier,
+      null_ls.builtins.formatting.prettierd,
+      null_ls.builtins.formatting.dart_format,
+      null_ls.builtins.formatting.eslint,
+      null_ls.builtins.formatting.eslint_d,
+      --@usage[[ completion ]]
+      null_ls.builtins.completion.spell,
+      null_ls.builtins.completion.luasnip,
+      --@usage[[ diagnostics ]]
+      null_ls.builtins.diagnostics.tsc,
+      null_ls.builtins.diagnostics.eslint,
+      null_ls.builtins.diagnostics.eslint_d,
+      null_ls.builtins.diagnostics.fish,
+      --@usage[[ code actions ]]
+      null_ls.builtins.code_actions.eslint,
+      null_ls.builtins.code_actions.eslint_d,
+      null_ls.builtins.code_actions.gitsigns,
+      null_ls.builtins.code_actions.refactoring,
+    })
+  end
+end
+
 function M.nvimtree()
   return function()
     local nvimtree_loaded, nvimtree = pcall(require, 'nvim-tree')

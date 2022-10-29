@@ -38,6 +38,16 @@ packer.startup(function()
     config = config.icons(),
   }
 
+  -- Popup Supporters
+  use {
+    'nvim-lua/plenary.nvim',
+    commit = '4b7e520',
+  }
+  use {
+    'nvim-lua/popup.nvim',
+    commit = 'b7404d3',
+  }
+
   -- Status line
   use {
     'nvim-lualine/lualine.nvim',
@@ -101,16 +111,6 @@ packer.startup(function()
     'lukas-reineke/indent-blankline.nvim',
     event = 'BufEnter',
     setup = setup.indent_blankline(),
-  }
-
-  -- Popup Supporters
-  use {
-    'nvim-lua/plenary.nvim',
-    commit = '4b7e520',
-  }
-  use {
-    'nvim-lua/popup.nvim',
-    commit = 'b7404d3',
   }
 
   -- Git
@@ -187,6 +187,12 @@ packer.startup(function()
     requires = 'kyazdani42/nvim-web-devicons',
     setup    = setup.trouble(),
     config   = config.trouble(),
+  }
+
+  -- Improve LSP performance
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    config = config.null_ls(),
   }
 
   -- Fuzzy search

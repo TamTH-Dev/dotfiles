@@ -1,5 +1,5 @@
 local M = {}
-local on_windows = vim.loop.os_uname().version:match "Windows"
+local on_windows = vim.loop.os_uname().version:match 'Windows'
 
 -- Load config
 -- @arg reload: boolean - whether to force reload
@@ -22,7 +22,7 @@ M.load_config = function(reload)
 end
 
 M.join_paths = function(...)
-  local path_sep = on_windows and "\\" or "/"
+  local path_sep = on_windows and '\\' or '/'
   local result = table.concat({ ... }, path_sep)
 
   return result

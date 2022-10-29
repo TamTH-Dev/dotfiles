@@ -50,8 +50,8 @@ packer.startup(function()
     'akinsho/bufferline.nvim',
     commit = 'e70be62',
     branch = 'main',
-    event = 'BufWinEnter',
-    setup = setup.bufferline(),
+    event  = 'BufWinEnter',
+    setup  = setup.bufferline(),
     config = config.bufferline(),
   }
 
@@ -59,7 +59,7 @@ packer.startup(function()
   use {
     'kyazdani42/nvim-tree.lua',
     commit = 'e94f517',
-    setup = setup.nvimtree(),
+    setup  = setup.nvimtree(),
     config = config.nvimtree(),
   }
 
@@ -117,14 +117,14 @@ packer.startup(function()
   use {
     'lewis6991/gitsigns.nvim',
     commit = '21ab05c',
-    event = 'BufRead',
+    event  = 'BufRead',
     config = config.gitsigns(),
   }
 
   -- Smooth scroll for neovim
   use {
     'karb94/neoscroll.nvim',
-    event = 'BufRead',
+    event  = 'BufRead',
     config = config.neoscroll(),
   }
 
@@ -132,12 +132,12 @@ packer.startup(function()
   use {
     'JoosepAlviste/nvim-ts-context-commentstring',
     commit = '2941f00',
-    event = 'BufReadPost',
+    event  = 'BufReadPost',
   }
   use {
     'numToStr/Comment.nvim',
     commit = 'ad7ffa8',
-    event = 'BufRead',
+    event  = 'BufRead',
     config = config.comment(),
   }
 
@@ -145,14 +145,14 @@ packer.startup(function()
   use {
     'tpope/vim-surround',
     commit = 'bf3480d',
-    event = 'BufEnter',
+    event  = 'BufEnter',
   }
 
   -- Emmet
   use {
     'mattn/emmet-vim',
     commit = 'def5d57',
-    event = 'BufEnter',
+    event  = 'BufEnter',
     ft = {
       'html',
       'css',
@@ -163,19 +163,6 @@ packer.startup(function()
       'vue',
     },
     setup = setup.emmet(),
-  }
-
-  -- Fuzzy search
-  use {
-    'nvim-telescope/telescope.nvim',
-    commit = 'f174a03',
-    config = config.telescope(),
-  }
-  use {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    commit = '65c0ee3',
-    run = 'make',
-    requires = { 'nvim-telescope/telescope.nvim' },
   }
 
   -- Built-in LSP Configuration Supporter
@@ -189,12 +176,38 @@ packer.startup(function()
     commit = 'ae913cb',
     config = config.lsp(),
   }
+  -- LSP Styling
+  use({
+    'glepnir/lspsaga.nvim',
+    branch = 'main',
+    config = config.saga(),
+  })
+  use {
+    'folke/trouble.nvim',
+    requires = 'kyazdani42/nvim-web-devicons',
+    setup    = setup.trouble(),
+    config   = config.trouble(),
+  }
+
+  -- Fuzzy search
+  use {
+    'nvim-telescope/telescope.nvim',
+    commit = 'f174a03',
+    setup  = setup.telescope(),
+    config = config.telescope(),
+  }
+  use {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    commit   = '65c0ee3',
+    run      = 'make',
+    requires = { 'nvim-telescope/telescope.nvim' },
+  }
 
   -- Autopairs supporter
   use {
     'windwp/nvim-autopairs',
     commit = '4fc96c8',
-    after = 'nvim-cmp',
+    after  = 'nvim-cmp',
     config = config.autopairs(),
   }
 
@@ -206,43 +219,43 @@ packer.startup(function()
   use {
     'hrsh7th/nvim-cmp',
     commit = 'cdb7766',
-    event = 'BufEnter',
+    event  = 'BufEnter',
     requires = {
       {
         'saadparwaiz1/cmp_luasnip',
         commit = 'a9de941',
-        after = 'nvim-cmp',
-        opt = true,
+        after  = 'nvim-cmp',
+        opt    = true,
       },
       {
         'rafamadriz/friendly-snippets',
         commit = 'b838c36',
-        after = { 'nvim-cmp', 'cmp_luasnip' },
-        opt = true,
+        after  = { 'nvim-cmp', 'cmp_luasnip' },
+        opt    = true,
       },
       {
         'hrsh7th/cmp-nvim-lsp',
         commit = '3cf38d9',
-        after = 'nvim-cmp',
-        opt = true,
+        after  = 'nvim-cmp',
+        opt    = true,
       },
       {
         'hrsh7th/cmp-nvim-lua',
         commit = 'd276254',
-        after = 'nvim-cmp',
-        opt = true,
+        after  = 'nvim-cmp',
+        opt    = true,
       },
       {
         'hrsh7th/cmp-buffer',
         commit = '3022dbc',
-        after = 'nvim-cmp',
-        opt = true,
+        after  = 'nvim-cmp',
+        opt    = true,
       },
       {
         'hrsh7th/cmp-path',
         commit = '91ff86c',
-        after = 'nvim-cmp',
-        opt = true,
+        after  = 'nvim-cmp',
+        opt    = true,
       },
     },
     config = config.cmp(),
@@ -252,13 +265,13 @@ packer.startup(function()
   use {
     'kazhala/close-buffers.nvim',
     commit = '3acbcad',
-    setup = setup.close_buffers(),
+    setup  = setup.close_buffers(),
   }
 
   -- Flutter tools
   use {
     'akinsho/flutter-tools.nvim',
-    setup = setup.flutter(),
+    setup  = setup.flutter(),
     config = config.flutter(),
   }
   

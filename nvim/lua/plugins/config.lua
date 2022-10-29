@@ -2,16 +2,16 @@ local M = {}
 
 function M.alpha()
   return function()
-    local is_alpha_loaded, alpha = pcall(require, 'alpha')
+    local alpha_loaded, alpha = pcall(require, 'alpha')
 
-    if not is_alpha_loaded then return end
+    if not alpha_loaded then return end
 
     local api = vim.api
     local cmd = vim.cmd
 
     local header = {
       type = 'text',
-      val = {
+      val  = {
         '   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣿⣶⣿⣦⣼⣆          ',
         '    ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ',
         '          ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷    ⠻⠿⢿⣿⣧⣄     ',
@@ -26,21 +26,21 @@ function M.alpha()
       },
       opts = {
         position = 'center',
-        hl = 'Special'
+        hl       = 'Special'
       }
     }
 
     local function set_button(sc, text, keybind)
       local sc_ = sc:gsub('%s', ''):gsub('SPC', '<leader>')
       local opts = {
-        position = 'center',
-        text = text,
-        shortcut = sc,
-        cursor = 5,
-        width = 24,
+        position       = 'center',
+        text           = text,
+        shortcut       = sc,
+        cursor         = 5,
+        width          = 24,
         align_shortcut = 'right',
-        hl_shortcut = 'Special',
-        hl = 'DiagnosticFloatingInfo',
+        hl_shortcut    = 'Special',
+        hl             = 'DiagnosticFloatingInfo',
       }
 
       if keybind then
@@ -61,32 +61,32 @@ function M.alpha()
     local buttons = {
       type = 'group',
       val = {
-        set_button('p', '  Find File', '<cmd>Telescope find_files hidden=true<CR>'),
-        set_button('f', '  Find Word', '<cmd>Telescope live_grep<CR>'),
-        set_button('o', '  Project structure', '<cmd>NvimTreeToggle<CR>'),
-        set_button('n', '  New File',  '<cmd>ene!<CR>'),
-        set_button('s', '  Settings',  '<cmd>e $HOME/.config/nvim/lua/default_config.lua<CR>'),
-        set_button('q', '  Quit',      '<cmd>qa<CR>'),
+        set_button('p', '  Find File',         '<cmd>Telescope find_files hidden=true<CR>'           ),
+        set_button('f', '  Find Word',         '<cmd>Telescope live_grep<CR>'                        ),
+        set_button('o', '  Project structure', '<cmd>NvimTreeToggle<CR>'                             ),
+        set_button('n', '  New File',          '<cmd>ene!<CR>'                                       ),
+        set_button('s', '  Settings',          '<cmd>e $HOME/.config/nvim/lua/default_config.lua<CR>'),
+        set_button('q', '  Quit',              '<cmd>qa<CR>'                                         ),
       },
       opts = {
         position = 'center',
-        spacing = 2,
+        spacing  = 2,
       }
     }
 
     local footer = {
       type = 'text',
-      val = 'A clever person solves a problem. A wise person avoids it.',
+      val  = 'A clever person solves a problem. A wise person avoids it.',
       opts = {
         position = 'center',
-        hl = 'String',
+        hl       = 'String',
       }
     }
 
     local section = {
-      header = header,
+      header  = header,
       buttons = buttons,
-      footer = footer,
+      footer  = footer,
     }
 
     local opts = {
@@ -100,10 +100,10 @@ function M.alpha()
       },
     }
 
-    --@usage apply config to alpha
+    --@usage[[ apply config to alpha ]]
     alpha.setup(opts)
 
-    --@usage disable folding on alpha buffer
+    --@usage[[ disable folding on alpha buffer ]]
     cmd('autocmd FileType alpha setlocal nofoldenable')
   end
 end
@@ -111,42 +111,42 @@ end
 function M.autopairs()
   return function()
     local autopairs_loaded, autopairs = pcall(require, 'nvim-autopairs')
-    local cmp_loaded, cmp = pcall(require, 'cmp')
+    local cmp_loaded, cmp             = pcall(require, 'cmp')
 
     if not (autopairs_loaded or cmp_loaded) then return end
 
     autopairs.setup({
       disable_filetype = { 'TelescopePrompt' },
-      --@usage check bracket in same line
-        enable_check_bracket_line = false,
-      --@usage check treesitter
-      check_ts = true,
-      enable_moveright = true,
-      --@usage disable when recording or executing a macro
-      disable_in_macro = false,
-      --@usage add bracket pairs after quote
-      enable_afterquote = true,
-      --@usage map the <BS> key
-      map_bs = true,
-      --@usage map <c-w> to delete a pair if possible
-      map_c_w = false,
-      --@usage disable when insert after visual block mode
-      disable_in_visualblock = false,
-      --@usage change default fast_wrap
-      fast_wrap = {
-        map = "<M-e>",
-        chars = { "{", "[", "(", '"', "'" },
-        pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
-        offset = 0, -- Offset from pattern match
-        end_key = "$",
-        keys = "qwertyuiopzxcvbnmasdfghjkl",
-        check_comma = true,
-        highlight = "Search",
-        highlight_grey = "Comment",
+      --@usage[[ check bracket in same line ]]
+      enable_check_bracket_line = false,
+      --@usage[[ check treesitter ]]
+      check_ts                  = true,
+      enable_moveright          = true,
+      --@usage[[ disable when recording or executing a macro ]]
+      disable_in_macro          = false,
+      --@usage[[ add bracket pairs after quote ]]
+      enable_afterquote         = true,
+      --@usage[[ map the <BS> key ]]
+      map_bs                    = true,
+      --@usage[[ map <c-w> to delete a pair if possible ]]
+      map_c_w                   = false,
+      --@usage[[ disable when insert after visual block mode ]]
+      disable_in_visualblock    = false,
+      --@usage[[ change default fast_wrap ]]
+      fast_wrap                 = {
+        map            = '<M-e>',
+        chars          = { '{', '[', '(', '"', '\'' },
+        pattern        = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], '%s+', ''),
+        offset         = 0, -- Offset from pattern match
+        end_key        = '$',
+        keys           = 'qwertyuiopzxcvbnmasdfghjkl',
+        check_comma    = true,
+        highlight      = 'Search',
+        highlight_grey = 'Comment',
       },
     })
 
-    --@usage intergate with cmp
+    --@usage[[ intergate with cmp ]]
     local cmp_autopairs = require('nvim-autopairs.completion.cmp')
     cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
   end
@@ -154,48 +154,49 @@ end
 
 function M.bufferline()
   return function()
-    local is_bufferline_loaded, bufferline =  pcall(require, 'bufferline')
-    if not is_bufferline_loaded then return end
+    local bufferline_loaded, bufferline = pcall(require, 'bufferline')
+
+    if not bufferline_loaded then return end
 
     local fn = vim.fn
 
     bufferline.setup {
       options = {
-        numbers = 'none',
-        close_command = 'bdelete! %d',
-        right_mouse_command = 'bdelete! %d',
-        left_mouse_command = 'buffer %d',
-        middle_mouse_command = nil,
-        indicator = {
-            icon = '▎',
+        numbers                 = 'none',
+        close_command           = 'bdelete! %d',
+        right_mouse_command     = 'bdelete! %d',
+        left_mouse_command      = 'buffer %d',
+        middle_mouse_command    = nil,
+        indicator               = {
+            icon  = '▎',
             style = 'icon',
         },
-        buffer_close_icon = '',
-        modified_icon = '●',
-        close_icon = '',
-        left_trunc_marker = '',
-        right_trunc_marker = '',
-        --@usage can be used to change the buffer's label in the bufferline.
+        buffer_close_icon       = '',
+        modified_icon           = '●',
+        close_icon              = '',
+        left_trunc_marker       = '',
+        right_trunc_marker      = '',
+        --@usage[[ can be used to change the buffer's label in the bufferline ]]
         name_formatter = function(buf)
           if buf.name:match('%.md') then
             return fn.fnamemodify(buf.name)
           end
         end,
-        max_name_length = 14,
-        max_prefix_length = 10,
-        tab_size = 16,
-        diagnostics = false,
-        show_buffer_icons = true,
+        max_name_length         = 14,
+        max_prefix_length       = 10,
+        tab_size                = 16,
+        diagnostics             = false,
+        show_buffer_icons       = true,
         show_buffer_close_icons = false,
-        show_close_icon = false,
-        show_tab_indicators = true,
-        --@usage whether or not custom sorted buffers should persist
-        persist_buffer_sort = true,
-        --@usage 'slant' | 'thick' | 'thin' | { 'any', 'any' }
-        separator_style = 'thin',
-        enforce_regular_tabs = false,
-        always_show_bufferline = false,
-        sort_by = 'id',
+        show_close_icon         = false,
+        show_tab_indicators     = true,
+        --@usage[[ whether or not custom sorted buffers should persist ]]
+        persist_buffer_sort     = true,
+        --@usage[[ 'slant' | 'thick' | 'thin' | { 'any', 'any' } ]]
+        separator_style         = 'thin',
+        enforce_regular_tabs    = false,
+        always_show_bufferline  = false,
+        sort_by                 = 'id',
       }
     }
   end
@@ -203,40 +204,39 @@ end
 
 function M.cmp()
   return function()
-    local is_cmp_loaded, cmp = pcall(require, 'cmp')
-    local is_luasnip_loaded, luasnip = pcall(require, 'luasnip')
+    local cmp_loaded, cmp         = pcall(require, 'cmp')
+    local luasnip_loaded, luasnip = pcall(require, 'luasnip')
 
-    if not (is_cmp_loaded or is_luasnip_loaded) then return end
+    if not (cmp_loaded or luasnip_loaded) then return end
 
     local api = vim.api
 
-    -- Icon for custom item kinds
     local format_icons = {
-      Class = '',
-      Color = '',
-      Constant = '',
-      Constructor = '',
-      Enum = '練',
-      EnumMember = '',
-      Event = '',
-      Field = '',
-      File = '',
-      Folder = '',
-      Function = '',
-      Interface = '',
-      Keyword = ' ',
-      Method = '',
-      Module = '',
-      Operator = '',
-      Property = '',
-      Reference = '',
-      Snippet = '',
-      Struct = '',
-      Text = '',
+      Class         = '',
+      Color         = '',
+      Constant      = '',
+      Constructor   = '',
+      Enum          = '練',
+      EnumMember    = '',
+      Event         = '',
+      Field         = '',
+      File          = '',
+      Folder        = '',
+      Function      = '',
+      Interface     = '',
+      Keyword       = ' ',
+      Method        = '',
+      Module        = '',
+      Operator      = '',
+      Property      = '',
+      Reference     = '',
+      Snippet       = '',
+      Struct        = '',
+      Text          = '',
       TypeParameter = '',
-      Unit = '塞',
-      Value = '',
-      Variable = '',
+      Unit          = '塞',
+      Value         = '',
+      Variable      = '',
     }
 
     local has_words_before = function()
@@ -253,21 +253,20 @@ function M.cmp()
       },
       window = {
         documentation = {
-          border = {'╭', '─', '╮', '│', '╯', '─', '╰', '│'},
+          border       = {'╭', '─', '╮', '│', '╯', '─', '╰', '│'},
           winhighlight = 'Normal:Normal,FloatBorder:PmenuBorder,CursorLine:Visual,Search:None',
-          scrollbar = '║',
+          scrollbar    = '║',
         },
         completion = {
-          border = {'╭', '─', '╮', '│', '╯', '─', '╰', '│'},
+          border       = {'╭', '─', '╮', '│', '╯', '─', '╰', '│'},
           winhighlight = 'Normal:Normal,FloatBorder:PmenuBorder,CursorLine:Visual,Search:None',
-          scrollbar = nil,
+          scrollbar    = nil,
         },
       },
       mapping = {
         ['<Down>'] = cmp.mapping.scroll_docs(-4),
         ['<Up>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.close(),
         ['<CR>'] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Replace,
           select = true,
@@ -300,61 +299,61 @@ function M.cmp()
         }),
       },
       formatting = {
-        fields = { "kind", "abbr", "menu" },
-        max_width = 0,
+        fields     = { 'kind', 'abbr', 'menu' },
+        max_width  = 0,
         kind_icons = {
-          Class = " ",
-          Color = " ",
-          Constant = "ﲀ ",
-          Constructor = " ",
-          Enum = "練",
-          EnumMember = " ",
-          Event = " ",
-          Field = " ",
-          File = "",
-          Folder = " ",
-          Function = " ",
-          Interface = "ﰮ ",
-          Keyword = " ",
-          Method = " ",
-          Module = " ",
-          Operator = "",
-          Property = " ",
-          Reference = " ",
-          Snippet = " ",
-          Struct = " ",
-          Text = " ",
-          TypeParameter = " ",
-          Unit = "塞",
-          Value = " ",
-          Variable = " ",
+          Class         = '',
+          Color         = '',
+          Constant      = '',
+          Constructor   = '',
+          Enum          = '練',
+          EnumMember    = '',
+          Event         = '',
+          Field         = '',
+          File          = '',
+          Folder        = '',
+          Function      = '',
+          Interface     = '',
+          Keyword       = ' ',
+          Method        = '',
+          Module        = '',
+          Operator      = '',
+          Property      = '',
+          Reference     = '',
+          Snippet       = '',
+          Struct        = '',
+          Text          = '',
+          TypeParameter = '',
+          Unit          = '塞',
+          Value         = '',
+          Variable      = '',
         },
         source_names = {
-          nvim_lsp = "(LSP)",
-          path = "(Path)",
-          luasnip = "(Snippet)",
-          buffer = "(Buffer)",
+          nvim_lsp = '(LSP)',
+          path     = '(Path)',
+          luasnip  = '(Snippet)',
+          buffer   = '(Buffer)',
         },
         duplicates = {
           nvim_lsp = 0,
-          luasnip = 1,
-          buffer = 1,
-          path = 1,
+          luasnip  = 1,
+          buffer   = 1,
+          path     = 1,
         },
         duplicates_default = 0,
         format = function(entry, vim_item)
           vim_item.kind = format_icons[vim_item.kind]
           vim_item.menu = ({
             nvim_lsp = '(LSP)',
-            luasnip = '(Snippet)',
-            path = '(Path)',
-            buffer = '(Buffer)',
+            luasnip  = '(Snippet)',
+            path     = '(Path)',
+            buffer   = '(Buffer)',
           })[entry.source.name]
           vim_item.dup = ({
             nvim_lsp = 0,
-            luasnip = 1,
-            buffer = 1,
-            path = 1,
+            luasnip  = 1,
+            buffer   = 1,
+            path     = 1,
           })[entry.source.name] or 0
 
           return vim_item
@@ -373,19 +372,19 @@ end
 
 function M.comment()
   return function()
-    local is_comment_loaded, comment = pcall(require, 'Comment')
+    local comment_loaded, comment = pcall(require, 'Comment')
 
-    if not is_comment_loaded then return end
+    if not comment_loaded then return end
 
     comment.setup({
       padding = true,
-      sticky = true,
+      sticky  = true,
       toggler = {
-        line = 'gcc',
+        line  = 'gcc',
         block = 'gbc',
       },
       opleader = {
-        line = 'gc',
+        line  = 'gc',
         block = 'gb',
       },
       pre_hook = function(ctx)
@@ -415,236 +414,209 @@ function M.filetype()
   end
 end
 
-function M.fzf()
+function M.flutter()
   return function()
-    local api = vim.api
-    local map = function(...) vim.api.nvim_set_keymap('n', ...) end
-    local glob = vim.g
-    local opts = { noremap = true, silent = true }
+    local flutter_loaded, flutter = pcall(require, 'flutter-tools')
 
-    --@usage fzf layout
-    glob.fzf_layout = { down = '50%' }
+    if not flutter_loaded then return end
 
-    --@usage disable preview window
-    glob.fzf_preview_window = { right = 'hidden' }
-
-    glob.fzf_nvim_statusline = 0
-
-    -- Open search popup
-    map('<C-p>', '<cmd>Files<CR>', opts)
-    map('<C-f>', '<cmd>Rg<CR>', opts)
-    map('<C-b>', '<cmd>Buffers<CR>', opts)
-
-    glob.fzf_colors = {
-      fg      = { 'fg', 'LineNr' },
-      bg      = { 'bg', 'EndOfBuffer' },
-      hl      = { 'fg', 'Function' },
-      ['fg+'] = { 'fg', 'Normal' },
-      ['bg+'] = { 'bg', 'EndOfBuffer' },
-      ['hl+'] = { 'fg', 'Function' },
-      info    = { 'fg', 'Number' },
-      border  = { 'fg', 'EndOfBuffer' },
-      prompt  = { 'fg', 'Character' },
-      pointer = { 'fg', 'Function' },
-      marker  = { 'fg', 'Function' },
-      spinner = { 'fg', 'Function' },
-      header  = { 'fg', 'Statement' }
+    flutter.setup{
+      ui = {
+        border             = 'rounded',
+        notification_style = 'native',
+      },
+      decorations = {
+        statusline = {
+          app_version = false,
+          device      = false,
+        }
+      },
+      lsp = {
+        color = {
+          enabled          = true,
+          background       = true,
+          foreground       = true,
+          virtual_text     = false,
+          virtual_text_str = '',
+        },
+        settings = {
+          showTodos              = false,
+          completeFunctionCalls  = true,
+          renameFilesWithClasses = 'prompt',
+          enableSnippets         = true,
+        }
+      },
     }
-
-    --@usage actions for fzf
-    glob.fzf_action = {
-       ['ctrl-t'] = 'tab split',
-       ['ctrl-x'] = 'split',
-       ['ctrl-v'] = 'vsplit'
-    }
-
-    --@usage files searching
-    api.nvim_exec([[command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, <bang>0)]], false)
-
-    --@usage buffers searching
-    api.nvim_exec([[command! -bang -nargs=? -complete=dir Buffers call fzf#vim#buffers(<q-args>, <bang>0)]], false)
-
-    --@usage advanced ripgrep integration
-    api.nvim_exec([[
-      function! RipgrepFzf(query, fullscreen)
-        let command_fmt = 'rg --column --no-heading --color=always --smart-case %s -g "!{node_modules,.git,build,dist,.cache,cache,.idea}" || true'
-        let initial_command = printf(command_fmt, shellescape(a:query))
-        let reload_command = printf(command_fmt, '{q}')
-        let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-        call fzf#vim#grep(initial_command, 1, a:fullscreen)
-      endfunction
-      command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
-    ]], false)
   end
 end
 
 function M.gitsigns()
   return function()
-    local is_gitsigns_loaded, gitsigns = pcall(require, 'gitsigns')
+    local gitsigns_loaded, gitsigns = pcall(require, 'gitsigns')
 
-    if not is_gitsigns_loaded then return end
+    if not gitsigns_loaded then return end
 
     gitsigns.setup {
-      numhl = false,
-      linehl = false,
-      word_diff = false,
-      signcolumn = true,
+      numhl              = false,
+      linehl             = false,
+      word_diff          = false,
+      signcolumn         = true,
       signs = {
-        add = { hl = 'DiffAdd', text = '' },
-        change = { hl = 'DiffChange', text = '' },
-        delete = { hl = 'DiffDelete', text = '' },
-        topdelete = { hl = 'DiffDelete', text = '' },
+        add          = { hl = 'DiffAdd',    text = '' },
+        change       = { hl = 'DiffChange', text = '' },
+        delete       = { hl = 'DiffDelete', text = '' },
+        topdelete    = { hl = 'DiffDelete', text = '' },
         changedelete = { hl = 'DiffChange', text = '' },
       },
-      status_formatter = nil, -- Use default
-      sign_priority = 6,
-      debug_mode = false,
+      status_formatter   = nil,
+      sign_priority      = 6,
+      debug_mode         = false,
       current_line_blame = false,
-      update_debounce = 100,
+      update_debounce    = 100,
     }
   end
 end
 
 function M.icons()
   return function()
-    local is_colors_loaded, highlights = pcall(require, 'colors.highlights')
-    local is_devicons_loaded, icons = pcall(require, 'nvim-web-devicons')
+    local devicons_loaded, icons = pcall(require, 'nvim-web-devicons')
+    local colors_loaded, highlights = pcall(require, 'colors.highlights')
 
-    if not (is_devicons_loaded or is_colors_loaded) then return end
+    if not (devicons_loaded or colors_loaded) then return end
 
     local colors = highlights.colors
 
     icons.setup {
       override = {
         c = {
-           icon = '',
+           icon  = '',
            color = colors.blue,
-           name = 'c',
+           name  = 'c',
         },
         cc = {
-           icon = '',
+           icon  = '',
            color = colors.blue,
-           name = 'cc',
+           name  = 'cc',
         },
         cpp = {
-           icon = '',
+           icon  = '',
            color = colors.blue,
-           name = 'cpp',
+           name  = 'cpp',
         },
         css = {
-           icon = '',
+           icon  = '',
            color = colors.blue,
-           name = 'css',
+           name  = 'css',
         },
         deb = {
-           icon = '',
+           icon  = '',
            color = colors.red,
-           name = 'deb',
+           name  = 'deb',
         },
         Dockerfile = {
-           icon = '',
+           icon  = '',
            color = colors.blue,
-           name = 'Dockerfile',
+           name  = 'Dockerfile',
         },
         html = {
-           icon = '',
+           icon  = '',
            color = colors.orange,
-           name = 'html',
+           name  = 'html',
         },
         java = {
-          icon = '',
+          icon  = '',
           color = colors.red,
-          name = 'java',
+          name  = 'java',
         },
         jpeg = {
-           icon = '',
+           icon  = '',
            color = colors.magenta,
-           name = 'jpeg',
+           name  = 'jpeg',
         },
         jpg = {
-           icon = '',
+           icon  = '',
            color = colors.magenta,
-           name = 'jpg',
+           name  = 'jpg',
         },
         js = {
-           icon = '',
+           icon  = '',
            color = colors.orange,
-           name = 'js',
+           name  = 'js',
         },
         kt = {
-           icon = '󱈙',
+           icon  = '󱈙',
            color = colors.orange,
-           name = 'kt',
+           name  = 'kt',
         },
         lock = {
-           icon = '',
+           icon  = '',
            color = colors.red,
-           name = 'lock',
+           name  = 'lock',
         },
         lua = {
-           icon = '',
+           icon  = '',
            color = colors.blue,
-           name = 'lua',
+           name  = 'lua',
         },
         mp3 = {
-           icon = '',
+           icon  = '',
            color = colors.blue,
-           name = 'mp3',
+           name  = 'mp3',
         },
         mp4 = {
-           icon = '',
+           icon  = '',
            color = colors.blue,
-           name = 'mp4',
+           name  = 'mp4',
         },
         out = {
-           icon = '',
+           icon  = '',
            color = colors.blue,
-           name = 'out',
+           name  = 'out',
         },
         png = {
-           icon = '',
+           icon  = '',
            color = colors.magenta,
-           name = 'png',
+           name  = 'png',
         },
         py = {
-           icon = '',
+           icon  = '',
            color = colors.orange,
-           name = 'py',
+           name  = 'py',
         },
         toml = {
-           icon = '',
+           icon  = '',
            color = colors.blue,
-           name = 'toml',
+           name  = 'toml',
         },
         ts = {
-           icon = '',
+           icon  = '',
            color = colors.blue,
-           name = 'ts',
+           name  = 'ts',
         },
         rb = {
-           icon = '',
+           icon  = '',
            color = colors.red,
-           name = 'rb',
+           name  = 'rb',
         },
         rpm = {
-           icon = '',
+           icon  = '',
            color = colors.orange,
-           name = 'rpm',
+           name  = 'rpm',
         },
         vue = {
-           icon = '﵂',
+           icon  = '﵂',
            color = colors.green,
-           name = 'vue',
+           name  = 'vue',
         },
         xz = {
-           icon = '',
+           icon  = '',
            color = colors.orange,
-           name = 'xz',
+           name  = 'xz',
         },
         zip = {
-           icon = '',
+           icon  = '',
            color = colors.orange,
-           name = 'zip',
+           name  = 'zip',
         }
       }
     }
@@ -653,10 +625,10 @@ end
 
 function M.lsp()
   return function()
-    local is_lsp_installer_loaded, lsp_installer = pcall(require, 'nvim-lsp-installer')
-    local is_languages_loaded, languages = pcall(require, 'plugins/languages')
+    local lsp_installer_loaded, lsp_installer = pcall(require, 'nvim-lsp-installer')
+    local languages_loaded, languages         = pcall(require, 'plugins/languages')
 
-    if not (is_lsp_installer_loaded or is_languages_loaded) then return end
+    if not (lsp_installer_loaded or languages_loaded) then return end
 
     local api = vim.api
     local cmd = vim.cmd
@@ -664,20 +636,20 @@ function M.lsp()
 
     local customize = function()
       local handlers = lsp.handlers
-      local fn = vim.fn
+      local fn       = vim.fn
 
-      --@usage diagnostics
+      --@usage[[ diagnostics ]]
       handlers['textDocument/publishDiagnostics'] = lsp.with(
         lsp.diagnostic.on_publish_diagnostics,
         {
-          signs = true,
-          virtual_text = false,
-          underline = true,
+          signs         = true,
+          virtual_text  = false,
+          underline     = true,
           severity_sort = false,
         }
       )
 
-      --@usage symbols in the sign column (gutter)
+      --@usage[[ symbols in the sign column (gutter) ]]
       local signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
       for type, icon in pairs(signs) do
         local hl = 'DiagnosticSign' .. type
@@ -695,7 +667,7 @@ function M.lsp()
         {'│', 'FloatBorder'},
       }
 
-      --@usage popup customization globly
+      --@usage[[ popup customization globly ]]
       local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
       function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
         opts = opts or {}
@@ -705,29 +677,29 @@ function M.lsp()
 
     end
 
-    --@usage invoke customization
+    --@usage[[ invoke customization ]]
     customize()
 
     local on_attach = function(client, bufnr)
-      local buf_set_keymap = function(...) api.nvim_buf_set_keymap(bufnr, ...) end
-      local buf_set_option = function(...) api.nvim_buf_set_option(bufnr, ...) end
-      local opts = { noremap = true, silent = true }
+      --[[ local buf_set_keymap = function(...) api.nvim_buf_set_keymap(bufnr, ...) end ]]
+      --[[ local buf_set_option = function(...) api.nvim_buf_set_option(bufnr, ...) end ]]
+      --[[ local opts = { noremap = true, silent = true } ]]
 
-      --@usage enable completion triggered
-      buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-      buf_set_keymap('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>',                             opts)
-      buf_set_keymap('n', '<leader>gf', '<cmd>lua vim.lsp.buf.references()<CR>',                             opts)
-      buf_set_keymap('n', '<leader>gk', '<cmd>lua vim.lsp.buf.hover()<CR>',                                  opts)
-      buf_set_keymap('n', '<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>',                         opts)
-      buf_set_keymap('n', '<leader>gr', '<cmd>lua vim.lsp.buf.rename()<CR>',                                 opts)
-      buf_set_keymap('n', '<leader>gn', '<cmd>lua vim.diagnostic.goto_next()<CR>',                           opts)
-      buf_set_keymap('n', '<leader>gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>',                           opts)
-      buf_set_keymap('n', '<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<CR>',                            opts)
-      buf_set_keymap('n', '<leader>gl', '<cmd>lua vim.diagnostic.open_float()<CR>',                          opts)
-      buf_set_keymap('n', '<C-e>',      '<cmd>lua vim.diagnostic.setloclist()<CR>',                     opts)
-      buf_set_keymap('n', '<C-w>',      '<cmd>lua vim.diagnostic.setloclist({ workspace = true })<CR>', opts)
+      --@usage[[ enable completion triggered ]]
+      --[[ buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc') ]]
+      --[[ buf_set_keymap('n', '<leader>gn', '<cmd>lua vim.diagnostic.goto_next()<CR>',                           opts) ]]
+      --[[ buf_set_keymap('n', '<leader>gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>',                           opts) ]]
+      --[[ buf_set_keymap('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>',                             opts) ]]
+      --[[ buf_set_keymap('n', '<leader>gf', '<cmd>lua vim.lsp.buf.references()<CR>',                             opts) ]]
+      --[[ buf_set_keymap('n', '<leader>gk', '<cmd>lua vim.lsp.buf.hover()<CR>',                                  opts) ]]
+      --[[ buf_set_keymap('n', '<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>',                         opts) ]]
+      --[[ buf_set_keymap('n', '<leader>gr', '<cmd>lua vim.lsp.buf.rename()<CR>',                                 opts) ]]
+      --[[ buf_set_keymap('n', '<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<CR>',                            opts) ]]
+      --[[ buf_set_keymap('n', '<leader>gl', '<cmd>lua vim.diagnostic.open_float()<CR>',                          opts) ]]
+      --[[ buf_set_keymap('n', '<C-e>',      '<cmd>lua vim.diagnostic.setloclist()<CR>',                     opts) ]]
+      --[[ buf_set_keymap('n', '<C-w>',      '<cmd>lua vim.diagnostic.setloclist({ workspace = true })<CR>', opts) ]]
 
-      --@usage set autocommands conditional on server_capabilities
+      --@usage[[ set autocommands conditional on server_capabilities ]]
       if client.resolved_capabilities.document_highlight then
         api.nvim_exec([[
           augroup lsp_document_highlight
@@ -758,31 +730,31 @@ function M.lsp()
     lsp_installer.settings {
       ui = {
         icons = {
-          --@usage the list icon to use for installed servers.
-          server_installed = '✓',
-          --@usage the list icon to use for servers that are pending installation.
-          server_pending = '➜',
-          --@usage the list icon to use for servers that are not installed.
+          --@usage[[ the list icon to use for installed servers ]]
+          server_installed   = '✓',
+          --@usage[[ the list icon to use for servers that are pending installation ]]
+          server_pending     = '➜',
+          --@usage[[ the list icon to use for servers that are not installed ]]
           server_uninstalled = '✗'
         },
         keymaps = {
-          --@usage keymap to expand a server in the UI
+          --@usage[[ keymap to expand a server in the UI ]]
           toggle_server_expand = '<CR>',
-          --@usage keymap to install a server
-          install_server = 'i',
-          --@usage keymap to reinstall/update a server
-          update_server = 'u',
-          --@usage keymap to uninstall a server
-          uninstall_server = 'X',
+          --@usage[[ keymap to install a server ]]
+          install_server       = 'i',
+          --@usage[[ keymap to reinstall/update a server ]]
+          update_server        = 'u',
+          --@usage[[ keymap to uninstall a server ]]
+          uninstall_server     = 'X',
         },
       }
     }
 
     lsp_installer.on_server_ready(function(server)
       local opts = {
-        --@usage map buffer local keybindings when the language server attaches
-        on_attach = on_attach,
-        --@usage enable snippet support
+        --@usage[[ map buffer local keybindings when the language server attaches ]]
+        on_attach    = on_attach,
+        --@usage[[ enable snippet support ]]
         capabilities = set_capabilities(),
       }
       local language = languages[server.name]
@@ -802,7 +774,7 @@ function M.lsp()
         end
       end
 
-      --@usage apply options
+      --@usage[[ apply options ]]
       server:setup(opts)
       cmd [[ do User LspAttachBuffers ]]
     end)
@@ -811,10 +783,10 @@ end
 
 function M.lualine()
   return function()
-    local is_colors_loaded, highlights = pcall(require, 'colors.highlights')
-    local is_lualine_loaded, lualine = pcall(require, 'lualine')
+    local lualine_loaded, lualine   = pcall(require, 'lualine')
+    local colors_loaded, highlights = pcall(require, 'colors.highlights')
 
-    if not (is_lualine_loaded or is_colors_loaded) then return end
+    if not (lualine_loaded or colors_loaded) then return end
 
     local colors = highlights.colors
     local fn = vim.fn
@@ -838,9 +810,9 @@ function M.lualine()
     local config = {
       options = {
         component_separators = '',
-        section_separators = '',
+        section_separators   = '',
         theme = {
-          normal = { c = { fg = colors.fg, bg = colors.extraBg } },
+          normal   = { c = { fg = colors.fg, bg = colors.extraBg } },
           inactive = { c = { fg = colors.fg, bg = colors.extraBg } },
         },
       },
@@ -867,9 +839,8 @@ function M.lualine()
         n = colors.blue,
         i = colors.green,
         c = colors.orange,
-        V = colors.magenta,
-        [''] = colors.magenta,
         v = colors.magenta,
+        V = colors.magenta,
         R = colors.red,
       }
       local color = mode_colors[fn.mode()]
@@ -893,7 +864,7 @@ function M.lualine()
       function()
         return '▊'
       end,
-      color = { fg = colors.blue },
+      color   = { fg = colors.blue    },
       padding = { left = 0, right = 1 },
     })
 
@@ -903,9 +874,8 @@ function M.lualine()
           n = 'NORMAL',
           i = 'INSERT',
           c = 'COMMAND',
-          V = 'VISUAL',
-          [''] = 'VISUAL',
           v = 'VISUAL',
+          V = 'VISUAL',
           R = 'REPLACE',
           s = 'SNIPPET',
         }
@@ -913,26 +883,29 @@ function M.lualine()
           n = ' ',
           i = ' ',
           c = 'גּ ',
-          V = '﬏ ',
-          [''] = '﬏ ',
           v = '﬏ ',
+          V = '﬏ ',
           R = ' ',
           s = ' ',
         }
         cmd('hi! LualineMode guifg='..get_mode_color()..' guibg='..colors.extraBg)
+
         local alias_mode = alias[fn.mode()]
         local icon = icons[fn.mode()]
+
         if not alias_mode then
           alias_mode = fn.mode()
         end
+
         if not icon then
           icon = ' '
         end
+
         return icon..alias_mode
       end,
-      color = 'LualineMode',
+      color   = 'LualineMode',
       padding = { left = 0, right = 1 },
-      cond = conditions.hide_in_width,
+      cond    = conditions.hide_in_width,
     })
 
     -- ins_left({
@@ -943,25 +916,25 @@ function M.lualine()
     ins_left({
       'filename',
       color = { fg = colors.fg, gui = 'bold' },
-      cond = conditions.buffer_not_empty and conditions.hide_in_width,
+      cond  = conditions.buffer_not_empty and conditions.hide_in_width,
     })
 
     ins_left({
       'branch',
-      icon = '',
+      icon  = '',
       color = { fg = colors.magenta, gui = 'bold' },
-      cond = conditions.hide_in_width,
+      cond  = conditions.hide_in_width,
     })
 
     ins_left({
       'diff',
-      symbols = { added = ' ', modified = '柳', removed = ' ' },
+      symbols    = { added = ' ', modified = '柳', removed = ' ' },
       diff_color = {
-        added = { fg = colors.green },
+        added    = { fg = colors.green  },
         modified = { fg = colors.orange },
-        removed = { fg = colors.red },
+        removed  = { fg = colors.red    },
       },
-      cond = conditions.hide_in_width,
+      cond       = conditions.hide_in_width,
     })
 
     ins_left({
@@ -994,8 +967,8 @@ function M.lualine()
 
     ins_right({
       'location',
-      color = { fg = colors.blue, gui = 'bold' },
-      padding = { left = 1, right = 1 },
+      color   = { fg = colors.blue, gui = 'bold' },
+      padding = { left = 1, right = 1            },
     })
 
     ins_right({
@@ -1003,13 +976,13 @@ function M.lualine()
       sources = { 'nvim_diagnostic' },
       symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
       diagnostics_color = {
-        error = { fg = colors.red },
-        warn = { fg = colors.orange },
-        info = { fg = colors.blue },
-        hint = { fg = colors.blue },
+        error = { fg = colors.red    },
+        warn  = { fg = colors.orange },
+        info  = { fg = colors.blue   },
+        hint  = { fg = colors.blue   },
       },
       padding = { left = 1, right = 1 },
-      cond = conditions.hide_in_width,
+      cond    = conditions.hide_in_width,
     })
 
     ins_right({
@@ -1019,10 +992,10 @@ function M.lualine()
 
     ins_right({
       'o:encoding',
-      fmt = string.upper,
-      color = { fg = colors.green, gui = 'bold' },
-      padding = { left = 1, right = 1 },
-      cond = conditions.hide_in_width,
+      fmt     = string.upper,
+      color   = { fg = colors.green, gui = 'bold' },
+      padding = { left = 1, right = 1             },
+      cond    = conditions.hide_in_width,
     })
 
     -- ins_right({
@@ -1043,8 +1016,8 @@ function M.lualine()
       function()
         return '▊'
       end,
-      color = { fg = colors.blue },
-      padding = { right = 0 },
+      color   = { fg = colors.blue },
+      padding = { right = 0        },
     })
 
     lualine.setup(config)
@@ -1053,39 +1026,44 @@ end
 
 function M.neoscroll()
   return function()
-    local is_neoscroll_loaded, neoscroll = pcall(require, 'neoscroll')
-    local is_config_loaded, config = pcall(require, 'neoscroll.config')
+    local neoscroll_loaded, neoscroll = pcall(require, 'neoscroll')
+    local neoscroll_config_loaded, config = pcall(require, 'neoscroll.config')
 
-    if not (is_neoscroll_loaded or is_config_loaded) then return end
+    if not (neoscroll_loaded or neoscroll_config_loaded) then return end
 
     neoscroll.setup({
-      -- All these keys will be mapped to their corresponding default scrolling animation
-      mappings = { '<C-u>', '<C-d>' },
-      hide_cursor = true,          -- Hide cursor while scrolling
-      stop_eof = true,             -- Stop at <EOF> when scrolling downwards
-      use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the glob scope
-      respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
-      cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
-      easing_function = nil,        -- Default easing function
-      pre_hook = nil,              -- Function to run before the scrolling animation starts
-      post_hook = nil,              -- Function to run after the scrolling animation ends
+      mappings             = { '<C-u>', '<C-d>' },
+      --@usage[[ Hide cursor while scrolling ]]
+      hide_cursor          = true,
+      --@usage[[ Stop at <EOF> when scrolling downwards ]]
+      stop_eof             = true,
+      --@usage[[ Use the local scope of scrolloff instead of the glob scope ]]
+      use_local_scrolloff  = false,
+      --@usage[[ Stop scrolling when the cursor reaches the scrolloff margin of the file ]]
+      respect_scrolloff    = false,
+      --@usage[[ The cursor will keep on scrolling even if the window cannot scroll further ]]
+      cursor_scrolls_alone = true,
+      --@usage[[ Default easing function ]]
+      easing_function      = nil,
+      --@usage[[ Function to run before the scrolling animation starts ]]
+      pre_hook             = nil,
+      --@usage[[ Function to run after the scrolling animation ends ]]
+      post_hook            = nil,
     })
 
     local mappings = {}
-
     mappings['<C-u>'] = { 'scroll', { '-vim.wo.scroll', 'true', '100' } }
     mappings['<C-d>'] = { 'scroll', { 'vim.wo.scroll', 'true', '100' } }
-    -- mappings['<C-b>'] = { 'scroll', { '-vim.api.nvim_win_get_height(0)', 'true', '100' } }
-    -- mappings['<C-f>'] = { 'scroll', { 'vim.api.nvim_win_get_height(0)', 'true', '100' } }
+
     config.set_mappings(mappings)
   end
 end
 
 function M.nvimtree()
   return function()
-    local is_nvimtree_loaded, nvimtree = pcall(require, 'nvim-tree')
+    local nvimtree_loaded, nvimtree = pcall(require, 'nvim-tree')
 
-    if not is_nvimtree_loaded then return end
+    if not nvimtree_loaded then return end
 
     local screen_width = vim.api.nvim_list_uis()[1].width
     local screen_height = vim.api.nvim_list_uis()[1].height
@@ -1093,95 +1071,95 @@ function M.nvimtree()
     local height = 32
 
     nvimtree.setup {
-      -- disables netrw completely
+      --@usage[[ disables netrw completely ]]
       disable_netrw       = true,
-      -- hijack netrw window on startup
+      --@usage[[ hijack netrw window on startup ]]
       hijack_netrw        = false,
-      -- open the tree when running this setup function
+      --@usage[[ open the tree when running this setup function ]]
       open_on_setup       = false,
-      -- will not open on setup if the filetype is in this list
+      --@usage[[ will not open on setup if the filetype is in this list ]]
       ignore_ft_on_setup  = {},
-      -- disable diagnostic in nvim tree
+      --@usage[[ disable diagnostic in nvim tree ]]
       diagnostics = {
-        enable = true,
+        enable       = true,
         show_on_dirs = true,
-        icons = {
-          hint = '',
-          info = '',
+        icons        = {
+          hint    = '',
+          info    = '',
           warning = '',
-          error = '',
+          error   = '',
         },
       },
-      -- opens the tree when changing/opening a new tab if the tree wasn't previously opened
+      --@usage[[ opens the tree when changing/opening a new tab if the tree wasn't previously opened ]]
       open_on_tab         = false,
-      -- hijack the cursor in the tree to put it at the start of the filename
+      --@usage[[ hijack the cursor in the tree to put it at the start of the filename ]]
       hijack_cursor       = false,
-      -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually)
+      --@usage[[ updates the root directory of the tree on `DirChanged` (when your run `:cd` usually) ]]
       update_cwd          = false,
       renderer = {
-        add_trailing = false,
-        group_empty = false,
-        highlight_git = false,
-        full_name = false,
+        add_trailing           = false,
+        group_empty            = false,
+        highlight_git          = false,
+        full_name              = false,
         highlight_opened_files = 'none',
-        root_folder_modifier = ':~',
-        indent_width = 2,
-        indent_markers = {
-          enable = false,
+        root_folder_modifier   = ':~',
+        indent_width           = 2,
+        indent_markers         = {
+          enable        = true,
           inline_arrows = true,
-          icons = {
+          icons         = {
             corner = '└',
-            edge = '│',
-            item = '│',
+            edge   = '│',
+            item   = '│',
             bottom = '─',
-            none = ' ',
+            none   = ' ',
           },
         },
       },
-      -- update the focused file on `BufEnter`, un-collapses the folders recursively until it finds the file
+      --@usage[[ update the focused file on `BufEnter`, un-collapses the folders recursively until it finds the file ]]
       update_focused_file = {
-        -- enables the feature
+        --@usage[[ enables the feature ]]
         enable      = true,
-        -- update the root directory of the tree to the one of the folder containing the file if the file is not under the current root directory
-        -- only relevant when `update_focused_file.enable` is true
+        --@usage[[ update the root directory of the tree to the one of the folder containing the file if the file is not under the current root directory ]]
+        --[[ only relevant when `update_focused_file.enable` is true ]]
         update_cwd  = true,
-        -- list of buffer names / filetypes that will not update the cwd if the file isn't found under the current root directory
-        -- only relevant when `update_focused_file.update_cwd` is true and `update_focused_file.enable` is true
+        --@usage[[ list of buffer names / filetypes that will not update the cwd if the file isn't found under the current root directory ]]
+        --[[ only relevant when `update_focused_file.update_cwd` is true and `update_focused_file.enable` is true ]]
         ignore_list = {}
       },
-      -- configuration options for the system open command (`s` in the tree by default)
+      --@usage[[ configuration options for the system open command (`s` in the tree by default) ]]
       system_open = {
-        -- the command to run this, leaving nil should work in most cases
+        --@usage[[ the command to run this, leaving nil should work in most cases ]]
         cmd  = nil,
-        -- the command arguments as a list
+        --@usage[[ the command arguments as a list ]]
         args = {}
       },
 
       view = {
         preserve_window_proportions = true,
-        -- width of the window, can be either a number (columns) or a string in `%`
-        width = 35,
-        -- side of the tree, can be one of 'left' | 'right' | 'top' | 'bottom'
-        side = 'top',
-        -- hide root dir
-        hide_root_folder = false,
-        mappings = {
-          -- custom only false will merge the list with the default mappings
-          -- if true, it will only use your list to set the mappings
+        --@usage[[ width of the window, can be either a number (columns) or a string in `%` ]]
+        width                       = 35,
+        --@usage[[ side of the tree, can be one of 'left' | 'right' | 'top' | 'bottom' ]]
+        side                        = 'top',
+        --@usage[[ hide root dir ]]
+        hide_root_folder            = false,
+        mappings                    = {
+          --@usage[[ custom only false will merge the list with the default mappings ]]
+          --[[ if true, it will only use your list to set the mappings ]]
           custom_only = false,
-          -- list of mappings to set on the tree manually
-          list = {}
+          --@usage[[ list of mappings to set on the tree manually ]]
+          list        = {}
         },
         float = {
-          enable = true,
+          enable             = true,
           quit_on_focus_loss = true,
-          open_win_config = {
+          open_win_config    = {
             relative = 'editor',
-            border = 'rounded',
-            width = width,
-            height = height,
-            row = (screen_height - height) * 0.5,
-            col = (screen_width - width) * 0.5,
+            border   = 'rounded',
+            width    = width,
+            height   = height,
+            row      = (screen_height - height) * 0.5,
+            col      = (screen_width - width) * 0.5,
           },
         },
       }
@@ -1191,91 +1169,76 @@ end
 
 function M.saga()
   return function()
-    local is_saga_loaded, saga = pcall(require, 'lspsaga')
+    local saga_loaded, saga = pcall(require, 'lspsaga')
 
-    if not is_saga_loaded then return end
+    if not saga_loaded then return end
 
-    saga.setup {
-      debug = false,
-      use_saga_diagnostic_sign = false,
-      --@usage diagnostic sign
-      error_sign = '',
-      warn_sign = '',
-      hint_sign = '',
-      infor_sign = '',
-      diagnostic_header_icon = ' ',
-      --@usage code action title icon
-      code_action_icon = ' ',
-      code_action_prompt = {
-        enable = true,
-        sign = true,
-        sign_priority = 40,
-        virtual_text = true,
+    saga.init_lsp_saga({
+      --@usage[[ "single" | "double" | "rounded" | "bold" | "plus" ]]
+      border_style             = 'rounded',
+      --@usage[[ the range of 0 for fully opaque window (disabled) to 100 for fully ]]
+      --[[ transparent background. Values between 0-30 are typically most useful. ]]
+      saga_winblend            = 0,
+      --@usage[[ Error, Warn, Info, Hint ]]
+      diagnostic_header        = { ' ', ' ', ' ', ' ' },
+      --@usage[[ preview lines of lsp_finder and definition preview ]]
+      max_preview_lines        = 12,
+      --@usage[[ use emoji lightbulb in default ]]
+      code_action_icon         = ' ',
+      --@usage[[ press number to execute the codeaction in codeaction window ]]
+      code_action_num_shortcut = true,
+      --@usage[[ finder icons ]]
+      finder_icons = {
+        def = ' ',
+        ref = ' ',
+        link = ' ',
       },
-      finder_definition_icon = '  ',
-      finder_reference_icon = '  ',
-      max_preview_lines = 10,
-      finder_action_keys = {
-        open = '<CR>',
-        vsplit = 'v',
-        split = 'x',
-        quit = '<C-c>',
-        scroll_down = '<C-d>',
-        scroll_up = '<C-u>',
-      },
-      code_action_keys = {
-        quit = '<C-c>',
-        exec = '<CR>',
-      },
-      rename_action_keys = {
-        quit = '<C-c>',
-        exec = '<CR>',
-      },
-      definition_preview_icon = '  ',
-      border_style = 'round',
-      rename_prompt_prefix = '➤',
-      rename_output_qflist = {
-        enable = false,
-        auto_open_qflist = false,
-      },
-      server_filetype_map = {},
-      diagnostic_prefix_format = '%d. ',
-      diagnostic_message_format = '%m %c',
-      highlight_prefix = false,
-    }
+    })
+
+    local map = function(...) vim.api.nvim_set_keymap('n', ...) end
+    local opts = { silent = true, noremap = true }
+
+    map('<leader>gr', '<cmd>Lspsaga rename<CR>',                  opts)
+    map('<leader>ga', '<cmd>Lspsaga code_action<CR>',             opts)
+    map('<leader>gf', '<cmd>Lspsaga lsp_finder<CR>',              opts)
+    map('<leader>gk', '<cmd>Lspsaga hover_doc<CR>',               opts)
+    map('<leader>gl', '<cmd>Lspsaga show_line_diagnostics<CR>',   opts)
+    map('<leader>gl', '<cmd>Lspsaga show_cursor_diagnostics<CR>', opts)
+    map('<leader>gn', '<cmd>Lspsaga diagnostic_jump_next<CR>',    opts)
+    map('<leader>gp', '<cmd>Lspsaga diagnostic_jump_prev<CR>',    opts)
   end
 end
 
 function M.telescope()
   return function()
-    local is_telescope_loaded, telescope = pcall(require, 'telescope')
-    local is_telescope_actions_loaded, actions = pcall(require, 'telescope.actions')
-    local is_telescope_sorters_loaded, sorters = pcall(require, 'telescope.sorters')
-    local is_telescope_previewers_loaded, previewers = pcall(require, 'telescope.previewers')
+    local telescope_loaded, telescope             = pcall(require, 'telescope')
+    local telescope_actions_loaded, actions       = pcall(require, 'telescope.actions')
+    local telescope_sorters_loaded, sorters       = pcall(require, 'telescope.sorters')
+    local telescope_previewers_loaded, previewers = pcall(require, 'telescope.previewers')
 
-    if not (is_telescope_loaded or is_telescope_actions_loaded or is_telescope_sorters_loaded or is_telescope_previewers_loaded) then
+    if not (telescope_loaded or telescope_actions_loaded or telescope_sorters_loaded or telescope_previewers_loaded) then
       return
     end
 
     telescope.setup {
       defaults = {
-        prompt_prefix = '  ',
-        selection_caret = '   ',
-        entry_prefix = '  ',
-        initial_mode = 'insert',
+        prompt_prefix      = '  ',
+        selection_caret    = '   ',
+        entry_prefix       = '  ',
+        initial_mode       = 'insert',
         selection_strategy = 'reset',
-        sorting_strategy = 'ascending',
-        layout_strategy = 'horizontal',
+        sorting_strategy   = 'ascending',
+        layout_strategy    = 'horizontal',
         layout_config = {
-          width = 0.5,
+          width          = 0.5,
           preview_cutoff = 120,
+          vertical       = { mirror = false },
           horizontal = {
             preview_width = function(_, cols, _)
               return math.floor(cols * 0.4)
             end,
             mirror = false,
           },
-          vertical = { mirror = false },
         },
         vimgrep_arguments = {
           'rg',
@@ -1290,20 +1253,20 @@ function M.telescope()
         },
         mappings = {
           i = {
-            ['<Tab>'] = actions.move_selection_next,
+            ['<Tab>']   = actions.move_selection_next,
             ['<S-Tab>'] = actions.move_selection_previous,
-            ['<C-c>'] = actions.close,
-            ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
-            ['<C-j>'] = actions.cycle_history_next,
-            ['<C-k>'] = actions.cycle_history_prev,
-            ['<CR>'] = actions.select_default,
+            ['<C-c>']   = actions.close,
+            ['<C-q>']   = actions.smart_send_to_qflist + actions.open_qflist,
+            ['<C-j>']   = actions.cycle_history_next,
+            ['<C-k>']   = actions.cycle_history_prev,
+            ['<CR>']    = actions.select_default,
           },
           n = {
-            ['<Tab>'] = actions.move_selection_next,
+            ['<Tab>']   = actions.move_selection_next,
             ['<S-Tab>'] = actions.move_selection_previous,
-            ['<C-c>'] = actions.close,
-            ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
-            ['<CR>'] = actions.select_default,
+            ['<C-c>']   = actions.close,
+            ['<C-q>']   = actions.smart_send_to_qflist + actions.open_qflist,
+            ['<CR>']    = actions.select_default,
           },
         },
         file_ignore_patterns = {
@@ -1314,75 +1277,66 @@ function M.telescope()
           '.git/.*',
           '.next/*',
         },
-        path_display = { shorten = 6 },
-        winblend = 0,
-        border = {},
-        borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-        color_devicons = true,
+        path_display     = { shorten = 6 },
+        winblend         = 0,
+        border           = {},
+        borderchars      = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+        color_devicons   = true,
         disable_devicons = false,
-        set_env = { ['COLORTERM'] = 'truecolor' },
-        file_previewer = previewers.vim_buffer_cat.new,
-        grep_previewer = previewers.vim_buffer_vimgrep.new,
+        set_env          = { ['COLORTERM'] = 'truecolor' },
+        file_previewer   = previewers.vim_buffer_cat.new,
+        grep_previewer   = previewers.vim_buffer_vimgrep.new,
         qflist_previewer = previewers.vim_buffer_qflist.new,
-        file_sorter = sorters.get_fuzzy_file,
-        generic_sorter = sorters.get_generic_fuzzy_sorter,
+        file_sorter      = sorters.get_fuzzy_file,
+        generic_sorter   = sorters.get_generic_fuzzy_sorter,
       },
       pickers = {
         find_files = {
-          hidden = true,
+          hidden    = true,
           previewer = false,
         },
         live_grep = {
           --@usage don't include the filename in the search results
           only_sort_text = true,
-          previewer = false,
+          previewer      = false,
         },
       },
       extensions = {
         fzf = {
           --@usage false will only do exact matching
-          fuzzy = true,
+          fuzzy                   = true,
           --@usage override the generic sorter
           override_generic_sorter = true,
           --@usage override the file sorter
-          override_file_sorter = true,
+          override_file_sorter    = true,
           --@usage or "ignore_case" or "respect_case"
-          case_mode = 'smart_case',
+          case_mode               = 'smart_case',
         },
       },
     }
 
     telescope.load_extension('fzf')
-
-    local map = function(...) vim.api.nvim_set_keymap('n', ...) end
-    local opts = { noremap = true, silent = true }
-
-    map('<C-p>', '<cmd>Telescope find_files hidden=true<CR>', opts)
-    map('<C-f>', '<cmd>Telescope live_grep<CR>', opts)
-    map('<C-b>', '<cmd>Telescope buffers<CR>', opts)
-    map('<C-e>', '<cmd>Telescope lsp_document_diagnostics<CR>', opts)
-    map('<C-w>', '<cmd>Telescope lsp_workspace_diagnostics<CR>', opts)
   end
 end
 
 function M.treesitter()
   return function()
-    local is_treesitter_loaded, treesitter_configs = pcall(require, 'nvim-treesitter.configs')
+    local treesitter_loaded, treesitter = pcall(require, 'nvim-treesitter.configs')
 
-    if not is_treesitter_loaded then return end
+    if not treesitter_loaded then return end
 
-    treesitter_configs.setup {
+    treesitter.setup {
       context_commentstring = {
-        enable = true,
+        enable         = true,
         enable_autocmd = false,
       },
       highlight = {
-        enable = true,
-        disable = {},
+        enable                            = true,
+        disable                           = {},
         additional_vim_regex_highlighting = true,
       },
       indent = {
-        enable = false,
+        enable  = false,
         disable = {}
       },
       ensure_installed = {
@@ -1395,25 +1349,25 @@ function M.treesitter()
         'javascript', 'dockerfile',
       },
       ignore_install = { 'phpdoc' },
-      auto_install = true,
+      auto_install   = true,
       playground = {
-        enable = true,
-        disable = {},
+        enable          = true,
+        disable         = {},
         --@usage debounced time for highlighting nodes in the playground from source code
-        updatetime = 25,
+        updatetime      = 25,
         --@usage whether the query persists across vim sessions
         persist_queries = false,
         keybindings = {
-          toggle_query_editor = 'o',
-          toggle_hl_groups = 'i',
+          toggle_query_editor       = 'o',
+          toggle_hl_groups          = 'i',
           toggle_injected_languages = 't',
-          toggle_anonymous_nodes = 'a',
-          toggle_language_display = 'I',
-          focus_language = 'f',
-          unfocus_language = 'F',
-          update = 'R',
-          goto_node = '<CR>',
-          show_help = '?',
+          toggle_anonymous_nodes    = 'a',
+          toggle_language_display   = 'I',
+          focus_language            = 'f',
+          unfocus_language          = 'F',
+          update                    = 'R',
+          goto_node                 = '<CR>',
+          show_help                 = '?',
         },
       },
       autotag = {
@@ -1422,48 +1376,85 @@ function M.treesitter()
       rainbow = {
         enable = true,
         --@usage list of disabled languages
-        -- disable = { 'jsx', 'cpp' },
+        -- disable     = { 'jsx', 'cpp' },
         --@usage also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-        extended_mode = true,
+        extended_mode  = true,
         --@usage do not enable for files with more than n lines, int
         max_file_lines = nil,
         --@usage table of hex strings
-        -- colors = {},
+        -- colors      = {},
         --@usage table of colour name strings
-        -- termcolors = {}
+        -- termcolors  = {}
       }
     }
   end
 end
 
-function M.flutter()
+function M.trouble()
   return function()
-    require('flutter-tools').setup{
-      ui = {
-        border = 'rounded',
-        notification_style = 'native',
+    local trouble_loaded, trouble = pcall(require, 'trouble')
+
+    if not trouble_loaded then return end
+
+    trouble.setup {
+      --@usage[[ position of the list can be: bottom, top, left, right ]]
+      position    = 'bottom',
+      --@usage[[ height of the trouble list when position is top or bottom ]]
+      height      = 10,
+      --@usage[[ use devicons for filenames ]]
+      icons       = true,
+      --@usage[[ "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist" ]]
+      mode        = 'workspace_diagnostics',
+      --@usage[[ icon used for open folds ]]
+      fold_open   = '',
+      --@usage[[ icon used for closed folds ]]
+      fold_closed = '',
+      --@usage[[ group results by file ]]
+      group       = true,
+      --@usage[[ add an extra new line on top of the list ]]
+      padding     = true,
+      action_keys = {
+          --@usage[[ close the list ]]
+          close       = 'q',
+          --@usage[[ cancel the preview and get back to your last window / buffer / cursor ]]
+          cancel      = '<esc>',
+          --@usage[[ manually refresh ]]
+          refresh     = 'r',
+          --@usage[[ jump to the diagnostic or open / close folds ]]
+          jump        = { '<Tab>' },
+          --@usage[[ open buffer in new split ]]
+          open_split  = { '<c-x>' },
+          --@usage[[ open buffer in new vsplit ]]
+          open_vsplit = { '<c-v>' },
+          --@usage[[ open buffer in new tab ]]
+          open_tab    = { '<c-t>' },
+          --@usage[[ jump to the diagnostic and close the list ]]
+          jump_close  = { '<CR>' },
+          --@usage[[ close all folds ]]
+          close_folds = { 'zM', 'zm' },
+          --@usage[[ open all folds ]]
+          open_folds  = { 'zR', 'zr' },
+          --@usage[[ toggle fold of current file ]]
+          toggle_fold = { 'zA', 'za' },
+          --@usage[[ previous item ]]
+          previous    = 'k',
+          --@usage[[ next item ]]
+          next        = 'j'
       },
-      decorations = {
-        statusline = {
-          app_version = false,
-          device = false,
-        }
-      },
-      lsp = {
-        color = {
-          enabled = true,
-          background = true,
-          foreground = true,
-          virtual_text = false, -- show the highlight using virtual text
-          virtual_text_str = "", -- the virtual text character to highlight
-        },
-        settings = {
-          showTodos = false,
-          completeFunctionCalls = true,
-          renameFilesWithClasses = "prompt",
-          enableSnippets = true,
-        }
-      },
+      --@usage[[ add an indent guide below the fold icons ]]
+      indent_lines         = true,
+      --@usage[[ automatically open the list when you have diagnostics ]]
+      auto_open            = false,
+      --@usage[[ automatically close the list when you have no diagnostics ]]
+      auto_close           = false,
+      --@usage[[ automatically preview the location of the diagnostic. <esc> to close preview and go back to last window ]]
+      auto_preview         = true,
+      --@usage[[ automatically fold a file trouble list at creation ]]
+      auto_fold            = false,
+      --@usage[[ for the given modes, automatically jump if there is only a single result ]]
+      auto_jump            = { 'lsp_definitions' },
+      --@usage[[ enabling this will use the signs defined in your lsp client ]]
+      use_diagnostic_signs = true
     }
   end
 end

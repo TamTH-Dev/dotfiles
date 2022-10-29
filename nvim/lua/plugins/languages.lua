@@ -74,7 +74,7 @@ M.jdtls = {
 }
 
 M.jsonls = {
-  cmd = { "vscode-json-language-server", "--stdio" },
+  cmd = { 'vscode-json-language-server', '--stdio' },
   init_options = {
     provideFormatter = true
   },
@@ -138,7 +138,7 @@ M.pyright = {
     python = {
       analysis = {
         autoSearchPaths = true,
-        diagnosticMode = "workspace",
+        diagnosticMode = 'workspace',
         useLibraryCodeForTypes = true
       }
     }
@@ -160,19 +160,19 @@ M.tsserver = {
     languages = {
       javascript = { },
       javascriptreact = { },
-      ["javascript.jsx"] = { },
+      ['javascript.jsx'] = { },
       typescript = { },
-      ["typescript.tsx"] = { },
+      ['typescript.tsx'] = { },
       typescriptreact = { },
     }
   },
   filetypes = {
-    "javascript",
-    "javascriptreact",
-    "javascript.jsx",
-    "typescript",
-    "typescript.tsx",
-    "typescriptreact"
+    'javascript',
+    'javascriptreact',
+    'javascript.jsx',
+    'typescript',
+    'typescript.tsx',
+    'typescriptreact'
   }
 }
 

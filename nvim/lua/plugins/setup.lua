@@ -92,24 +92,6 @@ function M.nvimtree()
   end
 end
 
-function M.saga()
-  return function()
-    local map = function(...) vim.api.nvim_buf_set_keymap(0, ...) end
-    local opts = { silent = true, noremap = true }
-
-    map('n', '<leader>gr', '<cmd>Lspsaga rename<CR>',                                                    opts)
-    map('n', '<leader>ga', '<cmd>Lspsaga code_action<CR>',                                               opts)
-    map('x', '<leader>ga', '<cmd><c-u>Lspsaga range_code_action<CR>',                                    opts)
-    map('n', '<leader>gf', '<cmd>Lspsaga lsp_finder<CR>',                                                opts)
-    map('n', '<leader>gk', '<cmd>Lspsaga hover_doc<CR>',                                                 opts)
-    map('n', '<leader>gl', '<cmd>Lspsaga show_line_diagnostics<CR>',                                     opts)
-    map('n', '<leader>gn', '<cmd>Lspsaga diagnostic_jump_next<CR>',                                      opts)
-    map('n', '<leader>gp', '<cmd>Lspsaga diagnostic_jump_prev<CR>',                                      opts)
-    map('n', '<C-u>',      '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1, "<c-u>")<CR>', {})
-    map('n', '<C-d>',      '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1, "<c-d>")<CR>',  {})
-  end
-end
-
 function M.telescope()
   return function()
     local map = function(...) vim.api.nvim_set_keymap('n', ...) end
@@ -118,8 +100,16 @@ function M.telescope()
     map('<C-p>', '<cmd>Telescope find_files hidden=true<CR>',    opts)
     map('<C-f>', '<cmd>Telescope live_grep<CR>',                 opts)
     map('<C-b>', '<cmd>Telescope buffers<CR>',                   opts)
-    map('<C-e>', '<cmd>Telescope lsp_document_diagnostics<CR>',  opts)
-    map('<C-w>', '<cmd>Telescope lsp_workspace_diagnostics<CR>', opts)
+  end
+end
+
+function M.trouble()
+  return function()
+    local map = function(...) vim.api.nvim_set_keymap('n', ...) end
+    local opts = { noremap = true, silent = true }
+
+    map('<C-e>', '<cmd>TroubleToggle document_diagnostics<CR>',  opts)
+    map('<C-w>', '<cmd>TroubleToggle workspace_diagnostics<CR>', opts)
   end
 end
 
@@ -128,17 +118,15 @@ function M.flutter()
     local opts = { noremap = true, silent = true }
     local map = function(...) vim.api.nvim_set_keymap('n', ...) end
 
-    map('<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    map('<leader>gf', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    map('<leader>gk', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    map('<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>',     opts)
+    map('<leader>gf', '<cmd>lua vim.lsp.buf.references()<CR>',     opts)
+    map('<leader>gk', '<cmd>lua vim.lsp.buf.hover()<CR>',          opts)
     map('<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    map('<leader>gr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    map('<leader>gn', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-    map('<leader>gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-    map('<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    map('<leader>gl', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-    map('<C-e>', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-    map('<C-w>', '<cmd>lua vim.lsp.diagnostic.set_loclist({ workspace = true })<CR>', opts)
+    map('<leader>gr', '<cmd>lua vim.lsp.buf.rename()<CR>',         opts)
+    map('<leader>gn', '<cmd>lua vim.diagnostic.goto_next()<CR>',   opts)
+    map('<leader>gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>',   opts)
+    map('<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<CR>',    opts)
+    map('<leader>gl', '<cmd>lua vim.diagnostic.open_float()<CR>',  opts)
   end
 end
 

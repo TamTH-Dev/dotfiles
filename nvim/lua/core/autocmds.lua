@@ -1,13 +1,10 @@
 local cmd = vim.cmd
 
 -- Open nvim with a dir
--- .cmd([[ autocmd BufEnter * if &buftype != 'terminal' | lcd %:p:h | endif ]])
+-- cmd([[ autocmd BufEnter * if &buftype != 'terminal' | lcd %:p:h | endif ]])
 
 -- auto close file explorer when quiting incase a single buffer is left
 -- cmd([[ autocmd BufEnter * if (winnr('$') == 1 && &filetype == 'nvimtree') | q | endif ]])
-
--- Open image buffers
--- cmd([[autocmd BufEnter *.png,*.jpeg,*.jpg,*gif exec "! feh " | :bw]])
 
 -- Disable inserting comment on new line automatically
 cmd([[au BufEnter * set fo-=c fo-=r fo-=o]])

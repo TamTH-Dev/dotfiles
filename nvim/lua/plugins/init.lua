@@ -8,13 +8,13 @@ packer.startup(function()
   local config = require 'plugins.config'
   local setup = require 'plugins.setup'
 
-  -- Packer can manage itself
+  --[[ Packer can manage itself ]]
   use {
     'wbthomason/packer.nvim',
     commit = '6afb674',
   }
 
-  -- Boost startup time
+  --[[ Boost startup time ]]
   use {
     'lewis6991/impatient.nvim',
   }
@@ -23,7 +23,7 @@ packer.startup(function()
     config = config.filetype(),
   }
 
-  -- Colorscheme
+  --[[ Colorscheme ]]
   use {
     'folke/tokyonight.nvim',
     config = function()
@@ -31,14 +31,14 @@ packer.startup(function()
     end,
   }
   
-  -- Icons suppliers for Madvim
+  --[[ Icons suppliers for Madvim ]]
   use {
     'kyazdani42/nvim-web-devicons',
     commit = '9061e2d',
     config = config.icons(),
   }
 
-  -- Popup Supporters
+  --[[ Popup Supporters ]]
   use {
     'nvim-lua/plenary.nvim',
     commit = '4b7e520',
@@ -48,14 +48,14 @@ packer.startup(function()
     commit = 'b7404d3',
   }
 
-  -- Status line
+  --[[ Status line ]]
   use {
     'nvim-lualine/lualine.nvim',
     commit = 'abb0312',
     config = config.lualine(),
   }
 
-  -- Buffer management bar
+  --[[ Buffer management bar ]]
   use {
     'akinsho/bufferline.nvim',
     commit = 'e70be62',
@@ -65,7 +65,7 @@ packer.startup(function()
     config = config.bufferline(),
   }
 
-  -- File explorer
+  --[[ File explorer ]]
   use {
     'kyazdani42/nvim-tree.lua',
     commit = 'e94f517',
@@ -73,14 +73,14 @@ packer.startup(function()
     config = config.nvimtree(),
   }
 
-  -- Fancy start screen
+  --[[ Fancy start screen ]]
   use {
     'goolord/alpha-nvim',
     commit = '0bb6fc0',
     config = config.alpha(),
   }
 
-  -- Parser
+  --[[ Parser ]]
   use {
     'nvim-treesitter/nvim-treesitter',
     commit = 'c4c358e',
@@ -94,7 +94,7 @@ packer.startup(function()
     },
   }
 
-  -- Indentation helper for jsx
+  --[[ Indentation helper for jsx ]]
   use {
     'maxmellon/vim-jsx-pretty',
     commit = '6989f16',
@@ -106,14 +106,14 @@ packer.startup(function()
     },
   }
 
-  -- Indentation guides
+  --[[ Indentation guides ]]
   use {
     'lukas-reineke/indent-blankline.nvim',
     event = 'BufEnter',
     setup = setup.indent_blankline(),
   }
 
-  -- Git
+  --[[ Git ]]
   use {
     'lewis6991/gitsigns.nvim',
     commit = '21ab05c',
@@ -121,14 +121,14 @@ packer.startup(function()
     config = config.gitsigns(),
   }
 
-  -- Smooth scroll for neovim
+  --[[ Smooth scroll for neovim ]]
   use {
     'karb94/neoscroll.nvim',
     event  = 'BufRead',
     config = config.neoscroll(),
   }
 
-  -- Commenter
+  --[[ Commenter ]]
   use {
     'JoosepAlviste/nvim-ts-context-commentstring',
     commit = '2941f00',
@@ -141,14 +141,14 @@ packer.startup(function()
     config = config.comment(),
   }
 
-  -- Surround parentheses, brackets, quotes, XML tags, and more
+  --[[ Surround parentheses, brackets, quotes, XML tags, and more ]]
   use {
     'tpope/vim-surround',
     commit = 'bf3480d',
     event  = 'BufEnter',
   }
 
-  -- Emmet
+  --[[ Emmet ]]
   use {
     'mattn/emmet-vim',
     commit = 'def5d57',
@@ -165,18 +165,18 @@ packer.startup(function()
     setup = setup.emmet(),
   }
 
-  -- Built-in LSP Configuration Supporter
+  --[[ Built-in LSP Configuration Supporter ]]
   use {
     'neovim/nvim-lspconfig',
     commit = 'ee2e8c6',
   }
-  -- LSP Installer
+  --[[ LSP Installer ]]
   use {
     'williamboman/nvim-lsp-installer',
     commit = 'ae913cb',
     config = config.lsp(),
   }
-  -- LSP Styling
+  --[[ LSP Styling ]]
   use({
     'glepnir/lspsaga.nvim',
     branch = 'main',
@@ -188,8 +188,7 @@ packer.startup(function()
     setup    = setup.trouble(),
     config   = config.trouble(),
   }
-
-  -- Improve LSP performance
+  --[[ Improve LSP performance ]]
   use {
     'jose-elias-alvarez/null-ls.nvim',
     config = config.null_ls(),
@@ -209,7 +208,7 @@ packer.startup(function()
     requires = { 'nvim-telescope/telescope.nvim' },
   }
 
-  -- Autopairs supporter
+  --[[ Autopairs supporter ]]
   use {
     'windwp/nvim-autopairs',
     commit = '4fc96c8',
@@ -217,7 +216,7 @@ packer.startup(function()
     config = config.autopairs(),
   }
 
-  -- Completion supporters
+  --[[ Completion supporters ]]
   use {
     'L3MON4D3/LuaSnip',
     commit = 'cc00863',
@@ -267,14 +266,14 @@ packer.startup(function()
     config = config.cmp(),
   }
 
-  -- Delete all buffers except one
+  --[[ Delete all buffers except one ]]
   use {
     'kazhala/close-buffers.nvim',
     commit = '3acbcad',
     setup  = setup.close_buffers(),
   }
 
-  -- Flutter tools
+  --[[ Flutter tools ]]
   use {
     'akinsho/flutter-tools.nvim',
     setup  = setup.flutter(),

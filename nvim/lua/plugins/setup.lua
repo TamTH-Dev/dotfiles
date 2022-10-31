@@ -5,13 +5,13 @@ function M.bufferline()
     local map = function(...) vim.api.nvim_set_keymap('n', ...) end
     local opts = { noremap = true, silent = true }
 
-    --@usage move to previous/next
+    --@usage[[ move to previous/next ]]
     map('<leader><Tab>',   '<cmd>BufferLineCycleNext<CR>',     opts)
     map('<leader><S-Tab>', '<cmd>BufferLineCyclePrev<CR>',     opts)
-    --@usage re-order to previous/next
+    --@usage[[ re-order to previous/next ]]
     map('<leader>>',       '<cmd>BufferLineMoveNext<CR>',      opts)
     map('<leader><',       '<cmd>BufferLineMovePrev<CR>',      opts)
-    --@usage goto buffer in position...
+    --@usage[[ goto buffer in position... ]]
     map('<leader>1',       '<cmd>BufferLineGoToBuffer 1<CR>',  opts)
     map('<leader>2',       '<cmd>BufferLineGoToBuffer 2<CR>',  opts)
     map('<leader>3',       '<cmd>BufferLineGoToBuffer 3<CR>',  opts)
@@ -38,7 +38,7 @@ function M.emmet()
   return function()
     local glob = vim.g
 
-    --@usage remap the default emmet's leader key
+    --@usage[[ remap the default emmet's leader key ]]
     glob.user_emmet_leader_key = '<C-y>'
   end
 end
@@ -81,9 +81,9 @@ function M.nvimtree()
     map('<leader>r',  '<cmd>NvimTreeRefresh<CR>',  opts)
     map('<leader>nf', '<cmd>NvimTreeFindFile<CR>', opts)
 
-    --@usage don't auto open tree on specific filetypes
+    --@usage[[ don't auto open tree on specific filetypes ]]
     glob.nvim_tree_auto_ignore_ft = { 'alpha' }
-    --@usage list of filenames that gets highlighted with NvimTreeSpecialFile
+    --@usage[[ list of filenames that gets highlighted with NvimTreeSpecialFile ]]
     glob.vim_tree_special_files = {
       ['README.md'] = 1,
       Makefile = 1,

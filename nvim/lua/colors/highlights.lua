@@ -2,11 +2,11 @@ local M = {}
 
 local cmd = vim.cmd
 
--- TODO: Find the way to get colors from scheme
--- Get color from current scheme
--- local colors = require('colors').get()
+--TODO:[[ Find the way to get colors from scheme ]]
+--[[ Get color from current scheme ]]
+--[[ local colors = require('colors').get() ]]
 
--- Declare colors manually
+--[[ Declare colors manually ]]
 local colors = {
   bg        = '#24283b',
   extraBg   = '#1a1b26',
@@ -20,16 +20,16 @@ local colors = {
   darkGray = '#303757',
 }
 
--- Define fg color
--- @param group Group
--- @param color Color
+--[[ Define fg color ]]
+--@param[[ group Group ]]
+--@param[[ color Color ]]
 local fg = function(group, color)
    cmd('hi '..group..' guifg='.. color)
 end
 
--- Define bg color
--- @param group Group
--- @param color Color
+--[[ Define bg color ]]
+--@param[[ group Group ]]
+--@param[[ color Color ]]
 local bg = function(group, color)
    cmd('hi '..group..' guibg='.. color)
 end
@@ -59,7 +59,7 @@ fg('ScrollbarError',       colors.red)
 fg('healthError',          colors.red)
 fg('CursorLineNr',         colors.gray)
 
--- Telescope
+--[[ Telescope ]]
 fg('TelescopeBorder',                 colors.gray)
 fg('TelescopeResultsBorder',          colors.gray)
 fg('TelescopePromptBorder',           colors.gray)
@@ -83,7 +83,7 @@ fg('TelescopeSelectionCaret',         colors.orange)
 fg('TelescopeMultiSelection',         colors.gray)
 fg('TelescopeMatching',               colors.blue)
 
--- LSP
+--[[ LSP ]]
 fg('DiagnosticFloatingError',    colors.red)
 fg('DiagnosticFloatingWarn',     colors.orange)
 fg('DiagnosticFloatingInfo',     colors.magenta)
@@ -102,7 +102,7 @@ bg('DiagnosticVirtualTextInfo',  'default')
 bg('DiagnosticVirtualTextHint',  'default')
 bg('LspFloatWinNormal',          colors.bg)
 
--- Saga
+--[[ Saga ]]
 fg('LspSagaDiagnosticBorder',       colors.blue)
 fg('LspSagaDiagnosticTruncateLine', colors.blue)
 fg('LspSagaDiagnosticHeader',       colors.fg)
@@ -120,30 +120,30 @@ fg('DiagnosticMap',                 colors.orange)
 fg('DiagnosticLineCol',             colors.gray)
 fg('TargetFileName',                colors.fg)
 
--- Trouble
+--[[ Trouble ]]
 fg('TroubleError', colors.red)
 fg('TroubleWarn',  colors.orange)
 fg('TroubleInfo',  colors.magenta)
 fg('TroubleHint',  colors.blue)
 
--- Indent_blankline
+--[[ Indent_blankline ]]
 fg('IndentBlanklineContextChar', colors.orange)
 
--- Bufferline
+--[[ Bufferline ]]
 fg('BufferLineIndicatorSelected', colors.red)
 
--- NvimTree
+--[[ NvimTree ]]
 fg('NvimTreeFolderIcon',          colors.blue)
 bg('NvimTreeNormal',              colors.bg)
 fg('NvimTreeLspDiagnosticsError', colors.red)
 fg('NvimTreeCursorLineNr',        colors.gray)
 
--- Fzf
+--[[ Fzf ]]
 fg('fzf1', colors.fg)
 fg('fzf2', colors.fg)
 fg('fzf3', colors.fg)
 
--- Rainbow Treesitter
+--[[ Rainbow Treesitter ]]
 fg('rainbowcol1', colors.red)
 fg('rainbowcol2', colors.orange)
 fg('rainbowcol3', colors.orange)
@@ -152,7 +152,7 @@ fg('rainbowcol5', colors.magenta)
 fg('rainbowcol6', colors.blue)
 fg('rainbowcol7', colors.fg)
 
--- Gitsigns
+--[[ Gitsigns ]]
 bg('DiffAdd',    colors.bg)
 fg('DiffAdd',    colors.green)
 bg('DiffChange', colors.bg)
@@ -162,7 +162,7 @@ fg('DiffDelete', colors.red)
 bg('DiffText',   colors.bg)
 fg('DiffText',   colors.orange)
 
--- Export colors to use somewhere else
+--[[ Export colors to use somewhere else ]]
 M.colors = colors
 
 return M

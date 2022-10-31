@@ -4,7 +4,7 @@ if not is_packer_init_loaded then return end
 
 packer.startup(function()
   local use = packer.use
-  -- Import plugins config and setup
+  --[[ Import plugins config and setup ]]
   local config = require 'plugins.config'
   local setup = require 'plugins.setup'
 
@@ -179,6 +179,7 @@ packer.startup(function()
   --[[ LSP Styling ]]
   use({
     'glepnir/lspsaga.nvim',
+    commit = '391cf74',
     branch = 'main',
     config = config.saga(),
   })

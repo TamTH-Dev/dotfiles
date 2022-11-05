@@ -25,13 +25,12 @@ nnoremap k gk
 nmap <leader>f <Action>(ReformatCode)
 
 " Common options
-set hlsearch
-set ignorecase
-set smartcase
-set smartindent
-set number
-set relativenumber
 set clipboard+=unnamedplus
+set hlsearch
+set incsearch
+set number
+set smartindent
+set relativenumber
 
 " Plugins
 set surround

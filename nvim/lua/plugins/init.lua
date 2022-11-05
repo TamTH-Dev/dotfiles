@@ -87,7 +87,7 @@ packer.startup(function()
     config = config.treesitter(),
     requires = {
       {
-        -- Autoclose tags
+        --[[ Autoclose tags ]]
         'windwp/nvim-ts-autotag',
         after = 'nvim-treesitter',
       },

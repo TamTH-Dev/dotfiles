@@ -9,28 +9,7 @@ function M.alpha()
     local api = vim.api
     local cmd = vim.cmd
 
-    local header = {
-      type = 'text',
-      val  = {
-        '   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣿⣶⣿⣦⣼⣆          ',
-        '    ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ',
-        '          ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷    ⠻⠿⢿⣿⣧⣄     ',
-        '           ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀⠄⠢⣀⡀⠈⠙⠿⠄    ',
-        '          ⢠⣿⣿⣿⠈    ⣻⣿⣿⣿⣿⣿⣿⣿⣛⣳⣤⣀⣀   ',
-        '   ⢠⣧⣶⣥⡤⢄ ⣸⣿⣿⠘  ⢀⣴⣿⣿⡿⠛⣿⣿⣧⠈⢿⠿⠟⠛⠻⠿⠄  ',
-        '  ⣰⣿⣿⠛⠻⣿⣿⡦⢹⣿⣷   ⢊⣿⣿⡏  ⢸⣿⣿⡇ ⢀⣠⣄⣾⠄   ',
-        ' ⣠⣿⠿⠛ ⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄  ',
-        ' ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇ ⠛⠻⢷⣄ ',
-        '    ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆       ',
-        '       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ',
-      },
-      opts = {
-        position = 'center',
-        hl       = 'Special'
-      }
-    }
-
-    local function set_button(sc, text, keybind)
+    local function build_option(sc, text, keybind)
       local sc_ = sc:gsub('%s', ''):gsub('SPC', '<leader>')
       local opts = {
         position       = 'center',
@@ -58,15 +37,15 @@ function M.alpha()
       }
     end
 
-    local buttons = {
+    local options = {
       type = 'group',
       val = {
-        set_button('p', '  Find File',         '<cmd>Telescope find_files hidden=true<CR>'           ),
-        set_button('f', '  Find Word',         '<cmd>Telescope live_grep<CR>'                        ),
-        set_button('o', '  Project structure', '<cmd>NvimTreeToggle<CR>'                             ),
-        set_button('n', '  New File',          '<cmd>ene!<CR>'                                       ),
-        set_button('s', '  Settings',          '<cmd>e $HOME/.config/nvim/lua/default_config.lua<CR>'),
-        set_button('q', '  Quit',              '<cmd>qa<CR>'                                         ),
+        build_option('p', '  Find File', '<cmd>Telescope find_files hidden=true<CR>'),
+        build_option('f', '  Find Word', '<cmd>Telescope live_grep<CR>'),
+        build_option('o', '  Project structure', '<cmd>NvimTreeToggle<CR>'),
+        build_option('n', '  New File', '<cmd>ene!<CR>'),
+        build_option('s', '  Settings', '<cmd>e $HOME/.config/nvim/lua/default_config.lua<CR>'),
+        build_option('q', '  Quit', '<cmd>qa<CR>'),
       },
       opts = {
         position = 'center',
@@ -74,29 +53,19 @@ function M.alpha()
       }
     }
 
-    local footer = {
-      type = 'text',
-      val  = 'A clever person solves a problem. A wise person avoids it.',
-      opts = {
-        position = 'center',
-        hl       = 'String',
-      }
-    }
-
+    local screen_height = vim.api.nvim_list_uis()[1].height
+    local options_height = 18
     local section = {
-      header  = header,
-      buttons = buttons,
-      footer  = footer,
+      options = options,
     }
 
     local opts = {
       layout = {
-        -- { type = 'padding', val = 8 },
-        -- section.header,
-        { type = 'padding', val = 14 },
-        section.buttons,
-        -- { type = 'padding', val = 4 },
-        -- section.footer,
+        {
+          type = 'padding',
+          val  = math.floor((screen_height - options_height) * 0.5),
+        },
+        section.options,
       },
     }
 
@@ -116,7 +85,7 @@ function M.autopairs()
     if not (autopairs_loaded or cmp_loaded) then return end
 
     autopairs.setup({
-      disable_filetype = { 'TelescopePrompt' },
+      disable_filetype          = { 'TelescopePrompt' },
       --@usage[[ check bracket in same line ]]
       enable_check_bracket_line = false,
       --@usage[[ check treesitter ]]
@@ -168,8 +137,8 @@ function M.bufferline()
         left_mouse_command      = 'buffer %d',
         middle_mouse_command    = nil,
         indicator               = {
-            icon  = '▎',
-            style = 'icon',
+          icon  = '▎',
+          style = 'icon',
         },
         buffer_close_icon       = '',
         modified_icon           = '●',
@@ -177,7 +146,7 @@ function M.bufferline()
         left_trunc_marker       = '',
         right_trunc_marker      = '',
         --@usage[[ can be used to change the buffer's label in the bufferline ]]
-        name_formatter = function(buf)
+        name_formatter          = function(buf)
           if buf.name:match('%.md') then
             return fn.fnamemodify(buf.name)
           end
@@ -253,12 +222,12 @@ function M.cmp()
       },
       window = {
         documentation = {
-          border       = {'╭', '─', '╮', '│', '╯', '─', '╰', '│'},
+          border       = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
           winhighlight = 'Normal:Normal,FloatBorder:PmenuBorder,CursorLine:Visual,Search:None',
           scrollbar    = '║',
         },
         completion = {
-          border       = {'╭', '─', '╮', '│', '╯', '─', '╰', '│'},
+          border       = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
           winhighlight = 'Normal:Normal,FloatBorder:PmenuBorder,CursorLine:Visual,Search:None',
           scrollbar    = nil,
         },
@@ -299,9 +268,9 @@ function M.cmp()
         }),
       },
       formatting = {
-        fields     = { 'kind', 'abbr', 'menu' },
-        max_width  = 0,
-        kind_icons = {
+        fields             = { 'kind', 'abbr', 'menu' },
+        max_width          = 0,
+        kind_icons         = {
           Class         = '',
           Color         = '',
           Constant      = '',
@@ -328,20 +297,20 @@ function M.cmp()
           Value         = '',
           Variable      = '',
         },
-        source_names = {
+        source_names       = {
           nvim_lsp = '(LSP)',
           path     = '(Path)',
           luasnip  = '(Snippet)',
           buffer   = '(Buffer)',
         },
-        duplicates = {
+        duplicates         = {
           nvim_lsp = 0,
           luasnip  = 1,
           buffer   = 1,
           path     = 1,
         },
         duplicates_default = 0,
-        format = function(entry, vim_item)
+        format             = function(entry, vim_item)
           vim_item.kind = format_icons[vim_item.kind]
           vim_item.menu = ({
             nvim_lsp = '(LSP)',
@@ -377,9 +346,9 @@ function M.comment()
     if not comment_loaded then return end
 
     comment.setup({
-      padding = true,
-      sticky  = true,
-      toggler = {
+      padding  = true,
+      sticky   = true,
+      toggler  = {
         line  = 'gcc',
         block = 'gbc',
       },
@@ -420,7 +389,7 @@ function M.flutter()
 
     if not flutter_loaded then return end
 
-    flutter.setup{
+    flutter.setup {
       ui = {
         border             = 'rounded',
         notification_style = 'native',
@@ -433,9 +402,9 @@ function M.flutter()
       },
       lsp = {
         color = {
-          enabled          = true,
-          background       = true,
-          foreground       = true,
+          enabled          = false,
+          background       = false,
+          foreground       = false,
           virtual_text     = false,
           virtual_text_str = '',
         },
@@ -461,8 +430,8 @@ function M.gitsigns()
       linehl             = false,
       word_diff          = false,
       signcolumn         = true,
-      signs = {
-        add          = { hl = 'DiffAdd',    text = '' },
+      signs              = {
+        add          = { hl = 'DiffAdd', text = '' },
         change       = { hl = 'DiffChange', text = '' },
         delete       = { hl = 'DiffDelete', text = '' },
         topdelete    = { hl = 'DiffDelete', text = '' },
@@ -489,39 +458,39 @@ function M.icons()
     icons.setup {
       override = {
         c = {
-           icon  = '',
-           color = colors.blue,
-           name  = 'c',
+          icon  = '',
+          color = colors.blue,
+          name  = 'c',
         },
         cc = {
-           icon  = '',
-           color = colors.blue,
-           name  = 'cc',
+          icon  = '',
+          color = colors.blue,
+          name  = 'cc',
         },
         cpp = {
-           icon  = '',
-           color = colors.blue,
-           name  = 'cpp',
+          icon  = '',
+          color = colors.blue,
+          name  = 'cpp',
         },
         css = {
-           icon  = '',
-           color = colors.blue,
-           name  = 'css',
+          icon  = '',
+          color = colors.blue,
+          name  = 'css',
         },
         deb = {
-           icon  = '',
-           color = colors.red,
-           name  = 'deb',
+          icon  = '',
+          color = colors.red,
+          name  = 'deb',
         },
         Dockerfile = {
-           icon  = '',
-           color = colors.blue,
-           name  = 'Dockerfile',
+          icon  = '',
+          color = colors.blue,
+          name  = 'Dockerfile',
         },
         html = {
-           icon  = '',
-           color = colors.orange,
-           name  = 'html',
+          icon  = '',
+          color = colors.orange,
+          name  = 'html',
         },
         java = {
           icon  = '',
@@ -529,94 +498,94 @@ function M.icons()
           name  = 'java',
         },
         jpeg = {
-           icon  = '',
-           color = colors.magenta,
-           name  = 'jpeg',
+          icon  = '',
+          color = colors.magenta,
+          name  = 'jpeg',
         },
         jpg = {
-           icon  = '',
-           color = colors.magenta,
-           name  = 'jpg',
+          icon  = '',
+          color = colors.magenta,
+          name  = 'jpg',
         },
         js = {
-           icon  = '',
-           color = colors.orange,
-           name  = 'js',
+          icon  = '',
+          color = colors.orange,
+          name  = 'js',
         },
         kt = {
-           icon  = '󱈙',
-           color = colors.orange,
-           name  = 'kt',
+          icon  = '󱈙',
+          color = colors.orange,
+          name  = 'kt',
         },
         lock = {
-           icon  = '',
-           color = colors.red,
-           name  = 'lock',
+          icon  = '',
+          color = colors.red,
+          name  = 'lock',
         },
         lua = {
-           icon  = '',
-           color = colors.blue,
-           name  = 'lua',
+          icon  = '',
+          color = colors.blue,
+          name  = 'lua',
         },
         mp3 = {
-           icon  = '',
-           color = colors.blue,
-           name  = 'mp3',
+          icon  = '',
+          color = colors.blue,
+          name  = 'mp3',
         },
         mp4 = {
-           icon  = '',
-           color = colors.blue,
-           name  = 'mp4',
+          icon  = '',
+          color = colors.blue,
+          name  = 'mp4',
         },
         out = {
-           icon  = '',
-           color = colors.blue,
-           name  = 'out',
+          icon  = '',
+          color = colors.blue,
+          name  = 'out',
         },
         png = {
-           icon  = '',
-           color = colors.magenta,
-           name  = 'png',
+          icon  = '',
+          color = colors.magenta,
+          name  = 'png',
         },
         py = {
-           icon  = '',
-           color = colors.orange,
-           name  = 'py',
+          icon  = '',
+          color = colors.orange,
+          name  = 'py',
         },
         toml = {
-           icon  = '',
-           color = colors.blue,
-           name  = 'toml',
+          icon  = '',
+          color = colors.blue,
+          name  = 'toml',
         },
         ts = {
-           icon  = '',
-           color = colors.blue,
-           name  = 'ts',
+          icon  = '',
+          color = colors.blue,
+          name  = 'ts',
         },
         rb = {
-           icon  = '',
-           color = colors.red,
-           name  = 'rb',
+          icon  = '',
+          color = colors.red,
+          name  = 'rb',
         },
         rpm = {
-           icon  = '',
-           color = colors.orange,
-           name  = 'rpm',
+          icon  = '',
+          color = colors.orange,
+          name  = 'rpm',
         },
         vue = {
-           icon  = '﵂',
-           color = colors.green,
-           name  = 'vue',
+          icon  = '﵂',
+          color = colors.green,
+          name  = 'vue',
         },
         xz = {
-           icon  = '',
-           color = colors.orange,
-           name  = 'xz',
+          icon  = '',
+          color = colors.orange,
+          name  = 'xz',
         },
         zip = {
-           icon  = '',
-           color = colors.orange,
-           name  = 'zip',
+          icon  = '',
+          color = colors.orange,
+          name  = 'zip',
         }
       }
     }
@@ -657,14 +626,14 @@ function M.lsp()
       end
 
       local border = {
-        {'╭', 'FloatBorder'},
-        {'─', 'FloatBorder'},
-        {'╮', 'FloatBorder'},
-        {'│', 'FloatBorder'},
-        {'╯', 'FloatBorder'},
-        {'─', 'FloatBorder'},
-        {'╰', 'FloatBorder'},
-        {'│', 'FloatBorder'},
+        { '╭', 'FloatBorder' },
+        { '─', 'FloatBorder' },
+        { '╮', 'FloatBorder' },
+        { '│', 'FloatBorder' },
+        { '╯', 'FloatBorder' },
+        { '─', 'FloatBorder' },
+        { '╰', 'FloatBorder' },
+        { '│', 'FloatBorder' },
       }
 
       --@usage[[ popup customization globly ]]
@@ -811,7 +780,7 @@ function M.lualine()
       options = {
         component_separators = '',
         section_separators   = '',
-        theme = {
+        theme                = {
           normal   = { c = { fg = colors.fg, bg = colors.extraBg } },
           inactive = { c = { fg = colors.fg, bg = colors.extraBg } },
         },
@@ -864,7 +833,7 @@ function M.lualine()
       function()
         return '▊'
       end,
-      color   = { fg = colors.blue    },
+      color   = { fg = colors.blue },
       padding = { left = 0, right = 1 },
     })
 
@@ -888,7 +857,7 @@ function M.lualine()
           R = ' ',
           s = ' ',
         }
-        cmd('hi! LualineMode guifg='..get_mode_color()..' guibg='..colors.extraBg)
+        cmd('hi! LualineMode guifg=' .. get_mode_color() .. ' guibg=' .. colors.extraBg)
 
         local alias_mode = alias[fn.mode()]
         local icon = icons[fn.mode()]
@@ -901,7 +870,7 @@ function M.lualine()
           icon = ' '
         end
 
-        return icon..alias_mode
+        return icon .. alias_mode
       end,
       color   = 'LualineMode',
       padding = { left = 0, right = 1 },
@@ -930,9 +899,9 @@ function M.lualine()
       'diff',
       symbols    = { added = ' ', modified = '柳', removed = ' ' },
       diff_color = {
-        added    = { fg = colors.green  },
+        added    = { fg = colors.green },
         modified = { fg = colors.orange },
-        removed  = { fg = colors.red    },
+        removed  = { fg = colors.red },
       },
       cond       = conditions.hide_in_width,
     })
@@ -968,21 +937,21 @@ function M.lualine()
     ins_right({
       'location',
       color   = { fg = colors.blue, gui = 'bold' },
-      padding = { left = 1, right = 1            },
+      padding = { left = 1, right = 1 },
     })
 
     ins_right({
       'diagnostics',
-      sources = { 'nvim_diagnostic' },
-      symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+      sources           = { 'nvim_diagnostic' },
+      symbols           = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
       diagnostics_color = {
-        error = { fg = colors.red    },
+        error = { fg = colors.red },
         warn  = { fg = colors.orange },
-        info  = { fg = colors.blue   },
-        hint  = { fg = colors.blue   },
+        info  = { fg = colors.blue },
+        hint  = { fg = colors.blue },
       },
-      padding = { left = 1, right = 1 },
-      cond    = conditions.hide_in_width,
+      padding           = { left = 1, right = 1 },
+      cond              = conditions.hide_in_width,
     })
 
     ins_right({
@@ -994,7 +963,7 @@ function M.lualine()
       'o:encoding',
       fmt     = string.upper,
       color   = { fg = colors.green, gui = 'bold' },
-      padding = { left = 1, right = 1             },
+      padding = { left = 1, right = 1 },
       cond    = conditions.hide_in_width,
     })
 
@@ -1017,7 +986,7 @@ function M.lualine()
         return '▊'
       end,
       color   = { fg = colors.blue },
-      padding = { right = 0        },
+      padding = { right = 0 },
     })
 
     lualine.setup(config)
@@ -1111,7 +1080,7 @@ function M.nvimtree()
       --@usage[[ will not open on setup if the filetype is in this list ]]
       ignore_ft_on_setup  = {},
       --@usage[[ disable diagnostic in nvim tree ]]
-      diagnostics = {
+      diagnostics         = {
         enable       = true,
         show_on_dirs = true,
         icons        = {
@@ -1127,7 +1096,7 @@ function M.nvimtree()
       hijack_cursor       = false,
       --@usage[[ updates the root directory of the tree on `DirChanged` (when your run `:cd` usually) ]]
       update_cwd          = false,
-      renderer = {
+      renderer            = {
         add_trailing           = false,
         group_empty            = false,
         highlight_git          = false,
@@ -1159,7 +1128,7 @@ function M.nvimtree()
         ignore_list = {}
       },
       --@usage[[ configuration options for the system open command (`s` in the tree by default) ]]
-      system_open = {
+      system_open         = {
         --@usage[[ the command to run this, leaving nil should work in most cases ]]
         cmd  = nil,
         --@usage[[ the command arguments as a list ]]
@@ -1181,7 +1150,7 @@ function M.nvimtree()
           --@usage[[ list of mappings to set on the tree manually ]]
           list        = {}
         },
-        float = {
+        float                       = {
           enable             = true,
           quit_on_focus_loss = true,
           open_win_config    = {
@@ -1219,7 +1188,7 @@ function M.saga()
       --@usage[[ press number to execute the codeaction in codeaction window ]]
       code_action_num_shortcut = true,
       --@usage[[ finder icons ]]
-      finder_icons = {
+      finder_icons             = {
         def = ' ',
         ref = ' ',
         link = ' ',
@@ -1229,14 +1198,14 @@ function M.saga()
     local map = function(...) vim.api.nvim_set_keymap('n', ...) end
     local opts = { silent = true, noremap = true }
 
-    map('<leader>gr', '<cmd>Lspsaga rename<CR>',                  opts)
-    map('<leader>ga', '<cmd>Lspsaga code_action<CR>',             opts)
-    map('<leader>gf', '<cmd>Lspsaga lsp_finder<CR>',              opts)
-    map('<leader>gk', '<cmd>Lspsaga hover_doc<CR>',               opts)
-    map('<leader>gl', '<cmd>Lspsaga show_line_diagnostics<CR>',   opts)
+    map('<leader>gr', '<cmd>Lspsaga rename<CR>', opts)
+    map('<leader>ga', '<cmd>Lspsaga code_action<CR>', opts)
+    map('<leader>gf', '<cmd>Lspsaga lsp_finder<CR>', opts)
+    map('<leader>gk', '<cmd>Lspsaga hover_doc<CR>', opts)
+    map('<leader>gl', '<cmd>Lspsaga show_line_diagnostics<CR>', opts)
     map('<leader>gl', '<cmd>Lspsaga show_cursor_diagnostics<CR>', opts)
-    map('<leader>gn', '<cmd>Lspsaga diagnostic_jump_next<CR>',    opts)
-    map('<leader>gp', '<cmd>Lspsaga diagnostic_jump_prev<CR>',    opts)
+    map('<leader>gn', '<cmd>Lspsaga diagnostic_jump_next<CR>', opts)
+    map('<leader>gp', '<cmd>Lspsaga diagnostic_jump_prev<CR>', opts)
   end
 end
 
@@ -1253,25 +1222,26 @@ function M.telescope()
 
     telescope.setup {
       defaults = {
-        prompt_prefix      = '  ',
-        selection_caret    = '   ',
-        entry_prefix       = '  ',
-        initial_mode       = 'insert',
-        selection_strategy = 'reset',
-        sorting_strategy   = 'ascending',
-        layout_strategy    = 'horizontal',
-        layout_config = {
+        prompt_prefix        = '  ',
+        selection_caret      = '   ',
+        entry_prefix         = '  ',
+        initial_mode         = 'insert',
+        selection_strategy   = 'reset',
+        sorting_strategy     = 'ascending',
+        layout_strategy      = 'horizontal',
+        preview              = false,
+        layout_config        = {
           width          = 0.5,
           preview_cutoff = 120,
           vertical       = { mirror = false },
-          horizontal = {
+          horizontal     = {
             preview_width = function(_, cols, _)
-              return math.floor(cols * 0.4)
+              return math.floor(cols * 0.5)
             end,
             mirror = false,
           },
         },
-        vimgrep_arguments = {
+        vimgrep_arguments    = {
           'rg',
           '--color=never',
           '--no-heading',
@@ -1282,7 +1252,7 @@ function M.telescope()
           '--hidden',
           '--glob=!.git/',
         },
-        mappings = {
+        mappings             = {
           i = {
             ['<Tab>']   = actions.move_selection_next,
             ['<S-Tab>'] = actions.move_selection_previous,
@@ -1308,28 +1278,26 @@ function M.telescope()
           '.git/.*',
           '.next/*',
         },
-        path_display     = { shorten = 6 },
-        winblend         = 0,
-        border           = {},
-        borderchars      = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-        color_devicons   = true,
-        disable_devicons = false,
-        set_env          = { ['COLORTERM'] = 'truecolor' },
-        file_previewer   = previewers.vim_buffer_cat.new,
-        grep_previewer   = previewers.vim_buffer_vimgrep.new,
-        qflist_previewer = previewers.vim_buffer_qflist.new,
-        file_sorter      = sorters.get_fuzzy_file,
-        generic_sorter   = sorters.get_generic_fuzzy_sorter,
+        path_display         = { shorten = 6 },
+        winblend             = 0,
+        border               = {},
+        borderchars          = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+        color_devicons       = true,
+        disable_devicons     = false,
+        set_env              = { ['COLORTERM'] = 'truecolor' },
+        file_previewer       = previewers.vim_buffer_cat.new,
+        grep_previewer       = previewers.vim_buffer_vimgrep.new,
+        qflist_previewer     = previewers.vim_buffer_qflist.new,
+        file_sorter          = sorters.get_fuzzy_file,
+        generic_sorter       = sorters.get_generic_fuzzy_sorter,
       },
       pickers = {
         find_files = {
-          hidden    = true,
-          previewer = false,
+          hidden = true,
         },
         live_grep = {
           --@usage don't include the filename in the search results
           only_sort_text = true,
-          previewer      = false,
         },
       },
       extensions = {
@@ -1361,16 +1329,16 @@ function M.treesitter()
         enable         = true,
         enable_autocmd = false,
       },
-      highlight = {
+      highlight             = {
         enable                            = true,
         disable                           = {},
         additional_vim_regex_highlighting = true,
       },
-      indent = {
+      indent                = {
         enable  = false,
         disable = {}
       },
-      ensure_installed = {
+      ensure_installed      = {
         'scss', 'kotlin', 'lua', 'python', 'yaml',
         'regex', 'make', 'sql', 'json', 'dart',
         'haskell', 'tsx', 'jsonc', 'toml', 'query',
@@ -1379,16 +1347,16 @@ function M.treesitter()
         'cmake', 'vue', 'comment', 'jsdoc', 'go',
         'javascript', 'dockerfile',
       },
-      ignore_install = { 'phpdoc' },
-      auto_install   = true,
-      playground = {
+      ignore_install        = { 'phpdoc' },
+      auto_install          = true,
+      playground            = {
         enable          = true,
         disable         = {},
         --@usage debounced time for highlighting nodes in the playground from source code
         updatetime      = 25,
         --@usage whether the query persists across vim sessions
         persist_queries = false,
-        keybindings = {
+        keybindings     = {
           toggle_query_editor       = 'o',
           toggle_hl_groups          = 'i',
           toggle_injected_languages = 't',
@@ -1401,11 +1369,11 @@ function M.treesitter()
           show_help                 = '?',
         },
       },
-      autotag = {
+      autotag               = {
         enable = true,
       },
-      rainbow = {
-        enable = true,
+      rainbow               = {
+        enable         = true,
         --@usage list of disabled languages
         -- disable     = { 'jsx', 'cpp' },
         --@usage also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
@@ -1429,48 +1397,48 @@ function M.trouble()
 
     trouble.setup {
       --@usage[[ position of the list can be: bottom, top, left, right ]]
-      position    = 'bottom',
+      position             = 'bottom',
       --@usage[[ height of the trouble list when position is top or bottom ]]
-      height      = 10,
+      height               = 10,
       --@usage[[ use devicons for filenames ]]
-      icons       = true,
+      icons                = true,
       --@usage[[ "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist" ]]
-      mode        = 'workspace_diagnostics',
+      mode                 = 'workspace_diagnostics',
       --@usage[[ icon used for open folds ]]
-      fold_open   = '',
+      fold_open            = '',
       --@usage[[ icon used for closed folds ]]
-      fold_closed = '',
+      fold_closed          = '',
       --@usage[[ group results by file ]]
-      group       = true,
+      group                = true,
       --@usage[[ add an extra new line on top of the list ]]
-      padding     = true,
-      action_keys = {
-          --@usage[[ close the list ]]
-          close       = 'q',
-          --@usage[[ cancel the preview and get back to your last window / buffer / cursor ]]
-          cancel      = '<esc>',
-          --@usage[[ manually refresh ]]
-          refresh     = 'r',
-          --@usage[[ jump to the diagnostic or open / close folds ]]
-          jump        = { '<Tab>' },
-          --@usage[[ open buffer in new split ]]
-          open_split  = { '<c-x>' },
-          --@usage[[ open buffer in new vsplit ]]
-          open_vsplit = { '<c-v>' },
-          --@usage[[ open buffer in new tab ]]
-          open_tab    = { '<c-t>' },
-          --@usage[[ jump to the diagnostic and close the list ]]
-          jump_close  = { '<CR>' },
-          --@usage[[ close all folds ]]
-          close_folds = { 'zM', 'zm' },
-          --@usage[[ open all folds ]]
-          open_folds  = { 'zR', 'zr' },
-          --@usage[[ toggle fold of current file ]]
-          toggle_fold = { 'zA', 'za' },
-          --@usage[[ previous item ]]
-          previous    = 'k',
-          --@usage[[ next item ]]
-          next        = 'j'
+      padding              = true,
+      action_keys          = {
+        --@usage[[ close the list ]]
+        close       = 'q',
+        --@usage[[ cancel the preview and get back to your last window / buffer / cursor ]]
+        cancel      = '<esc>',
+        --@usage[[ manually refresh ]]
+        refresh     = 'r',
+        --@usage[[ jump to the diagnostic or open / close folds ]]
+        jump        = { '<Tab>' },
+        --@usage[[ open buffer in new split ]]
+        open_split  = { '<c-x>' },
+        --@usage[[ open buffer in new vsplit ]]
+        open_vsplit = { '<c-v>' },
+        --@usage[[ open buffer in new tab ]]
+        open_tab    = { '<c-t>' },
+        --@usage[[ jump to the diagnostic and close the list ]]
+        jump_close  = { '<CR>' },
+        --@usage[[ close all folds ]]
+        close_folds = { 'zM', 'zm' },
+        --@usage[[ open all folds ]]
+        open_folds  = { 'zR', 'zr' },
+        --@usage[[ toggle fold of current file ]]
+        toggle_fold = { 'zA', 'za' },
+        --@usage[[ previous item ]]
+        previous    = 'k',
+        --@usage[[ next item ]]
+        next        = 'j'
       },
       --@usage[[ add an indent guide below the fold icons ]]
       indent_lines         = true,

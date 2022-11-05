@@ -22,9 +22,8 @@ nnoremap j gj
 nnoremap k gk
 
 " Common options
-set termguicolor
-set hlsearch
-set ignorecase
-set smartcase
-set smartindent
 set clipboard+=unnamedplus
+set hlsearch
+set incsearch
+set smartindent
+set termguicolor

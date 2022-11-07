@@ -76,5 +76,5 @@ local disabled_built_ins = {
 }
 
 for _, plugin in pairs(disabled_built_ins) do
-   global['loaded_' .. plugin] = 1
+  global['loaded_' .. plugin] = 1
 end

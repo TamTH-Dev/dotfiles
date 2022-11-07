@@ -668,6 +668,8 @@ function M.lsp()
       --[[ buf_set_keymap('n', '<C-e>',      '<cmd>lua vim.diagnostic.setloclist()<CR>',                     opts) ]]
       --[[ buf_set_keymap('n', '<C-w>',      '<cmd>lua vim.diagnostic.setloclist({ workspace = true })<CR>', opts) ]]
 
+      client.resolved_capabilities.document_formatting = true
+
       --@usage[[ set autocommands conditional on server_capabilities ]]
       if client.resolved_capabilities.document_highlight then
         api.nvim_exec([[
@@ -1034,27 +1036,27 @@ function M.null_ls()
 
     if not null_ls_loaded then return end
 
+    local formatting = null_ls.builtins.formatting
+
     null_ls.setup({
+      debug = false,
       --@usage[[ formatting ]]
-      null_ls.builtins.formatting.stylua,
-      null_ls.builtins.formatting.prettier,
-      null_ls.builtins.formatting.prettierd,
-      null_ls.builtins.formatting.dart_format,
-      null_ls.builtins.formatting.eslint,
-      null_ls.builtins.formatting.eslint_d,
+      formatting.stylua,
+      formatting.prettier,
+      --[[ formatting.prettier.with { ]]
+      --[[   extra_filetypes = { 'toml', 'solidity' }, ]]
+      --[[   extra_args = { '--no-semi', '--single-quote', '--jsx-single-quote' }, ]]
+      --[[ }, ]]
+      formatting.prettierd,
+      --[[ null_ls.builtins.formatting.dart_format, ]]
       --@usage[[ completion ]]
-      null_ls.builtins.completion.spell,
-      null_ls.builtins.completion.luasnip,
+      --[[ null_ls.builtins.completion.luasnip, ]]
       --@usage[[ diagnostics ]]
-      null_ls.builtins.diagnostics.tsc,
-      null_ls.builtins.diagnostics.eslint,
-      null_ls.builtins.diagnostics.eslint_d,
-      null_ls.builtins.diagnostics.fish,
+      --[[ null_ls.builtins.diagnostics.tsc, ]]
+      --[[ null_ls.builtins.diagnostics.stylint, ]]
       --@usage[[ code actions ]]
-      null_ls.builtins.code_actions.eslint,
-      null_ls.builtins.code_actions.eslint_d,
-      null_ls.builtins.code_actions.gitsigns,
-      null_ls.builtins.code_actions.refactoring,
+      --[[ null_ls.builtins.code_actions.gitsigns, ]]
+      --[[ null_ls.builtins.code_actions.refactoring, ]]
     })
   end
 end

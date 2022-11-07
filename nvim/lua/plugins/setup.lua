@@ -6,22 +6,22 @@ function M.bufferline()
     local opts = { noremap = true, silent = true }
 
     --@usage[[ move to previous/next ]]
-    map('<leader><Tab>',   '<cmd>BufferLineCycleNext<CR>',     opts)
-    map('<leader><S-Tab>', '<cmd>BufferLineCyclePrev<CR>',     opts)
+    map('<leader><Tab>', '<cmd>BufferLineCycleNext<CR>', opts)
+    map('<leader><S-Tab>', '<cmd>BufferLineCyclePrev<CR>', opts)
     --@usage[[ re-order to previous/next ]]
-    map('<leader>>',       '<cmd>BufferLineMoveNext<CR>',      opts)
-    map('<leader><',       '<cmd>BufferLineMovePrev<CR>',      opts)
+    map('<leader>>', '<cmd>BufferLineMoveNext<CR>', opts)
+    map('<leader><', '<cmd>BufferLineMovePrev<CR>', opts)
     --@usage[[ goto buffer in position... ]]
-    map('<leader>1',       '<cmd>BufferLineGoToBuffer 1<CR>',  opts)
-    map('<leader>2',       '<cmd>BufferLineGoToBuffer 2<CR>',  opts)
-    map('<leader>3',       '<cmd>BufferLineGoToBuffer 3<CR>',  opts)
-    map('<leader>4',       '<cmd>BufferLineGoToBuffer 4<CR>',  opts)
-    map('<leader>5',       '<cmd>BufferLineGoToBuffer 5<CR>',  opts)
-    map('<leader>6',       '<cmd>BufferLineGoToBuffer 6<CR>',  opts)
-    map('<leader>7',       '<cmd>BufferLineGoToBuffer 7<CR>',  opts)
-    map('<leader>8',       '<cmd>BufferLineGoToBuffer 8<CR>',  opts)
-    map('<leader>9',       '<cmd>BufferLineGoToBuffer 9<CR>',  opts)
-    map('<leader>10',      '<cmd>BufferLineGoToBuffer 10<CR>', opts)
+    map('<leader>1', '<cmd>BufferLineGoToBuffer 1<CR>', opts)
+    map('<leader>2', '<cmd>BufferLineGoToBuffer 2<CR>', opts)
+    map('<leader>3', '<cmd>BufferLineGoToBuffer 3<CR>', opts)
+    map('<leader>4', '<cmd>BufferLineGoToBuffer 4<CR>', opts)
+    map('<leader>5', '<cmd>BufferLineGoToBuffer 5<CR>', opts)
+    map('<leader>6', '<cmd>BufferLineGoToBuffer 6<CR>', opts)
+    map('<leader>7', '<cmd>BufferLineGoToBuffer 7<CR>', opts)
+    map('<leader>8', '<cmd>BufferLineGoToBuffer 8<CR>', opts)
+    map('<leader>9', '<cmd>BufferLineGoToBuffer 9<CR>', opts)
+    map('<leader>10', '<cmd>BufferLineGoToBuffer 10<CR>', opts)
   end
 end
 
@@ -77,8 +77,8 @@ function M.nvimtree()
     local glob = vim.g
     local opts = { noremap = true, silent = true }
 
-    map('<C-n>',      '<cmd>NvimTreeToggle<CR>',   opts)
-    map('<leader>r',  '<cmd>NvimTreeRefresh<CR>',  opts)
+    map('<C-n>', '<cmd>NvimTreeToggle<CR>', opts)
+    map('<leader>r', '<cmd>NvimTreeRefresh<CR>', opts)
     map('<leader>nf', '<cmd>NvimTreeFindFile<CR>', opts)
 
     --@usage[[ don't auto open tree on specific filetypes ]]
@@ -97,9 +97,9 @@ function M.telescope()
     local map = function(...) vim.api.nvim_set_keymap('n', ...) end
     local opts = { noremap = true, silent = true }
 
-    map('<C-p>', '<cmd>Telescope find_files hidden=true<CR>',    opts)
-    map('<C-f>', '<cmd>Telescope live_grep<CR>',                 opts)
-    map('<C-b>', '<cmd>Telescope buffers<CR>',                   opts)
+    map('<C-p>', '<cmd>Telescope find_files hidden=true<CR>', opts)
+    map('<C-f>', '<cmd>Telescope live_grep<CR>', opts)
+    map('<C-b>', '<cmd>Telescope buffers<CR>', opts)
   end
 end
 
@@ -108,7 +108,7 @@ function M.trouble()
     local map = function(...) vim.api.nvim_set_keymap('n', ...) end
     local opts = { noremap = true, silent = true }
 
-    map('<C-e>', '<cmd>TroubleToggle document_diagnostics<CR>',  opts)
+    map('<C-e>', '<cmd>TroubleToggle document_diagnostics<CR>', opts)
     map('<C-w>', '<cmd>TroubleToggle workspace_diagnostics<CR>', opts)
   end
 end
@@ -118,15 +118,15 @@ function M.flutter()
     local opts = { noremap = true, silent = true }
     local map = function(...) vim.api.nvim_set_keymap('n', ...) end
 
-    map('<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>',     opts)
-    map('<leader>gf', '<cmd>lua vim.lsp.buf.references()<CR>',     opts)
-    map('<leader>gk', '<cmd>lua vim.lsp.buf.hover()<CR>',          opts)
+    map('<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    map('<leader>gf', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+    map('<leader>gk', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
     map('<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    map('<leader>gr', '<cmd>lua vim.lsp.buf.rename()<CR>',         opts)
-    map('<leader>gn', '<cmd>lua vim.diagnostic.goto_next()<CR>',   opts)
-    map('<leader>gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>',   opts)
-    map('<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<CR>',    opts)
-    map('<leader>gl', '<cmd>lua vim.diagnostic.open_float()<CR>',  opts)
+    map('<leader>gr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    map('<leader>gn', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+    map('<leader>gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+    map('<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    map('<leader>gl', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   end
 end
 

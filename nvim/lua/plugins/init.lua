@@ -30,7 +30,7 @@ packer.startup(function()
       require 'colors'.init()
     end,
   }
-  
+
   --[[ Icons suppliers for Madvim ]]
   use {
     'kyazdani42/nvim-web-devicons',
@@ -95,16 +95,16 @@ packer.startup(function()
   }
 
   --[[ Indentation helper for jsx ]]
-  use {
-    'maxmellon/vim-jsx-pretty',
-    commit = '6989f16',
-    ft = {
-      'javascript',
-      'javascriptreact',
-      'typescript',
-      'typescriptreact',
-    },
-  }
+  --[[ use { ]]
+  --[[   'maxmellon/vim-jsx-pretty', ]]
+  --[[   commit = '6989f16', ]]
+  --[[   ft = { ]]
+  --[[     'javascript', ]]
+  --[[     'javascriptreact', ]]
+  --[[     'typescript', ]]
+  --[[     'typescriptreact', ]]
+  --[[   }, ]]
+  --[[ } ]]
 
   --[[ Indentation guides ]]
   use {
@@ -153,7 +153,7 @@ packer.startup(function()
     'mattn/emmet-vim',
     commit = 'def5d57',
     event  = 'BufEnter',
-    ft = {
+    ft     = {
       'html',
       'css',
       'javascript',
@@ -162,37 +162,41 @@ packer.startup(function()
       'typescriptreact',
       'vue',
     },
-    setup = setup.emmet(),
+    setup  = setup.emmet(),
   }
 
   --[[ Built-in LSP Configuration Supporter ]]
   use {
     'neovim/nvim-lspconfig',
     commit = 'ee2e8c6',
-  }
-  --[[ LSP Installer ]]
-  use {
-    'williamboman/nvim-lsp-installer',
-    commit = 'ae913cb',
-    config = config.lsp(),
-  }
-  --[[ LSP Styling ]]
-  use({
-    'glepnir/lspsaga.nvim',
-    commit = '391cf74',
-    branch = 'main',
-    config = config.saga(),
-  })
-  use {
-    'folke/trouble.nvim',
-    requires = 'kyazdani42/nvim-web-devicons',
-    setup    = setup.trouble(),
-    config   = config.trouble(),
-  }
-  --[[ Improve LSP performance ]]
-  use {
-    'jose-elias-alvarez/null-ls.nvim',
-    config = config.null_ls(),
+    requires = {
+      --[[ Installer ]]
+      {
+        'williamboman/nvim-lsp-installer',
+        commit = 'ae913cb',
+        config = config.lsp(),
+      },
+      --[[ Use Neovim as a language server to inject LSP diagnostics, ]]
+      --[[ code actions, and more via Lua ]]
+      {
+        'jose-elias-alvarez/null-ls.nvim',
+        requires = 'nvim-lua/plenary.nvim',
+        config   = config.null_ls(),
+      },
+      --[[ Styling ]]
+      {
+        'glepnir/lspsaga.nvim',
+        commit = '391cf74',
+        branch = 'main',
+        config = config.saga(),
+      },
+      {
+        'folke/trouble.nvim',
+        requires = 'kyazdani42/nvim-web-devicons',
+        setup    = setup.trouble(),
+        config   = config.trouble(),
+      }
+    },
   }
 
   -- Fuzzy search
@@ -224,8 +228,8 @@ packer.startup(function()
   }
   use {
     'hrsh7th/nvim-cmp',
-    commit = 'cdb7766',
-    event  = 'BufEnter',
+    commit   = 'cdb7766',
+    event    = 'BufEnter',
     requires = {
       {
         'saadparwaiz1/cmp_luasnip',
@@ -264,7 +268,7 @@ packer.startup(function()
         opt    = true,
       },
     },
-    config = config.cmp(),
+    config   = config.cmp(),
   }
 
   --[[ Delete all buffers except one ]]
@@ -280,8 +284,8 @@ packer.startup(function()
     setup  = setup.flutter(),
     config = config.flutter(),
   }
-  
-  --[[ use { ]]
-  --[[   'tweekmonster/startuptime.vim', ]]
-  --[[ } ]]
+
+  use {
+    'tweekmonster/startuptime.vim',
+  }
 end)

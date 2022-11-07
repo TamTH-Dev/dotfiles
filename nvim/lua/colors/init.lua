@@ -19,7 +19,7 @@ function M.init()
   end
 
   --[[ Set colorscheme ]]
-  cmd('colorscheme '..theme)
+  cmd('colorscheme ' .. theme)
 
   --[[ Unload to force reload ]]
   package.loaded['colors.highlights' or false] = nil
@@ -33,10 +33,10 @@ end
 --[[ Returns a table of colors for given or current theme ]]
 --TODO:[[ Research more ]]
 function M.get(theme)
-   if not theme then
-      theme = vim.g.default_theme
-   end
-   return require('')
+  if not theme then
+    theme = vim.g.default_theme
+  end
+  return require('')
 end
 
 return M

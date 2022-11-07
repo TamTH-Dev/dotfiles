@@ -39,23 +39,23 @@ M.cssls = {
     },
     scss = {
       validate = true
-    }
+    },
   }
 }
 
 M.html = {
-    init_options = {
-      configurationSection = { 'html', 'css', 'javascript', 'markdown' },
-      embeddedLanguages = {
-        css = true,
-        javascript = true
-      }
-    },
-    root_dir = function(fname)
-      local util = require 'lspconfig/util'
-      return util.root_pattern('package.json', '.git')(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
-    end,
-    filetypes = { 'html', 'markdown' },
+  init_options = {
+    configurationSection = { 'html', 'css', 'javascript', 'markdown' },
+    embeddedLanguages = {
+      css = true,
+      javascript = true
+    }
+  },
+  root_dir = function(fname)
+    local util = require 'lspconfig/util'
+    return util.root_pattern('package.json', '.git')(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
+  end,
+  filetypes = { 'html', 'markdown' },
 }
 
 M.jdtls = {
@@ -158,12 +158,12 @@ M.tsserver = {
   end,
   settings = {
     languages = {
-      javascript = { },
-      javascriptreact = { },
-      ['javascript.jsx'] = { },
-      typescript = { },
-      ['typescript.tsx'] = { },
-      typescriptreact = { },
+      javascript = {},
+      javascriptreact = {},
+      ['javascript.jsx'] = {},
+      typescript = {},
+      ['typescript.tsx'] = {},
+      typescriptreact = {},
     }
   },
   filetypes = {

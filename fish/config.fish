@@ -38,7 +38,7 @@ set -g fish_pager_color_description $green
 set fish_greeting
 
 # Language environment
-set LANG "en_US.UTF-8"
+set LANG 'en_US.UTF-8'
 
 # Preferred editor for local and remote sessions
 set EDITOR nvim
@@ -52,26 +52,37 @@ end
 set PATH $HOME/.local/bin $HOME/.config/bin /usr/local/bin /usr/bin /usr/sbin /usr/local/sbin /bin $PATH
 
 # Nvm
-set NVM_DIR "$HOME/.nvm"
-set PATH $HOME/.nvm/versions/node/v16.17.0/bin $PATH
+set NVM_DIR $HOME/.nvm
+set PATH $HOME/.nvm/versions/node/v18.12.1/bin $PATH
 
-# Flutter
+# Rvm
+set PATH $HOME/.rvm/bin $PATH
+
+# Mobile
 set PATH $HOME/flutter/bin $PATH
+set PATH $HOME/Library/Android/sdk/emulator $PATH
+
+# Postgresql
+set PATH /Library/PostgreSQL/14/bin $PATH
+
+# Python packages
+set PATH $HOME/Library/Python/3.9/bin $PATH
 
 # Configure fzf
 set -gx FZF_DEFAULT_OPTS '
-      --color=bg+:#2e3440,bg:#2e3440
-      --color=hl+:#81a1c1,hl:#81a1c1
-      --color=fg+:#d8dee9,fg:#4c566a
-      --color=info:#a3be8c,prompt:#a3be8c,spinner:#a3be8c,pointer:#d08770,marker:#81a1c1
-      --layout=reverse --bind=shift-tab:up,tab:down --no-multi --cycle'
+    --color=bg+:#24283b,bg:#24283b
+    --color=hl+:#2ac3de,hl:#2ac3de
+    --color=fg+:#c0caf5,fg:#565f89
+    --color=info:#9ece6a,prompt:#9ece6a,spinner:#9ece6a,pointer:#f7768e,marker:#2ac3de
+    --layout=reverse --bind=shift-tab:up,tab:down --no-multi --cycle
+  '
 set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden -g "!{node_modules,.git,build,dist,.cache,cache,.idea}"'
 
 # Aliases
 # Main editor
-alias vi="nvim"
+alias vi='nvim'
 # Git management tool
-alias lg="lazygit"
+alias lg='lazygit'
 # Fish configuration
 alias fishconfig="vi ~/.config/fish/config.fish"
 # Changing "ls" to "exa"
@@ -82,6 +93,8 @@ alias lt='exa -aT --color=always --group-directories-first'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
+# Simulator
+alias simulator='arch -x86_64 /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/Contents/MacOS/Simulator'
 
 # Launch starship
 starship init fish | source

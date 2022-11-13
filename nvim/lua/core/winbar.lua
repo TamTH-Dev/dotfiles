@@ -27,18 +27,21 @@ local excludes = function()
   return true
 end
 
-local function get_modified()
-  return "%#WinBarFilename#%f%*"
+local function get_file_path()
+  local file_path = vim.api.nvim_eval_statusline("%f", {}).str
+  file_path = file_path:gsub("/", " ᐅ ")
+
+  return file_path
 end
 
-local function get_location()
+local function get_current_location()
   local location = navic.get_location()
 
   if location == "" or location == nil then
     return ""
   end
 
-  return "%#WinBarContext#" .. "  " .. location .. "%*"
+  return "%#WinBarContext#" .. " ᐅ " .. location .. "%*"
 end
 
 function M.get_winbar()
@@ -46,14 +49,14 @@ function M.get_winbar()
     return ""
   end
 
-  local location = get_location()
-  local modified = get_modified()
+  local current_location = get_current_location()
+  local file_path = get_file_path()
 
   if not navic.is_available() then
-    return "%#WinBarSeparator#%*" .. modified .. "%#WinBarSeparator#%*"
+    return "%#WinBarSeparator#%*" .. file_path .. "%#WinBarSeparator#%*"
   end
 
-  return "%#WinBarSeparator#%*" .. modified .. location .. "%#WinBarSeparator#%*"
+  return "%#WinBarSeparator#%*" .. file_path .. current_location .. "%#WinBarSeparator#%*"
 end
 
 return M

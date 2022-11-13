@@ -231,24 +231,24 @@ packer.startup(function()
 
   --[[ Completion supporters ]]
   use({
+    "rafamadriz/friendly-snippets",
+    commit = "c93311f",
+  })
+  use({
     "L3MON4D3/LuaSnip",
     commit = "619796e",
+    config = config.luasnip(),
   })
   use({
     "hrsh7th/nvim-cmp",
     commit = "c53dd36",
     event = "BufEnter",
+    config = config.cmp(),
     requires = {
       {
         "saadparwaiz1/cmp_luasnip",
         commit = "1809552",
-        after = "nvim-cmp",
-        opt = true,
-      },
-      {
-        "rafamadriz/friendly-snippets",
-        commit = "c93311f",
-        after = { "nvim-cmp", "cmp_luasnip" },
+        after = { "nvim-cmp", "LuaSnip" },
         opt = true,
       },
       {
@@ -276,7 +276,6 @@ packer.startup(function()
         opt = true,
       },
     },
-    config = config.cmp(),
   })
 
   --[[ Delete all buffers except one ]]

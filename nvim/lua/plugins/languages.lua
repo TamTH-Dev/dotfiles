@@ -164,18 +164,14 @@ M.tsserver = {
 		languages = {
 			javascript = {},
 			javascriptreact = {},
-			["javascript.jsx"] = {},
 			typescript = {},
-			["typescript.tsx"] = {},
 			typescriptreact = {},
 		},
 	},
 	filetypes = {
 		"javascript",
 		"javascriptreact",
-		"javascript.jsx",
 		"typescript",
-		"typescript.tsx",
 		"typescriptreact",
 	},
 }

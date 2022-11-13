@@ -186,8 +186,6 @@ function M.cmp()
       return
     end
 
-    local api = vim.api
-
     local kind_icons = {
       Array = "",
       Boolean = "◩",
@@ -226,9 +224,9 @@ function M.cmp()
     }
 
     local has_words_before = function()
-      local line, col = unpack(api.nvim_win_get_cursor(0))
+      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 
-      return col ~= 0 and api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
 
     cmp.setup({
@@ -286,45 +284,30 @@ function M.cmp()
       },
       formatting = {
         fields = { "kind", "abbr", "menu" },
-        max_width = 0,
-        kind_icons = kind_icons,
-        source_names = {
-          nvim_lsp = "(LSP)",
-          path = "(Path)",
-          luasnip = "(Snippet)",
-          buffer = "(Buffer)",
-        },
-        duplicates = {
-          nvim_lsp = 0,
-          luasnip = 1,
-          buffer = 1,
-          path = 1,
-        },
-        duplicates_default = 0,
-        format = function(entry, vim_item)
-          vim_item.kind = kind_icons[vim_item.kind]
-          vim_item.menu = ({
+        format = function(entry, item)
+          item.kind = kind_icons[item.kind]
+          item.menu = ({
             nvim_lsp = "(LSP)",
-            path = "(Path)",
             luasnip = "(Snippet)",
+            path = "(Path)",
             buffer = "(Buffer)",
           })[entry.source.name]
-          vim_item.dup = ({
+          item.dup = ({
             nvim_lsp = 0,
             luasnip = 1,
             buffer = 1,
             path = 1,
           })[entry.source.name] or 0
 
-          return vim_item
+          return item
         end,
       },
       sources = {
         { name = "nvim_lsp" },
-        { name = "nvim_lua" },
         { name = "luasnip" },
         { name = "path" },
         { name = "buffer" },
+        { name = "nvim_lua" },
       },
     })
   end
@@ -968,6 +951,20 @@ function M.lualine()
     })
 
     lualine.setup(config)
+  end
+end
+
+function M.luasnip()
+  return function()
+    local luasnip_loaders_loaded, luasnip_loaders = pcall(require, "luasnip/loaders/from_vscode")
+
+    if not luasnip_loaders_loaded then
+      return
+    end
+
+    luasnip_loaders.lazy_load({
+      paths = { "~/.local/share/nvim/site/pack/packer/start/friendly-snippets" },
+    })
   end
 end
 

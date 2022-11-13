@@ -188,10 +188,12 @@ function M.cmp()
 
     local api = vim.api
 
-    local format_icons = {
+    local kind_icons = {
+      Array = "",
+      Boolean = "◩",
       Class = "",
       Color = "",
-      Constant = "",
+      Constant = "",
       Constructor = "",
       Enum = "練",
       EnumMember = "",
@@ -200,20 +202,27 @@ function M.cmp()
       File = "",
       Folder = "",
       Function = "",
-      Interface = "",
-      Keyword = " ",
+      Interface = "練",
+      Key = "",
+      Keyword = "",
       Method = "",
-      Module = "",
+      Module = "",
+      Null = "",
+      Namespace = "",
+      Number = "",
+      Object = "",
       Operator = "",
-      Property = "",
+      Property = "",
+      Package = "",
       Reference = "",
       Snippet = "",
-      Struct = "",
+      String = "",
+      Struct = "",
       Text = "",
       TypeParameter = "",
       Unit = "塞",
       Value = "",
-      Variable = "",
+      Variable = "",
     }
 
     local has_words_before = function()
@@ -278,33 +287,7 @@ function M.cmp()
       formatting = {
         fields = { "kind", "abbr", "menu" },
         max_width = 0,
-        kind_icons = {
-          Class = "",
-          Color = "",
-          Constant = "",
-          Constructor = "",
-          Enum = "練",
-          EnumMember = "",
-          Event = "",
-          Field = "",
-          File = "",
-          Folder = "",
-          Function = "",
-          Interface = "",
-          Keyword = " ",
-          Method = "",
-          Module = "",
-          Operator = "",
-          Property = "",
-          Reference = "",
-          Snippet = "",
-          Struct = "",
-          Text = "",
-          TypeParameter = "",
-          Unit = "塞",
-          Value = "",
-          Variable = "",
-        },
+        kind_icons = kind_icons,
         source_names = {
           nvim_lsp = "(LSP)",
           path = "(Path)",
@@ -319,7 +302,7 @@ function M.cmp()
         },
         duplicates_default = 0,
         format = function(entry, vim_item)
-          vim_item.kind = format_icons[vim_item.kind]
+          vim_item.kind = kind_icons[vim_item.kind]
           vim_item.menu = ({
             nvim_lsp = "(LSP)",
             path = "(Path)",
@@ -663,24 +646,6 @@ function M.lsp()
     customize()
 
     local on_attach = function(client, bufnr)
-      --[[ local buf_set_keymap = function(...) api.nvim_buf_set_keymap(bufnr, ...) end ]]
-      --[[ local buf_set_option = function(...) api.nvim_buf_set_option(bufnr, ...) end ]]
-      --[[ local opts = { noremap = true, silent = true } ]]
-
-      --@usage[[ enable completion triggered ]]
-      --[[ buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc') ]]
-      --[[ buf_set_keymap('n', '<leader>gn', '<cmd>lua vim.diagnostic.goto_next()<CR>',                           opts) ]]
-      --[[ buf_set_keymap('n', '<leader>gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>',                           opts) ]]
-      --[[ buf_set_keymap('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>',                             opts) ]]
-      --[[ buf_set_keymap('n', '<leader>gf', '<cmd>lua vim.lsp.buf.references()<CR>',                             opts) ]]
-      --[[ buf_set_keymap('n', '<leader>gk', '<cmd>lua vim.lsp.buf.hover()<CR>',                                  opts) ]]
-      --[[ buf_set_keymap('n', '<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>',                         opts) ]]
-      --[[ buf_set_keymap('n', '<leader>gr', '<cmd>lua vim.lsp.buf.rename()<CR>',                                 opts) ]]
-      --[[ buf_set_keymap('n', '<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<CR>',                            opts) ]]
-      --[[ buf_set_keymap('n', '<leader>gl', '<cmd>lua vim.diagnostic.open_float()<CR>',                          opts) ]]
-      --[[ buf_set_keymap('n', '<C-e>',      '<cmd>lua vim.diagnostic.setloclist()<CR>',                     opts) ]]
-      --[[ buf_set_keymap('n', '<C-w>',      '<cmd>lua vim.diagnostic.setloclist({ workspace = true })<CR>', opts) ]]
-
       --@usage[[ Attach navic to lsp ]]
       if client.server_capabilities.documentSymbolProvider then
         require("nvim-navic").attach(client, bufnr)

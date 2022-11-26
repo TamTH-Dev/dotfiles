@@ -96,18 +96,6 @@ packer.startup(function()
     },
   })
 
-  --[[ Indentation helper for jsx ]]
-  --[[ use { ]]
-  --[[   'maxmellon/vim-jsx-pretty', ]]
-  --[[   commit = '6989f16', ]]
-  --[[   ft = { ]]
-  --[[     'javascript', ]]
-  --[[     'javascriptreact', ]]
-  --[[     'typescript', ]]
-  --[[     'typescriptreact', ]]
-  --[[   }, ]]
-  --[[ } ]]
-
   --[[ Indentation guides ]]
   use({
     "lukas-reineke/indent-blankline.nvim",
@@ -166,6 +154,7 @@ packer.startup(function()
     },
     setup = setup.emmet(),
   })
+
   --[[ Winbar ]]
   use({
     "SmiteshP/nvim-navic",
@@ -173,24 +162,18 @@ packer.startup(function()
     config = config.winbar(),
   })
 
+  --[[ Manage external editor tooling ]]
+  use({
+    "williamboman/mason.nvim",
+    config = config.mason(),
+  })
+
   --[[ Built-in LSP Configuration Supporter ]]
   use({
     "neovim/nvim-lspconfig",
     commit = "ee2e8c6",
+    config = config.lsp(),
     requires = {
-      --[[ Installer ]]
-      {
-        "williamboman/nvim-lsp-installer",
-        commit = "ae913cb",
-        config = config.lsp(),
-      },
-      --[[ Use Neovim as a language server to inject LSP diagnostics, ]]
-      --[[ code actions, and more via Lua ]]
-      {
-        "jose-elias-alvarez/null-ls.nvim",
-        requires = "nvim-lua/plenary.nvim",
-        config = config.null_ls(),
-      },
       --[[ Styling ]]
       {
         "glepnir/lspsaga.nvim",
@@ -205,6 +188,32 @@ packer.startup(function()
         config = config.trouble(),
       },
     },
+  })
+  -- [[ Bridges mason.nvim with the lspconfig ]]
+  use({
+    "williamboman/mason-lspconfig.nvim",
+    requires = {
+      "williamboman/mason.nvim",
+      "neovim/nvim-lspconfig",
+    },
+    config = config.mason_lspconfig(),
+  })
+
+  -- [[ Use Neovim as a language server to inject LSP diagnostics,
+  --  code actions, and more via Lua ]]
+  use({
+    "jose-elias-alvarez/null-ls.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = config.null_ls(),
+  })
+  -- [[ Bridges mason.nvim with the null-ls ]]
+  use({
+    "jayp0521/mason-null-ls.nvim",
+    requires = {
+      "williamboman/mason.nvim",
+      "jose-elias-alvarez/null-ls.nvim",
+    },
+    config = config.mason_null_ls(),
   })
 
   -- Fuzzy search

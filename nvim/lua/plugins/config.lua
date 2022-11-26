@@ -576,14 +576,6 @@ end
 
 function M.lsp()
   return function()
-    local lsp_installer_loaded, lsp_installer = pcall(require, "nvim-lsp-installer")
-    local languages_loaded, languages = pcall(require, "plugins/languages")
-
-    if not (lsp_installer_loaded or languages_loaded) then
-      return
-    end
-
-    local cmd = vim.cmd
     local lsp = vim.lsp
 
     local customize = function()
@@ -618,9 +610,11 @@ function M.lsp()
 
       --@usage[[ popup customization globly ]]
       local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+
       function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
         opts = opts or {}
         opts.border = opts.border or border
+
         return orig_util_open_floating_preview(contents, syntax, opts, ...)
       end
     end
@@ -654,57 +648,19 @@ function M.lsp()
       return capabilities
     end
 
-    lsp_installer.settings({
-      ui = {
-        icons = {
-          --@usage[[ the list icon to use for installed servers ]]
-          server_installed = "✓",
-          --@usage[[ the list icon to use for servers that are pending installation ]]
-          server_pending = "➜",
-          --@usage[[ the list icon to use for servers that are not installed ]]
-          server_uninstalled = "✗",
-        },
-        keymaps = {
-          --@usage[[ keymap to expand a server in the UI ]]
-          toggle_server_expand = "<CR>",
-          --@usage[[ keymap to install a server ]]
-          install_server = "i",
-          --@usage[[ keymap to reinstall/update a server ]]
-          update_server = "u",
-          --@usage[[ keymap to uninstall a server ]]
-          uninstall_server = "X",
-        },
-      },
-    })
+    local languages = require("plugins/lsp_languages")
+    local servers = require("plugins/lsp_servers")
 
-    lsp_installer.on_server_ready(function(server)
-      local opts = {
-        --@usage[[ map buffer local keybindings when the language server attaches ]]
+    for _, server in ipairs(servers) do
+      require("lspconfig")[server].setup({
         on_attach = on_attach,
-        --@usage[[ enable snippet support ]]
         capabilities = set_capabilities(),
-      }
-      local language = languages[server.name]
-
-      if language then
-        if language.init_options then
-          opts.init_options = language.init_options
-        end
-        if language.settings then
-          opts.settings = language.settings
-        end
-        if language.root_dir then
-          opts.root_dir = language.root_dir
-        end
-        if language.filetypes then
-          opts.filetypes = language.filetypes
-        end
-      end
-
-      --@usage[[ apply options ]]
-      server:setup(opts)
-      cmd([[ do User LspAttachBuffers ]])
-    end)
+        init_options = languages[server].init_options,
+        settings = languages[server].settings,
+        root_dir = languages[server].root_dir,
+        filetypes = languages[server].filetypes,
+      })
+    end
   end
 end
 
@@ -968,6 +924,85 @@ function M.luasnip()
   end
 end
 
+function M.mason()
+  return function()
+    local mason_loaded, mason = pcall(require, "mason")
+
+    if not mason_loaded then
+      return
+    end
+
+    mason.setup({
+      ui = {
+        border = "rounded",
+        icons = {
+          package_installed = "",
+          package_pending = "",
+          package_uninstalled = "✗",
+        },
+      },
+    })
+  end
+end
+
+function M.mason_lspconfig()
+  return function()
+    local mason_lspconfig_loaded, mason_lspconfig = pcall(require, "mason-lspconfig")
+
+    if not mason_lspconfig_loaded then
+      return
+    end
+
+    local servers = require("plugins/lsp_servers")
+
+    mason_lspconfig.setup({
+      ensure_installed = servers,
+    })
+  end
+end
+
+function M.mason_null_ls()
+  return function()
+    local mason_null_ls_loaded, mason_null_ls = pcall(require, "mason-null-ls")
+    local null_ls_loaded, null_ls = pcall(require, "null-ls")
+
+    if not (mason_null_ls_loaded or null_ls_loaded) then
+      return
+    end
+
+    mason_null_ls.setup({
+      ensure_installed = {
+        "autopep8",
+        "clang_format",
+        "prettier",
+        "stylua",
+      },
+    })
+
+    local formatting = null_ls.builtins.formatting
+
+    mason_null_ls.setup_handlers({
+      function(source_name, methods)
+        -- [[ All sources with no handler get passed here ]]
+        -- [[ Keep original functionality of `automatic_setup = true` ]]
+        require("mason-null-ls.automatic_setup")(source_name, methods)
+      end,
+      autopep8 = function(_, _)
+        null_ls.register(formatting.autopep8)
+      end,
+      clang_format = function(_, _)
+        null_ls.register(formatting.clang_format)
+      end,
+      prettier = function(_, _)
+        null_ls.register(formatting.prettier)
+      end,
+      stylua = function(_, _)
+        null_ls.register(formatting.stylua)
+      end,
+    })
+  end
+end
+
 function M.neoscroll()
   return function()
     local neoscroll_loaded, neoscroll = pcall(require, "neoscroll")
@@ -1013,19 +1048,7 @@ function M.null_ls()
       return
     end
 
-    local formatting = null_ls.builtins.formatting
-
-    null_ls.setup({
-      debug = false,
-      sources = {
-        --@usage[[ formatting ]]
-        formatting.autopep8,
-        formatting.fish_indent,
-        formatting.stylua,
-        formatting.prettier,
-        formatting.xmllint,
-      },
-    })
+    null_ls.setup()
   end
 end
 

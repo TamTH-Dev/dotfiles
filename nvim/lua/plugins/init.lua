@@ -219,7 +219,7 @@ packer.startup(function()
   -- Fuzzy search
   use({
     "nvim-telescope/telescope.nvim",
-    commit = "f174a03",
+    commit = "3c2e5fb",
     setup = setup.telescope(),
     config = config.telescope(),
   })
@@ -302,7 +302,7 @@ packer.startup(function()
   })
 
   --[[ Measure neovim's startup time ]]
-  use({
-    "tweekmonster/startuptime.vim",
-  })
+  --[[ use({ ]]
+  --[[   "tweekmonster/startuptime.vim", ]]
+  --[[ }) ]]
 end)

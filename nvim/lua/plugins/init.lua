@@ -223,12 +223,14 @@ packer.startup(function()
     setup = setup.telescope(),
     config = config.telescope(),
   })
-  use({
-    "nvim-telescope/telescope-fzf-native.nvim",
-    commit = "65c0ee3",
-    run = "make",
-    requires = { "nvim-telescope/telescope.nvim" },
-  })
+  --[[ use({ ]]
+  --[[   "nvim-telescope/telescope-fzf-native.nvim", ]]
+  --[[   commit = "7447fe7", ]]
+  --[[   run = "make", ]]
+  --[[   requires = { ]]
+  --[[     "nvim-telescope/telescope.nvim", ]]
+  --[[   }, ]]
+  --[[ }) ]]
 
   --[[ Autopairs supporter ]]
   use({

@@ -1234,17 +1234,13 @@ function M.telescope()
         selection_strategy = "reset",
         sorting_strategy = "ascending",
         layout_strategy = "horizontal",
-        preview = false,
         layout_config = {
           width = 0.5,
           preview_cutoff = 120,
-          vertical = { mirror = false },
           horizontal = {
-            preview_width = function(_, cols, _)
-              return math.floor(cols * 0.5)
-            end,
             mirror = false,
           },
+          vertical = { mirror = false },
         },
         vimgrep_arguments = {
           "rg",
@@ -1299,27 +1295,46 @@ function M.telescope()
       pickers = {
         find_files = {
           hidden = true,
+          previewer = false,
+        },
+        buffers = {
+          previewer = false,
         },
         live_grep = {
           --@usage don't include the filename in the search results
           only_sort_text = true,
+          layout_config = {
+            width = 0.75,
+            preview_cutoff = 120,
+            horizontal = {
+              preview_width = function(_, cols, _)
+                if cols < 120 then
+                  return math.floor(cols * 0.5)
+                end
+
+                return math.floor(cols * 0.6)
+              end,
+              mirror = false,
+            },
+            vertical = { mirror = false },
+          },
         },
       },
-      extensions = {
-        fzf = {
-          --@usage false will only do exact matching
-          fuzzy = true,
-          --@usage override the generic sorter
-          override_generic_sorter = true,
-          --@usage override the file sorter
-          override_file_sorter = true,
-          --@usage or "ignore_case" or "respect_case"
-          case_mode = "smart_case",
-        },
-      },
+      --[[ extensions = { ]]
+      --[[   fzf = { ]]
+      --[[     --@usage false will only do exact matching ]]
+      --[[     fuzzy = true, ]]
+      --[[     --@usage override the generic sorter ]]
+      --[[     override_generic_sorter = true, ]]
+      --[[     --@usage override the file sorter ]]
+      --[[     override_file_sorter = true, ]]
+      --[[     --@usage or "ignore_case" or "respect_case" ]]
+      --[[     case_mode = "smart_case", ]]
+      --[[   }, ]]
+      --[[ }, ]]
     })
 
-    telescope.load_extension("fzf")
+    --[[ telescope.load_extension("fzf") ]]
   end
 end
 

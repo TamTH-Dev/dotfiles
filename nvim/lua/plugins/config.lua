@@ -42,8 +42,8 @@ function M.alpha()
 		local options = {
 			type = "group",
 			val = {
-				build_option("p", "  Find File", "<cmd>Telescope find_files hidden=true<CR>"),
-				build_option("f", "  Find Word", "<cmd>Telescope live_grep<CR>"),
+				build_option("p", "  Find File", "<cmd>FzfLua files<CR>"),
+				build_option("f", "  Find Word", "<cmd>FzfLua live_grep<CR>"),
 				build_option("o", "  Project structure", "<cmd>NvimTreeToggle<CR>"),
 				build_option("n", "  New File", "<cmd>ene!<CR>"),
 				build_option("s", "  Settings", "<cmd>e $HOME/.config/nvim/lua/default_config.lua<CR>"),
@@ -591,7 +591,7 @@ function M.lsp()
 			})
 
 			--@usage[[ symbols in the sign column (gutter) ]]
-			local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+			local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 			for type, icon in pairs(signs) do
 				local hl = "DiagnosticSign" .. type
 				fn.sign_define(hl, { text = icon, texthl = hl })
@@ -859,7 +859,7 @@ function M.lualine()
 		ins_right({
 			"diagnostics",
 			sources = { "nvim_diagnostic" },
-			symbols = { error = " ", warn = " ", info = " ", hint = " " },
+			symbols = { error = " ", warn = " ", info = " ", hint = " " },
 			diagnostics_color = {
 				error = { fg = colors.red },
 				warn = { fg = colors.orange },
@@ -1080,7 +1080,7 @@ function M.nvimtree()
 				show_on_dirs = true,
 				icons = {
 					hint = "",
-					info = "",
+					info = "",
 					warning = "",
 					error = "",
 				},
@@ -1177,7 +1177,7 @@ function M.saga()
 			--[[ transparent background. Values between 0-30 are typically most useful. ]]
 			saga_winblend = 0,
 			--@usage[[ Error, Warn, Info, Hint ]]
-			diagnostic_header = { " ", " ", " ", " " },
+			diagnostic_header = { " ", " ", " ", " " },
 			--@usage[[ preview lines of lsp_finder and definition preview ]]
 			max_preview_lines = 12,
 			--@usage[[ use emoji lightbulb in default ]]
@@ -1530,6 +1530,143 @@ function M.winbar()
 			depth_limit = 0,
 			depth_limit_indicator = "...",
 			safe_output = true,
+		})
+	end
+end
+
+function M.fzf()
+	return function()
+		local fzf_loaded, fzf = pcall(require, "fzf-lua")
+
+		if not fzf_loaded then
+			return
+		end
+
+		local actions = require("fzf-lua.actions")
+
+		fzf.setup({
+			winopts = {
+				height = 0.85,
+				width = 0.80,
+				row = 0.35,
+				col = 0.50,
+				border = "rounded",
+				fullscreen = false,
+				hl = {
+					normal = "Normal",
+					border = "FloatBorder",
+					search = "IncSearch",
+					title = "Normal",
+				},
+				preview = {
+					border = "border",
+					wrap = "nowrap",
+					hidden = "nohidden",
+					vertical = "down:45%",
+					horizontal = "right:60%",
+					layout = "flex",
+					flip_columns = 120,
+					title = false,
+					title_align = "center",
+					scrollbar = "border",
+					scrolloff = "-2",
+					scrollchars = { "", "" },
+					delay = 100,
+					winopts = {
+						number = true,
+						relativenumber = false,
+						cursorline = false,
+						cursorlineopt = "both",
+						cursorcolumn = false,
+						signcolumn = "no",
+						list = false,
+						foldenable = false,
+						foldmethod = "manual",
+					},
+				},
+			},
+			keymap = {
+				builtin = {
+					["<S-down>"] = "preview-page-down",
+					["<S-up>"] = "preview-page-up",
+				},
+				fzf = {
+					["ctrl-d"] = "half-page-down",
+					["ctrl-u"] = "half-page-up",
+				},
+			},
+			actions = {
+				files = {
+					["ctrl-s"] = actions.file_split,
+					["ctrl-v"] = actions.file_vsplit,
+				},
+				buffers = {
+					["ctrl-s"] = actions.buf_split,
+					["ctrl-v"] = actions.buf_vsplit,
+				},
+			},
+			fzf_opts = {
+				["--ansi"] = "",
+				["--info"] = "inline",
+				["--height"] = "100%",
+				["--layout"] = "reverse",
+				["--border"] = "none",
+			},
+			fzf_colors = {
+				["header"] = { "fg", "Comment" },
+			},
+			files = {
+				prompt = "Files❯ ",
+				multiprocess = true,
+				git_icons = true,
+				file_icons = true,
+				color_icons = true,
+				find_opts = [[-type f -not -path '*/\.git/*' -printf '%P\n']],
+				rg_opts = "--color=never --files --hidden --follow -g '!.git'",
+				fd_opts = "--color=never --type f --hidden --follow --exclude .git",
+				actions = {
+					["default"] = actions.file_edit,
+				},
+			},
+			grep = {
+				prompt = "Rg❯ ",
+				input_prompt = "Grep For❯ ",
+				multiprocess = true,
+				git_icons = true,
+				file_icons = true,
+				color_icons = true,
+				grep_opts = "--binary-files=without-match --line-number --recursive --color=auto --perl-regexp",
+				rg_opts = "--column --line-number --no-heading --color=always --smart-case --max-columns=512",
+				rg_glob = false,
+				no_header = false,
+				no_header_i = false,
+			},
+			buffers = {
+				prompt = "Buffers❯ ",
+				git_icons = true,
+				file_icons = true,
+				color_icons = true,
+				sort_lastused = true,
+			},
+			diagnostics = {
+				prompt = "Diagnostics❯ ",
+				cwd_only = false,
+				file_icons = true,
+				git_icons = true,
+				color_icons = true,
+				diag_icons = true,
+				icon_padding = "",
+				actions = {
+					["default"] = actions.file_edit,
+				},
+				signs = {
+					["Error"] = { text = "", texthl = "DiagnosticError" },
+					["Warn"] = { text = "", texthl = "DiagnosticWarn" },
+					["Info"] = { text = "", texthl = "DiagnosticInfo" },
+					["Hint"] = { text = "", texthl = "DiagnosticHint" },
+				},
+			},
+			file_icon_padding = "",
 		})
 	end
 end

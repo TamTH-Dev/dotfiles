@@ -181,12 +181,12 @@ packer.startup(function()
         branch = "main",
         config = config.saga(),
       },
-      {
-        "folke/trouble.nvim",
-        requires = "kyazdani42/nvim-web-devicons",
-        setup = setup.trouble(),
-        config = config.trouble(),
-      },
+      --[[ { ]]
+      --[[   "folke/trouble.nvim", ]]
+      --[[   requires = "kyazdani42/nvim-web-devicons", ]]
+      --[[   setup = setup.trouble(), ]]
+      --[[   config = config.trouble(), ]]
+      --[[ }, ]]
     },
   })
   -- [[ Bridges mason.nvim with the lspconfig ]]
@@ -217,20 +217,29 @@ packer.startup(function()
   })
 
   -- Fuzzy search
+  --[[ Better performance for large projects ]]
   use({
-    "nvim-telescope/telescope.nvim",
-    commit = "cabf991",
-    setup = setup.telescope(),
-    config = config.telescope(),
-  })
-  use({
-    "nvim-telescope/telescope-fzf-native.nvim",
-    commit = "ae9d95",
-    run = "make",
+    "ibhagwan/fzf-lua",
     requires = {
-      "nvim-telescope/telescope.nvim",
+      "nvim-tree/nvim-web-devicons",
     },
+    config = config.fzf(),
+    setup = setup.fzf(),
   })
+  --[[ use({ ]]
+  --[[   "nvim-telescope/telescope.nvim", ]]
+  --[[   commit = "cabf991", ]]
+  --[[   setup = setup.telescope(), ]]
+  --[[   config = config.telescope(), ]]
+  --[[ }) ]]
+  --[[ use({ ]]
+  --[[   "nvim-telescope/telescope-fzf-native.nvim", ]]
+  --[[   commit = "ae9d95", ]]
+  --[[   run = "make", ]]
+  --[[   requires = { ]]
+  --[[     "nvim-telescope/telescope.nvim", ]]
+  --[[   }, ]]
+  --[[ }) ]]
 
   --[[ Autopairs supporter ]]
   use({

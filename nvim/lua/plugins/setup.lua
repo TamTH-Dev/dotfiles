@@ -108,6 +108,22 @@ function M.indent_blankline()
 	end
 end
 
+function M.fzf()
+	return function()
+		local map = function(...)
+			vim.api.nvim_set_keymap("n", ...)
+		end
+
+		local opts = { noremap = true, silent = true }
+
+		map("<C-p>", "<cmd>FzfLua files<CR>", opts)
+		map("<C-f>", "<cmd>FzfLua live_grep<CR>", opts)
+		map("<C-b>", "<cmd>FzfLua buffers<CR>", opts)
+		map("<C-e>", "<cmd>FzfLua diagnostics_document<CR>", opts)
+		map("<C-w>", "<cmd>FzfLua diagnostics_workspace<CR>", opts)
+	end
+end
+
 function M.nvimtree()
 	return function()
 		local map = function(...)
@@ -138,21 +154,21 @@ function M.telescope()
 		end
 		local opts = { noremap = true, silent = true }
 
-		map("<C-p>", "<cmd>Telescope find_files hidden=true<CR>", opts)
-		map("<C-f>", "<cmd>Telescope live_grep<CR>", opts)
-		map("<C-b>", "<cmd>Telescope buffers<CR>", opts)
+		--[[ map("<C-p>", "<cmd>Telescope find_files hidden=true<CR>", opts) ]]
+		--[[ map("<C-f>", "<cmd>Telescope live_grep<CR>", opts) ]]
+		--[[ map("<C-b>", "<cmd>Telescope buffers<CR>", opts) ]]
 	end
 end
 
 function M.trouble()
 	return function()
-		local map = function(...)
-			vim.api.nvim_set_keymap("n", ...)
-		end
-		local opts = { noremap = true, silent = true }
+		--[[ local map = function(...) ]]
+		--[[   vim.api.nvim_set_keymap("n", ...) ]]
+		--[[ end ]]
+		--[[ local opts = { noremap = true, silent = true } ]]
 
-		map("<C-e>", "<cmd>TroubleToggle document_diagnostics<CR>", opts)
-		map("<C-w>", "<cmd>TroubleToggle workspace_diagnostics<CR>", opts)
+		--[[ map("<C-e>", "<cmd>TroubleToggle document_diagnostics<CR>", opts) ]]
+		--[[ map("<C-w>", "<cmd>TroubleToggle workspace_diagnostics<CR>", opts) ]]
 	end
 end
 

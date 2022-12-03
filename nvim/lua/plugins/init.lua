@@ -219,18 +219,18 @@ packer.startup(function()
   -- Fuzzy search
   use({
     "nvim-telescope/telescope.nvim",
-    commit = "3c2e5fb",
+    commit = "cabf991",
     setup = setup.telescope(),
     config = config.telescope(),
   })
-  --[[ use({ ]]
-  --[[   "nvim-telescope/telescope-fzf-native.nvim", ]]
-  --[[   commit = "7447fe7", ]]
-  --[[   run = "make", ]]
-  --[[   requires = { ]]
-  --[[     "nvim-telescope/telescope.nvim", ]]
-  --[[   }, ]]
-  --[[ }) ]]
+  use({
+    "nvim-telescope/telescope-fzf-native.nvim",
+    commit = "ae9d95",
+    run = "make",
+    requires = {
+      "nvim-telescope/telescope.nvim",
+    },
+  })
 
   --[[ Autopairs supporter ]]
   use({
@@ -304,7 +304,7 @@ packer.startup(function()
   })
 
   --[[ Measure neovim's startup time ]]
-  --[[ use({ ]]
-  --[[   "tweekmonster/startuptime.vim", ]]
-  --[[ }) ]]
+  use({
+    "tweekmonster/startuptime.vim",
+  })
 end)

@@ -1640,6 +1640,9 @@ function M.fzf()
 				rg_glob = false,
 				no_header = false,
 				no_header_i = false,
+				actions = {
+					["default"] = actions.file_edit,
+				},
 			},
 			buffers = {
 				prompt = "Buffers❯ ",
@@ -1647,6 +1650,9 @@ function M.fzf()
 				file_icons = true,
 				color_icons = true,
 				sort_lastused = true,
+				actions = {
+					["default"] = actions.file_edit,
+				},
 			},
 			diagnostics = {
 				prompt = "Diagnostics❯ ",

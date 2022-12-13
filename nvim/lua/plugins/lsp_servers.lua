@@ -3,11 +3,12 @@ local M = {
   "clangd",
   "cmake",
   "cssls",
-  "tsserver",
+  "gopls",
   "html",
   "jsonls",
   "pyright",
   "sumneko_lua",
+  "tsserver",
   "yamlls",
 }
 

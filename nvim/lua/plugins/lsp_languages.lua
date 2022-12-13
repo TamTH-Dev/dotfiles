@@ -60,14 +60,21 @@ M.cssls = {
   },
 }
 
+M.gopls = {
+  root_dir = function(fname)
+    local util = require("lspconfig/util")
+    local root_files = {
+      "go.mod",
+      ".git",
+    }
+
+    return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
+  end,
+  filetypes = { "go", "gomod", "gowork", "gotmpl" },
+  single_file_support = true,
+}
+
 M.html = {
-  init_options = {
-    configurationSection = { "html", "css", "javascript", "markdown" },
-    embeddedLanguages = {
-      css = true,
-      javascript = true,
-    },
-  },
   root_dir = function(fname)
     local util = require("lspconfig/util")
 
@@ -95,7 +102,6 @@ M.jdtls = {
 }
 
 M.jsonls = {
-  cmd = { "vscode-json-language-server", "--stdio" },
   init_options = {
     provideFormatter = true,
   },

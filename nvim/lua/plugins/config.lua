@@ -1089,8 +1089,8 @@ function M.nvimtree()
 			open_on_tab = false,
 			--@usage[[ hijack the cursor in the tree to put it at the start of the filename ]]
 			hijack_cursor = false,
-			--@usage[[ updates the root directory of the tree on `DirChanged` (when your run `:cd` usually) ]]
-			update_cwd = false,
+			--@usage[[ changes the tree root directory on `DirChanged` and refreshes the tree ]]
+			sync_root_with_cwd = false,
 			renderer = {
 				add_trailing = false,
 				group_empty = false,
@@ -1115,9 +1115,8 @@ function M.nvimtree()
 			update_focused_file = {
 				--@usage[[ enables the feature ]]
 				enable = true,
-				--@usage[[ update the root directory of the tree to the one of the folder containing the file if the file is not under the current root directory ]]
-				--[[ only relevant when `update_focused_file.enable` is true ]]
-				update_cwd = true,
+				--@usage[[ Update the root directory of the tree if the file is not under current root directory ]]
+				update_cwd = false,
 				--@usage[[ list of buffer names / filetypes that will not update the cwd if the file isn't found under the current root directory ]]
 				--[[ only relevant when `update_focused_file.update_cwd` is true and `update_focused_file.enable` is true ]]
 				ignore_list = {},

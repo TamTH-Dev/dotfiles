@@ -11,6 +11,7 @@ options.cursorline = false
 options.expandtab = true
 options.fileencoding = "utf-8"
 options.formatoptions = options.formatoptions - "ocr"
+options.guifont = "BlexMono Nerd Font:h13"
 options.hidden = true
 options.history = 50
 options.hlsearch = true

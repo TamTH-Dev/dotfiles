@@ -56,7 +56,7 @@ function M.alpha()
     }
 
     local screen_height = vim.api.nvim_list_uis()[1].height
-    local options_height = 16
+    local options_height = 15
     local section = {
       options = options,
     }

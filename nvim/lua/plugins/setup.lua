@@ -149,10 +149,10 @@ end
 
 function M.telescope()
 	return function()
-		local map = function(...)
-			vim.api.nvim_set_keymap("n", ...)
-		end
-		local opts = { noremap = true, silent = true }
+		--[[ local map = function(...) ]]
+		--[[   vim.api.nvim_set_keymap("n", ...) ]]
+		--[[ end ]]
+		--[[ local opts = { noremap = true, silent = true } ]]
 
 		--[[ map("<C-p>", "<cmd>Telescope find_files hidden=true<CR>", opts) ]]
 		--[[ map("<C-f>", "<cmd>Telescope live_grep<CR>", opts) ]]
@@ -160,15 +160,10 @@ function M.telescope()
 	end
 end
 
-function M.trouble()
+function M.undotree()
 	return function()
-		--[[ local map = function(...) ]]
-		--[[   vim.api.nvim_set_keymap("n", ...) ]]
-		--[[ end ]]
-		--[[ local opts = { noremap = true, silent = true } ]]
-
-		--[[ map("<C-e>", "<cmd>TroubleToggle document_diagnostics<CR>", opts) ]]
-		--[[ map("<C-w>", "<cmd>TroubleToggle workspace_diagnostics<CR>", opts) ]]
+		local opts = { noremap = true, silent = true }
+		vim.api.nvim_set_keymap("n", "<leader>u", "<cmd>UndotreeToggle<CR>", opts)
 	end
 end
 

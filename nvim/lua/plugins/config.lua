@@ -426,6 +426,30 @@ function M.gitsigns()
 	end
 end
 
+function M.harpoon()
+	return function()
+		local mark_loaded, mark = pcall(require, "harpoon.mark")
+		local ui_loaded, ui = pcall(require, "harpoon.ui")
+
+		if not (mark_loaded or ui_loaded) then
+			return
+		end
+
+		local map = function(...)
+			vim.keymap.set("n", ...)
+		end
+
+		--@usage[[ add file ]]
+		map("<leader>fa", mark.add_file)
+		--@usage[[ toggle quick menu ]]
+		map("<leader>fl", ui.toggle_quick_menu)
+		--@usage[[ go next ]]
+		map("<leader>fn", ui.nav_next)
+		--@usage[[ go previous ]]
+		map("<leader>fp", ui.nav_prev)
+	end
+end
+
 function M.icons()
 	return function()
 		local devicons_loaded, icons = pcall(require, "nvim-web-devicons")
@@ -1467,77 +1491,6 @@ function M.treesitter()
 				--@usage table of colour name strings
 				-- termcolors  = {}
 			},
-		})
-	end
-end
-
-function M.trouble()
-	return function()
-		local trouble_loaded, trouble = pcall(require, "trouble")
-
-		if not trouble_loaded then
-			return
-		end
-
-		trouble.setup({
-			--@usage[[ position of the list can be: bottom, top, left, right ]]
-			position = "bottom",
-			--@usage[[ height of the trouble list when position is top or bottom ]]
-			height = 10,
-			--@usage[[ use devicons for filenames ]]
-			icons = true,
-			--@usage[[ "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist" ]]
-			mode = "workspace_diagnostics",
-			--@usage[[ icon used for open folds ]]
-			fold_open = "",
-			--@usage[[ icon used for closed folds ]]
-			fold_closed = "",
-			--@usage[[ group results by file ]]
-			group = true,
-			--@usage[[ add an extra new line on top of the list ]]
-			padding = true,
-			action_keys = {
-				--@usage[[ close the list ]]
-				close = "q",
-				--@usage[[ cancel the preview and get back to your last window / buffer / cursor ]]
-				cancel = "<esc>",
-				--@usage[[ manually refresh ]]
-				refresh = "r",
-				--@usage[[ jump to the diagnostic or open / close folds ]]
-				jump = { "<Tab>" },
-				--@usage[[ open buffer in new split ]]
-				open_split = { "<c-x>" },
-				--@usage[[ open buffer in new vsplit ]]
-				open_vsplit = { "<c-v>" },
-				--@usage[[ open buffer in new tab ]]
-				open_tab = { "<c-t>" },
-				--@usage[[ jump to the diagnostic and close the list ]]
-				jump_close = { "<CR>" },
-				--@usage[[ close all folds ]]
-				close_folds = { "zM", "zm" },
-				--@usage[[ open all folds ]]
-				open_folds = { "zR", "zr" },
-				--@usage[[ toggle fold of current file ]]
-				toggle_fold = { "zA", "za" },
-				--@usage[[ previous item ]]
-				previous = "k",
-				--@usage[[ next item ]]
-				next = "j",
-			},
-			--@usage[[ add an indent guide below the fold icons ]]
-			indent_lines = true,
-			--@usage[[ automatically open the list when you have diagnostics ]]
-			auto_open = false,
-			--@usage[[ automatically close the list when you have no diagnostics ]]
-			auto_close = false,
-			--@usage[[ automatically preview the location of the diagnostic. <esc> to close preview and go back to last window ]]
-			auto_preview = true,
-			--@usage[[ automatically fold a file trouble list at creation ]]
-			auto_fold = false,
-			--@usage[[ for the given modes, automatically jump if there is only a single result ]]
-			auto_jump = { "lsp_definitions" },
-			--@usage[[ enabling this will use the signs defined in your lsp client ]]
-			use_diagnostic_signs = true,
 		})
 	end
 end

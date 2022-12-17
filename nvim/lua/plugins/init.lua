@@ -179,12 +179,6 @@ packer.startup(function()
 				branch = "main",
 				config = config.saga(),
 			},
-			--[[ { ]]
-			--[[   "folke/trouble.nvim", ]]
-			--[[   requires = "kyazdani42/nvim-web-devicons", ]]
-			--[[   setup = setup.trouble(), ]]
-			--[[   config = config.trouble(), ]]
-			--[[ }, ]]
 		},
 	})
 	-- [[ Bridges mason.nvim with the lspconfig ]]
@@ -301,6 +295,19 @@ packer.startup(function()
 		"kazhala/close-buffers.nvim",
 		commit = "3acbcad",
 		setup = setup.close_buffers(),
+	})
+
+	--[[ Navigate with the fewest keystrokes ]]
+	use({
+		"ThePrimeagen/harpoon",
+		requires = "nvim-lua/plenary.nvim",
+		config = config.harpoon(),
+	})
+
+	--[[ Visualize the undo history ]]
+	use({
+		"mbbill/undotree",
+		setup = setup.undotree(),
 	})
 
 	--[[ Flutter tools ]]

@@ -35,3 +35,5 @@ map("n", mappings.open_new_buffer, "<cmd>tabnew<CR>", opts)
 --[[ Move vertically by visual line ]]
 map("n", "j", "gj", opts)
 map("n", "k", "gk", opts)
+--[[ Paste in visual without removing current buffer ]]
+map("x", "<leader>p", "\"_dP", opts)

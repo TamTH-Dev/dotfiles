@@ -68,9 +68,12 @@ set PATH /Library/PostgreSQL/14/bin $PATH
 # Python packages
 set PATH $HOME/Library/Python/3.9/bin $PATH
 
+# Go packages
+set PATH $HOME/go/bin $PATH 
+
 # Configure fzf
 set -gx FZF_DEFAULT_OPTS '
-    --color=bg+:#24283b,bg:#24283b
+    --color=bg+:#1a1b26,bg:#1a1b26
     --color=hl+:#2ac3de,hl:#2ac3de
     --color=fg+:#c0caf5,fg:#565f89
     --color=info:#9ece6a,prompt:#9ece6a,spinner:#9ece6a,pointer:#f7768e,marker:#2ac3de

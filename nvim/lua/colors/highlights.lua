@@ -6,7 +6,7 @@ local M = {}
 
 --[[ Declare colors manually ]]
 local colors = {
-  bg = "#24283b",
+  bg = "#1a1b26",
   extraBg = "#1e2030",
   fg = "#c0caf5",
   red = "#f7768e",
@@ -14,8 +14,8 @@ local colors = {
   green = "#9ece6a",
   magenta = "#bb9af7",
   blue = "#2ac3de",
-  gray = "#414868",
-  darkGray = "#303757",
+  gray = "#565f89",
+  darkGray = "#222436",
 }
 
 --[[ Define highlight color ]]

@@ -1390,7 +1390,7 @@ function M.tokyonight()
 		end
 
 		tokyonight.setup({
-			style = "storm",
+			style = "night",
 		})
 
 		require("colors").init()

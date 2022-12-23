@@ -1458,9 +1458,9 @@ function M.treesitter()
 			playground = {
 				enable = true,
 				disable = {},
-				--@usage debounced time for highlighting nodes in the playground from source code
+				--@usage[[ debounced time for highlighting nodes in the playground from source code ]]
 				updatetime = 25,
-				--@usage whether the query persists across vim sessions
+				--@usage[[ whether the query persists across vim sessions ]]
 				persist_queries = false,
 				keybindings = {
 					toggle_query_editor = "o",
@@ -1480,15 +1480,15 @@ function M.treesitter()
 			},
 			rainbow = {
 				enable = true,
-				--@usage list of disabled languages
+				--@usage[[ list of disabled languages ]]
 				-- disable     = { 'jsx', 'cpp' },
-				--@usage also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+				--@usage[[ also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean ]]
 				extended_mode = true,
-				--@usage do not enable for files with more than n lines, int
+				--@usage[[ do not enable for files with more than n lines, int ]]
 				max_file_lines = nil,
-				--@usage table of hex strings
+				--@usage[[ table of hex strings ]]
 				-- colors      = {},
-				--@usage table of colour name strings
+				--@usage[[ table of colour name strings ]]
 				-- termcolors  = {}
 			},
 		})

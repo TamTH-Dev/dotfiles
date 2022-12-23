@@ -1,9 +1,5 @@
 local M = {}
 
---TODO:[[ Find the way to get colors from scheme ]]
---[[ Get color from current scheme ]]
---[[ local colors = require('colors').get() ]]
-
 --[[ Declare colors manually ]]
 local colors = {
   bg = "#1a1b26",

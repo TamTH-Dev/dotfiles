@@ -110,11 +110,11 @@ packer.startup(function()
 	})
 
 	--[[ Smooth scroll for neovim ]]
-	use({
-		"karb94/neoscroll.nvim",
-		event = "BufRead",
-		config = config.neoscroll(),
-	})
+	--[[ use({ ]]
+	--[[ 	"karb94/neoscroll.nvim", ]]
+	--[[ 	event = "BufRead", ]]
+	--[[ 	config = config.neoscroll(), ]]
+	--[[ }) ]]
 
 	--[[ Commenter ]]
 	use({

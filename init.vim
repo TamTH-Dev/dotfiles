@@ -21,9 +21,19 @@ imap jj <Esc>
 nnoremap j gj
 nnoremap k gk
 
+" A little bit upgrade for vertical movements
+nnoremap <C-d> <C-d>zz 
+nnoremap <C-u> <C-u>zz 
+
+" A little bit upgrade for searching
+nnoremap n nzzzv 
+nnoremap N Nzzzv 
+
 " Common options
 set clipboard+=unnamedplus
 set hlsearch
 set incsearch
 set smartindent
 set termguicolor
+set scrolloff=8
+set sidescrolloff=8

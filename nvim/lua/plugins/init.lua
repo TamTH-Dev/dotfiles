@@ -318,7 +318,7 @@ packer.startup(function()
 	})
 
 	--[[ Measure neovim's startup time ]]
-	--[[ use({ ]]
-	--[[ 	"tweekmonster/startuptime.vim", ]]
-	--[[ }) ]]
+	use({
+		"tweekmonster/startuptime.vim",
+	})
 end)

@@ -648,9 +648,9 @@ function M.lsp()
 
 		local on_attach = function(client, bufnr)
 			--@usage[[ Attach navic to lsp ]]
-			if client.server_capabilities.documentSymbolProvider then
-				require("nvim-navic").attach(client, bufnr)
-			end
+			--[[ if client.server_capabilities.documentSymbolProvider then ]]
+			--[[ 	require("nvim-navic").attach(client, bufnr) ]]
+			--[[ end ]]
 
 			--@usage[[ Disable default formatter, it will be responsibility of null-ls ]]
 			client.server_capabilities.document_formatting = false
@@ -1211,10 +1211,10 @@ function M.saga()
 				enable = true,
 				enable_in_insert = true,
 				cache_code_action = true,
-				sign = true,
+				sign = false,
 				update_time = 20,
 				sign_priority = 20,
-				virtual_text = false,
+				virtual_text = true,
 			},
 			--@usage[[ press number to execute the codeaction in codeaction window ]]
 			code_action_num_shortcut = true,

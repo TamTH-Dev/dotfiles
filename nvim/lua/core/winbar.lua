@@ -1,6 +1,6 @@
 local M = {}
 
-local navic = require("nvim-navic")
+--[[ local navic = require("nvim-navic") ]]
 
 M.winbar_filetype_exclude = {
   "help",
@@ -34,29 +34,29 @@ local function get_file_path()
   return file_path
 end
 
-local function get_current_location()
-  local location = navic.get_location()
+--[[ local function get_current_location() ]]
+--[[   local location = navic.get_location() ]]
+--[[]]
+--[[   if location == "" or location == nil then ]]
+--[[     return "" ]]
+--[[   end ]]
+--[[]]
+--[[   return "%#WinBarContext#" .. " ᐅ " .. location .. "%*" ]]
+--[[ end ]]
 
-  if location == "" or location == nil then
-    return ""
-  end
-
-  return "%#WinBarContext#" .. " ᐅ " .. location .. "%*"
-end
-
-function M.get_winbar()
-  if excludes() then
-    return ""
-  end
-
-  local current_location = get_current_location()
-  local file_path = get_file_path()
-
-  if not navic.is_available() then
-    return "%#WinBarSeparator#%*" .. file_path .. "%#WinBarSeparator#%*"
-  end
-
-  return "%#WinBarSeparator#%*" .. file_path .. current_location .. "%#WinBarSeparator#%*"
-end
+--[[ function M.get_winbar() ]]
+--[[   if excludes() then ]]
+--[[     return "" ]]
+--[[   end ]]
+--[[]]
+--[[   local current_location = get_current_location() ]]
+--[[   local file_path = get_file_path() ]]
+--[[]]
+--[[   if not navic.is_available() then ]]
+--[[     return "%#WinBarSeparator#%*" .. file_path .. "%#WinBarSeparator#%*" ]]
+--[[   end ]]
+--[[]]
+--[[   return "%#WinBarSeparator#%*" .. file_path .. current_location .. "%#WinBarSeparator#%*" ]]
+--[[ end ]]
 
 return M

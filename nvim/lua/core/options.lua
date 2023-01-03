@@ -42,7 +42,7 @@ options.termguicolors = true
 options.timeoutlen = 500
 options.updatetime = 250
 options.undofile = false
-options.winbar = "%{%v:lua.require'core.winbar'.get_winbar()%}"
+--[[ options.winbar = "%{%v:lua.require'core.winbar'.get_winbar()%}" ]]
 options.wrap = true
 options.writebackup = false
 
@@ -50,31 +50,31 @@ options.writebackup = false
 local user_options = require("core.utils").load_config().options
 
 for key, value in pairs(user_options) do
-  options[key] = value
+	options[key] = value
 end
 
 --[[ Disable some builtin vim plugins ]]
 local disabled_built_ins = {
-  "2html_plugin",
-  "getscript",
-  "getscriptPlugin",
-  "gzip",
-  "logipat",
-  "netrw",
-  "netrwPlugin",
-  "netrwSettings",
-  "netrwFileHandlers",
-  "matchit",
-  "tar",
-  "tarPlugin",
-  "rrhelper",
-  "spellfile_plugin",
-  "vimball",
-  "vimballPlugin",
-  "zip",
-  "zipPlugin",
+	"2html_plugin",
+	"getscript",
+	"getscriptPlugin",
+	"gzip",
+	"logipat",
+	"netrw",
+	"netrwPlugin",
+	"netrwSettings",
+	"netrwFileHandlers",
+	"matchit",
+	"tar",
+	"tarPlugin",
+	"rrhelper",
+	"spellfile_plugin",
+	"vimball",
+	"vimballPlugin",
+	"zip",
+	"zipPlugin",
 }
 
 for _, plugin in pairs(disabled_built_ins) do
-  global["loaded_" .. plugin] = 1
+	global["loaded_" .. plugin] = 1
 end

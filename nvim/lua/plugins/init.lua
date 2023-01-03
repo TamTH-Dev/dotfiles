@@ -102,12 +102,12 @@ packer.startup(function()
 	})
 
 	--[[ Git ]]
-	use({
-		"lewis6991/gitsigns.nvim",
-		commit = "21ab05c",
-		event = "BufRead",
-		config = config.gitsigns(),
-	})
+	--[[ use({ ]]
+	--[[ 	"lewis6991/gitsigns.nvim", ]]
+	--[[ 	commit = "21ab05c", ]]
+	--[[ 	event = "BufRead", ]]
+	--[[ 	config = config.gitsigns(), ]]
+	--[[ }) ]]
 
 	--[[ Smooth scroll for neovim ]]
 	--[[ use({ ]]
@@ -154,11 +154,11 @@ packer.startup(function()
 	})
 
 	--[[ Winbar ]]
-	use({
-		"SmiteshP/nvim-navic",
-		requires = "neovim/nvim-lspconfig",
-		config = config.winbar(),
-	})
+	--[[ use({ ]]
+	--[[ 	"SmiteshP/nvim-navic", ]]
+	--[[ 	requires = "neovim/nvim-lspconfig", ]]
+	--[[ 	config = config.winbar(), ]]
+	--[[ }) ]]
 
 	--[[ Manage external editor tooling ]]
 	use({
@@ -318,7 +318,7 @@ packer.startup(function()
 	})
 
 	--[[ Measure neovim's startup time ]]
-	use({
-		"tweekmonster/startuptime.vim",
-	})
+	--[[ use({ ]]
+	--[[ 	"tweekmonster/startuptime.vim", ]]
+	--[[ }) ]]
 end)

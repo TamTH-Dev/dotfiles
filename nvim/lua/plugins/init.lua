@@ -215,6 +215,7 @@ packer.startup(function()
 		requires = {
 			"nvim-tree/nvim-web-devicons",
 		},
+		commit = "5abf66f",
 		config = config.fzf(),
 		setup = setup.fzf(),
 	})
@@ -318,7 +319,7 @@ packer.startup(function()
 	})
 
 	--[[ Measure neovim's startup time ]]
-	use({
-		"tweekmonster/startuptime.vim",
-	})
+	--[[ use({ ]]
+	--[[ 	"tweekmonster/startuptime.vim", ]]
+	--[[ }) ]]
 end)

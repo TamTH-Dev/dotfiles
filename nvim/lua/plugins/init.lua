@@ -215,7 +215,7 @@ packer.startup(function()
 		requires = {
 			"nvim-tree/nvim-web-devicons",
 		},
-		commit = "5abf66f",
+		commit = "d9c9574",
 		config = config.fzf(),
 		setup = setup.fzf(),
 	})

@@ -42,8 +42,10 @@ function M.alpha()
     local options = {
       type = "group",
       val = {
-        build_option("p", "  Find File", "<cmd>FzfLua files<CR>"),
-        build_option("f", "  Find Word", "<cmd>FzfLua live_grep<CR>"),
+        --[[ build_option("p", "  Find File", "<cmd>FzfLua files<CR>"), ]]
+        --[[ build_option("f", "  Find Word", "<cmd>FzfLua live_grep<CR>"), ]]
+        build_option("p", "  Find File", "<cmd>Telescope find_files hidden=true<CR>"),
+        build_option("f", "  Find Word", "<cmd>Telescope live_grep<CR>"),
         build_option("o", "  Project structure", "<cmd>NvimTreeToggle<CR>"),
         build_option("n", "  New File", "<cmd>ene!<CR>"),
         build_option("s", "  Settings", "<cmd>e $HOME/.config/nvim/lua/default_config.lua<CR>"),
@@ -647,13 +649,31 @@ function M.lsp()
     customize()
 
     local on_attach = function(client, bufnr)
+      local buf_set_keymap = function(...)
+        vim.api.nvim_buf_set_keymap(bufnr, ...)
+      end
+      local opts = { noremap = true, silent = true }
+
+      --@usage[[ enable completion triggered ]]
+      buf_set_keymap("n", "<leader>gn", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
+      buf_set_keymap("n", "<leader>gp", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
+      buf_set_keymap("n", "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+      buf_set_keymap("n", "<leader>gf", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+      buf_set_keymap("n", "<leader>gk", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+      buf_set_keymap("n", "<leader>gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+      buf_set_keymap("n", "<leader>gr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+      buf_set_keymap("n", "<leader>ga", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+      buf_set_keymap("n", "<leader>gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+      buf_set_keymap("n", "<C-e>", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+      buf_set_keymap("n", "<C-w>", "<cmd>lua vim.diagnostic.setloclist({ workspace = true })<CR>", opts)
+
+      --@usage[[ Disable default formatter, it will be responsibility of null-ls ]]
+      client.server_capabilities.document_formatting = false
+
       --@usage[[ Attach navic to lsp ]]
       --[[ if client.server_capabilities.documentSymbolProvider then ]]
       --[[ 	require("nvim-navic").attach(client, bufnr) ]]
       --[[ end ]]
-
-      --@usage[[ Disable default formatter, it will be responsibility of null-ls ]]
-      client.server_capabilities.document_formatting = false
     end
 
     local get_capabilities = function()
@@ -1193,36 +1213,32 @@ function M.saga()
       return
     end
 
-    saga.init_lsp_saga({
-      --@usage[[ "single" | "double" | "rounded" | "bold" | "plus" ]]
-      border_style = "rounded",
-      --@usage[[ the range of 0 for fully opaque window (disabled) to 100 for fully ]]
-      --[[ transparent background. Values between 0-30 are typically most useful. ]]
-      saga_winblend = 0,
-      --@usage[[ Error, Warn, Info, Hint ]]
-      diagnostic_header = { " ", " ", " ", " " },
-      --@usage[[ preview lines of lsp_finder and definition preview ]]
-      max_preview_lines = 12,
-      --@usage[[ use emoji lightbulb in default ]]
-      --[[ code_action_icon = " ", ]]
-      code_action_icon = " ",
-      --@usage[[ same as nvim-lightbulb but async ]]
-      code_action_lightbulb = {
+    saga.setup({
+      ui = {
+        theme = "round",
+        border = "rounded",
+        winblend = 0,
+        code_action = " ",
+      },
+      code_action = {
+        num_shortcut = true,
+        keys = {
+          quit = "q",
+          exec = "<CR>",
+        },
+      },
+      symbol_in_winbar = {
+        enable = false,
+      },
+      beacon = {
+        enable = false,
+      },
+      lightbulb = {
         enable = true,
         enable_in_insert = true,
-        cache_code_action = true,
         sign = false,
-        update_time = 20,
-        sign_priority = 20,
+        sign_priority = 40,
         virtual_text = true,
-      },
-      --@usage[[ press number to execute the codeaction in codeaction window ]]
-      code_action_num_shortcut = true,
-      --@usage[[ finder icons ]]
-      finder_icons = {
-        def = " ",
-        ref = " ",
-        link = " ",
       },
     })
 
@@ -1398,82 +1414,60 @@ end
 
 function M.treesitter()
   return function()
-    local treesitter_loaded, treesitter = pcall(require, "nvim-treesitter.configs")
+    local treesitter_loaded, _ = pcall(require, "nvim-treesitter.configs")
 
     if not treesitter_loaded then
       return
     end
 
-    treesitter.setup({
-      context_commentstring = {
-        enable = true,
-        enable_autocmd = false,
-      },
+    local treesitter_config_loaded, treesitter_config = pcall(require, "nvim-treesitter.configs")
+
+    if not treesitter_config_loaded then
+      return
+    end
+
+    treesitter_config.setup({
       highlight = {
         enable = true,
         disable = {},
-        additional_vim_regex_highlighting = true,
-      },
-      indent = {
-        enable = false,
-        disable = {},
       },
       ensure_installed = {
-        "scss",
-        "kotlin",
-        "lua",
-        "python",
-        "yaml",
-        "regex",
-        "make",
-        "sql",
-        "json",
+        "bash",
+        "c",
+        "cmake",
+        "comment",
+        "css",
         "dart",
-        "haskell",
-        "tsx",
-        "jsonc",
-        "toml",
-        "query",
+        "diff",
+        "dockerfile",
         "fish",
         "gitignore",
-        "rust",
-        "html",
-        "css",
-        "typescript",
-        "c",
-        "json5",
-        "diff",
-        "bash",
-        "cmake",
-        "vue",
-        "comment",
-        "jsdoc",
         "go",
+        "haskell",
+        "html",
         "javascript",
-        "dockerfile",
+        "jsdoc",
+        "json",
+        "json5",
+        "jsonc",
+        "kotlin",
+        "lua",
+        "make",
+        "markdown",
+        "python",
+        "query",
+        "regex",
+        "rust",
+        "scss",
+        "sql",
+        "toml",
+        "tsx",
+        "typescript",
+        "vue",
+        "yaml",
       },
       ignore_install = { "phpdoc" },
       auto_install = true,
-      playground = {
-        enable = true,
-        disable = {},
-        --@usage[[ debounced time for highlighting nodes in the playground from source code ]]
-        updatetime = 25,
-        --@usage[[ whether the query persists across vim sessions ]]
-        persist_queries = false,
-        keybindings = {
-          toggle_query_editor = "o",
-          toggle_hl_groups = "i",
-          toggle_injected_languages = "t",
-          toggle_anonymous_nodes = "a",
-          toggle_language_display = "I",
-          focus_language = "f",
-          unfocus_language = "F",
-          update = "R",
-          goto_node = "<CR>",
-          show_help = "?",
-        },
-      },
       autotag = {
         enable = true,
       },

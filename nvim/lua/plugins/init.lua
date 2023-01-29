@@ -1,325 +1,295 @@
 local is_packer_init_loaded, packer = pcall(require, "plugins.packerInit")
 
 if not is_packer_init_loaded then
-  return
+	return
 end
 
 packer.startup(function()
-  local use = packer.use
-  --[[ Import plugins config and setup ]]
-  local config = require("plugins.config")
-  local setup = require("plugins.setup")
+	local use = packer.use
+	--[[ Plugins' setup and config ]]
+	local config = require("plugins.config")
+	local setup = require("plugins.setup")
 
-  --[[ Packer can manage itself ]]
-  use({
-    "wbthomason/packer.nvim",
-    commit = "6afb674",
-  })
+	--[[ Plugins manager ]]
+	use({
+		"wbthomason/packer.nvim",
+		commit = "1d0cf98",
+	})
 
-  --[[ Boost startup time ]]
-  use({
-    "lewis6991/impatient.nvim",
-    commit = "b842e16",
-  })
-  use({
-    "nathom/filetype.nvim",
-    config = config.filetype(),
-  })
+	--[[ Colorscheme ]]
+	use({
+		"folke/tokyonight.nvim",
+		config = config.tokyonight(),
+	})
 
-  --[[ Colorscheme ]]
-  use({
-    "folke/tokyonight.nvim",
-    config = config.tokyonight(),
-  })
+	--[[ Functions supporter ]]
+	use({
+		"nvim-lua/plenary.nvim",
+		commit = "4b7e520",
+	})
 
-  --[[ Icons suppliers for Madvim ]]
-  use({
-    "kyazdani42/nvim-web-devicons",
-    commit = "9061e2d",
-    config = config.icons(),
-  })
+	--[[ Built-in LSP configuration supporter ]]
+	use({
+		"neovim/nvim-lspconfig",
+		commit = "1e98825",
+		config = config.lsp(),
+		requires = {
+			--[[ Manage external editor tooling ]]
+			{
+				"williamboman/mason.nvim",
+				commit = "2469bfc",
+				config = config.mason(),
+			},
+			--[[ Bridges mason.nvim with the lspconfig ]]
+			{
+				"williamboman/mason-lspconfig.nvim",
+				commit = "422b974",
+				config = config.mason_lspconfig(),
+			},
+			--[[ Use Neovim as a language server to inject LSP diagnostics,
+			-- code actions, and more via Lua ]]
+			{
+				"jose-elias-alvarez/null-ls.nvim",
+				commit = "7b2b28e",
+				config = config.null_ls(),
+				requires = "nvim-lua/plenary.nvim",
+			},
+			--[[ Bridges mason.nvim with the null-ls ]]
+			{
+				"jayp0521/mason-null-ls.nvim",
+				commit = "93946ae",
+				config = config.mason_null_ls(),
+			},
+			--[[ LSP styling ]]
+			--[[ { ]]
+			--[[ 	"glepnir/lspsaga.nvim", ]]
+			--[[ 	commit = "e698de5", ]]
+			--[[ 	branch = "main", ]]
+			--[[ 	config = config.saga(), ]]
+			--[[ }, ]]
+		},
+	})
 
-  --[[ Popup Supporters ]]
-  use({
-    "nvim-lua/plenary.nvim",
-    commit = "4b7e520",
-  })
-  use({
-    "nvim-lua/popup.nvim",
-    commit = "b7404d3",
-  })
+	--[[ Completion supporters ]]
+	use({
+		"hrsh7th/nvim-cmp",
+		commit = "e7e2ef7",
+		config = config.cmp(),
+		requires = {
+			{
+				"hrsh7th/cmp-nvim-lsp",
+				commit = "5922477",
+			},
+			{
+				"rafamadriz/friendly-snippets",
+				commit = "046e4d3",
+			},
+			{
+				"L3MON4D3/LuaSnip",
+				commit = "94f192c",
+				config = config.luasnip(),
+			},
+			{
+				"saadparwaiz1/cmp_luasnip",
+				commit = "1809552",
+			},
+			{
+				"hrsh7th/cmp-buffer",
+				commit = "3022dbc",
+			},
+			{
+				"hrsh7th/cmp-path",
+				commit = "91ff86c",
+			},
+		},
+	})
 
-  --[[ Status line ]]
-  use({
-    "nvim-lualine/lualine.nvim",
-    commit = "abb0312",
-    config = config.lualine(),
-  })
+	--[[ Parser ]]
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		commit = "c610c78",
+		config = config.treesitter(),
+		requires = {
+			--[[ Autopairs supporter ]]
+			{
+				"windwp/nvim-autopairs",
+				commit = "31042a5",
+				config = config.autopairs(),
+			},
+			--[[ Autoclose tags ]]
+			{
+				"windwp/nvim-ts-autotag",
+				commit = "fdefe46",
+			},
+			--[[ Surround parentheses, brackets, quotes, XML tags, and more ]]
+			{
+				"tpope/vim-surround",
+				commit = "3d188ed",
+			},
+		},
+	})
 
-  --[[ Buffer management bar ]]
-  use({
-    "akinsho/bufferline.nvim",
-    commit = "e70be62",
-    branch = "main",
-    event = "BufWinEnter",
-    setup = setup.bufferline(),
-    config = config.bufferline(),
-  })
+	--[[ Icons suppliers ]]
+	use({
+		"kyazdani42/nvim-web-devicons",
+		commit = "a421d18",
+		config = config.icons(),
+	})
 
-  --[[ File explorer ]]
-  use({
-    "kyazdani42/nvim-tree.lua",
-    commit = "e94f517",
-    setup = setup.nvimtree(),
-    config = config.nvimtree(),
-  })
+	--[[ Fuzzy search ]]
+	use({
+		"nvim-telescope/telescope.nvim",
+		commit = "dce1156",
+		setup = setup.telescope(),
+		config = config.telescope(),
+		requires = {
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				commit = "fab3e22",
+				run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix buil",
+			},
+		},
+	})
+	--[[ Better performance for large projects ]]
+	--[[ use({ ]]
+	--[[   "ibhagwan/fzf-lua", ]]
+	--[[   requires = { ]]
+	--[[     "nvim-tree/nvim-web-devicons", ]]
+	--[[   }, ]]
+	--[[   commit = "d9c9574", ]]
+	--[[   config = config.fzf(), ]]
+	--[[   setup = setup.fzf(), ]]
+	--[[ }) ]]
 
-  --[[ Fancy start screen ]]
-  use({
-    "goolord/alpha-nvim",
-    commit = "0bb6fc0",
-    config = config.alpha(),
-  })
+	--[[ Status line ]]
+	use({
+		"nvim-lualine/lualine.nvim",
+		commit = "0050b30",
+		config = config.lualine(),
+	})
 
-  --[[ Parser ]]
-  use({
-    "nvim-treesitter/nvim-treesitter",
-    commit = "c4c358e",
-    config = config.treesitter(),
-    requires = {
-      {
-        --[[ Autoclose tags ]]
-        "windwp/nvim-ts-autotag",
-        after = "nvim-treesitter",
-      },
-    },
-  })
+	--[[ Buffer management bar ]]
+	use({
+		"akinsho/bufferline.nvim",
+		commit = "c7492a7",
+		tag = "v3.*",
+		setup = setup.bufferline(),
+		config = config.bufferline(),
+	})
 
-  --[[ Indentation guides ]]
-  use({
-    "lukas-reineke/indent-blankline.nvim",
-    event = "BufEnter",
-    setup = setup.indent_blankline(),
-  })
+	--[[ File explorer ]]
+	use({
+		"kyazdani42/nvim-tree.lua",
+		commit = "e14989c",
+		setup = setup.nvimtree(),
+		config = config.nvimtree(),
+	})
 
-  --[[ Git ]]
-  --[[ use({ ]]
-  --[[ 	"lewis6991/gitsigns.nvim", ]]
-  --[[ 	commit = "21ab05c", ]]
-  --[[ 	event = "BufRead", ]]
-  --[[ 	config = config.gitsigns(), ]]
-  --[[ }) ]]
+	--[[ Commenter ]]
+	use({
+		"numToStr/Comment.nvim",
+		commit = "dd12730",
+		config = config.comment(),
+		requires = {
+			{
+				"JoosepAlviste/nvim-ts-context-commentstring",
+				commit = "a0f8956",
+			},
+		},
+	})
 
-  --[[ Smooth scroll for neovim ]]
-  --[[ use({ ]]
-  --[[ 	"karb94/neoscroll.nvim", ]]
-  --[[ 	event = "BufRead", ]]
-  --[[ 	config = config.neoscroll(), ]]
-  --[[ }) ]]
+	--[[ Fancy start screen ]]
+	use({
+		"goolord/alpha-nvim",
+		commit = "21a0f25",
+		config = config.alpha(),
+	})
 
-  --[[ Commenter ]]
-  use({
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    commit = "2941f00",
-    event = "BufReadPost",
-  })
-  use({
-    "numToStr/Comment.nvim",
-    commit = "ad7ffa8",
-    event = "BufRead",
-    config = config.comment(),
-  })
+	--[[ Emmet ]]
+	use({
+		"mattn/emmet-vim",
+		commit = "def5d57",
+		ft = {
+			"html",
+			"css",
+			"javascript",
+			"javascriptreact",
+			"typescript",
+			"typescriptreact",
+			"vue",
+		},
+		setup = setup.emmet(),
+	})
 
-  --[[ Surround parentheses, brackets, quotes, XML tags, and more ]]
-  use({
-    "tpope/vim-surround",
-    commit = "bf3480d",
-    event = "BufEnter",
-  })
+	--[[ Delete all buffers except one ]]
+	use({
+		"kazhala/close-buffers.nvim",
+		commit = "3acbcad",
+		setup = setup.close_buffers(),
+	})
 
-  --[[ Emmet ]]
-  use({
-    "mattn/emmet-vim",
-    commit = "def5d57",
-    event = "BufEnter",
-    ft = {
-      "html",
-      "css",
-      "javascript",
-      "javascriptreact",
-      "typescript",
-      "typescriptreact",
-      "vue",
-    },
-    setup = setup.emmet(),
-  })
+	--[[ Navigate with the fewest keystrokes ]]
+	use({
+		"ThePrimeagen/harpoon",
+		commit = "8c0bb0a",
+		config = config.harpoon(),
+		requires = "nvim-lua/plenary.nvim",
+	})
 
-  --[[ Winbar ]]
-  --[[ use({ ]]
-  --[[ 	"SmiteshP/nvim-navic", ]]
-  --[[ 	requires = "neovim/nvim-lspconfig", ]]
-  --[[ 	config = config.winbar(), ]]
-  --[[ }) ]]
-  --[[ Manage external editor tooling ]]
-  use({
-    "williamboman/mason.nvim",
-    config = config.mason(),
-  })
+	--[[ Visualize the undo history ]]
+	use({
+		"mbbill/undotree",
+		commit = "1a23ea8",
+		setup = setup.undotree(),
+	})
 
-  --[[ Built-in LSP Configuration Supporter ]]
-  use({
-    "neovim/nvim-lspconfig",
-    commit = "ee2e8c6",
-    config = config.lsp(),
-    requires = {
-      --[[ Styling ]]
-      {
-        "glepnir/lspsaga.nvim",
-        commit = "391cf74",
-        branch = "main",
-        config = config.saga(),
-      },
-    },
-  })
-  -- [[ Bridges mason.nvim with the lspconfig ]]
-  use({
-    "williamboman/mason-lspconfig.nvim",
-    requires = {
-      "williamboman/mason.nvim",
-      "neovim/nvim-lspconfig",
-    },
-    config = config.mason_lspconfig(),
-  })
+	--[[ Flutter supporter ]]
+	use({
+		"akinsho/flutter-tools.nvim",
+		commit = "ae0be3c",
+		setup = setup.flutter(),
+		config = config.flutter(),
+	})
 
-  -- [[ Use Neovim as a language server to inject LSP diagnostics,
-  --  code actions, and more via Lua ]]
-  use({
-    "jose-elias-alvarez/null-ls.nvim",
-    requires = "nvim-lua/plenary.nvim",
-    config = config.null_ls(),
-  })
-  -- [[ Bridges mason.nvim with the null-ls ]]
-  use({
-    "jayp0521/mason-null-ls.nvim",
-    requires = {
-      "williamboman/mason.nvim",
-      "jose-elias-alvarez/null-ls.nvim",
-    },
-    config = config.mason_null_ls(),
-  })
+	--[[ Indentation guides ]]
+	--[[ use({ ]]
+	--[[   "lukas-reineke/indent-blankline.nvim", ]]
+	--[[   event = "BufEnter", ]]
+	--[[   setup = setup.indent_blankline(), ]]
+	--[[ }) ]]
 
-  --[[ Completion supporters ]]
-  use({
-    "rafamadriz/friendly-snippets",
-    commit = "c93311f",
-  })
-  use({
-    "L3MON4D3/LuaSnip",
-    commit = "619796e",
-    config = config.luasnip(),
-  })
-  use({
-    "hrsh7th/nvim-cmp",
-    commit = "c53dd36",
-    event = "BufEnter",
-    config = config.cmp(),
-    requires = {
-      {
-        "saadparwaiz1/cmp_luasnip",
-        commit = "1809552",
-        after = { "nvim-cmp", "LuaSnip" },
-        opt = true,
-      },
-      {
-        "hrsh7th/cmp-nvim-lsp",
-        commit = "78924d1",
-        after = "nvim-cmp",
-        opt = true,
-      },
-      {
-        "hrsh7th/cmp-nvim-lua",
-        commit = "d276254",
-        after = "nvim-cmp",
-        opt = true,
-      },
-      {
-        "hrsh7th/cmp-buffer",
-        commit = "3022dbc",
-        after = "nvim-cmp",
-        opt = true,
-      },
-      {
-        "hrsh7th/cmp-path",
-        commit = "91ff86c",
-        after = "nvim-cmp",
-        opt = true,
-      },
-    },
-  })
+	--[[ Git ]]
+	--[[ use({ ]]
+	--[[ 	"lewis6991/gitsigns.nvim", ]]
+	--[[ 	commit = "21ab05c", ]]
+	--[[ 	event = "BufRead", ]]
+	--[[ 	config = config.gitsigns(), ]]
+	--[[ }) ]]
 
-  -- Fuzzy search
-  --[[ Better performance for large projects ]]
-  use({
-    "ibhagwan/fzf-lua",
-    requires = {
-      "nvim-tree/nvim-web-devicons",
-    },
-    commit = "d9c9574",
-    config = config.fzf(),
-    setup = setup.fzf(),
-  })
-  --[[ use({ ]]
-  --[[   "nvim-telescope/telescope.nvim", ]]
-  --[[   commit = "cabf991", ]]
-  --[[   setup = setup.telescope(), ]]
-  --[[   config = config.telescope(), ]]
-  --[[ }) ]]
-  --[[ use({ ]]
-  --[[   "nvim-telescope/telescope-fzf-native.nvim", ]]
-  --[[   commit = "ae9d95", ]]
-  --[[   run = "make", ]]
-  --[[   requires = { ]]
-  --[[     "nvim-telescope/telescope.nvim", ]]
-  --[[   }, ]]
-  --[[ }) ]]
+	--[[ Smooth scroll for neovim ]]
+	--[[ use({ ]]
+	--[[ 	"karb94/neoscroll.nvim", ]]
+	--[[ 	event = "BufRead", ]]
+	--[[ 	config = config.neoscroll(), ]]
+	--[[ }) ]]
 
-  --[[ Autopairs supporter ]]
-  use({
-    "windwp/nvim-autopairs",
-    commit = "4fc96c8",
-    after = "nvim-cmp",
-    config = config.autopairs(),
-  })
+	--[[ Winbar ]]
+	--[[ use({ ]]
+	--[[ 	"SmiteshP/nvim-navic", ]]
+	--[[ 	requires = "neovim/nvim-lspconfig", ]]
+	--[[ 	config = config.winbar(), ]]
+	--[[ }) ]]
 
-  --[[ Delete all buffers except one ]]
-  use({
-    "kazhala/close-buffers.nvim",
-    commit = "3acbcad",
-    setup = setup.close_buffers(),
-  })
-
-  --[[ Navigate with the fewest keystrokes ]]
-  use({
-    "ThePrimeagen/harpoon",
-    requires = "nvim-lua/plenary.nvim",
-    config = config.harpoon(),
-  })
-
-  --[[ Visualize the undo history ]]
-  use({
-    "mbbill/undotree",
-    setup = setup.undotree(),
-  })
-
-  --[[ Flutter tools ]]
-  use({
-    "akinsho/flutter-tools.nvim",
-    setup = setup.flutter(),
-    config = config.flutter(),
-  })
-
-  --[[ Measure neovim's startup time ]]
-  use({
-    "tweekmonster/startuptime.vim",
-  })
+	--[[ Measure neovim's startup time ]]
+	--[[ use({ ]]
+	--[[   "tweekmonster/startuptime.vim", ]]
+	--[[ }) ]]
 end)
+
+-- Automatically source and re-compile packer whenever you save this init.lua
+local packer_group = vim.api.nvim_create_augroup("Packer", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePost", {
+	command = "source <afile> | silent! LspStop | silent! LspStart | PackerCompile",
+	group = packer_group,
+	pattern = vim.fn.expand("$MYVIMRC"),
+})

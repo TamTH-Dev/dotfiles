@@ -149,14 +149,14 @@ end
 
 function M.telescope()
 	return function()
-		--[[ local map = function(...) ]]
-		--[[   vim.api.nvim_set_keymap("n", ...) ]]
-		--[[ end ]]
-		--[[ local opts = { noremap = true, silent = true } ]]
+		local map = function(...)
+		  vim.api.nvim_set_keymap("n", ...)
+		end
+		local opts = { noremap = true, silent = true }
 
-		--[[ map("<C-p>", "<cmd>Telescope find_files hidden=true<CR>", opts) ]]
-		--[[ map("<C-f>", "<cmd>Telescope live_grep<CR>", opts) ]]
-		--[[ map("<C-b>", "<cmd>Telescope buffers<CR>", opts) ]]
+		map("<C-p>", "<cmd>Telescope find_files hidden=true<CR>", opts)
+		map("<C-f>", "<cmd>Telescope live_grep<CR>", opts)
+		map("<C-b>", "<cmd>Telescope buffers<CR>", opts)
 	end
 end
 

@@ -281,9 +281,9 @@ packer.startup(function()
 	--[[ }) ]]
 
 	--[[ Measure neovim's startup time ]]
-	--[[ use({ ]]
-	--[[   "tweekmonster/startuptime.vim", ]]
-	--[[ }) ]]
+	use({
+	  "tweekmonster/startuptime.vim",
+	})
 end)
 
 -- Automatically source and re-compile packer whenever you save this init.lua

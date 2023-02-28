@@ -41,11 +41,9 @@ $aws\
 $gcloud\
 $openstack\
 $azure\
-$fill\
 $cmd_duration\
 $jobs\
 $battery\
-$time\
 $status\
 $container\
 $shell\
@@ -96,6 +94,4 @@ style = "yellow"
 symbol = " "
 
 [time]
-disabled = false
-style = "bold white"
-format = "[$time]($style)"
+disabled = true

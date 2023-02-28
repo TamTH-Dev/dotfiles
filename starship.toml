@@ -56,7 +56,7 @@ $character"""
 symbol = " "
 
 [directory]
-style = "blue"
+style = "#2ac3de"
 read_only = " "
 truncation_length = 4
 truncate_to_repo = false

@@ -1,34 +1,101 @@
-# Inserts blank line between shell prompts.
 add_newline = false
 
-# Timeout for starship to scan files (in milliseconds)
-scan_timeout = 50
+format = """
+$username\
+$hostname\
+$localip\
+$kubernetes\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$docker_context\
+$package\
+$c\
+$cmake\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$golang\
+$haskell\
+$java\
+$julia\
+$kotlin\
+$gradle\
+$lua\
+$nodejs\
+$perl\
+$php\
+$python\
+$ruby\
+$rust\
+$scala\
+$swift\
+$conda\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$fill\
+$cmd_duration\
+$jobs\
+$battery\
+$time\
+$status\
+$container\
+$shell\
+$line_break\
+$character"""
 
-# Timeout for commands executed by starship (in milliseconds)
-command_timeout = 2000
+[fill]
+symbol = " "
 
-# Disable the package module, hiding it from the prompt completely
-[package]
-disabled = true
+[directory]
+style = "blue"
+read_only = " "
+truncation_length = 4
+truncate_to_repo = false
 
-# Shows a character beside where the text is entered
-[character]                           
+[character]
 success_symbol = '[➜](#9ece6a)'
 vicmd_symbol = '[➜](#bb9af7)'
 error_symbol = '[➜](#f7768e)'
 
-# Shows the path to current directory
-[directory]
-truncation_length = 32
-read_only = ''
-format = '[$path](#bb9af7)[$read_only](#f7768e) '
-
-# Shows the active branch of the repo in current directory
 [git_branch]
-symbol = ''
-truncation_length = 32
-format = 'on [$symbol $branch](#7dcfff) '
+symbol = " "
+format = "[$symbol$branch]($style) "
+style = "bright-black"
 
-[username]
-format = '[$user](#2ac3de) in '
-show_always = true
+[jobs]
+symbol = ""
+style = "bold red"
+number_threshold = 1
+format = "[$symbol]($style)"
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "cyan"
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bright-black"
+
+[git_metrics]
+disabled = false
+
+[cmd_duration]
+format = "[$duration]($style)"
+style = "yellow"
+
+[memory_usage]
+symbol = " "
+
+[time]
+disabled = false
+style = "bold white"
+format = "[$time]($style)"

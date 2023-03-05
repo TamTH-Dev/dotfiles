@@ -289,17 +289,17 @@ function M.cmp()
         format = function(entry, item)
           item.kind = kind_icons[item.kind]
           item.menu = ({
-            nvim_lsp = "(LSP)",
-            luasnip = "(Snippet)",
-            path = "(Path)",
-            buffer = "(Buffer)",
-          })[entry.source.name]
+                nvim_lsp = "(LSP)",
+                luasnip = "(Snippet)",
+                path = "(Path)",
+                buffer = "(Buffer)",
+              })[entry.source.name]
           item.dup = ({
-            nvim_lsp = 0,
-            luasnip = 1,
-            buffer = 1,
-            path = 1,
-          })[entry.source.name] or 0
+                nvim_lsp = 0,
+                luasnip = 1,
+                buffer = 1,
+                path = 1,
+              })[entry.source.name] or 0
 
           return item
         end,
@@ -385,7 +385,7 @@ function M.flutter()
           enabled = false,
           background = false,
           foreground = false,
-          virtual_text = false,
+          virtual_text = true,
           virtual_text_str = "",
         },
         settings = {
@@ -412,13 +412,6 @@ function M.gitsigns()
       linehl = false,
       word_diff = false,
       signcolumn = true,
-      signs = {
-        add = { hl = "DiffAdd", text = "" },
-        change = { hl = "DiffChange", text = "" },
-        delete = { hl = "DiffDelete", text = "" },
-        topdelete = { hl = "DiffDelete", text = "" },
-        changedelete = { hl = "DiffChange", text = "" },
-      },
       status_formatter = nil,
       sign_priority = 6,
       debug_mode = false,
@@ -611,7 +604,7 @@ function M.lsp()
       --@usage[[ diagnostics ]]
       handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
         signs = true,
-        virtual_text = false,
+        virtual_text = true,
         underline = true,
         severity_sort = false,
       })
@@ -997,10 +990,10 @@ function M.mason_lspconfig()
       return
     end
 
-    local servers = require("plugins/lsp_servers")
+    --[[ local servers = require("plugins/lsp_servers") ]]
 
     mason_lspconfig.setup({
-      ensure_installed = servers,
+      --[[ ensure_installed = servers, ]]
     })
   end
 end
@@ -1172,7 +1165,6 @@ function M.nvimtree()
         --@usage[[ the command arguments as a list ]]
         args = {},
       },
-
       view = {
         preserve_window_proportions = true,
         --@usage[[ width of the window, can be either a number (columns) or a string in `%` ]]
@@ -1265,11 +1257,12 @@ function M.telescope()
     local telescope_sorters_loaded, sorters = pcall(require, "telescope.sorters")
     local telescope_previewers_loaded, previewers = pcall(require, "telescope.previewers")
 
-    if not (
+    if
+        not (
         telescope_loaded
-            or telescope_actions_loaded
-            or telescope_sorters_loaded
-            or telescope_previewers_loaded
+        or telescope_actions_loaded
+        or telescope_sorters_loaded
+        or telescope_previewers_loaded
         )
     then
       return

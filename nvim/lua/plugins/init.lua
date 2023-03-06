@@ -250,7 +250,7 @@ packer.startup(function()
     setup = setup.indent_blankline(),
   })
 
-  --[[ Git ]]
+  --[[ Git indicators ]]
   use({
     "lewis6991/gitsigns.nvim",
     commit = "3b6c0a6",

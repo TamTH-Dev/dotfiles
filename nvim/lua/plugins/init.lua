@@ -256,6 +256,9 @@ packer.startup(function()
     commit = "3b6c0a6",
     config = config.gitsigns(),
   })
+
+  -- [[ Greeter for neovim ]]
+  use({ "startup-nvim/startup.nvim" })
 end)
 
 -- Automatically source and re-compile packer whenever you save this init.lua

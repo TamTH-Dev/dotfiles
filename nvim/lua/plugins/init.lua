@@ -257,8 +257,14 @@ packer.startup(function()
     config = config.gitsigns(),
   })
 
+  -- [[ Custom escape ]]
+  use({
+    "max397574/better-escape.nvim",
+    config = config.better_escape(),
+  })
+
   -- [[ Greeter for neovim ]]
-  use({ "startup-nvim/startup.nvim" })
+  --[[ use({ "startup-nvim/startup.nvim" }) ]]
 end)
 
 -- Automatically source and re-compile packer whenever you save this init.lua

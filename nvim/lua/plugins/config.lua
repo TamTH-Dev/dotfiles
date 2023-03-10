@@ -127,6 +127,23 @@ function M.autopairs()
   end
 end
 
+function M.better_escape()
+  return function()
+    local better_escape_loaded, better_escape = pcall(require, "better_escape")
+
+    if not better_escape_loaded then
+      return
+    end
+
+    better_escape.setup({
+      mapping = { "jj" },
+      timeout = vim.o.timeoutlen,
+      clear_empty_lines = false,
+      keys = "<Esc>",
+    })
+  end
+end
+
 function M.bufferline()
   return function()
     local bufferline_loaded, bufferline = pcall(require, "bufferline")
@@ -991,7 +1008,6 @@ function M.mason_lspconfig()
     end
 
     --[[ local servers = require("plugins/lsp_servers") ]]
-
     mason_lspconfig.setup({
       --[[ ensure_installed = servers, ]]
     })

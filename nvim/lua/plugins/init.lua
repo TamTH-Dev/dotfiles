@@ -119,6 +119,11 @@ packer.startup(function()
         "tpope/vim-surround",
         commit = "3d188ed",
       },
+      --[[ Set the commentstring option based on the cursor location in the file ]]
+      {
+        "JoosepAlviste/nvim-ts-context-commentstring",
+        commit = "729d83e",
+      },
     },
   })
 
@@ -182,12 +187,6 @@ packer.startup(function()
     "numToStr/Comment.nvim",
     commit = "6821b3a",
     config = config.comment(),
-    requires = {
-      {
-        "JoosepAlviste/nvim-ts-context-commentstring",
-        commit = "729d83e",
-      },
-    },
   })
 
   --[[ Fancy start screen ]]
@@ -264,7 +263,7 @@ packer.startup(function()
   })
 
   -- [[ Greeter for neovim ]]
-  -- use({ "startup-nvim/startup.nvim" })
+  use({ "startup-nvim/startup.nvim" })
 end)
 
 -- Automatically source and re-compile packer whenever you save this init.lua

@@ -1493,6 +1493,9 @@ function M.treesitter()
         --@usage[[ table of colour name strings ]]
         -- termcolors  = {}
       },
+      context_commentstring = {
+        enable = true,
+      },
     })
   end
 end

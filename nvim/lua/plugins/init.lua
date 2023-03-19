@@ -31,33 +31,33 @@ packer.startup(function()
   --[[ Built-in LSP configuration supporter ]]
   use({
     "neovim/nvim-lspconfig",
-    commit = "56f4c8c",
+    commit = "5a87140",
     config = config.lsp(),
     requires = {
       --[[ Manage external editor tooling ]]
       {
         "williamboman/mason.nvim",
-        commit = "2237ebf",
+        commit = "fd1c061",
         config = config.mason(),
       },
       --[[ Bridges mason.nvim with the lspconfig ]]
       {
         "williamboman/mason-lspconfig.nvim",
-        commit = "e4badf7",
+        commit = "2b81103",
         config = config.mason_lspconfig(),
       },
       --[[ Use Neovim as a language server to inject LSP diagnostics,
 			-- code actions, and more via Lua ]]
       {
         "jose-elias-alvarez/null-ls.nvim",
-        commit = "456cd27",
+        commit = "456a983",
         config = config.null_ls(),
         requires = "nvim-lua/plenary.nvim",
       },
       --[[ Bridges mason.nvim with the null-ls ]]
       {
         "jayp0521/mason-null-ls.nvim",
-        commit = "c05de94",
+        commit = "4070ec7",
         config = config.mason_null_ls(),
       },
     },
@@ -66,7 +66,7 @@ packer.startup(function()
   --[[ Completion supporters ]]
   use({
     "hrsh7th/nvim-cmp",
-    commit = "feed47f",
+    commit = "777450f",
     config = config.cmp(),
     requires = {
       {
@@ -75,11 +75,11 @@ packer.startup(function()
       },
       {
         "rafamadriz/friendly-snippets",
-        commit = "009887b",
+        commit = "25ddcd9",
       },
       {
         "L3MON4D3/LuaSnip",
-        commit = "9b5be5e",
+        commit = "a835e3d",
         config = config.luasnip(),
       },
       {
@@ -100,19 +100,19 @@ packer.startup(function()
   --[[ Parser ]]
   use({
     "nvim-treesitter/nvim-treesitter",
-    commit = "3731cf1",
+    commit = "f1a0b81",
     config = config.treesitter(),
     requires = {
       --[[ Autopairs supporter ]]
       {
         "windwp/nvim-autopairs",
-        commit = "ab49517",
+        commit = "e755f36",
         config = config.autopairs(),
       },
       --[[ Autoclose tags ]]
       {
         "windwp/nvim-ts-autotag",
-        commit = "fdefe46",
+        commit = "25698e4",
       },
       --[[ Surround parentheses, brackets, quotes, XML tags, and more ]]
       {
@@ -129,8 +129,8 @@ packer.startup(function()
 
   --[[ Icons suppliers ]]
   use({
-    "kyazdani42/nvim-web-devicons",
-    commit = "c3c1dc4",
+    "nvim-tree/nvim-web-devicons",
+    commit = "585dbc2",
     config = config.icons(),
   })
 
@@ -176,8 +176,8 @@ packer.startup(function()
 
   --[[ File explorer ]]
   use({
-    "kyazdani42/nvim-tree.lua",
-    commit = "1b45344",
+    "nvim-tree/nvim-tree.lua",
+    commit = "1d79a64",
     setup = setup.nvimtree(),
     config = config.nvimtree(),
   })
@@ -185,14 +185,14 @@ packer.startup(function()
   --[[ Commenter ]]
   use({
     "numToStr/Comment.nvim",
-    commit = "6821b3a",
+    commit = "8d3aa5c",
     config = config.comment(),
   })
 
   --[[ Fancy start screen ]]
   use({
     "goolord/alpha-nvim",
-    commit = "4b0ba68",
+    commit = "3847d6b",
     config = config.alpha(),
   })
 
@@ -219,14 +219,6 @@ packer.startup(function()
     setup = setup.close_buffers(),
   })
 
-  --[[ Navigate with the fewest keystrokes ]]
-  use({
-    "ThePrimeagen/harpoon",
-    commit = "f7040fd",
-    config = config.harpoon(),
-    requires = "nvim-lua/plenary.nvim",
-  })
-
   --[[ Visualize the undo history ]]
   use({
     "mbbill/undotree",
@@ -237,7 +229,7 @@ packer.startup(function()
   --[[ Flutter supporter ]]
   use({
     "akinsho/flutter-tools.nvim",
-    commit = "5a32382",
+    commit = "727df22",
     setup = setup.flutter(),
     config = config.flutter(),
   })
@@ -252,13 +244,14 @@ packer.startup(function()
   --[[ Git indicators ]]
   use({
     "lewis6991/gitsigns.nvim",
-    commit = "3b6c0a6",
+    commit = "b1f9cf7",
     config = config.gitsigns(),
   })
 
   -- [[ Custom escape ]]
   use({
     "max397574/better-escape.nvim",
+    commit = "426d297",
     config = config.better_escape(),
   })
 

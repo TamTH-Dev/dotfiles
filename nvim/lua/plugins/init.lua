@@ -8,10 +8,10 @@ packer.startup(function()
   local use = packer.use
 
   --[[ Plugins manager ]]
-  use({
-    "wbthomason/packer.nvim",
-    commit = "1d0cf98",
-  })
+  -- use({
+  --  "wbthomason/packer.nvim",
+  --  commit = "1d0cf98",
+  -- })
 end)
 
 -- Automatically source and re-compile packer whenever you save this init.lua

@@ -402,7 +402,7 @@ function M.flutter()
 					enabled = false,
 					background = false,
 					foreground = false,
-					virtual_text = true,
+					virtual_text = false,
 					virtual_text_str = "",
 				},
 				settings = {
@@ -597,7 +597,7 @@ function M.lsp()
 			--@usage[[ diagnostics ]]
 			handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
 				signs = true,
-				virtual_text = true,
+				virtual_text = false,
 				underline = true,
 				severity_sort = false,
 			})

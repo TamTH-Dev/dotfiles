@@ -220,11 +220,11 @@ packer.startup(function()
   })
 
   --[[ Visualize the undo history ]]
-  use({
-    "mbbill/undotree",
-    commit = "485f01e",
-    setup = setup.undotree(),
-  })
+  --[[ use({ ]]
+  --[[   "mbbill/undotree", ]]
+  --[[   commit = "485f01e", ]]
+  --[[   setup = setup.undotree(), ]]
+  --[[ }) ]]
 
   --[[ Flutter supporter ]]
   use({
@@ -235,18 +235,18 @@ packer.startup(function()
   })
 
   --[[ Indentation guides ]]
-  use({
-    "lukas-reineke/indent-blankline.nvim",
-    commit = "018bd04",
-    setup = setup.indent_blankline(),
-  })
+  --[[ use({ ]]
+  --[[   "lukas-reineke/indent-blankline.nvim", ]]
+  --[[   commit = "018bd04", ]]
+  --[[   setup = setup.indent_blankline(), ]]
+  --[[ }) ]]
 
   --[[ Git indicators ]]
-  use({
-    "lewis6991/gitsigns.nvim",
-    commit = "b1f9cf7",
-    config = config.gitsigns(),
-  })
+  --[[ use({ ]]
+  --[[   "lewis6991/gitsigns.nvim", ]]
+  --[[   commit = "b1f9cf7", ]]
+  --[[   config = config.gitsigns(), ]]
+  --[[ }) ]]
 
   -- [[ Custom escape ]]
   use({
@@ -256,7 +256,7 @@ packer.startup(function()
   })
 
   -- [[ Greeter for neovim ]]
-  use({ "startup-nvim/startup.nvim" })
+  --[[ use({ "startup-nvim/startup.nvim" }) ]]
 end)
 
 -- Automatically source and re-compile packer whenever you save this init.lua

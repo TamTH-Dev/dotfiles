@@ -3,7 +3,8 @@ local M = {}
 M.ui, M.options, M.mappings = {}, {}, {}
 
 M.ui = {
-  theme = "tokyonight",
+  --[[ theme = "tokyonight", ]]
+  theme = "catppuccin",
 }
 
 M.options = {

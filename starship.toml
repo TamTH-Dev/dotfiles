@@ -54,15 +54,15 @@ $character"""
 symbol = " "
 
 [directory]
-style = "#2ac3de"
+style = "#91D7E3"
 read_only = " "
 truncation_length = 4
 truncate_to_repo = false
 
 [character]
-success_symbol = '[➜](#9ece6a)'
-vicmd_symbol = '[➜](#bb9af7)'
-error_symbol = '[➜](#f7768e)'
+success_symbol = '[➜](#A6DA95)'
+vicmd_symbol = '[➜](#B7BDF8)'
+error_symbol = '[➜](#ED8796)'
 
 [git_branch]
 symbol = " "
@@ -92,6 +92,9 @@ style = "yellow"
 
 [memory_usage]
 symbol = " "
+
+[package]
+format = 'is [$symbol$version](#F5A97F) '
 
 [time]
 disabled = true

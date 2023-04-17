@@ -17,11 +17,11 @@ packer.startup(function()
   })
 
   --[[ Colorscheme ]]
-  use({ "catppuccin/nvim", as = "catppuccin", config = config.catppuccin() })
-  --[[ use({ ]]
-  --[[   "folke/tokyonight.nvim", ]]
-  --[[   config = config.tokyonight(), ]]
-  --[[ }) ]]
+  use({
+    "catppuccin/nvim",
+    as = "catppuccin",
+    config = config.catppuccin(),
+  })
 
   --[[ Functions supporter ]]
   use({
@@ -220,12 +220,6 @@ packer.startup(function()
     setup = setup.close_buffers(),
   })
 
-  --[[ Visualize the undo history ]]
-  --[[ use({ ]]
-  --[[   "mbbill/undotree", ]]
-  --[[   commit = "485f01e", ]]
-  --[[   setup = setup.undotree(), ]]
-  --[[ }) ]]
   --[[ Flutter supporter ]]
   use({
     "akinsho/flutter-tools.nvim",
@@ -234,6 +228,19 @@ packer.startup(function()
     config = config.flutter(),
   })
 
+  -- [[ Custom escape ]]
+  use({
+    "max397574/better-escape.nvim",
+    commit = "426d297",
+    config = config.better_escape(),
+  })
+
+  --[[ Visualize the undo history ]]
+  --[[ use({ ]]
+  --[[   "mbbill/undotree", ]]
+  --[[   commit = "485f01e", ]]
+  --[[   setup = setup.undotree(), ]]
+  --[[ }) ]]
   --[[ Indentation guides ]]
   --[[ use({ ]]
   --[[   "lukas-reineke/indent-blankline.nvim", ]]
@@ -246,15 +253,8 @@ packer.startup(function()
   --[[   commit = "b1f9cf7", ]]
   --[[   config = config.gitsigns(), ]]
   --[[ }) ]]
-  -- [[ Custom escape ]]
-  use({
-    "max397574/better-escape.nvim",
-    commit = "426d297",
-    config = config.better_escape(),
-  })
-
   -- [[ Greeter for neovim ]]
-  --[[ use({ "startup-nvim/startup.nvim" }) ]]
+  use({ "startup-nvim/startup.nvim" })
 end)
 
 -- Automatically source and re-compile packer whenever you save this init.lua

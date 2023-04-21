@@ -34,6 +34,7 @@ set clipboard+=unnamedplus
 set hlsearch
 set incsearch
 set smartindent
+set smartcase
 set termguicolor
 set scrolloff=8
 set sidescrolloff=8

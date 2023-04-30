@@ -117,7 +117,7 @@ function M.fzf()
 		local opts = { noremap = true, silent = true }
 
 		map("<C-p>", "<cmd>FzfLua files<CR>", opts)
-		map("<C-f>", "<cmd>FzfLua live_grep<CR>", opts)
+		map("<C-f>", "<cmd>FzfLua live_grep_resume<CR>", opts)
 		map("<C-b>", "<cmd>FzfLua buffers<CR>", opts)
 		map("<C-e>", "<cmd>FzfLua diagnostics_document<CR>", opts)
 		map("<C-w>", "<cmd>FzfLua diagnostics_workspace<CR>", opts)

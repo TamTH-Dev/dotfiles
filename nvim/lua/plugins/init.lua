@@ -32,35 +32,35 @@ packer.startup(function()
 	--[[ LSP configuration ]]
 	use({
 		"williamboman/mason.nvim",
-		commit = "75e64d2",
+		commit = "057ac5c",
 		config = config.mason(),
 	})
 	use({
 		"williamboman/mason-lspconfig.nvim",
-		commit = "7034065",
+		commit = "43f2ddf",
 		config = config.mason_lspconfig(),
 	})
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
-		commit = "f8ffcd7",
+		commit = "33b853a",
 		config = config.null_ls(),
 		requires = "nvim-lua/plenary.nvim",
 	})
 	use({
 		"jayp0521/mason-null-ls.nvim",
-		commit = "04fc509",
+		commit = "cfbd839",
 		config = config.mason_null_ls(),
 	})
 	use({
 		"neovim/nvim-lspconfig",
-		commit = "eddaef9",
+		commit = "427378a",
 		config = config.lsp(),
 	})
 
 	--[[ Completion supporters ]]
 	use({
 		"hrsh7th/nvim-cmp",
-		commit = "777450f",
+		commit = "11102d3",
 		config = config.cmp(),
 		requires = {
 			{
@@ -69,11 +69,11 @@ packer.startup(function()
 			},
 			{
 				"rafamadriz/friendly-snippets",
-				commit = "b1b78a6",
+				commit = "631f79e",
 			},
 			{
 				"L3MON4D3/LuaSnip",
-				commit = "8d6c0a9",
+				commit = "e77fa9a",
 				config = config.luasnip(),
 			},
 			{
@@ -94,13 +94,13 @@ packer.startup(function()
 	--[[ Parser ]]
 	use({
 		"nvim-treesitter/nvim-treesitter",
-		commit = "c79c379",
+		commit = "1ca9b93",
 		config = config.treesitter(),
 		requires = {
 			--[[ Autopairs supporter ]]
 			{
 				"windwp/nvim-autopairs",
-				commit = "58985de",
+				commit = "4b478a7",
 				config = config.autopairs(),
 			},
 		},
@@ -108,12 +108,12 @@ packer.startup(function()
 	--[[ Auto-close tags ]]
 	use({
 		"windwp/nvim-ts-autotag",
-		commit = "cac97f3",
+		commit = "40615e9",
 	})
 	--[[ Set the commentstring option based on the cursor location in the file ]]
 	use({
 		"JoosepAlviste/nvim-ts-context-commentstring",
-		commit = "ada15e9",
+		commit = "0bf8fbc",
 	})
 	--[[ Surround parentheses, brackets, quotes, XML tags, and more ]]
 	use({
@@ -134,7 +134,7 @@ packer.startup(function()
 		requires = {
 			"nvim-tree/nvim-web-devicons",
 		},
-		commit = "08f57e9",
+		commit = "79c7c34",
 		config = config.fzf(),
 		setup = setup.fzf(),
 	})
@@ -163,7 +163,7 @@ packer.startup(function()
 	--[[ Buffer management bar ]]
 	use({
 		"akinsho/bufferline.nvim",
-		commit = "243893b",
+		commit = "a4bd445",
 		setup = setup.bufferline(),
 		config = config.bufferline(),
 	})
@@ -171,7 +171,7 @@ packer.startup(function()
 	--[[ File explorer ]]
 	use({
 		"nvim-tree/nvim-tree.lua",
-		commit = "0db85a7",
+		commit = "d8b154c",
 		setup = setup.nvimtree(),
 		config = config.nvimtree(),
 	})
@@ -179,7 +179,7 @@ packer.startup(function()
 	--[[ Commenter ]]
 	use({
 		"numToStr/Comment.nvim",
-		commit = "a89339f",
+		commit = "38d3b7e",
 		config = config.comment(),
 	})
 
@@ -216,16 +216,23 @@ packer.startup(function()
 	--[[ Flutter supporter ]]
 	use({
 		"akinsho/flutter-tools.nvim",
-		commit = "dedb571",
+		commit = "97f9bde",
 		setup = setup.flutter(),
 		config = config.flutter(),
 	})
 
-	-- [[ Custom escape ]]
+	--[[ Custom escape ]]
 	use({
 		"max397574/better-escape.nvim",
 		commit = "426d297",
 		config = config.better_escape(),
+	})
+
+	--[[ Git indicators ]]
+	use({
+		"lewis6991/gitsigns.nvim",
+		commit = "b1f9cf7",
+		config = config.gitsigns(),
 	})
 
 	--[[ Visualize the undo history ]]
@@ -239,12 +246,6 @@ packer.startup(function()
 	--[[   "lukas-reineke/indent-blankline.nvim", ]]
 	--[[   commit = "018bd04", ]]
 	--[[   setup = setup.indent_blankline(), ]]
-	--[[ }) ]]
-	--[[ Git indicators ]]
-	--[[ use({ ]]
-	--[[   "lewis6991/gitsigns.nvim", ]]
-	--[[   commit = "b1f9cf7", ]]
-	--[[   config = config.gitsigns(), ]]
 	--[[ }) ]]
 	-- [[ Greeter for neovim ]]
 	-- use({ "startup-nvim/startup.nvim" })

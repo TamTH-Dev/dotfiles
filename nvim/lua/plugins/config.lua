@@ -655,6 +655,7 @@ function M.lsp()
 				virtual_text = false,
 				underline = true,
 				severity_sort = false,
+				update_in_insert = true,
 			})
 
 			--@usage[[ symbols in the sign column (gutter) ]]
@@ -1033,15 +1034,16 @@ end
 
 function M.mason_lspconfig()
 	return function()
+		local mason_loaded, mason = pcall(require, "mason")
 		local mason_lspconfig_loaded, mason_lspconfig = pcall(require, "mason-lspconfig")
 
-		if not mason_lspconfig_loaded then
+		if not (mason_loaded or mason_lspconfig_loaded) then
 			return
 		end
 
-		--[[ local servers = require("plugins/lsp_servers") ]]
+		local servers = require("plugins/lsp_servers")
 		mason_lspconfig.setup({
-			--[[ ensure_installed = servers, ]]
+			ensure_installed = servers,
 		})
 	end
 end
@@ -1061,7 +1063,7 @@ function M.mason_null_ls()
 			ensure_installed = {
 				"autopep8",
 				"clang_format",
-        "prettierd",
+				"prettierd",
 				"stylua",
 			},
 			handlers = {
@@ -1450,7 +1452,7 @@ end
 
 function M.treesitter()
 	return function()
-		local treesitter_loaded, _ = pcall(require, "nvim-treesitter.configs")
+		local treesitter_loaded, _ = pcall(require, "nvim-treesitter")
 
 		if not treesitter_loaded then
 			return

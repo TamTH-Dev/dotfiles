@@ -12,16 +12,22 @@ export PATH=/usr/local/sbin:$PATH
 export PATH=/bin:$PATH
 export PATH=/opt/homebrew/bin:$PATH
 
+# Docker daemon fix
+export DOCKER_HOST=unix:///Users/$(whoami)/Library/Containers/com.docker.docker/Data/docker.raw.sock
+
 # Nvm
 export NVM_DIR=~/.nvm
-export PATH=~/.nvm/versions/node/v18.12.1/bin:$PATH
+source $NVM_DIR/nvm.sh
+export PATH=$NVM_DIR/versions/node/v18.12.1/bin:$PATH
 
 # Flutter
 export PATH=~/flutter/bin:$PATH
-export PATH=~/Library/Android/sdk/emulator:$PATH
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 
-# Python
-export PATH=~/Library/Python/3.9/bin:$PATH
+# Pub
+export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 # Go
 export PATH=~/go/bin:$PATH
@@ -56,8 +62,8 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules,.git,build,di
 
 alias vi=nvim
 alias lg=lazygit
-# alias ls=exa
-# alias la="exa -lah"
+alias ls=exa
+alias la="exa -lah"
 alias la="ls -lah"
 alias c=clear
 

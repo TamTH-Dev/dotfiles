@@ -32,6 +32,7 @@ nnoremap N Nzzzv
 " Common options
 set clipboard+=unnamedplus
 set hlsearch
+set ignorecase
 set incsearch
 set smartindent
 set smartcase

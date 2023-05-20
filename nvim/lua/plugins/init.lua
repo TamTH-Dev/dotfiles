@@ -248,7 +248,7 @@ packer.startup(function()
 	--[[   setup = setup.indent_blankline(), ]]
 	--[[ }) ]]
 	-- [[ Greeter for neovim ]]
-	-- use({ "startup-nvim/startup.nvim" })
+	use({ "startup-nvim/startup.nvim" })
 end)
 
 -- Automatically source and re-compile packer whenever you save this init.lua

@@ -32,6 +32,10 @@ export PATH="$PATH":"$HOME/.pub-cache/bin"
 # Go
 export PATH=~/go/bin:$PATH
 
+# Ruby
+export GEM_HOME=$HOME/.gem
+export PATH="$GEM_HOME/bin:$PATH"
+
 
 ##########################################
 ##         Basic configuration          ##
@@ -47,12 +51,12 @@ source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 ##           Fzf configuration          ##
 ##########################################
 export FZF_DEFAULT_OPTS="
-    --color=bg+:#24273A,bg:#24273A
-    --color=hl+:#7DC4E4,hl:#7DC4E4
-    --color=fg+:#CAD3F5,fg:#5B6078
-    --color=info:#F5A97F,prompt:#A6DA95,spinner:#A5ADCB,pointer:#ED8796,marker:#8AADF4
-    --layout=reverse --bind=shift-tab:up,tab:down --no-multi --cycle
-  "
+  --color=bg+:#1a1b26,bg:#1a1b26
+  --color=hl+:#2ac3de,hl:#2ac3de
+  --color=fg+:#c0caf5,fg:#565f89
+  --color=info:#9ece6a,prompt:#9ece6a,spinner:#9ece6a,pointer:#f7768e,marker:#2ac3de
+  --layout=reverse --bind=shift-tab:up,tab:down --no-multi --cycle
+"
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules,.git,build,dist,.cache,cache,.idea,.pub-cache}"'
 
 

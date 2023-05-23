@@ -18,9 +18,8 @@ packer.startup(function()
 
 	--[[ Colorscheme ]]
 	use({
-		"catppuccin/nvim",
-		as = "catppuccin",
-		config = config.catppuccin(),
+		"folke/tokyonight.nvim",
+    config = config.tokyonight(),
 	})
 
 	--[[ Functions supporter ]]

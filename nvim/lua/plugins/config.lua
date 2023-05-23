@@ -505,138 +505,138 @@ function M.icons()
 		local colors = highlights.colors
 
 		icons.setup({
-			override = {
-				c = {
-					icon = "",
-					color = colors.blue,
-					name = "c",
-				},
-				cc = {
-					icon = "",
-					color = colors.blue,
-					name = "cc",
-				},
-				cpp = {
-					icon = "",
-					color = colors.blue,
-					name = "cpp",
-				},
-				css = {
-					icon = "",
-					color = colors.blue,
-					name = "css",
-				},
-				deb = {
-					icon = "",
-					color = colors.red,
-					name = "deb",
-				},
-				Dockerfile = {
-					icon = "",
-					color = colors.blue,
-					name = "Dockerfile",
-				},
-				html = {
-					icon = "",
-					color = colors.peach,
-					name = "html",
-				},
-				java = {
-					icon = "",
-					color = colors.red,
-					name = "java",
-				},
-				jpeg = {
-					icon = "",
-					color = colors.lavender,
-					name = "jpeg",
-				},
-				jpg = {
-					icon = "",
-					color = colors.lavender,
-					name = "jpg",
-				},
-				js = {
-					icon = "",
-					color = colors.peach,
-					name = "js",
-				},
-				kt = {
-					icon = "󱈙",
-					color = colors.peach,
-					name = "kt",
-				},
-				lock = {
-					icon = "",
-					color = colors.red,
-					name = "lock",
-				},
-				lua = {
-					icon = "",
-					color = colors.blue,
-					name = "lua",
-				},
-				mp3 = {
-					icon = "",
-					color = colors.blue,
-					name = "mp3",
-				},
-				mp4 = {
-					icon = "",
-					color = colors.blue,
-					name = "mp4",
-				},
-				out = {
-					icon = "",
-					color = colors.blue,
-					name = "out",
-				},
-				png = {
-					icon = "",
-					color = colors.lavender,
-					name = "png",
-				},
-				py = {
-					icon = "",
-					color = colors.peach,
-					name = "py",
-				},
-				toml = {
-					icon = "",
-					color = colors.blue,
-					name = "toml",
-				},
-				ts = {
-					icon = "",
-					color = colors.blue,
-					name = "ts",
-				},
-				rb = {
-					icon = "",
-					color = colors.red,
-					name = "rb",
-				},
-				rpm = {
-					icon = "",
-					color = colors.peach,
-					name = "rpm",
-				},
-				vue = {
-					icon = "﵂",
-					color = colors.green,
-					name = "vue",
-				},
-				xz = {
-					icon = "",
-					color = colors.peach,
-					name = "xz",
-				},
-				zip = {
-					icon = "",
-					color = colors.peach,
-					name = "zip",
-				},
-			},
+      override = {
+        c = {
+          icon = "",
+          color = colors.blue,
+          name = "c",
+        },
+        cc = {
+          icon = "",
+          color = colors.blue,
+          name = "cc",
+        },
+        cpp = {
+          icon = "",
+          color = colors.blue,
+          name = "cpp",
+        },
+        css = {
+          icon = "",
+          color = colors.blue,
+          name = "css",
+        },
+        deb = {
+          icon = "",
+          color = colors.red,
+          name = "deb",
+        },
+        Dockerfile = {
+          icon = "",
+          color = colors.blue,
+          name = "Dockerfile",
+        },
+        html = {
+          icon = "",
+          color = colors.orange,
+          name = "html",
+        },
+        java = {
+          icon = "",
+          color = colors.red,
+          name = "java",
+        },
+        jpeg = {
+          icon = "",
+          color = colors.magenta,
+          name = "jpeg",
+        },
+        jpg = {
+          icon = "",
+          color = colors.magenta,
+          name = "jpg",
+        },
+        js = {
+          icon = "",
+          color = colors.orange,
+          name = "js",
+        },
+        kt = {
+          icon = "󱈙",
+          color = colors.orange,
+          name = "kt",
+        },
+        lock = {
+          icon = "",
+          color = colors.red,
+          name = "lock",
+        },
+        lua = {
+          icon = "",
+          color = colors.blue,
+          name = "lua",
+        },
+        mp3 = {
+          icon = "",
+          color = colors.blue,
+          name = "mp3",
+        },
+        mp4 = {
+          icon = "",
+          color = colors.blue,
+          name = "mp4",
+        },
+        out = {
+          icon = "",
+          color = colors.blue,
+          name = "out",
+        },
+        png = {
+          icon = "",
+          color = colors.magenta,
+          name = "png",
+        },
+        py = {
+          icon = "",
+          color = colors.orange,
+          name = "py",
+        },
+        toml = {
+          icon = "",
+          color = colors.blue,
+          name = "toml",
+        },
+        ts = {
+          icon = "",
+          color = colors.blue,
+          name = "ts",
+        },
+        rb = {
+          icon = "",
+          color = colors.red,
+          name = "rb",
+        },
+        rpm = {
+          icon = "",
+          color = colors.orange,
+          name = "rpm",
+        },
+        vue = {
+          icon = "﵂",
+          color = colors.green,
+          name = "vue",
+        },
+        xz = {
+          icon = "",
+          color = colors.orange,
+          name = "xz",
+        },
+        zip = {
+          icon = "",
+          color = colors.orange,
+          name = "zip",
+        },
+      },
 		})
 	end
 end
@@ -783,8 +783,8 @@ function M.lualine()
 				component_separators = "",
 				section_separators = "",
 				theme = {
-					normal = { c = { fg = colors.text, bg = colors.mantle } },
-					inactive = { c = { fg = colors.text, bg = colors.mantle } },
+          normal = { c = { fg = colors.fg, bg = colors.extraBg } },
+          inactive = { c = { fg = colors.fg, bg = colors.extraBg } },
 				},
 			},
 			sections = {
@@ -807,12 +807,12 @@ function M.lualine()
 
 		local get_mode_color = function()
 			local mode_colors = {
-				n = colors.blue,
-				i = colors.green,
-				c = colors.peach,
-				v = colors.lavender,
-				V = colors.lavender,
-				R = colors.red,
+        n = colors.blue,
+        i = colors.green,
+        c = colors.orange,
+        v = colors.magenta,
+        V = colors.magenta,
+        R = colors.red,
 			}
 			local color = mode_colors[fn.mode()]
 
@@ -835,7 +835,7 @@ function M.lualine()
 			function()
 				return "▊"
 			end,
-			color = { fg = colors.sky },
+			color = { fg = colors.blue },
 			padding = { left = 0, right = 1 },
 		})
 
@@ -859,7 +859,7 @@ function M.lualine()
 					R = " ",
 					s = " ",
 				}
-				cmd("hi! LualineMode guifg=" .. get_mode_color() .. " guibg=" .. colors.mantle)
+				cmd("hi! LualineMode guifg=" .. get_mode_color() .. " guibg=" .. colors.extraBg)
 
 				local alias_mode = alias[fn.mode()]
 				local icon = icons[fn.mode()]
@@ -883,14 +883,14 @@ function M.lualine()
 			"filename",
 			cond = conditions.buffer_not_empty and conditions.hide_in_width,
 			padding = { left = 1, right = 1 },
-			color = { fg = colors.text, gui = "bold" },
+			color = { fg = colors.fg, gui = "bold" },
 		})
 
 		ins_left({
 			"filesize",
 			cond = conditions.buffer_not_empty,
 			padding = { left = 1, right = 1 },
-			color = { fg = colors.surface2, gui = "bold" },
+			color = { fg = colors.darkGray, gui = "bold" },
 		})
 
 		ins_left({
@@ -898,7 +898,7 @@ function M.lualine()
 			cond = conditions.hide_in_width,
 			icon = "",
 			padding = { left = 1, right = 1 },
-			color = { fg = colors.lavender, gui = "bold" },
+			color = { fg = colors.magenta, gui = "bold" },
 		})
 
 		ins_left({
@@ -907,9 +907,9 @@ function M.lualine()
 			symbols = { added = " ", modified = "柳", removed = " " },
 			padding = { left = 1, right = 1 },
 			diff_color = {
-				added = { fg = colors.green },
-				modified = { fg = colors.peach },
-				removed = { fg = colors.red },
+        added = { fg = colors.green },
+        modified = { fg = colors.orange },
+        removed = { fg = colors.red },
 			},
 		})
 
@@ -932,7 +932,7 @@ function M.lualine()
 			symbols = { error = " ", warn = " ", info = " ", hint = " " },
 			diagnostics_color = {
 				error = { fg = colors.red },
-				warn = { fg = colors.peach },
+				warn = { fg = colors.orange },
 				info = { fg = colors.blue },
 				hint = { fg = colors.blue },
 			},
@@ -981,7 +981,7 @@ function M.lualine()
 		ins_right({
 			"progress",
 			padding = { left = 1, right = 1 },
-			color = { fg = colors.peach, gui = "bold" },
+			color = { fg = colors.orange, gui = "bold" },
 			cond = conditions.hide_in_width,
 		})
 
@@ -989,7 +989,7 @@ function M.lualine()
 			function()
 				return "▊"
 			end,
-			color = { fg = colors.sky },
+			color = { fg = colors.blue },
 			padding = { right = 0 },
 		})
 

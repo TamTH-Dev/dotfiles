@@ -52,17 +52,17 @@ $character"""
 
 [username]
 show_always = true
-format = "[$user](#e0af68) in "
+format = "[$user](bold #e0af68) in "
 
 [hostname]
 ssh_only = false
-format = '[$ssh_symbol$hostname](#41a6b5) in '
+format = '[$ssh_symbol$hostname](bold #41a6b5) in '
 
 [fill]
 symbol = " "
 
 [directory]
-style = "#7aa2f7"
+style = "bold #7aa2f7"
 read_only = " "
 truncation_length = 4
 truncate_to_repo = false

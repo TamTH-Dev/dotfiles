@@ -1,45 +1,38 @@
 local utils = require("core.utils")
-
-local user_mappings = utils.load_config().mappings
 local map = vim.api.nvim_set_keymap
 local global = vim.g
-
 local opts = { noremap = true, silent = true }
 
-local mappings = user_mappings.common
 --[[ Leader key ]]
-global.mapleader = mappings.leader
+global.mapleader = ","
 --[[ Save buffer ]]
-map("n", mappings.save_buffer, "<cmd>w!<CR>", opts)
+map("n", "<leader>w", "<cmd>w!<CR>", opts)
 --[[ Quit buffer ]]
-map("n", mappings.quit_buffer, "<cmd>q<CR>", opts)
+map("n", "<leader>q", "<cmd>q<CR>", opts)
 --[[ Format buffer ]]
-map("n", mappings.format_buffer, "<cmd>lua vim.lsp.buf.format()<CR>", opts)
+map("n", "<leader>f", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
 --[[ Exit modes ]]
-map("i", mappings.exit_modes, "<Esc>", opts)
+map("i", "jj", "<Esc>", opts)
 --[[ Split windows ]]
-map("n", mappings.split_window_vertically, "<cmd>vsplit<CR>", opts)
-map("n", mappings.split_window_horizontally, "<cmd>split<CR>", opts)
+map("n", "<leader>g/", "<cmd>vsplit<CR>", opts)
+map("n", "<leader>g\\", "<cmd>split<CR>", opts)
 --[[ Move between windows ]]
-map("n", mappings.move_to_above_window, "<C-W>k", opts)
-map("n", mappings.move_to_right_window, "<C-W>l", opts)
-map("n", mappings.move_to_below_window, "<C-W>j", opts)
-map("n", mappings.move_to_left_window, "<C-W>h", opts)
+map("n", "<A-k>", "<C-W>k", opts)
+map("n", "<A-l>", "<C-W>l", opts)
+map("n", "<A-j>", "<C-W>j", opts)
+map("n", "<A-h>", "<C-W>h", opts)
 --[[ Turn off highlight ]]
-map("n", mappings.turn_off_highlight, "<cmd>nohl<CR>", opts)
+map("n", "<leader><space>", "<cmd>nohl<CR>", opts)
 --[[ Use tab with text block ]]
-map("v", mappings.indent_block, ">gv", opts)
-map("v", mappings.outdent_block, "<gv", opts)
+map("v", "<Tab>", ">gv", opts)
+map("v", "<S-Tab>", "<gv", opts)
 --[[ Open new buffer ]]
-map("n", mappings.open_new_buffer, "<cmd>tabnew<CR>", opts)
+map("n", "<leader>t", "<cmd>tabnew<CR>", opts)
 --[[ Move vertically by visual line ]]
 map("n", "j", "gj", opts)
 map("n", "k", "gk", opts)
 --[[ A little bit upgrade for vertical movements ]]
 map("n", "<C-d>", "<C-d>zz", opts)
 map("n", "<C-u>", "<C-u>zz", opts)
---[[ A little bit upgrade for searching ]]
-map("n", "n", "nzzzv", opts)
-map("n", "N", "Nzzzv", opts)
 --[[ Paste in visual without removing current buffer ]]
 map("x", "<leader>p", '"_dP', opts)

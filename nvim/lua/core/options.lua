@@ -12,7 +12,6 @@ options.cursorline = false
 options.expandtab = true
 options.fileencoding = "utf-8"
 options.formatoptions = options.formatoptions - "ocr"
-options.guifont = "BlexMono Nerd Font:h13"
 options.hidden = true
 options.history = 50
 options.hlsearch = true
@@ -20,6 +19,7 @@ options.ignorecase = true
 options.incsearch = true
 options.joinspaces = false
 options.lazyredraw = true
+options.magic = true
 options.mouse = "a"
 options.number = true
 options.numberwidth = 4
@@ -34,6 +34,8 @@ options.showtabline = 2
 options.sidescrolloff = 8
 options.smartcase = true
 options.smartindent = true
+options.smarttab = true
+options.softtabstop = 2
 options.splitbelow = true
 options.splitright = true
 options.swapfile = false
@@ -43,18 +45,10 @@ options.termguicolors = true
 options.timeoutlen = 500
 options.updatetime = 250
 options.undofile = false
---[[ options.winbar = "%{%v:lua.require'core.winbar'.get_winbar()%}" ]]
 options.wrap = true
 options.writebackup = false
 
---[[ User options ]]
-local user_options = require("core.utils").load_config().options
-
-for key, value in pairs(user_options) do
-	options[key] = value
-end
-
---[[ Disable some builtin vim plugins ]]
+--[[ Disabled builtin plugins ]]
 local disabled_built_ins = {
 	"2html_plugin",
 	"getscript",

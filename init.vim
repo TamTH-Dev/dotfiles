@@ -36,6 +36,6 @@ set ignorecase
 set incsearch
 set smartindent
 set smartcase
-set termguicolor
 set scrolloff=8
 set sidescrolloff=8
+set termguicolor

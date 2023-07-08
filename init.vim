@@ -25,10 +25,6 @@ nnoremap k gk
 nnoremap <C-d> <C-d>zz 
 nnoremap <C-u> <C-u>zz 
 
-" A little bit upgrade for searching
-nnoremap n nzzzv 
-nnoremap N Nzzzv 
-
 " Common options
 set clipboard+=unnamedplus
 set hlsearch

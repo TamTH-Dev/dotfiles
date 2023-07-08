@@ -4,6 +4,7 @@ local global = vim.g
 --[[ Core options ]]
 options.backup = false
 options.belloff = "all"
+options.bg = "light"
 options.clipboard = "unnamedplus"
 options.cmdheight = 1
 options.completeopt = { "menuone", "noselect" }

@@ -31,10 +31,13 @@ nmap <leader>f <Action>(ReformatCode)
 " Common options
 set clipboard+=unnamedplus
 set hlsearch
+set ignorecase
 set incsearch
-set number
 set smartindent
-set relativenumber
+set smartcase
+set scrolloff=8
+set sidescrolloff=8
+set termguicolor
 
 " Plugins
 set surround

@@ -4,7 +4,7 @@ local global = vim.g
 --[[ Core options ]]
 options.backup = false
 options.belloff = "all"
-options.bg = "light"
+options.bg = "dark"
 options.clipboard = "unnamedplus"
 options.cmdheight = 1
 options.completeopt = { "menuone", "noselect" }
@@ -47,6 +47,8 @@ options.updatetime = 250
 options.undofile = false
 options.wrap = true
 options.writebackup = false
+
+global.skip_ts_context_commentstring_module = true
 
 --[[ Disabled builtin plugins ]]
 local disabled_built_ins = {

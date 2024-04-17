@@ -886,12 +886,12 @@ function M.lualine()
 			color = { fg = colors.fg, gui = "bold" },
 		})
 
-		ins_left({
-			"filesize",
-			cond = conditions.buffer_not_empty,
-			padding = { left = 1, right = 1 },
-			color = { fg = colors.darkGray, gui = "bold" },
-		})
+		--[[ ins_left({ ]]
+			--[[ "filesize" ]]
+			--[[ cond = conditions.buffer_not_empty, ]]
+			--[[ padding = { left = 1, right = 1 }, ]]
+			--[[ color = { fg = colors.darkGray, gui = "bold" }, ]]
+		--[[ }) ]]
 
 		ins_left({
 			"branch",
@@ -1034,10 +1034,9 @@ end
 
 function M.mason_lspconfig()
 	return function()
-		local mason_loaded, mason = pcall(require, "mason")
 		local mason_lspconfig_loaded, mason_lspconfig = pcall(require, "mason-lspconfig")
 
-		if not (mason_loaded or mason_lspconfig_loaded) then
+		if not mason_lspconfig_loaded then
 			return
 		end
 
@@ -1212,19 +1211,7 @@ function M.nvimtree()
 			},
 			view = {
 				preserve_window_proportions = true,
-				--@usage[[ width of the window, can be either a number (columns) or a string in `%` ]]
 				width = 35,
-				--@usage[[ side of the tree, can be one of 'left' | 'right' | 'top' | 'bottom' ]]
-				side = "top",
-				--@usage[[ hide root dir ]]
-				hide_root_folder = false,
-				mappings = {
-					--@usage[[ custom only false will merge the list with the default mappings ]]
-					--[[ if true, it will only use your list to set the mappings ]]
-					custom_only = false,
-					--@usage[[ list of mappings to set on the tree manually ]]
-					list = {},
-				},
 				float = {
 					enable = true,
 					quit_on_focus_loss = true,
@@ -1242,14 +1229,24 @@ function M.nvimtree()
 	end
 end
 
+function M.tscontextcommentstring()
+  return function()
+		local tscontextcommentstringloaded, tscontextcommentstring = pcall(require, "ts_context_commentstring")
+		if not tscontextcommentstringloaded then
+			return
+		end
+    tscontextcommentstring.setup({
+      enable_autocmd = false,
+    })
+  end
+end
+
 function M.saga()
 	return function()
 		local saga_loaded, saga = pcall(require, "lspsaga")
-
 		if not saga_loaded then
 			return
 		end
-
 		saga.setup({
 			ui = {
 				theme = "round",
@@ -1443,9 +1440,24 @@ function M.tokyonight()
 		end
 
 		tokyonight.setup({
-			style = "night",
+        style = "storm",
+        light_style = "storm",
+        transparent = false,
+        terminal_colors = true,
+        styles = {
+          comments = { italic = true },
+          keywords = { italic = true },
+          functions = {},
+          variables = {},
+          sidebars = "storm",
+          floats = "storm",
+        },
+        sidebars = { "qf", "help" },
+        day_brightness = 0.3,
+        hide_inactive_statusline = false,
+        dim_inactive = false,
+        lualine_bold = false,
 		})
-
 		require("colors").init()
 	end
 end

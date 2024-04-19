@@ -13,9 +13,7 @@ export PATH=/usr/sbin:$PATH
 export PATH=/usr/local/sbin:$PATH
 export PATH=/bin:$PATH
 export PATH=/opt/homebrew/bin:$PATH
-
-# Python
-export PATH=~/Library/Python/3.11/bin:$PATH
+export PATH=~/.pyenv/shims:$PATH
 
 # Docker daemon fix
 export DOCKER_HOST=unix:///Users/$(whoami)/Library/Containers/com.docker.docker/Data/docker.raw.sock
@@ -46,8 +44,9 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Java
-# export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
-export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk-1.8.jdk/Contents/Home'
+#export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+#export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk-1.8.jdk/Contents/Home'
+export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk-11.0.16.1.jdk/Contents/Home'
 export PATH=$JAVA_HOME/bin:$PATH
 
 
@@ -65,7 +64,13 @@ source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 ##           Fzf configuration          ##
 ##########################################
 
-export FZF_DEFAULT_OPTS="--layout=reverse --bind=shift-tab:up,tab:down --no-multi --cycle"
+export FZF_DEFAULT_OPTS="
+  --color=bg+:#24283b,bg:#24283b
+  --color=hl+:#2ac3de,hl:#2ac3de
+  --color=fg+:#c0caf5,fg:#565f89
+  --color=info:#9ece6a,prompt:#9ece6a,spinner:#9ece6a,pointer:#f7768e,marker:#2ac3de
+  --layout=reverse --bind=shift-tab:up,tab:down --no-multi --cycle
+"
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules,.git,build,dist,.cache,cache,.idea,.pub-cache}"'
 
 

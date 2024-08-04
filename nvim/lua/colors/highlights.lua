@@ -20,15 +20,12 @@ local colors = {
 --@param[[ background String ]]
 local set_highlight = function(target, foreground, background)
   local opts = {}
-
   if foreground ~= nil then
     opts["fg"] = foreground
   end
-
   if background ~= nil then
     opts["bg"] = background
   end
-
   vim.api.nvim_set_hl(0, target, opts)
 end
 

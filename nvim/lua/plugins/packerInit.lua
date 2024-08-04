@@ -6,7 +6,6 @@ if vim.fn.empty(vim.fn.glob(installed_path)) > 0 then
 end
 
 local is_packer_loaded, packer = pcall(require, "packer")
-
 if not is_packer_loaded then
 	return
 end

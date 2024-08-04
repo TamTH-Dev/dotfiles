@@ -5,9 +5,7 @@ function M.bufferline()
 		local map = function(...)
 			vim.api.nvim_set_keymap("n", ...)
 		end
-
 		local opts = { noremap = true, silent = true }
-
 		--@usage[[ move to previous/next ]]
 		map("<leader><Tab>", "<cmd>BufferLineCycleNext<CR>", opts)
 		map("<leader><S-Tab>", "<cmd>BufferLineCyclePrev<CR>", opts)
@@ -34,7 +32,6 @@ function M.close_buffers()
 			vim.api.nvim_set_keymap("n", ...)
 		end
 		local opts = { noremap = true, silent = true }
-
 		map("<leader>cb", "<cmd>BWipeout other<CR>", opts)
 	end
 end
@@ -42,7 +39,6 @@ end
 function M.emmet()
 	return function()
 		local glob = vim.g
-
 		--@usage[[ remap the default emmet's leader key ]]
 		glob.user_emmet_leader_key = "<C-y>"
 	end
@@ -51,7 +47,6 @@ end
 function M.indent_blankline()
 	return function()
 		local glob = vim.g
-
 		glob.indent_blankline_buftype_exclude = {
 			"help",
 			"packer",
@@ -113,9 +108,7 @@ function M.fzf()
 		local map = function(...)
 			vim.api.nvim_set_keymap("n", ...)
 		end
-
 		local opts = { noremap = true, silent = true }
-
 		map("<C-p>", "<cmd>FzfLua files<CR>", opts)
 		map("<C-f>", "<cmd>FzfLua live_grep_resume<CR>", opts)
 		map("<C-b>", "<cmd>FzfLua buffers<CR>", opts)
@@ -131,11 +124,9 @@ function M.nvimtree()
 		end
 		local glob = vim.g
 		local opts = { noremap = true, silent = true }
-
 		map("<C-n>", "<cmd>NvimTreeToggle<CR>", opts)
 		map("<leader>r", "<cmd>NvimTreeRefresh<CR>", opts)
 		map("<leader>nf", "<cmd>NvimTreeFindFile<CR>", opts)
-
 		--@usage[[ don't auto open tree on specific filetypes ]]
 		glob.nvim_tree_auto_ignore_ft = { "alpha" }
 		--@usage[[ list of filenames that gets highlighted with NvimTreeSpecialFile ]]
@@ -153,7 +144,6 @@ function M.telescope()
 		  vim.api.nvim_set_keymap("n", ...)
 		end
 		local opts = { noremap = true, silent = true }
-
 		map("<C-p>", "<cmd>Telescope find_files hidden=true<CR>", opts)
 		map("<C-f>", "<cmd>Telescope live_grep<CR>", opts)
 		map("<C-b>", "<cmd>Telescope buffers<CR>", opts)
@@ -173,7 +163,6 @@ function M.flutter()
 		local map = function(...)
 			vim.api.nvim_set_keymap("n", ...)
 		end
-
 		map("<leader>gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 		map("<leader>gf", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 		map("<leader>gk", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)

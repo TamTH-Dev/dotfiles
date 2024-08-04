@@ -7,7 +7,6 @@ M.bashls = {
 	filetypes = { "sh" },
 	root_dir = function(fname)
 		local util = require("lspconfig/util")
-
 		return util.root_pattern(".git")(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
 	end,
 }
@@ -21,7 +20,6 @@ M.clangd = {
 			"compile_flags.txt",
 			".git",
 		}
-
 		return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
 	end,
 }
@@ -33,7 +31,6 @@ M.cmake = {
 	filetypes = { "cmake" },
 	root_dir = function(fname)
 		local util = require("lspconfig/util")
-
 		return util.find_git_ancestor(fname) or util.path.dirname(fname)
 	end,
 }
@@ -42,7 +39,6 @@ M.cssls = {
 	filetypes = { "css", "scss", "less" },
 	root_dir = function(fname)
 		local util = require("lspconfig/util")
-
 		return util.root_pattern("package.json", ".git")(fname)
 			or util.find_git_ancestor(fname)
 			or util.path.dirname(fname)
@@ -67,7 +63,6 @@ M.gopls = {
 			"go.mod",
 			".git",
 		}
-
 		return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
 	end,
 	filetypes = { "go", "gomod", "gowork", "gotmpl" },
@@ -77,7 +72,6 @@ M.gopls = {
 M.html = {
 	root_dir = function(fname)
 		local util = require("lspconfig/util")
-
 		return util.root_pattern("package.json", ".git")(fname)
 			or util.find_git_ancestor(fname)
 			or util.path.dirname(fname)
@@ -96,7 +90,6 @@ M.jdtls = {
 			"settings.gradle", -- Gradle
 			"settings.gradle.kts", -- Gradle
 		}
-
 		return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
 	end,
 }
@@ -113,7 +106,6 @@ M.jsonls = {
 			"jsconfig.json",
 			".git",
 		}
-
 		return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
 	end,
 }
@@ -160,7 +152,6 @@ M.pyright = {
 			"Pipfile",
 			"pyrightconfig.json",
 		}
-
 		return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
 	end,
 	settings = {
@@ -183,7 +174,6 @@ M.tsserver = {
 			"jsconfig.json",
 			".git",
 		}
-
 		return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
 	end,
 	settings = {
@@ -209,7 +199,6 @@ M.yamlls = {
 			"*.yml",
 			"*.yaml",
 		}
-
 		return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
 	end,
 	settings = {

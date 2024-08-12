@@ -96,7 +96,7 @@ packer.startup(function()
     use({
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
-        commit = "a7a3b9c",
+        commit = "e5a05ba",
         config = config.treesitter(),
         requires = {
             --[[ Autopairs supporter ]]

@@ -41,7 +41,6 @@ options.splitright = true
 options.swapfile = false
 options.switchbuf = "useopen"
 options.tabstop = 4
-options.termguicolors = true
 options.timeoutlen = 500
 options.updatetime = 250
 options.undofile = false

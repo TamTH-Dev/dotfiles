@@ -20,41 +20,41 @@ packer.startup(function()
     use({
         "folke/tokyonight.nvim",
         config = config.tokyonight(),
-        commit = "b0e7c73",
+        commit = "4d15961",
     })
 
     --[[ Functions supporter ]]
     use({
         "nvim-lua/plenary.nvim",
-        commit = "a3e3bc8",
+        commit = "b9fd522",
     })
 
     --[[ LSP configuration ]]
     use({
         "williamboman/mason.nvim",
-        commit = "e2f7f90",
+        commit = "ad7146a",
         config = config.mason(),
     })
     use({
         "williamboman/mason-lspconfig.nvim",
-        commit = "ba9c2f0",
+        commit = "6bdb14f",
         config = config.mason_lspconfig(),
         after = "mason.nvim",
     })
-    use({
-        "jose-elias-alvarez/null-ls.nvim",
-        commit = "0010ea9",
-        config = config.null_ls(),
-        requires = "nvim-lua/plenary.nvim",
-    })
-    use({
-        "jayp0521/mason-null-ls.nvim",
-        commit = "de19726",
-        config = config.mason_null_ls(),
-    })
+    --[[ use({ ]]
+    --[[     "jose-elias-alvarez/null-ls.nvim", ]]
+    --[[     commit = "0010ea9", ]]
+    --[[     config = config.null_ls(), ]]
+    --[[     requires = "nvim-lua/plenary.nvim", ]]
+    --[[ }) ]]
+    --[[ use({ ]]
+    --[[     "jayp0521/mason-null-ls.nvim", ]]
+    --[[     commit = "de19726", ]]
+    --[[     config = config.mason_null_ls(), ]]
+    --[[ }) ]]
     use({
         "neovim/nvim-lspconfig",
-        commit = "e6528f4",
+        commit = "e688b48",
         config = config.lsp(),
     })
 
@@ -66,28 +66,28 @@ packer.startup(function()
         requires = {
             {
                 "hrsh7th/cmp-nvim-lsp",
-                commit = "39e2eda",
+                commit = "bd5a7d6",
             },
             {
                 "rafamadriz/friendly-snippets",
-                commit = "00ebcaa",
+                commit = "572f566",
             },
             {
                 "L3MON4D3/LuaSnip",
-                commit = "7552e65",
+                commit = "7381330",
                 config = config.luasnip(),
             },
             {
                 "saadparwaiz1/cmp_luasnip",
-                commit = "05a9ab2",
+                commit = "98d9cb5",
             },
             {
                 "hrsh7th/cmp-buffer",
-                commit = "3022dbc",
+                commit = "b74fab3",
             },
             {
                 "hrsh7th/cmp-path",
-                commit = "91ff86c",
+                commit = "c642487",
             },
         },
     })
@@ -96,13 +96,13 @@ packer.startup(function()
     use({
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
-        commit = "e5a05ba",
+        commit = "42fc28b",
         config = config.treesitter(),
         requires = {
             --[[ Autopairs supporter ]]
             {
                 "windwp/nvim-autopairs",
-                commit = "e38c5d8",
+                commit = "23320e7",
                 config = config.autopairs(),
             },
         },
@@ -126,7 +126,7 @@ packer.startup(function()
     --[[ Icons suppliers ]]
     use({
         "nvim-tree/nvim-web-devicons",
-        commit = "3722e3d",
+        commit = "b8221e4",
         config = config.icons(),
     })
 
@@ -136,7 +136,7 @@ packer.startup(function()
         requires = {
             "nvim-tree/nvim-web-devicons",
         },
-        commit = "73bdec9",
+        commit = "c0c0926",
         config = config.fzf(),
         setup = setup.fzf(),
     })
@@ -158,14 +158,14 @@ packer.startup(function()
     --[[ Status line ]]
     use({
         "nvim-lualine/lualine.nvim",
-        commit = "544dd15",
+        commit = "b8c2315",
         config = config.lualine(),
     })
 
     --[[ Buffer management bar ]]
     use({
         "akinsho/bufferline.nvim",
-        commit = "0b2fd86",
+        commit = "655133c",
         setup = setup.bufferline(),
         config = config.bufferline(),
     })
@@ -173,7 +173,7 @@ packer.startup(function()
     --[[ File explorer ]]
     use({
         "nvim-tree/nvim-tree.lua",
-        commit = "48d0e82",
+        commit = "e397756",
         setup = setup.nvimtree(),
         config = config.nvimtree(),
     })
@@ -181,7 +181,7 @@ packer.startup(function()
     --[[ Commenter ]]
     use({
         "JoosepAlviste/nvim-ts-context-commentstring",
-        commit = "6b5f95a",
+        commit = "1b212c2",
         config = config.tscontextcommentstring(),
     })
     use({
@@ -193,14 +193,14 @@ packer.startup(function()
     --[[ Fancy start screen ]]
     use({
         "goolord/alpha-nvim",
-        commit = "41283fb",
+        commit = "2b3cbcd",
         config = config.alpha(),
     })
 
     --[[ Emmet ]]
     use({
         "mattn/emmet-vim",
-        commit = "3fb2f63",
+        commit = "e983971",
         ft = {
             "html",
             "css",
@@ -223,14 +223,14 @@ packer.startup(function()
     --[[ Custom escape ]]
     use({
         "max397574/better-escape.nvim",
-        commit = "d337e02",
+        commit = "19a38aa",
         config = config.better_escape(),
     })
 
     --[[ Git indicators ]]
     use({
         "lewis6991/gitsigns.nvim",
-        commit = "564849a",
+        commit = "1ee5c1f",
         config = config.gitsigns(),
     })
 end)

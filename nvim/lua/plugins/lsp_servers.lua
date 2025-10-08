@@ -8,8 +8,8 @@ local M = {
     "jsonls",
     "pyright",
     "lua_ls",
-    "tsserver",
+    "ts_ls",
     "yamlls",
 }
-  
+
 return M

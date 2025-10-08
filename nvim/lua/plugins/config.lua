@@ -37,13 +37,13 @@ function M.alpha()
             type = "group",
             val = {
                 build_option("p", "  Find File", "<cmd>FzfLua files<CR>"),
-                build_option("f", "  Find Word", "<cmd>FzfLua live_grep<CR>"),
+                build_option("f", "  Find Word", "<cmd>FzfLua live_grep resume=true<CR>"),
                 --[[ build_option("p", "  Find File", "<cmd>Telescope find_files hidden=true<CR>"), ]]
                 --[[ build_option("f", "  Find Word", "<cmd>Telescope live_grep<CR>"), ]]
                 build_option("o", "  Project structure", "<cmd>NvimTreeToggle<CR>"),
-                build_option("n", "  New File", "<cmd>ene!<CR>"),
+                build_option("n", "  New File", "<cmd>ene!<CR>"),
                 build_option("s", "  Settings", "<cmd>e $HOME/.config/nvim/lua/default_config.lua<CR>"),
-                build_option("q", "  Quit", "<cmd>qa<CR>"),
+                build_option("q", "󰈆  Quit", "<cmd>qa<CR>"),
             },
             opts = {
                 position = "center",
@@ -554,7 +554,6 @@ function M.lsp()
         local lsp = vim.lsp
         local customize = function()
             local handlers = lsp.handlers
-            local fn = vim.fn
             --@usage[[ diagnostics ]]
             handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
                 signs = true,
@@ -564,11 +563,28 @@ function M.lsp()
                 update_in_insert = true,
             })
             --@usage[[ symbols in the sign column (gutter) ]]
-            local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-            for type, icon in pairs(signs) do
-                local hl = "DiagnosticSign" .. type
-                fn.sign_define(hl, { text = icon, texthl = hl })
-            end
+            --[[ local fn = vim.fn ]]
+            --[[ local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " } ]]
+            --[[ for type, icon in pairs(signs) do ]]
+            --[[     local hl = "DiagnosticSign" .. type ]]
+            --[[     fn.sign_define(hl, { text = icon, texthl = hl }) ]]
+            --[[ end ]]
+            vim.diagnostic.config({
+                signs = {
+                    text = {
+                        [vim.diagnostic.severity.ERROR] = " ",
+                        [vim.diagnostic.severity.WARN] = " ",
+                        [vim.diagnostic.severity.INFO] = " ",
+                        [vim.diagnostic.severity.HINT] = " ",
+                    },
+                    linehl = {
+                        [vim.diagnostic.severity.ERROR] = "Error",
+                        [vim.diagnostic.severity.WARN] = "Warn",
+                        [vim.diagnostic.severity.INFO] = "Info",
+                        [vim.diagnostic.severity.HINT] = "Hint",
+                    },
+                },
+            })
             local border = {
                 { "╭", "FloatBorder" },
                 { "─", "FloatBorder" },
@@ -629,7 +645,15 @@ function M.lsp()
         local languages = require("plugins/lsp_languages")
         local servers = require("plugins/lsp_servers")
         for _, server in ipairs(servers) do
-            require("lspconfig")[server].setup({
+            --[[ require("lspconfig")[server].setup({ ]]
+            --[[     on_attach = on_attach, ]]
+            --[[     capabilities = get_capabilities(), ]]
+            --[[     init_options = languages[server].init_options, ]]
+            --[[     settings = languages[server].settings, ]]
+            --[[     root_dir = languages[server].root_dir, ]]
+            --[[     filetypes = languages[server].filetypes, ]]
+            --[[ }) ]]
+            vim.lsp.config(server, {
                 on_attach = on_attach,
                 capabilities = get_capabilities(),
                 init_options = languages[server].init_options,
@@ -734,10 +758,10 @@ function M.lualine()
                 local icons = {
                     n = " ",
                     i = " ",
-                    c = "גּ ",
-                    v = "﬏ ",
-                    V = "﬏ ",
-                    R = " ",
+                    c = "󰘳 ",
+                    v = " ",
+                    V = " ",
+                    R = " ",
                     s = " ",
                 }
                 cmd("hi! LualineMode guifg=" .. get_mode_color() .. " guibg=" .. colors.extraBg)
@@ -1396,7 +1420,7 @@ function M.fzf()
                 col = 0.50,
                 border = "rounded",
                 fullscreen = false,
-                hl = {
+                hls = {
                     normal = "Normal",
                     border = "FloatBorder",
                     search = "IncSearch",
@@ -1411,7 +1435,7 @@ function M.fzf()
                     layout = "flex",
                     flip_columns = 120,
                     title = false,
-                    title_align = "center",
+                    title_pos = "center",
                     scrollbar = false,
                     delay = 50,
                     winopts = {

@@ -5,23 +5,10 @@ M.bashls = {
 		GLOB_PATTERN = "*@(.sh|.inc|.bash|.command)",
 	},
 	filetypes = { "sh" },
-	root_dir = function(fname)
-		local util = require("lspconfig/util")
-		return util.root_pattern(".git")(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
-	end,
 }
 
 M.clangd = {
 	filetypes = { "c", "cpp" },
-	root_dir = function(fname)
-		local util = require("lspconfig/util")
-		local root_files = {
-			"compile_commands.json",
-			"compile_flags.txt",
-			".git",
-		}
-		return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
-	end,
 }
 
 M.cmake = {
@@ -29,20 +16,10 @@ M.cmake = {
 		buildDirectory = "build",
 	},
 	filetypes = { "cmake" },
-	root_dir = function(fname)
-		local util = require("lspconfig/util")
-		return util.find_git_ancestor(fname) or util.path.dirname(fname)
-	end,
 }
 
 M.cssls = {
 	filetypes = { "css", "scss", "less" },
-	root_dir = function(fname)
-		local util = require("lspconfig/util")
-		return util.root_pattern("package.json", ".git")(fname)
-			or util.find_git_ancestor(fname)
-			or util.path.dirname(fname)
-	end,
 	settings = {
 		css = {
 			validate = true,
@@ -57,57 +34,22 @@ M.cssls = {
 }
 
 M.gopls = {
-	root_dir = function(fname)
-		local util = require("lspconfig/util")
-		local root_files = {
-			"go.mod",
-			".git",
-		}
-		return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
-	end,
 	filetypes = { "go", "gomod", "gowork", "gotmpl" },
 	single_file_support = true,
 }
 
 M.html = {
-	root_dir = function(fname)
-		local util = require("lspconfig/util")
-		return util.root_pattern("package.json", ".git")(fname)
-			or util.find_git_ancestor(fname)
-			or util.path.dirname(fname)
-	end,
 	filetypes = { "html", "markdown" },
 }
 
 M.jdtls = {
 	filetypes = { "java" },
-	root_dir = function(fname)
-		local util = require("lspconfig/util")
-		local root_files = {
-			"build.xml", -- Ant
-			"pom.xml", -- Maven
-			"build.gradle", -- Gradle
-			"settings.gradle", -- Gradle
-			"settings.gradle.kts", -- Gradle
-		}
-		return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
-	end,
 }
 
 M.jsonls = {
 	init_options = {
 		provideFormatter = true,
 	},
-	root_dir = function(fname)
-		local util = require("lspconfig/util")
-		local root_files = {
-			"package.json",
-			"tsconfig.json",
-			"jsconfig.json",
-			".git",
-		}
-		return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
-	end,
 }
 
 M.lua_ls = {
@@ -142,18 +84,6 @@ M.lua_ls = {
 
 M.pyright = {
 	filetypes = { "python" },
-	root_dir = function(fname)
-		local util = require("lspconfig/util")
-		local root_files = {
-			"pyproject.toml",
-			"setup.py",
-			"setup.cfg",
-			"requirements.txt",
-			"Pipfile",
-			"pyrightconfig.json",
-		}
-		return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
-	end,
 	settings = {
 		python = {
 			analysis = {
@@ -165,17 +95,7 @@ M.pyright = {
 	},
 }
 
-M.tsserver = {
-	root_dir = function(fname)
-		local util = require("lspconfig/util")
-		local root_files = {
-			"package.json",
-			"tsconfig.json",
-			"jsconfig.json",
-			".git",
-		}
-		return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
-	end,
+M.ts_ls = {
 	settings = {
 		languages = {
 			javascript = {},
@@ -193,14 +113,6 @@ M.tsserver = {
 }
 
 M.yamlls = {
-	root_dir = function(fname)
-		local util = require("lspconfig/util")
-		local root_files = {
-			"*.yml",
-			"*.yaml",
-		}
-		return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
-	end,
 	settings = {
 		ansible = {
 			ansible = {

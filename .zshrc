@@ -1,13 +1,12 @@
-##########################################
-##               Editor                 ##
-##########################################
+## Common
+export PATH="$HOME/.local/bin:$PATH"
+
+## Editor
 export VISUAL=nvim
 export EDITOR=nvim
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
-##########################################
-##               Aliases                ##
-##########################################
+## Aliases
 alias vi=nvim
 alias lg=lazygit
 alias ls="ls -G"
@@ -15,10 +14,7 @@ alias la="ls -lah -G"
 alias zshconfig="vi ~/.zshrc"
 alias zshsource="source ~/.zshrc"
 
-##########################################
-##           Fzf configuration          ##
-##########################################
-
+## Fzf
 export FZF_DEFAULT_OPTS="
   --color=bg+:#24283b,bg:#24283b
   --color=hl+:#2ac3de,hl:#2ac3de
@@ -28,4 +24,7 @@ export FZF_DEFAULT_OPTS="
 "
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules,.git,build,dist,.cache,cache,.idea,.pub-cache}"'
 
-##########################################
+## NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

@@ -1,0 +1,46 @@
+---
+"code_view:close_saved_tabs": none
+"terminal:toggle_autoexecute_mode": none
+"workspace:toggle_tab_configs_menu": none
+"code_review:show_find_bar": cmd-f
+"editor_view:add_cursor_below": none
+"terminal:bookmark_selected_block": none
+"input:clear_screen": ctrl-l
+"find:find_next_occurrence": none
+"workspace:toggle_keybindings_page": cmd-/
+"terminal:open_share_block_modal": none
+"notebookview:focus_terminal_input": none
+"editor_view:toggle_comment": none
+"workspace:activate_prev_tab": none
+/cloud-agent: none
+"terminal:ask_ai_assistant": none
+/open-repo: none
+"pane_group:add_down": ctrl-shift-_
+"find:find_prev_occurrence": none
+"workspace:new_tab": cmd-t
+"workspace:shift_focus_right": none
+"terminal:clear_blocks": none
+"workspace:close_panel": none
+"input:set_mode_agent": none
+"terminal:focus_input": none
+"pane_group:close_current_session": cmd-w
+/agent: none
+"terminal:open_cli_agent_rich_input": none
+"input:set_mode_terminal": none
+"terminal:cancel_command": ctrl-c
+"workspace:toggle_conversation_list_view": none
+"ai_assistant_panel:focus_terminal_input": none
+/conversations: none
+"editor_view:add_cursor_above": none
+"terminal:toggle_block_filter_on_selected_or_last_block": none
+"workspace:shift_focus_left": none
+Close Env Var Collection: none
+"terminal:backward_tabulation": none
+Close Workflow: none
+"welcome_view:open_project": none
+"editor_view:clear_buffer": none
+"editor_view:add_next_occurrence": none
+"input:clear_and_reset_ai_context_menu_query": none
+"pane_group:add_right": ctrl-shift-|
+"editor_view:clear_lines": none
+"workspace:activate_next_tab": none

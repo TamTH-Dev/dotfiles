@@ -58,6 +58,7 @@ mode = "dismissed"
 play_notification_sound = true
 
 [terminal]
+show_terminal_zero_state_block = false
 
 [terminal.input]
 input_box_type_setting = "universal"

@@ -1,4 +1,5 @@
 [appearance]
+spacing = "normal"
 
 [appearance.themes]
 system_theme = false
@@ -16,6 +17,15 @@ app_icon = "default"
 
 [appearance.window]
 zoom_level = 90
+
+[appearance.panes]
+should_dim_inactive_panes = false
+
+[appearance.input]
+input_mode = "pinned_to_bottom"
+
+[appearance.blocks]
+show_jump_to_bottom_of_block_button = true
 
 [code]
 
@@ -62,6 +72,8 @@ show_terminal_zero_state_block = false
 
 [terminal.input]
 input_box_type_setting = "universal"
+honor_ps1 = false
+alias_expansion_enabled = true
 
 [account]
 is_settings_sync_enabled = true
@@ -69,3 +81,34 @@ is_settings_sync_enabled = true
 [privacy]
 telemetry_enabled = true
 crash_reporting_enabled = true
+custom_secret_regex_list = [
+  { name = "IPv4 Address", pattern = '\b((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}\b' },
+  {
+    name = "IPv6 Address",
+    pattern = '\b((([0-9A-Fa-f]{1,4}:){1,6}:)|(([0-9A-Fa-f]{1,4}:){7}))([0-9A-Fa-f]{1,4})\b',
+  },
+  { name = "Phone Number", pattern = '\b(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}\b' },
+  {
+    name = "MAC Address",
+    pattern = '\b((([a-zA-z0-9]{2}[-:]){5}([a-zA-z0-9]{2}))|(([a-zA-z0-9]{2}:){5}([a-zA-z0-9]{2})))\b',
+  },
+  { name = "Google API Key", pattern = '\bAIza[0-9A-Za-z-_]{35}\b' },
+  {
+    name = "AWS Access ID",
+    pattern = '\b(AKIA|A3T|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{12,}\b',
+  },
+  { name = "Slack App Token", pattern = '\bxapp-[0-9]+-[A-Za-z0-9_]+-[0-9]+-[a-f0-9]+\b' },
+  { name = "GitHub Classic Personal Access Token", pattern = '\bghp_[A-Za-z0-9_]{36}\b' },
+  { name = "GitHub Fine-Grained Personal Access Token", pattern = '\bgithub_pat_[A-Za-z0-9_]{82}\b' },
+  { name = "GitHub OAuth Access Token", pattern = '\bgho_[A-Za-z0-9_]{36}\b' },
+  { name = "GitHub User-to-Server Token", pattern = '\bghu_[A-Za-z0-9_]{36}\b' },
+  { name = "GitHub Server-to-Server Token", pattern = '\bghs_[A-Za-z0-9_]{36}\b' },
+  { name = "Stripe Key", pattern = '\b(?:r|s)k_(test|live)_[0-9a-zA-Z]{24}\b' },
+  { name = "Firebase Auth Domain", pattern = '\b([a-z0-9-]){1,30}(\.firebaseapp\.com)\b' },
+  { name = "JWT", pattern = '\b(ey[a-zA-z0-9_\-=]{10,}\.){2}[a-zA-z0-9_\-=]{10,}\b' },
+  { name = "OpenAI API Key", pattern = '\bsk-[a-zA-Z0-9]{48}\b' },
+  { name = "Anthropic API Key", pattern = '\bsk-ant-api\d{0,2}-[a-zA-Z0-9\-]{80,120}\b' },
+  { name = "Generic SK API Key", pattern = '\bsk-[a-zA-Z0-9\-]{10,100}\b' },
+  { name = "Fireworks API Key", pattern = '\bfw_[a-zA-Z0-9]{24}\b' },
+  { name = "Warp API Key", pattern = '\bwk-[0-9]+\.[A-Fa-f0-9.\-]+\b' },
+]

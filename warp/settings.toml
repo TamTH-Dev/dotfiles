@@ -48,12 +48,14 @@ is_any_ai_enabled = true
 
 [agents.warp_agent.other]
 show_agent_notifications = true
+should_render_use_agent_toolbar_for_user_commands = false
 
 [agents.warp_agent.input]
 nld_in_terminal_enabled = false
 
 [text_editing]
 vim_mode_enabled = true
+vim_status_bar = true
 
 [notifications]
 toast_duration_secs = 8

@@ -1,0 +1,15 @@
+adjust-cell-height = 3
+auto-update-channel = stable
+bold-is-bright = true
+click-repeat-interval = 500
+command = /usr/bin/zsh
+font-family = MonoLisa Medium
+font-family-bold = MonoLisa Semibold
+font-family-bold-italic = MonoLisa Medium
+font-family-italic = MonoLisa Medium
+font-size = 9.5
+gtk-single-instance = false
+quick-terminal-position = center
+theme = tokyo-night
+window-padding-x = 10
+working-directory = inherit
